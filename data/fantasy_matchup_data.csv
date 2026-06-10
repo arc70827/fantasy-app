@@ -1,819 +1,819 @@
-Team,Points For,Opposing Team,Points Against,Win,Loss,Week,Year
-Team Dupre,107.1,Team Chasse,131.26,0,1,1,2021
-Team Chasse,131.26,Team Dupre,107.1,1,0,1,2021
-Team Perrotti,128.56,Team Pawlowicz,136.66,0,1,1,2021
-Team Pawlowicz,136.66,Team Perrotti,128.56,1,0,1,2021
-Team Sachs,134.78,Team Loomis,102.02,1,0,1,2021
-Team Loomis,102.02,Team Sachs,134.78,0,1,1,2021
-Team Acquarulo,96.6,Team Piazza,115.58,0,1,1,2021
-Team Piazza,115.58,Team Acquarulo,96.6,1,0,1,2021
-Team Shamas,158.16,Team Graver,94.68,1,0,1,2021
-Team Graver,94.68,Team Shamas,158.16,0,1,1,2021
-Team Chasse,179.64,Team Acquarulo,110.56,1,0,2,2021
-Team Acquarulo,110.56,Team Chasse,179.64,0,1,2,2021
-Team Sachs,174.92,Team Perrotti,111.1,1,0,2,2021
-Team Perrotti,111.1,Team Sachs,174.92,0,1,2,2021
-Team Dupre,145.26,Team Shamas,154.4,0,1,2,2021
-Team Shamas,154.4,Team Dupre,145.26,1,0,2,2021
-Team Pawlowicz,95.48,Team Piazza,91.12,1,0,2,2021
-Team Piazza,91.12,Team Pawlowicz,95.48,0,1,2,2021
-Team Loomis,101.6,Team Graver,136.02,0,1,2,2021
-Team Graver,136.02,Team Loomis,101.6,1,0,2,2021
-Team Pawlowicz,118.72,Team Chasse,126.48,0,1,3,2021
-Team Chasse,126.48,Team Pawlowicz,118.72,1,0,3,2021
-Team Shamas,119.22,Team Acquarulo,153.74,0,1,3,2021
-Team Acquarulo,153.74,Team Shamas,119.22,1,0,3,2021
-Team Piazza,145.7,Team Perrotti,118.74,1,0,3,2021
-Team Perrotti,118.74,Team Piazza,145.7,0,1,3,2021
-Team Graver,122.94,Team Sachs,124.94,0,1,3,2021
-Team Sachs,124.94,Team Graver,122.94,1,0,3,2021
-Team Loomis,124.64,Team Dupre,118.52,1,0,3,2021
-Team Dupre,118.52,Team Loomis,124.64,0,1,3,2021
-Team Perrotti,112.02,Team Chasse,103.76,1,0,4,2021
-Team Chasse,103.76,Team Perrotti,112.02,0,1,4,2021
-Team Graver,156.78,Team Piazza,131.02,1,0,4,2021
-Team Piazza,131.02,Team Graver,156.78,0,1,4,2021
-Team Acquarulo,155.18,Team Pawlowicz,128.72,1,0,4,2021
-Team Pawlowicz,128.72,Team Acquarulo,155.18,0,1,4,2021
-Team Shamas,103.06,Team Loomis,89.22,1,0,4,2021
-Team Loomis,89.22,Team Shamas,103.06,0,1,4,2021
-Team Sachs,98.8,Team Dupre,123.32,0,1,4,2021
-Team Dupre,123.32,Team Sachs,98.8,1,0,4,2021
-Team Chasse,167.74,Team Piazza,193.58,0,1,5,2021
-Team Piazza,193.58,Team Chasse,167.74,1,0,5,2021
-Team Loomis,95.16,Team Pawlowicz,125.76,0,1,5,2021
-Team Pawlowicz,125.76,Team Loomis,95.16,1,0,5,2021
-Team Dupre,142.6,Team Graver,156.32,0,1,5,2021
-Team Graver,156.32,Team Dupre,142.6,1,0,5,2021
-Team Perrotti,138.58,Team Acquarulo,80.72,1,0,5,2021
-Team Acquarulo,80.72,Team Perrotti,138.58,0,1,5,2021
-Team Sachs,140.5,Team Shamas,139.28,1,0,5,2021
-Team Shamas,139.28,Team Sachs,140.5,0,1,5,2021
-Team Chasse,154.48,Team Loomis,96.1,1,0,6,2021
-Team Loomis,96.1,Team Chasse,154.48,0,1,6,2021
-Team Perrotti,116.7,Team Dupre,108.92,1,0,6,2021
-Team Dupre,108.92,Team Perrotti,116.7,0,1,6,2021
-Team Acquarulo,139.7,Team Sachs,126.44,1,0,6,2021
-Team Sachs,126.44,Team Acquarulo,139.7,0,1,6,2021
-Team Piazza,143.68,Team Shamas,143.68,0,0,6,2021
-Team Shamas,143.68,Team Piazza,143.68,0,0,6,2021
-Team Pawlowicz,105.66,Team Graver,131.6,0,1,6,2021
-Team Graver,131.6,Team Pawlowicz,105.66,1,0,6,2021
-Team Graver,117.72,Team Chasse,133.74,0,1,7,2021
-Team Chasse,133.74,Team Graver,117.72,1,0,7,2021
-Team Dupre,136.44,Team Acquarulo,141.84,0,1,7,2021
-Team Acquarulo,141.84,Team Dupre,136.44,1,0,7,2021
-Team Sachs,176.86,Team Piazza,120.24,1,0,7,2021
-Team Piazza,120.24,Team Sachs,176.86,0,1,7,2021
-Team Shamas,113.44,Team Pawlowicz,122.44,0,1,7,2021
-Team Pawlowicz,122.44,Team Shamas,113.44,1,0,7,2021
-Team Loomis,116.56,Team Perrotti,128.5,0,1,7,2021
-Team Perrotti,128.5,Team Loomis,116.56,1,0,7,2021
-Team Chasse,109.4,Team Shamas,136.58,0,1,8,2021
-Team Shamas,136.58,Team Chasse,109.4,1,0,8,2021
-Team Piazza,81.2,Team Dupre,122.36,0,1,8,2021
-Team Dupre,122.36,Team Piazza,81.2,1,0,8,2021
-Team Pawlowicz,82.46,Team Sachs,134.8,0,1,8,2021
-Team Sachs,134.8,Team Pawlowicz,82.46,1,0,8,2021
-Team Perrotti,133.7,Team Graver,120.52,1,0,8,2021
-Team Graver,120.52,Team Perrotti,133.7,0,1,8,2021
-Team Acquarulo,86.82,Team Loomis,107.62,0,1,8,2021
-Team Loomis,107.62,Team Acquarulo,86.82,1,0,8,2021
-Team Piazza,123.76,Team Chasse,128.74,0,1,9,2021
-Team Chasse,128.74,Team Piazza,123.76,1,0,9,2021
-Team Dupre,113.66,Team Pawlowicz,65.48,1,0,9,2021
-Team Pawlowicz,65.48,Team Dupre,113.66,0,1,9,2021
-Team Loomis,145.58,Team Sachs,114.06,1,0,9,2021
-Team Sachs,114.06,Team Loomis,145.58,0,1,9,2021
-Team Acquarulo,90.78,Team Perrotti,100.18,0,1,9,2021
-Team Perrotti,100.18,Team Acquarulo,90.78,1,0,9,2021
-Team Graver,122.14,Team Shamas,78.3,1,0,9,2021
-Team Shamas,78.3,Team Graver,122.14,0,1,9,2021
-Team Sachs,97.62,Team Chasse,104.92,0,1,10,2021
-Team Chasse,104.92,Team Sachs,97.62,1,0,10,2021
-Team Pawlowicz,124.54,Team Perrotti,119.24,1,0,10,2021
-Team Perrotti,119.24,Team Pawlowicz,124.54,0,1,10,2021
-Team Shamas,133.64,Team Dupre,88.84,1,0,10,2021
-Team Dupre,88.84,Team Shamas,133.64,0,1,10,2021
-Team Piazza,142.14,Team Acquarulo,123.82,1,0,10,2021
-Team Acquarulo,123.82,Team Piazza,142.14,0,1,10,2021
-Team Graver,115.56,Team Loomis,107.2,1,0,10,2021
-Team Loomis,107.2,Team Graver,115.56,0,1,10,2021
-Team Acquarulo,120.38,Team Chasse,126.08,0,1,11,2021
-Team Chasse,126.08,Team Acquarulo,120.38,1,0,11,2021
-Team Shamas,124.92,Team Perrotti,134.24,0,1,11,2021
-Team Perrotti,134.24,Team Shamas,124.92,1,0,11,2021
-Team Sachs,92.66,Team Graver,168.38,0,1,11,2021
-Team Graver,168.38,Team Sachs,92.66,1,0,11,2021
-Team Piazza,146.2,Team Pawlowicz,85.68,1,0,11,2021
-Team Pawlowicz,85.68,Team Piazza,146.2,0,1,11,2021
-Team Dupre,86.46,Team Loomis,154.9,0,1,11,2021
-Team Loomis,154.9,Team Dupre,86.46,1,0,11,2021
-Team Chasse,104.94,Team Pawlowicz,99.4,1,0,12,2021
-Team Pawlowicz,99.4,Team Chasse,104.94,0,1,12,2021
-Team Graver,117.98,Team Acquarulo,68.66,1,0,12,2021
-Team Acquarulo,68.66,Team Graver,117.98,0,1,12,2021
-Team Perrotti,138.8,Team Piazza,114.82,1,0,12,2021
-Team Piazza,114.82,Team Perrotti,138.8,0,1,12,2021
-Team Loomis,128.18,Team Shamas,142.38,0,1,12,2021
-Team Shamas,142.38,Team Loomis,128.18,1,0,12,2021
-Team Dupre,124.6,Team Sachs,97.2,1,0,12,2021
-Team Sachs,97.2,Team Dupre,124.6,0,1,12,2021
-Team Chasse,107.1,Team Perrotti,139.82,0,1,13,2021
-Team Perrotti,139.82,Team Chasse,107.1,1,0,13,2021
-Team Loomis,125.24,Team Piazza,87.96,1,0,13,2021
-Team Piazza,87.96,Team Loomis,125.24,0,1,13,2021
-Team Pawlowicz,120.42,Team Acquarulo,88.36,1,0,13,2021
-Team Acquarulo,88.36,Team Pawlowicz,120.42,0,1,13,2021
-Team Graver,192.28,Team Dupre,68.3,1,0,13,2021
-Team Dupre,68.3,Team Graver,192.28,0,1,13,2021
-Team Shamas,159.92,Team Sachs,133.32,1,0,13,2021
-Team Sachs,133.32,Team Shamas,159.92,0,1,13,2021
-Team Chasse,106.28,Team Dupre,90.02,1,0,14,2021
-Team Dupre,90.02,Team Chasse,106.28,0,1,14,2021
-Team Perrotti,125.14,Team Sachs,118.88,1,0,14,2021
-Team Sachs,118.88,Team Perrotti,125.14,0,1,14,2021
-Team Acquarulo,106.2,Team Shamas,140.9,0,1,14,2021
-Team Shamas,140.9,Team Acquarulo,106.2,1,0,14,2021
-Team Piazza,145.72,Team Graver,155.5,0,1,14,2021
-Team Graver,155.5,Team Piazza,145.72,1,0,14,2021
-Team Pawlowicz,130.52,Team Loomis,149.74,0,1,14,2021
-Team Loomis,149.74,Team Pawlowicz,130.52,1,0,14,2021
-Team Perrotti,86.48,Team Loomis,86.92,0,1,15,2021
-Team Loomis,86.92,Team Perrotti,86.48,1,0,15,2021
-Team Shamas,113.26,Team Sachs,86.44,1,0,15,2021
-Team Sachs,86.44,Team Shamas,113.26,0,1,15,2021
-Team Chasse,63.18,Team Loomis,102.38,0,1,16,2021
-Team Loomis,102.38,Team Chasse,63.18,1,0,16,2021
-Team Graver,132.74,Team Shamas,120.38,1,0,16,2021
-Team Shamas,120.38,Team Graver,132.74,0,1,16,2021
-Team Loomis,113.72,Team Graver,88.18,1,0,17,2021
-Team Graver,88.18,Team Loomis,113.72,0,1,17,2021
-Justin Jefferson,123.62,PEDeAndre Hopkins,143.38,0,1,1,2022
-PEDeAndre Hopkins,143.38,Justin Jefferson,123.62,1,0,1,2022
-Silence D at work,109.02,Dave Sucks,106.12,1,0,1,2022
-Dave Sucks,106.12,Silence D at work,109.02,0,1,1,2022
-Scammer got Scammed,98.9,The DakStreet Boys,93.86,1,0,1,2022
-The DakStreet Boys,93.86,Scammer got Scammed,98.9,0,1,1,2022
-Dylan ate my Fantasy Points,123.88,Najee Germany,112.9,1,0,1,2022
-Najee Germany,112.9,Dylan ate my Fantasy Points,123.88,0,1,1,2022
-My Boy,142.32,Justin is Brown,126.26,1,0,1,2022
-Justin is Brown,126.26,My Boy,142.32,0,1,1,2022
-PEDeAndre Hopkins,118.68,Dylan ate my Fantasy Points,86.2,1,0,2,2022
-Dylan ate my Fantasy Points,86.2,PEDeAndre Hopkins,118.68,0,1,2,2022
-Scammer got Scammed,145.18,Silence D at work,125.52,1,0,2,2022
-Silence D at work,125.52,Scammer got Scammed,145.18,0,1,2,2022
-Justin Jefferson,128.46,My Boy,132.38,0,1,2,2022
-My Boy,132.38,Justin Jefferson,128.46,1,0,2,2022
-Dave Sucks,146.92,Najee Germany,101.56,1,0,2,2022
-Najee Germany,101.56,Dave Sucks,146.92,0,1,2,2022
-The DakStreet Boys,124.88,Justin is Brown,168.26,0,1,2,2022
-Justin is Brown,168.26,The DakStreet Boys,124.88,1,0,2,2022
-Dave Sucks,115.82,PEDeAndre Hopkins,136.9,0,1,3,2022
-PEDeAndre Hopkins,136.9,Dave Sucks,115.82,1,0,3,2022
-My Boy,97.06,Dylan ate my Fantasy Points,94.54,1,0,3,2022
-Dylan ate my Fantasy Points,94.54,My Boy,97.06,0,1,3,2022
-Najee Germany,95.66,Silence D at work,137.7,0,1,3,2022
-Silence D at work,137.7,Najee Germany,95.66,1,0,3,2022
-Justin is Brown,101.58,Scammer got Scammed,114.82,0,1,3,2022
-Scammer got Scammed,114.82,Justin is Brown,101.58,1,0,3,2022
-The DakStreet Boys,85.54,Justin Jefferson,130.3,0,1,3,2022
-Justin Jefferson,130.3,The DakStreet Boys,85.54,1,0,3,2022
-Silence D at work,103.16,PEDeAndre Hopkins,175.12,0,1,4,2022
-PEDeAndre Hopkins,175.12,Silence D at work,103.16,1,0,4,2022
-Justin is Brown,124.86,Najee Germany,100.8,1,0,4,2022
-Najee Germany,100.8,Justin is Brown,124.86,0,1,4,2022
-Dylan ate my Fantasy Points,94.16,Dave Sucks,147.76,0,1,4,2022
-Dave Sucks,147.76,Dylan ate my Fantasy Points,94.16,1,0,4,2022
-My Boy,111.98,The DakStreet Boys,141.32,0,1,4,2022
-The DakStreet Boys,141.32,My Boy,111.98,1,0,4,2022
-Scammer got Scammed,155.92,Justin Jefferson,103.98,1,0,4,2022
-Justin Jefferson,103.98,Scammer got Scammed,155.92,0,1,4,2022
-PEDeAndre Hopkins,175.46,Najee Germany,108.82,1,0,5,2022
-Najee Germany,108.82,PEDeAndre Hopkins,175.46,0,1,5,2022
-The DakStreet Boys,104.56,Dave Sucks,137.26,0,1,5,2022
-Dave Sucks,137.26,The DakStreet Boys,104.56,1,0,5,2022
-Justin Jefferson,151.98,Justin is Brown,109.88,1,0,5,2022
-Justin is Brown,109.88,Justin Jefferson,151.98,0,1,5,2022
-Silence D at work,108.46,Dylan ate my Fantasy Points,106.14,1,0,5,2022
-Dylan ate my Fantasy Points,106.14,Silence D at work,108.46,0,1,5,2022
-Scammer got Scammed,121.8,My Boy,114.7,1,0,5,2022
-My Boy,114.7,Scammer got Scammed,121.8,0,1,5,2022
-PEDeAndre Hopkins,126.56,The DakStreet Boys,95.02,1,0,6,2022
-The DakStreet Boys,95.02,PEDeAndre Hopkins,126.56,0,1,6,2022
-Silence D at work,120.1,Justin Jefferson,153.5,0,1,6,2022
-Justin Jefferson,153.5,Silence D at work,120.1,1,0,6,2022
-Dylan ate my Fantasy Points,80.82,Scammer got Scammed,103.1,0,1,6,2022
-Scammer got Scammed,103.1,Dylan ate my Fantasy Points,80.82,1,0,6,2022
-Najee Germany,90.82,My Boy,120.28,0,1,6,2022
-My Boy,120.28,Najee Germany,90.82,1,0,6,2022
-Dave Sucks,120.6,Justin is Brown,106.92,1,0,6,2022
-Justin is Brown,106.92,Dave Sucks,120.6,0,1,6,2022
-Justin is Brown,97.9,PEDeAndre Hopkins,116.04,0,1,7,2022
-PEDeAndre Hopkins,116.04,Justin is Brown,97.9,1,0,7,2022
-Justin Jefferson,93.44,Dylan ate my Fantasy Points,99.92,0,1,7,2022
-Dylan ate my Fantasy Points,99.92,Justin Jefferson,93.44,1,0,7,2022
-Scammer got Scammed,154.84,Najee Germany,133.52,1,0,7,2022
-Najee Germany,133.52,Scammer got Scammed,154.84,0,1,7,2022
-My Boy,132.26,Dave Sucks,118.8,1,0,7,2022
-Dave Sucks,118.8,My Boy,132.26,0,1,7,2022
-The DakStreet Boys,131.58,Silence D at work,99.12,1,0,7,2022
-Silence D at work,99.12,The DakStreet Boys,131.58,0,1,7,2022
-PEDeAndre Hopkins,166.02,My Boy,158.94,1,0,8,2022
-My Boy,158.94,PEDeAndre Hopkins,166.02,0,1,8,2022
-Najee Germany,113.54,Justin Jefferson,158.24,0,1,8,2022
-Justin Jefferson,158.24,Najee Germany,113.54,1,0,8,2022
-Dave Sucks,156.82,Scammer got Scammed,106.54,1,0,8,2022
-Scammer got Scammed,106.54,Dave Sucks,156.82,0,1,8,2022
-Silence D at work,104.6,Justin is Brown,115.98,0,1,8,2022
-Justin is Brown,115.98,Silence D at work,104.6,1,0,8,2022
-Dylan ate my Fantasy Points,133.84,The DakStreet Boys,91.2,1,0,8,2022
-The DakStreet Boys,91.2,Dylan ate my Fantasy Points,133.84,0,1,8,2022
-Najee Germany,137.3,PEDeAndre Hopkins,142.9,0,1,9,2022
-PEDeAndre Hopkins,142.9,Najee Germany,137.3,1,0,9,2022
-Justin Jefferson,120.34,Dave Sucks,135.62,0,1,9,2022
-Dave Sucks,135.62,Justin Jefferson,120.34,1,0,9,2022
-The DakStreet Boys,150.3,Scammer got Scammed,112,1,0,9,2022
-Scammer got Scammed,112,The DakStreet Boys,150.3,0,1,9,2022
-Dylan ate my Fantasy Points,110.94,Silence D at work,84.14,1,0,9,2022
-Silence D at work,84.14,Dylan ate my Fantasy Points,110.94,0,1,9,2022
-Justin is Brown,91.3,My Boy,91.8,0,1,9,2022
-My Boy,91.8,Justin is Brown,91.3,1,0,9,2022
-Scammer got Scammed,119.02,PEDeAndre Hopkins,89.8,1,0,10,2022
-PEDeAndre Hopkins,89.8,Scammer got Scammed,119.02,0,1,10,2022
-Dave Sucks,62.7,Silence D at work,123,0,1,10,2022
-Silence D at work,123,Dave Sucks,62.7,1,0,10,2022
-My Boy,105.08,Justin Jefferson,153.48,0,1,10,2022
-Justin Jefferson,153.48,My Boy,105.08,1,0,10,2022
-Najee Germany,141.5,Dylan ate my Fantasy Points,83.3,1,0,10,2022
-Dylan ate my Fantasy Points,83.3,Najee Germany,141.5,0,1,10,2022
-Justin is Brown,132.94,The DakStreet Boys,107.7,1,0,10,2022
-The DakStreet Boys,107.7,Justin is Brown,132.94,0,1,10,2022
-Dylan ate my Fantasy Points,118.64,PEDeAndre Hopkins,152.28,0,1,11,2022
-PEDeAndre Hopkins,152.28,Dylan ate my Fantasy Points,118.64,1,0,11,2022
-My Boy,109.74,Silence D at work,122.8,0,1,11,2022
-Silence D at work,122.8,My Boy,109.74,1,0,11,2022
-Scammer got Scammed,91,Justin is Brown,158.16,0,1,11,2022
-Justin is Brown,158.16,Scammer got Scammed,91,1,0,11,2022
-Najee Germany,116.2,Dave Sucks,111.62,1,0,11,2022
-Dave Sucks,111.62,Najee Germany,116.2,0,1,11,2022
-Justin Jefferson,98.32,The DakStreet Boys,88.64,1,0,11,2022
-The DakStreet Boys,88.64,Justin Jefferson,98.32,0,1,11,2022
-PEDeAndre Hopkins,114.52,Dave Sucks,95.86,1,0,12,2022
-Dave Sucks,95.86,PEDeAndre Hopkins,114.52,0,1,12,2022
-Justin is Brown,117.7,Dylan ate my Fantasy Points,131.04,0,1,12,2022
-Dylan ate my Fantasy Points,131.04,Justin is Brown,117.7,1,0,12,2022
-Silence D at work,116.42,Najee Germany,98.76,1,0,12,2022
-Najee Germany,98.76,Silence D at work,116.42,0,1,12,2022
-The DakStreet Boys,90.62,My Boy,123.84,0,1,12,2022
-My Boy,123.84,The DakStreet Boys,90.62,1,0,12,2022
-Justin Jefferson,129.02,Scammer got Scammed,135.2,0,1,12,2022
-Scammer got Scammed,135.2,Justin Jefferson,129.02,1,0,12,2022
-PEDeAndre Hopkins,104.06,Silence D at work,115,0,1,13,2022
-Silence D at work,115,PEDeAndre Hopkins,104.06,1,0,13,2022
-The DakStreet Boys,98.58,Najee Germany,144,0,1,13,2022
-Najee Germany,144,The DakStreet Boys,98.58,1,0,13,2022
-Dave Sucks,69.04,Dylan ate my Fantasy Points,167.2,0,1,13,2022
-Dylan ate my Fantasy Points,167.2,Dave Sucks,69.04,1,0,13,2022
-Justin is Brown,109.22,Justin Jefferson,138.32,0,1,13,2022
-Justin Jefferson,138.32,Justin is Brown,109.22,1,0,13,2022
-My Boy,104.08,Scammer got Scammed,128.84,0,1,13,2022
-Scammer got Scammed,128.84,My Boy,104.08,1,0,13,2022
-PEDeAndre Hopkins,91.94,Justin Jefferson,129.58,0,1,14,2022
-Justin Jefferson,129.58,PEDeAndre Hopkins,91.94,1,0,14,2022
-Silence D at work,132.28,Scammer got Scammed,119.86,1,0,14,2022
-Scammer got Scammed,119.86,Silence D at work,132.28,0,1,14,2022
-Dylan ate my Fantasy Points,125.46,My Boy,102.46,1,0,14,2022
-My Boy,102.46,Dylan ate my Fantasy Points,125.46,0,1,14,2022
-Najee Germany,121.18,Justin is Brown,98.98,1,0,14,2022
-Justin is Brown,98.98,Najee Germany,121.18,0,1,14,2022
-Dave Sucks,126.28,The DakStreet Boys,111.16,1,0,14,2022
-The DakStreet Boys,111.16,Dave Sucks,126.28,0,1,14,2022
-Dave Sucks,113.94,Justin Jefferson,166.16,0,1,15,2022
-Justin Jefferson,166.16,Dave Sucks,113.94,1,0,15,2022
-My Boy,98.82,Scammer got Scammed,137.7,0,1,15,2022
-Scammer got Scammed,137.7,My Boy,98.82,1,0,15,2022
-Justin Jefferson,148.88,PEDeAndre Hopkins,103.16,1,0,16,2022
-PEDeAndre Hopkins,103.16,Justin Jefferson,148.88,0,1,16,2022
-Scammer got Scammed,112,Silence D at work,164.5,0,1,16,2022
-Silence D at work,164.5,Scammer got Scammed,112,1,0,16,2022
-Justin Jefferson,117.6,Silence D at work,85.16,1,0,17,2022
-Silence D at work,85.16,Justin Jefferson,117.6,0,1,17,2022
-S(kittle),86.56,PEDeAndre Hopkins,91.34,0,1,1,2023
-PEDeAndre Hopkins,91.34,S(kittle),86.56,1,0,1,2023
-Team Chieffo,146.06,Pocket Aces,95.84,1,0,1,2023
-Pocket Aces,95.84,Team Chieffo,146.06,0,1,1,2023
-Mr. FigureItOut,129.24,Jah is gay,88.24,1,0,1,2023
-Jah is gay,88.24,Mr. FigureItOut,129.24,0,1,1,2023
-My digg hurts,138.7,Riley Reid Option,76.08,1,0,1,2023
-Riley Reid Option,76.08,My digg hurts,138.7,0,1,1,2023
-Chase-ing Young Children,108.26,Cup of Joe,115.66,0,1,1,2023
-Cup of Joe,115.66,Chase-ing Young Children,108.26,1,0,1,2023
-Riley Reid Option,100.68,PEDeAndre Hopkins,111.4,0,1,2,2023
-PEDeAndre Hopkins,111.4,Riley Reid Option,100.68,1,0,2,2023
-My digg hurts,130.02,Mr. FigureItOut,77.04,1,0,2,2023
-Mr. FigureItOut,77.04,My digg hurts,130.02,0,1,2,2023
-Pocket Aces,135.44,Chase-ing Young Children,170.54,0,1,2,2023
-Chase-ing Young Children,170.54,Pocket Aces,135.44,1,0,2,2023
-Team Chieffo,110.48,S(kittle),116.9,0,1,2,2023
-S(kittle),116.9,Team Chieffo,110.48,1,0,2,2023
-Jah is gay,115.76,Cup of Joe,129.2,0,1,2,2023
-Cup of Joe,129.2,Jah is gay,115.76,1,0,2,2023
-PEDeAndre Hopkins,125.48,My digg hurts,106.28,1,0,3,2023
-My digg hurts,106.28,PEDeAndre Hopkins,125.48,0,1,3,2023
-S(kittle),201.62,Chase-ing Young Children,129.74,1,0,3,2023
-Chase-ing Young Children,129.74,S(kittle),201.62,0,1,3,2023
-Cup of Joe,134.8,Mr. FigureItOut,103.26,1,0,3,2023
-Mr. FigureItOut,103.26,Cup of Joe,134.8,0,1,3,2023
-Jah is gay,130.32,Pocket Aces,120.36,1,0,3,2023
-Pocket Aces,120.36,Jah is gay,130.32,0,1,3,2023
-Riley Reid Option,119.96,Team Chieffo,166.28,0,1,3,2023
-Team Chieffo,166.28,Riley Reid Option,119.96,1,0,3,2023
-PEDeAndre Hopkins,77.82,Cup of Joe,111.98,0,1,4,2023
-Cup of Joe,111.98,PEDeAndre Hopkins,77.82,1,0,4,2023
-Chase-ing Young Children,154.92,Jah is gay,91.28,1,0,4,2023
-Jah is gay,91.28,Chase-ing Young Children,154.92,0,1,4,2023
-S(kittle),101.92,Riley Reid Option,97.98,1,0,4,2023
-Riley Reid Option,97.98,S(kittle),101.92,0,1,4,2023
-Mr. FigureItOut,168.54,Pocket Aces,120.74,1,0,4,2023
-Pocket Aces,120.74,Mr. FigureItOut,168.54,0,1,4,2023
-My digg hurts,148.96,Team Chieffo,87.24,1,0,4,2023
-Team Chieffo,87.24,My digg hurts,148.96,0,1,4,2023
-Team Chieffo,134.24,PEDeAndre Hopkins,111.64,1,0,5,2023
-PEDeAndre Hopkins,111.64,Team Chieffo,134.24,0,1,5,2023
-Riley Reid Option,134.82,Jah is gay,122.36,1,0,5,2023
-Jah is gay,122.36,Riley Reid Option,134.82,0,1,5,2023
-Pocket Aces,86.62,Cup of Joe,106.64,0,1,5,2023
-Cup of Joe,106.64,Pocket Aces,86.62,1,0,5,2023
-Mr. FigureItOut,119.48,Chase-ing Young Children,119.04,1,0,5,2023
-Chase-ing Young Children,119.04,Mr. FigureItOut,119.48,0,1,5,2023
-My digg hurts,123.92,S(kittle),162.58,0,1,5,2023
-S(kittle),162.58,My digg hurts,123.92,1,0,5,2023
-Jah is gay,140.46,PEDeAndre Hopkins,141.44,0,1,6,2023
-PEDeAndre Hopkins,141.44,Jah is gay,140.46,1,0,6,2023
-Mr. FigureItOut,98.94,Team Chieffo,120.54,0,1,6,2023
-Team Chieffo,120.54,Mr. FigureItOut,98.94,1,0,6,2023
-Chase-ing Young Children,113.32,My digg hurts,108.8,1,0,6,2023
-My digg hurts,108.8,Chase-ing Young Children,113.32,0,1,6,2023
-Cup of Joe,107.88,S(kittle),108.8,0,1,6,2023
-S(kittle),108.8,Cup of Joe,107.88,1,0,6,2023
-Pocket Aces,94.42,Riley Reid Option,127.48,0,1,6,2023
-Riley Reid Option,127.48,Pocket Aces,94.42,1,0,6,2023
-PEDeAndre Hopkins,143.56,Pocket Aces,67,1,0,7,2023
-Pocket Aces,67,PEDeAndre Hopkins,143.56,0,1,7,2023
-Team Chieffo,143.82,Chase-ing Young Children,158.38,0,1,7,2023
-Chase-ing Young Children,158.38,Team Chieffo,143.82,1,0,7,2023
-My digg hurts,97.56,Cup of Joe,91.26,1,0,7,2023
-Cup of Joe,91.26,My digg hurts,97.56,0,1,7,2023
-S(kittle),125.28,Jah is gay,111.5,1,0,7,2023
-Jah is gay,111.5,S(kittle),125.28,0,1,7,2023
-Riley Reid Option,126.14,Mr. FigureItOut,109.5,1,0,7,2023
-Mr. FigureItOut,109.5,Riley Reid Option,126.14,0,1,7,2023
-Mr. FigureItOut,97.2,PEDeAndre Hopkins,135.1,0,1,8,2023
-PEDeAndre Hopkins,135.1,Mr. FigureItOut,97.2,1,0,8,2023
-Cup of Joe,126.52,Team Chieffo,112.96,1,0,8,2023
-Team Chieffo,112.96,Cup of Joe,126.52,0,1,8,2023
-Jah is gay,105.98,My digg hurts,117.96,0,1,8,2023
-My digg hurts,117.96,Jah is gay,105.98,1,0,8,2023
-Pocket Aces,139.76,S(kittle),137.4,1,0,8,2023
-S(kittle),137.4,Pocket Aces,139.76,0,1,8,2023
-Chase-ing Young Children,153.96,Riley Reid Option,108.26,1,0,8,2023
-Riley Reid Option,108.26,Chase-ing Young Children,153.96,0,1,8,2023
-PEDeAndre Hopkins,103,S(kittle),92.8,1,0,9,2023
-S(kittle),92.8,PEDeAndre Hopkins,103,0,1,9,2023
-Team Chieffo,105.7,Jah is gay,134.08,0,1,9,2023
-Jah is gay,134.08,Team Chieffo,105.7,1,0,9,2023
-Cup of Joe,96.26,Pocket Aces,144.46,0,1,9,2023
-Pocket Aces,144.46,Cup of Joe,96.26,1,0,9,2023
-Riley Reid Option,99.92,My digg hurts,127.78,0,1,9,2023
-My digg hurts,127.78,Riley Reid Option,99.92,1,0,9,2023
-Chase-ing Young Children,121.72,Mr. FigureItOut,94.96,1,0,9,2023
-Mr. FigureItOut,94.96,Chase-ing Young Children,121.72,0,1,9,2023
-PEDeAndre Hopkins,59.46,Riley Reid Option,109.78,0,1,10,2023
-Riley Reid Option,109.78,PEDeAndre Hopkins,59.46,1,0,10,2023
-My digg hurts,115.36,Pocket Aces,166.76,0,1,10,2023
-Pocket Aces,166.76,My digg hurts,115.36,1,0,10,2023
-Jah is gay,118.32,Mr. FigureItOut,85.22,1,0,10,2023
-Mr. FigureItOut,85.22,Jah is gay,118.32,0,1,10,2023
-S(kittle),114.38,Team Chieffo,156.14,0,1,10,2023
-Team Chieffo,156.14,S(kittle),114.38,1,0,10,2023
-Cup of Joe,130.02,Chase-ing Young Children,118.28,1,0,10,2023
-Chase-ing Young Children,118.28,Cup of Joe,130.02,0,1,10,2023
-My digg hurts,129.1,PEDeAndre Hopkins,128.08,1,0,11,2023
-PEDeAndre Hopkins,128.08,My digg hurts,129.1,0,1,11,2023
-S(kittle),120.02,Mr. FigureItOut,82.76,1,0,11,2023
-Mr. FigureItOut,82.76,S(kittle),120.02,0,1,11,2023
-Chase-ing Young Children,105.5,Pocket Aces,76.56,1,0,11,2023
-Pocket Aces,76.56,Chase-ing Young Children,105.5,0,1,11,2023
-Cup of Joe,134.3,Jah is gay,121.96,1,0,11,2023
-Jah is gay,121.96,Cup of Joe,134.3,0,1,11,2023
-Team Chieffo,128.54,Riley Reid Option,112.4,1,0,11,2023
-Riley Reid Option,112.4,Team Chieffo,128.54,0,1,11,2023
-PEDeAndre Hopkins,136.02,Chase-ing Young Children,135.46,1,0,12,2023
-Chase-ing Young Children,135.46,PEDeAndre Hopkins,136.02,0,1,12,2023
-Mr. FigureItOut,97.68,Cup of Joe,85.58,1,0,12,2023
-Cup of Joe,85.58,Mr. FigureItOut,97.68,0,1,12,2023
-Riley Reid Option,102.22,S(kittle),119.96,0,1,12,2023
-S(kittle),119.96,Riley Reid Option,102.22,1,0,12,2023
-Pocket Aces,117.94,Jah is gay,120.78,0,1,12,2023
-Jah is gay,120.78,Pocket Aces,117.94,1,0,12,2023
-Team Chieffo,169.96,My digg hurts,143,1,0,12,2023
-My digg hurts,143,Team Chieffo,169.96,0,1,12,2023
-PEDeAndre Hopkins,132.6,Team Chieffo,127.76,1,0,13,2023
-Team Chieffo,127.76,PEDeAndre Hopkins,132.6,0,1,13,2023
-Riley Reid Option,145.9,Cup of Joe,83.48,1,0,13,2023
-Cup of Joe,83.48,Riley Reid Option,145.9,0,1,13,2023
-Jah is gay,0,Chase-ing Young Children,134.44,0,1,13,2023
-Chase-ing Young Children,134.44,Jah is gay,0,1,0,13,2023
-Pocket Aces,180.36,Mr. FigureItOut,104.34,1,0,13,2023
-Mr. FigureItOut,104.34,Pocket Aces,180.36,0,1,13,2023
-S(kittle),126.56,My digg hurts,104.82,1,0,13,2023
-My digg hurts,104.82,S(kittle),126.56,0,1,13,2023
-Cup of Joe,115.04,PEDeAndre Hopkins,143.24,0,1,14,2023
-PEDeAndre Hopkins,143.24,Cup of Joe,115.04,1,0,14,2023
-Pocket Aces,147.24,Team Chieffo,121.84,1,0,14,2023
-Team Chieffo,121.84,Pocket Aces,147.24,0,1,14,2023
-Mr. FigureItOut,109.26,My digg hurts,92.58,1,0,14,2023
-My digg hurts,92.58,Mr. FigureItOut,109.26,0,1,14,2023
-Chase-ing Young Children,133.62,S(kittle),103.72,1,0,14,2023
-S(kittle),103.72,Chase-ing Young Children,133.62,0,1,14,2023
-Jah is gay,65.92,Riley Reid Option,78.8,0,1,14,2023
-Riley Reid Option,78.8,Jah is gay,65.92,1,0,14,2023
-Team Chieffo,126.94,Cup of Joe,120.62,1,0,15,2023
-Cup of Joe,120.62,Team Chieffo,126.94,0,1,15,2023
-My digg hurts,94.22,S(kittle),169.68,0,1,15,2023
-S(kittle),169.68,My digg hurts,94.22,1,0,15,2023
-Team Chieffo,105.2,PEDeAndre Hopkins,140,0,1,16,2023
-PEDeAndre Hopkins,140,Team Chieffo,105.2,1,0,16,2023
-S(kittle),105.1,Chase-ing Young Children,114.28,0,1,16,2023
-Chase-ing Young Children,114.28,S(kittle),105.1,1,0,16,2023
-Chase-ing Young Children,112.16,PEDeAndre Hopkins,128.4,0,1,17,2023
-PEDeAndre Hopkins,128.4,Chase-ing Young Children,112.16,1,0,17,2023
-Reigning,178.38,Team Chieffo,98.3,1,0,1,2024
-Team Chieffo,98.3,Reigning,178.38,0,1,1,2024
-'fore i repeat it ima forget it,145.86,Amon a new Level,92.62,1,0,1,2024
-Amon a new Level,92.62,'fore i repeat it ima forget it,145.86,0,1,1,2024
-Mixon it (K)upp,121.66,Under the InfluWentz,98.06,1,0,1,2024
-Under the InfluWentz,98.06,Mixon it (K)upp,121.66,0,1,1,2024
-Jah is gay,89.78,Dyls belly,121.28,0,1,1,2024
-Dyls belly,121.28,Jah is gay,89.78,1,0,1,2024
-Njigbas Be Wildin,167.94,Kode,63.72,1,0,1,2024
-Kode,63.72,Njigbas Be Wildin,167.94,0,1,1,2024
-willimantic crack addicts,131.26,Big Johnson,129.92,1,0,1,2024
-Big Johnson,129.92,willimantic crack addicts,131.26,0,1,1,2024
-Under the InfluWentz,91.1,Reigning,84.16,1,0,2,2024
-Reigning,84.16,Under the InfluWentz,91.1,0,1,2,2024
-Dyls belly,128.66,Njigbas Be Wildin,76.54,1,0,2,2024
-Njigbas Be Wildin,76.54,Dyls belly,128.66,0,1,2,2024
-willimantic crack addicts,145.72,Mixon it (K)upp,123.94,1,0,2,2024
-Mixon it (K)upp,123.94,willimantic crack addicts,145.72,0,1,2,2024
-'fore i repeat it ima forget it,135.42,Jah is gay,147.64,0,1,2,2024
-Jah is gay,147.64,'fore i repeat it ima forget it,135.42,1,0,2,2024
-Amon a new Level,148.02,Kode,114.76,1,0,2,2024
-Kode,114.76,Amon a new Level,148.02,0,1,2,2024
-Big Johnson,89.98,Team Chieffo,115.08,0,1,2,2024
-Team Chieffo,115.08,Big Johnson,89.98,1,0,2,2024
-Mixon it (K)upp,128.06,Reigning,100.02,1,0,3,2024
-Reigning,100.02,Mixon it (K)upp,128.06,0,1,3,2024
-Kode,131.22,'fore i repeat it ima forget it,138.36,0,1,3,2024
-'fore i repeat it ima forget it,138.36,Kode,131.22,1,0,3,2024
-Team Chieffo,123.72,willimantic crack addicts,97.28,1,0,3,2024
-willimantic crack addicts,97.28,Team Chieffo,123.72,0,1,3,2024
-Jah is gay,112.08,Njigbas Be Wildin,104.08,1,0,3,2024
-Njigbas Be Wildin,104.08,Jah is gay,112.08,0,1,3,2024
-Amon a new Level,108.34,Dyls belly,107.48,1,0,3,2024
-Dyls belly,107.48,Amon a new Level,108.34,0,1,3,2024
-Big Johnson,109.98,Under the InfluWentz,82,1,0,3,2024
-Under the InfluWentz,82,Big Johnson,109.98,0,1,3,2024
-Reigning,140.6,Big Johnson,110.44,1,0,4,2024
-Big Johnson,110.44,Reigning,140.6,0,1,4,2024
-Njigbas Be Wildin,92.54,Amon a new Level,132.3,0,1,4,2024
-Amon a new Level,132.3,Njigbas Be Wildin,92.54,1,0,4,2024
-Team Chieffo,150.5,Mixon it (K)upp,114.02,1,0,4,2024
-Mixon it (K)upp,114.02,Team Chieffo,150.5,0,1,4,2024
-Kode,112.38,Jah is gay,98.08,1,0,4,2024
-Jah is gay,98.08,Kode,112.38,0,1,4,2024
-'fore i repeat it ima forget it,97.34,Dyls belly,85.94,1,0,4,2024
-Dyls belly,85.94,'fore i repeat it ima forget it,97.34,0,1,4,2024
-willimantic crack addicts,116.08,Under the InfluWentz,96.5,1,0,4,2024
-Under the InfluWentz,96.5,willimantic crack addicts,116.08,0,1,4,2024
-willimantic crack addicts,134.18,Reigning,95.34,1,0,5,2024
-Reigning,95.34,willimantic crack addicts,134.18,0,1,5,2024
-Dyls belly,115.18,Kode,110.76,1,0,5,2024
-Kode,110.76,Dyls belly,115.18,0,1,5,2024
-Mixon it (K)upp,143.02,Big Johnson,125.62,1,0,5,2024
-Big Johnson,125.62,Mixon it (K)upp,143.02,0,1,5,2024
-Jah is gay,91.7,Amon a new Level,141.66,0,1,5,2024
-Amon a new Level,141.66,Jah is gay,91.7,1,0,5,2024
-'fore i repeat it ima forget it,120.56,Njigbas Be Wildin,95.94,1,0,5,2024
-Njigbas Be Wildin,95.94,'fore i repeat it ima forget it,120.56,0,1,5,2024
-Under the InfluWentz,128.04,Team Chieffo,149.66,0,1,5,2024
-Team Chieffo,149.66,Under the InfluWentz,128.04,1,0,5,2024
-Reigning,97,Njigbas Be Wildin,111.42,0,1,6,2024
-Njigbas Be Wildin,111.42,Reigning,97,1,0,6,2024
-Under the InfluWentz,140.4,Dyls belly,149.72,0,1,6,2024
-Dyls belly,149.72,Under the InfluWentz,140.4,1,0,6,2024
-Team Chieffo,116.58,Kode,79.84,1,0,6,2024
-Kode,79.84,Team Chieffo,116.58,0,1,6,2024
-Mixon it (K)upp,93.96,Jah is gay,98.2,0,1,6,2024
-Jah is gay,98.2,Mixon it (K)upp,93.96,1,0,6,2024
-willimantic crack addicts,118.42,'fore i repeat it ima forget it,130.3,0,1,6,2024
-'fore i repeat it ima forget it,130.3,willimantic crack addicts,118.42,1,0,6,2024
-Big Johnson,115.72,Amon a new Level,152.86,0,1,6,2024
-Amon a new Level,152.86,Big Johnson,115.72,1,0,6,2024
-Kode,82.36,Reigning,97.72,0,1,7,2024
-Reigning,97.72,Kode,82.36,1,0,7,2024
-'fore i repeat it ima forget it,156.06,Under the InfluWentz,79.84,1,0,7,2024
-Under the InfluWentz,79.84,'fore i repeat it ima forget it,156.06,0,1,7,2024
-Amon a new Level,131.36,Team Chieffo,116.1,1,0,7,2024
-Team Chieffo,116.1,Amon a new Level,131.36,0,1,7,2024
-Dyls belly,102.64,Mixon it (K)upp,85.14,1,0,7,2024
-Mixon it (K)upp,85.14,Dyls belly,102.64,0,1,7,2024
-Njigbas Be Wildin,123.6,willimantic crack addicts,116.04,1,0,7,2024
-willimantic crack addicts,116.04,Njigbas Be Wildin,123.6,0,1,7,2024
-Jah is gay,96.38,Big Johnson,154.64,0,1,7,2024
-Big Johnson,154.64,Jah is gay,96.38,1,0,7,2024
-Reigning,90.02,Amon a new Level,132.5,0,1,8,2024
-Amon a new Level,132.5,Reigning,90.02,1,0,8,2024
-Under the InfluWentz,103.5,Njigbas Be Wildin,117.46,0,1,8,2024
-Njigbas Be Wildin,117.46,Under the InfluWentz,103.5,1,0,8,2024
-Team Chieffo,139.8,Jah is gay,159.18,0,1,8,2024
-Jah is gay,159.18,Team Chieffo,139.8,1,0,8,2024
-Mixon it (K)upp,93.14,'fore i repeat it ima forget it,110,0,1,8,2024
-'fore i repeat it ima forget it,110,Mixon it (K)upp,93.14,1,0,8,2024
-willimantic crack addicts,129.36,Kode,118.26,1,0,8,2024
-Kode,118.26,willimantic crack addicts,129.36,0,1,8,2024
-Big Johnson,155.16,Dyls belly,114.04,1,0,8,2024
-Dyls belly,114.04,Big Johnson,155.16,0,1,8,2024
-Jah is gay,114.86,Reigning,85.7,1,0,9,2024
-Reigning,85.7,Jah is gay,114.86,0,1,9,2024
-Kode,83.92,Under the InfluWentz,117.34,0,1,9,2024
-Under the InfluWentz,117.34,Kode,83.92,1,0,9,2024
-Dyls belly,104.7,Team Chieffo,133,0,1,9,2024
-Team Chieffo,133,Dyls belly,104.7,1,0,9,2024
-Njigbas Be Wildin,120.02,Mixon it (K)upp,123.06,0,1,9,2024
-Mixon it (K)upp,123.06,Njigbas Be Wildin,120.02,1,0,9,2024
-Amon a new Level,137.4,willimantic crack addicts,132.14,1,0,9,2024
-willimantic crack addicts,132.14,Amon a new Level,137.4,0,1,9,2024
-'fore i repeat it ima forget it,133.7,Big Johnson,108.7,1,0,9,2024
-Big Johnson,108.7,'fore i repeat it ima forget it,133.7,0,1,9,2024
-Reigning,123,Dyls belly,90.96,1,0,10,2024
-Dyls belly,90.96,Reigning,123,0,1,10,2024
-Under the InfluWentz,95.9,Amon a new Level,110.68,0,1,10,2024
-Amon a new Level,110.68,Under the InfluWentz,95.9,1,0,10,2024
-Team Chieffo,133.14,'fore i repeat it ima forget it,97.64,1,0,10,2024
-'fore i repeat it ima forget it,97.64,Team Chieffo,133.14,0,1,10,2024
-Mixon it (K)upp,113.18,Kode,114.5,0,1,10,2024
-Kode,114.5,Mixon it (K)upp,113.18,1,0,10,2024
-willimantic crack addicts,136.72,Jah is gay,122.64,1,0,10,2024
-Jah is gay,122.64,willimantic crack addicts,136.72,0,1,10,2024
-Big Johnson,111.4,Njigbas Be Wildin,92.1,1,0,10,2024
-Njigbas Be Wildin,92.1,Big Johnson,111.4,0,1,10,2024
-'fore i repeat it ima forget it,159.74,Reigning,109.38,1,0,11,2024
-Reigning,109.38,'fore i repeat it ima forget it,159.74,0,1,11,2024
-Amon a new Level,140.04,Mixon it (K)upp,116.64,1,0,11,2024
-Mixon it (K)upp,116.64,Amon a new Level,140.04,0,1,11,2024
-Jah is gay,89.02,Under the InfluWentz,72.5,1,0,11,2024
-Under the InfluWentz,72.5,Jah is gay,89.02,0,1,11,2024
-willimantic crack addicts,147.64,Dyls belly,92.18,1,0,11,2024
-Dyls belly,92.18,willimantic crack addicts,147.64,0,1,11,2024
-Njigbas Be Wildin,140.36,Team Chieffo,98.04,1,0,11,2024
-Team Chieffo,98.04,Njigbas Be Wildin,140.36,0,1,11,2024
-Kode,116.58,Big Johnson,107.38,1,0,11,2024
-Big Johnson,107.38,Kode,116.58,0,1,11,2024
-Njigbas Be Wildin,126.92,Reigning,118.78,1,0,12,2024
-Reigning,118.78,Njigbas Be Wildin,126.92,0,1,12,2024
-Mixon it (K)upp,143.32,Jah is gay,91.2,1,0,12,2024
-Jah is gay,91.2,Mixon it (K)upp,143.32,0,1,12,2024
-Dyls belly,137.38,Under the InfluWentz,85.3,1,0,12,2024
-Under the InfluWentz,85.3,Dyls belly,137.38,0,1,12,2024
-'fore i repeat it ima forget it,136.4,willimantic crack addicts,73.46,1,0,12,2024
-willimantic crack addicts,73.46,'fore i repeat it ima forget it,136.4,0,1,12,2024
-Kode,124.12,Team Chieffo,90.16,1,0,12,2024
-Team Chieffo,90.16,Kode,124.12,0,1,12,2024
-Amon a new Level,126.96,Big Johnson,113.08,1,0,12,2024
-Big Johnson,113.08,Amon a new Level,126.96,0,1,12,2024
-Kode,116.76,Reigning,116.22,1,0,13,2024
-Reigning,116.22,Kode,116.76,0,1,13,2024
-Dyls belly,118.22,Mixon it (K)upp,87.68,1,0,13,2024
-Mixon it (K)upp,87.68,Dyls belly,118.22,0,1,13,2024
-'fore i repeat it ima forget it,142.64,Under the InfluWentz,102.78,1,0,13,2024
-Under the InfluWentz,102.78,'fore i repeat it ima forget it,142.64,0,1,13,2024
-willimantic crack addicts,132.36,Njigbas Be Wildin,108.46,1,0,13,2024
-Njigbas Be Wildin,108.46,willimantic crack addicts,132.36,0,1,13,2024
-Amon a new Level,109.02,Team Chieffo,87.8,1,0,13,2024
-Team Chieffo,87.8,Amon a new Level,109.02,0,1,13,2024
-Big Johnson,165.18,Jah is gay,127.3,1,0,13,2024
-Jah is gay,127.3,Big Johnson,165.18,0,1,13,2024
-Reigning,130.48,Amon a new Level,111.92,1,0,14,2024
-Amon a new Level,111.92,Reigning,130.48,0,1,14,2024
-'fore i repeat it ima forget it,159.38,Mixon it (K)upp,135.02,1,0,14,2024
-Mixon it (K)upp,135.02,'fore i repeat it ima forget it,159.38,0,1,14,2024
-Njigbas Be Wildin,109.5,Under the InfluWentz,104.82,1,0,14,2024
-Under the InfluWentz,104.82,Njigbas Be Wildin,109.5,0,1,14,2024
-willimantic crack addicts,129.66,Kode,118.36,1,0,14,2024
-Kode,118.36,willimantic crack addicts,129.66,0,1,14,2024
-Team Chieffo,130,Jah is gay,118.16,1,0,14,2024
-Jah is gay,118.16,Team Chieffo,130,0,1,14,2024
-Big Johnson,154.12,Dyls belly,143.52,1,0,14,2024
-Dyls belly,143.52,Big Johnson,154.12,0,1,14,2024
-Dyls belly,116.16,Team Chieffo,100.82,1,0,15,2024
-Team Chieffo,100.82,Dyls belly,116.16,0,1,15,2024
-Njigbas Be Wildin,139.58,willimantic crack addicts,127.34,1,0,15,2024
-willimantic crack addicts,127.34,Njigbas Be Wildin,139.58,0,1,15,2024
-Big Johnson,148.9,Amon a new Level,148.2,1,0,15,2024
-Amon a new Level,148.2,Big Johnson,148.9,0,1,15,2024
-'fore i repeat it ima forget it,169.42,Dyls belly,141.74,1,0,16,2024
-Dyls belly,141.74,'fore i repeat it ima forget it,169.42,0,1,16,2024
-Big Johnson,144.28,Njigbas Be Wildin,142.12,1,0,16,2024
-Njigbas Be Wildin,142.12,Big Johnson,144.28,0,1,16,2024
-Big Johnson,144.42,'fore i repeat it ima forget it,97.88,1,0,17,2024
-'fore i repeat it ima forget it,97.88,Big Johnson,144.42,0,1,17,2024
-Saquon Bustley,116.82,Team Chieffo,82.92,1,0,1,2025
-Team Chieffo,82.92,Saquon Bustley,116.82,0,1,1,2025
-Nix my Balls,126.44,Njigbas in Paris,130.76,0,1,1,2025
-Njigbas in Paris,130.76,Nix my Balls,126.44,1,0,1,2025
-lets get this money,121.78,High Speed Chase,74.48,1,0,1,2025
-High Speed Chase,74.48,lets get this money,121.78,0,1,1,2025
-Bower Rangers,111.6,Beef One My Balls,135.98,0,1,1,2025
-Beef One My Balls,135.98,Bower Rangers,111.6,1,0,1,2025
-Cook my Balls,104.92,S(hamas),94.86,1,0,1,2025
-S(hamas),94.86,Cook my Balls,104.92,0,1,1,2025
-willimantic crack addicts,89.62,Kupp my balls,111.62,0,1,1,2025
-Kupp my balls,111.62,willimantic crack addicts,89.62,1,0,1,2025
-S(hamas),110.82,Saquon Bustley,113,0,1,2,2025
-Saquon Bustley,113,S(hamas),110.82,1,0,2,2025
-lets get this money,135.74,Nix my Balls,133.44,1,0,2,2025
-Nix my Balls,133.44,lets get this money,135.74,0,1,2,2025
-Njigbas in Paris,111.9,Bower Rangers,108.48,1,0,2,2025
-Bower Rangers,108.48,Njigbas in Paris,111.9,0,1,2,2025
-High Speed Chase,116.88,Beef One My Balls,108.1,1,0,2,2025
-Beef One My Balls,108.1,High Speed Chase,116.88,0,1,2,2025
-willimantic crack addicts,150.48,Cook my Balls,115.38,1,0,2,2025
-Cook my Balls,115.38,willimantic crack addicts,150.48,0,1,2,2025
-Kupp my balls,97.8,Team Chieffo,94.54,1,0,2,2025
-Team Chieffo,94.54,Kupp my balls,97.8,0,1,2,2025
-Cook my Balls,109.7,Saquon Bustley,125.42,0,1,3,2025
-Saquon Bustley,125.42,Cook my Balls,109.7,1,0,3,2025
-Nix my Balls,121.92,Bower Rangers,75.58,1,0,3,2025
-Bower Rangers,75.58,Nix my Balls,121.92,0,1,3,2025
-Beef One My Balls,144.52,lets get this money,118.74,1,0,3,2025
-lets get this money,118.74,Beef One My Balls,144.52,0,1,3,2025
-High Speed Chase,134.32,Njigbas in Paris,126.62,1,0,3,2025
-Njigbas in Paris,126.62,High Speed Chase,134.32,0,1,3,2025
-Team Chieffo,107.32,willimantic crack addicts,92.86,1,0,3,2025
-willimantic crack addicts,92.86,Team Chieffo,107.32,0,1,3,2025
-Kupp my balls,100.56,S(hamas),116.22,0,1,3,2025
-S(hamas),116.22,Kupp my balls,100.56,1,0,3,2025
-Saquon Bustley,114.42,Kupp my balls,120.4,0,1,4,2025
-Kupp my balls,120.4,Saquon Bustley,114.42,1,0,4,2025
-Beef One My Balls,144.86,Nix my Balls,141.44,1,0,4,2025
-Nix my Balls,141.44,Beef One My Balls,144.86,0,1,4,2025
-Bower Rangers,129.34,High Speed Chase,136.58,0,1,4,2025
-High Speed Chase,136.58,Bower Rangers,129.34,1,0,4,2025
-lets get this money,108,Njigbas in Paris,107.08,1,0,4,2025
-Njigbas in Paris,107.08,lets get this money,108,0,1,4,2025
-Team Chieffo,136.78,Cook my Balls,137.92,0,1,4,2025
-Cook my Balls,137.92,Team Chieffo,136.78,1,0,4,2025
-willimantic crack addicts,148.9,S(hamas),87.86,1,0,4,2025
-S(hamas),87.86,willimantic crack addicts,148.9,0,1,4,2025
-willimantic crack addicts,105.54,Saquon Bustley,95.54,1,0,5,2025
-Saquon Bustley,95.54,willimantic crack addicts,105.54,0,1,5,2025
-Nix my Balls,152.96,High Speed Chase,121.18,1,0,5,2025
-High Speed Chase,121.18,Nix my Balls,152.96,0,1,5,2025
-Njigbas in Paris,134.12,Beef One My Balls,174.18,0,1,5,2025
-Beef One My Balls,174.18,Njigbas in Paris,134.12,1,0,5,2025
-lets get this money,145.1,Bower Rangers,134.82,1,0,5,2025
-Bower Rangers,134.82,lets get this money,145.1,0,1,5,2025
-Cook my Balls,100.44,Kupp my balls,101.9,0,1,5,2025
-Kupp my balls,101.9,Cook my Balls,100.44,1,0,5,2025
-S(hamas),49.82,Team Chieffo,140.38,0,1,5,2025
-Team Chieffo,140.38,S(hamas),49.82,1,0,5,2025
-Saquon Bustley,134.14,Bower Rangers,78.32,1,0,6,2025
-Bower Rangers,78.32,Saquon Bustley,134.14,0,1,6,2025
-Cook my Balls,83.66,Nix my Balls,97.06,0,1,6,2025
-Nix my Balls,97.06,Cook my Balls,83.66,1,0,6,2025
-S(hamas),69.9,Njigbas in Paris,144.98,0,1,6,2025
-Njigbas in Paris,144.98,S(hamas),69.9,1,0,6,2025
-willimantic crack addicts,105.38,lets get this money,154.42,0,1,6,2025
-lets get this money,154.42,willimantic crack addicts,105.38,1,0,6,2025
-Team Chieffo,113.58,Beef One My Balls,80.54,1,0,6,2025
-Beef One My Balls,80.54,Team Chieffo,113.58,0,1,6,2025
-Kupp my balls,147.42,High Speed Chase,103.46,1,0,6,2025
-High Speed Chase,103.46,Kupp my balls,147.42,0,1,6,2025
-Beef One My Balls,125.86,Saquon Bustley,144.04,0,1,7,2025
-Saquon Bustley,144.04,Beef One My Balls,125.86,1,0,7,2025
-Njigbas in Paris,154.98,Cook my Balls,103.1,1,0,7,2025
-Cook my Balls,103.1,Njigbas in Paris,154.98,0,1,7,2025
-lets get this money,93.24,S(hamas),82.66,1,0,7,2025
-S(hamas),82.66,lets get this money,93.24,0,1,7,2025
-Bower Rangers,55.94,willimantic crack addicts,108.54,0,1,7,2025
-willimantic crack addicts,108.54,Bower Rangers,55.94,1,0,7,2025
-High Speed Chase,118.66,Team Chieffo,104.12,1,0,7,2025
-Team Chieffo,104.12,High Speed Chase,118.66,0,1,7,2025
-Nix my Balls,140.56,Kupp my balls,109.62,1,0,7,2025
-Kupp my balls,109.62,Nix my Balls,140.56,0,1,7,2025
-Saquon Bustley,145.88,High Speed Chase,123.7,1,0,8,2025
-High Speed Chase,123.7,Saquon Bustley,145.88,0,1,8,2025
-Cook my Balls,139.98,lets get this money,110.86,1,0,8,2025
-lets get this money,110.86,Cook my Balls,139.98,0,1,8,2025
-S(hamas),103.12,Bower Rangers,100.92,1,0,8,2025
-Bower Rangers,100.92,S(hamas),103.12,0,1,8,2025
-willimantic crack addicts,87.36,Beef One My Balls,86.82,1,0,8,2025
-Beef One My Balls,86.82,willimantic crack addicts,87.36,0,1,8,2025
-Team Chieffo,144.04,Nix my Balls,113.18,1,0,8,2025
-Nix my Balls,113.18,Team Chieffo,144.04,0,1,8,2025
-Kupp my balls,119.68,Njigbas in Paris,102.2,1,0,8,2025
-Njigbas in Paris,102.2,Kupp my balls,119.68,0,1,8,2025
-Nix my Balls,96.52,Saquon Bustley,93.26,1,0,9,2025
-Saquon Bustley,93.26,Nix my Balls,96.52,0,1,9,2025
-Bower Rangers,141.8,Cook my Balls,134.3,1,0,9,2025
-Cook my Balls,134.3,Bower Rangers,141.8,0,1,9,2025
-Beef One My Balls,102.3,S(hamas),92.92,1,0,9,2025
-S(hamas),92.92,Beef One My Balls,102.3,0,1,9,2025
-High Speed Chase,116.22,willimantic crack addicts,101.4,1,0,9,2025
-willimantic crack addicts,101.4,High Speed Chase,116.22,0,1,9,2025
-Njigbas in Paris,153.76,Team Chieffo,121.88,1,0,9,2025
-Team Chieffo,121.88,Njigbas in Paris,153.76,0,1,9,2025
-lets get this money,122.54,Kupp my balls,134.94,0,1,9,2025
-Kupp my balls,134.94,lets get this money,122.54,1,0,9,2025
-Saquon Bustley,160.8,Njigbas in Paris,132.44,1,0,10,2025
-Njigbas in Paris,132.44,Saquon Bustley,160.8,0,1,10,2025
-Cook my Balls,90.4,Beef One My Balls,114.6,0,1,10,2025
-Beef One My Balls,114.6,Cook my Balls,90.4,1,0,10,2025
-S(hamas),104.84,High Speed Chase,98.04,1,0,10,2025
-High Speed Chase,98.04,S(hamas),104.84,0,1,10,2025
-willimantic crack addicts,84.22,Nix my Balls,144.6,0,1,10,2025
-Nix my Balls,144.6,willimantic crack addicts,84.22,1,0,10,2025
-Team Chieffo,117.6,lets get this money,131.82,0,1,10,2025
-lets get this money,131.82,Team Chieffo,117.6,1,0,10,2025
-Kupp my balls,135.32,Bower Rangers,101.2,1,0,10,2025
-Bower Rangers,101.2,Kupp my balls,135.32,0,1,10,2025
-lets get this money,115.5,Saquon Bustley,92.74,1,0,11,2025
-Saquon Bustley,92.74,lets get this money,115.5,0,1,11,2025
-High Speed Chase,141.66,Cook my Balls,115.54,1,0,11,2025
-Cook my Balls,115.54,High Speed Chase,141.66,0,1,11,2025
-Nix my Balls,72.8,S(hamas),131.38,0,1,11,2025
-S(hamas),131.38,Nix my Balls,72.8,1,0,11,2025
-Njigbas in Paris,110.32,willimantic crack ad...,110.34,0,1,11,2025
-willimantic crack ad...,110.34,Njigbas in Paris,110.32,1,0,11,2025
-Bower Rangers,115.76,Team Chieffo,79.7,1,0,11,2025
-Team Chieffo,79.7,Bower Rangers,115.76,0,1,11,2025
-Beef One My Balls,100.7,Kupp my balls,112.62,0,1,11,2025
-Kupp my balls,112.62,Beef One My Balls,100.7,1,0,11,2025
-Bower Rangers,96.56,Saquon Bustley,89.46,1,0,12,2025
-Saquon Bustley,89.46,Bower Rangers,96.56,0,1,12,2025
-Nix my Balls,165.18,Cook my Balls,98.52,1,0,12,2025
-Cook my Balls,98.52,Nix my Balls,165.18,0,1,12,2025
-Njigbas in Paris,137.12,S(hamas),97.62,1,0,12,2025
-S(hamas),97.62,Njigbas in Paris,137.12,0,1,12,2025
-lets get this money,128.76,willimantic crack addicts,75.58,1,0,12,2025
-willimantic crack addicts,75.58,lets get this money,128.76,0,1,12,2025
-Beef One My Balls,103.92,Team Chieffo,125.54,0,1,12,2025
-Team Chieffo,125.54,Beef One My Balls,103.92,1,0,12,2025
-High Speed Chase,91.46,Kupp my balls,134.44,0,1,12,2025
-Kupp my balls,134.44,High Speed Chase,91.46,1,0,12,2025
-Saquon Bustley,137.68,Beef One My Balls,88.22,1,0,13,2025
-Beef One My Balls,88.22,Saquon Bustley,137.68,0,1,13,2025
-Cook my Balls,91.94,Njigbas in Paris,91.96,0,1,13,2025
-Njigbas in Paris,91.96,Cook my Balls,91.94,1,0,13,2025
-S(hamas),142.32,lets get this money,129.3,1,0,13,2025
-lets get this money,129.3,S(hamas),142.32,0,1,13,2025
-willimantic crack addicts,135.34,Bower Rangers,104.84,1,0,13,2025
-Bower Rangers,104.84,willimantic crack addicts,135.34,0,1,13,2025
-Team Chieffo,96.94,High Speed Chase,107.34,0,1,13,2025
-High Speed Chase,107.34,Team Chieffo,96.94,1,0,13,2025
-Kupp my balls,104.94,Nix my Balls,76.94,1,0,13,2025
-Nix my Balls,76.94,Kupp my balls,104.94,0,1,13,2025
-High Speed Chase,119.26,Saquon Bustley,93.12,1,0,14,2025
-Saquon Bustley,93.12,High Speed Chase,119.26,0,1,14,2025
-lets get this money,89.7,Cook my Balls,83.26,1,0,14,2025
-Cook my Balls,83.26,lets get this money,89.7,0,1,14,2025
-Bower Rangers,115.46,S(hamas),126.94,0,1,14,2025
-S(hamas),126.94,Bower Rangers,115.46,1,0,14,2025
-Beef One My Balls,131.34,willimantic crack addicts,90.9,1,0,14,2025
-willimantic crack addicts,90.9,Beef One My Balls,131.34,0,1,14,2025
-Nix my Balls,115.38,Team Chieffo,54.4,1,0,14,2025
-Team Chieffo,54.4,Nix my Balls,115.38,0,1,14,2025
-Njigbas in Paris,137.54,Kupp my balls,83.86,1,0,14,2025
-Kupp my balls,83.86,Njigbas in Paris,137.54,0,1,14,2025
-Saquon Bustley,150.2,Nix my Balls,126.4,1,0,15,2025
-Nix my Balls,126.4,Saquon Bustley,150.2,0,1,15,2025
-High Speed Chase,152.5,Njigbas in Paris,135.5,1,0,15,2025
-Njigbas in Paris,135.5,High Speed Chase,152.5,0,1,15,2025
-Beef One My Balls,127.42,lets get this money,93.1,1,0,15,2025
-lets get this money,93.1,Beef One My Balls,127.42,0,1,15,2025
-Saquon Bustley,145.8,Kupp my balls,112.52,1,0,16,2025
-Kupp my balls,112.52,Saquon Bustley,145.8,0,1,16,2025
-Beef One My Balls,143.66,High Speed Chase,159.76,0,1,16,2025
-High Speed Chase,159.76,Beef One My Balls,143.66,1,0,16,2025
-Njigbas Be Wildin,122.18,Dyls belly,143.58,0,1,17,2024
-Dyls belly,143.58,Njigbas Be Wildin,122.18,1,0,17,2024
-Team Chieffo,140.62,S(kittle),116.7,1,0,17,2023
-S(kittle),116.7,Team Chieffo,140.62,0,1,17,2023
-Scammer got Scammed,99.7,PEDeAndre Hopkins,52.7,1,0,17,2022
-PEDeAndre Hopkins,52.7,Scammer got Scammed,99.7,0,1,17,2022
-Saquon Bustley,170.84,High Speed Chase,155.7,1,0,17,2025
-High Speed Chase,155.7,Saquon Bustley,170.84,0,1,17,2025
-Beef One My Balls,95.78,Kupp my balls,94.68,1,0,17,2025
-Kupp my balls,94.68,Beef One My Balls,95.78,0,1,17,2025
+Team,Points For,Opposing Team,Points Against,Win,Loss,Week,Year,Matchup Type
+Team Dupre,107.1,Team Chasse,131.26,0,1,1,2021,Regular Season
+Team Chasse,131.26,Team Dupre,107.1,1,0,1,2021,Regular Season
+Team Perrotti,128.56,Team Pawlowicz,136.66,0,1,1,2021,Regular Season
+Team Pawlowicz,136.66,Team Perrotti,128.56,1,0,1,2021,Regular Season
+Team Sachs,134.78,Team Loomis,102.02,1,0,1,2021,Regular Season
+Team Loomis,102.02,Team Sachs,134.78,0,1,1,2021,Regular Season
+Team Acquarulo,96.6,Team Piazza,115.58,0,1,1,2021,Regular Season
+Team Piazza,115.58,Team Acquarulo,96.6,1,0,1,2021,Regular Season
+Team Shamas,158.16,Team Graver,94.68,1,0,1,2021,Regular Season
+Team Graver,94.68,Team Shamas,158.16,0,1,1,2021,Regular Season
+Team Chasse,179.64,Team Acquarulo,110.56,1,0,2,2021,Regular Season
+Team Acquarulo,110.56,Team Chasse,179.64,0,1,2,2021,Regular Season
+Team Sachs,174.92,Team Perrotti,111.1,1,0,2,2021,Regular Season
+Team Perrotti,111.1,Team Sachs,174.92,0,1,2,2021,Regular Season
+Team Dupre,145.26,Team Shamas,154.4,0,1,2,2021,Regular Season
+Team Shamas,154.4,Team Dupre,145.26,1,0,2,2021,Regular Season
+Team Pawlowicz,95.48,Team Piazza,91.12,1,0,2,2021,Regular Season
+Team Piazza,91.12,Team Pawlowicz,95.48,0,1,2,2021,Regular Season
+Team Loomis,101.6,Team Graver,136.02,0,1,2,2021,Regular Season
+Team Graver,136.02,Team Loomis,101.6,1,0,2,2021,Regular Season
+Team Pawlowicz,118.72,Team Chasse,126.48,0,1,3,2021,Regular Season
+Team Chasse,126.48,Team Pawlowicz,118.72,1,0,3,2021,Regular Season
+Team Shamas,119.22,Team Acquarulo,153.74,0,1,3,2021,Regular Season
+Team Acquarulo,153.74,Team Shamas,119.22,1,0,3,2021,Regular Season
+Team Piazza,145.7,Team Perrotti,118.74,1,0,3,2021,Regular Season
+Team Perrotti,118.74,Team Piazza,145.7,0,1,3,2021,Regular Season
+Team Graver,122.94,Team Sachs,124.94,0,1,3,2021,Regular Season
+Team Sachs,124.94,Team Graver,122.94,1,0,3,2021,Regular Season
+Team Loomis,124.64,Team Dupre,118.52,1,0,3,2021,Regular Season
+Team Dupre,118.52,Team Loomis,124.64,0,1,3,2021,Regular Season
+Team Perrotti,112.02,Team Chasse,103.76,1,0,4,2021,Regular Season
+Team Chasse,103.76,Team Perrotti,112.02,0,1,4,2021,Regular Season
+Team Graver,156.78,Team Piazza,131.02,1,0,4,2021,Regular Season
+Team Piazza,131.02,Team Graver,156.78,0,1,4,2021,Regular Season
+Team Acquarulo,155.18,Team Pawlowicz,128.72,1,0,4,2021,Regular Season
+Team Pawlowicz,128.72,Team Acquarulo,155.18,0,1,4,2021,Regular Season
+Team Shamas,103.06,Team Loomis,89.22,1,0,4,2021,Regular Season
+Team Loomis,89.22,Team Shamas,103.06,0,1,4,2021,Regular Season
+Team Sachs,98.8,Team Dupre,123.32,0,1,4,2021,Regular Season
+Team Dupre,123.32,Team Sachs,98.8,1,0,4,2021,Regular Season
+Team Chasse,167.74,Team Piazza,193.58,0,1,5,2021,Regular Season
+Team Piazza,193.58,Team Chasse,167.74,1,0,5,2021,Regular Season
+Team Loomis,95.16,Team Pawlowicz,125.76,0,1,5,2021,Regular Season
+Team Pawlowicz,125.76,Team Loomis,95.16,1,0,5,2021,Regular Season
+Team Dupre,142.6,Team Graver,156.32,0,1,5,2021,Regular Season
+Team Graver,156.32,Team Dupre,142.6,1,0,5,2021,Regular Season
+Team Perrotti,138.58,Team Acquarulo,80.72,1,0,5,2021,Regular Season
+Team Acquarulo,80.72,Team Perrotti,138.58,0,1,5,2021,Regular Season
+Team Sachs,140.5,Team Shamas,139.28,1,0,5,2021,Regular Season
+Team Shamas,139.28,Team Sachs,140.5,0,1,5,2021,Regular Season
+Team Chasse,154.48,Team Loomis,96.1,1,0,6,2021,Regular Season
+Team Loomis,96.1,Team Chasse,154.48,0,1,6,2021,Regular Season
+Team Perrotti,116.7,Team Dupre,108.92,1,0,6,2021,Regular Season
+Team Dupre,108.92,Team Perrotti,116.7,0,1,6,2021,Regular Season
+Team Acquarulo,139.7,Team Sachs,126.44,1,0,6,2021,Regular Season
+Team Sachs,126.44,Team Acquarulo,139.7,0,1,6,2021,Regular Season
+Team Piazza,143.68,Team Shamas,143.68,0,0,6,2021,Regular Season
+Team Shamas,143.68,Team Piazza,143.68,0,0,6,2021,Regular Season
+Team Pawlowicz,105.66,Team Graver,131.6,0,1,6,2021,Regular Season
+Team Graver,131.6,Team Pawlowicz,105.66,1,0,6,2021,Regular Season
+Team Graver,117.72,Team Chasse,133.74,0,1,7,2021,Regular Season
+Team Chasse,133.74,Team Graver,117.72,1,0,7,2021,Regular Season
+Team Dupre,136.44,Team Acquarulo,141.84,0,1,7,2021,Regular Season
+Team Acquarulo,141.84,Team Dupre,136.44,1,0,7,2021,Regular Season
+Team Sachs,176.86,Team Piazza,120.24,1,0,7,2021,Regular Season
+Team Piazza,120.24,Team Sachs,176.86,0,1,7,2021,Regular Season
+Team Shamas,113.44,Team Pawlowicz,122.44,0,1,7,2021,Regular Season
+Team Pawlowicz,122.44,Team Shamas,113.44,1,0,7,2021,Regular Season
+Team Loomis,116.56,Team Perrotti,128.5,0,1,7,2021,Regular Season
+Team Perrotti,128.5,Team Loomis,116.56,1,0,7,2021,Regular Season
+Team Chasse,109.4,Team Shamas,136.58,0,1,8,2021,Regular Season
+Team Shamas,136.58,Team Chasse,109.4,1,0,8,2021,Regular Season
+Team Piazza,81.2,Team Dupre,122.36,0,1,8,2021,Regular Season
+Team Dupre,122.36,Team Piazza,81.2,1,0,8,2021,Regular Season
+Team Pawlowicz,82.46,Team Sachs,134.8,0,1,8,2021,Regular Season
+Team Sachs,134.8,Team Pawlowicz,82.46,1,0,8,2021,Regular Season
+Team Perrotti,133.7,Team Graver,120.52,1,0,8,2021,Regular Season
+Team Graver,120.52,Team Perrotti,133.7,0,1,8,2021,Regular Season
+Team Acquarulo,86.82,Team Loomis,107.62,0,1,8,2021,Regular Season
+Team Loomis,107.62,Team Acquarulo,86.82,1,0,8,2021,Regular Season
+Team Piazza,123.76,Team Chasse,128.74,0,1,9,2021,Regular Season
+Team Chasse,128.74,Team Piazza,123.76,1,0,9,2021,Regular Season
+Team Dupre,113.66,Team Pawlowicz,65.48,1,0,9,2021,Regular Season
+Team Pawlowicz,65.48,Team Dupre,113.66,0,1,9,2021,Regular Season
+Team Loomis,145.58,Team Sachs,114.06,1,0,9,2021,Regular Season
+Team Sachs,114.06,Team Loomis,145.58,0,1,9,2021,Regular Season
+Team Acquarulo,90.78,Team Perrotti,100.18,0,1,9,2021,Regular Season
+Team Perrotti,100.18,Team Acquarulo,90.78,1,0,9,2021,Regular Season
+Team Graver,122.14,Team Shamas,78.3,1,0,9,2021,Regular Season
+Team Shamas,78.3,Team Graver,122.14,0,1,9,2021,Regular Season
+Team Sachs,97.62,Team Chasse,104.92,0,1,10,2021,Regular Season
+Team Chasse,104.92,Team Sachs,97.62,1,0,10,2021,Regular Season
+Team Pawlowicz,124.54,Team Perrotti,119.24,1,0,10,2021,Regular Season
+Team Perrotti,119.24,Team Pawlowicz,124.54,0,1,10,2021,Regular Season
+Team Shamas,133.64,Team Dupre,88.84,1,0,10,2021,Regular Season
+Team Dupre,88.84,Team Shamas,133.64,0,1,10,2021,Regular Season
+Team Piazza,142.14,Team Acquarulo,123.82,1,0,10,2021,Regular Season
+Team Acquarulo,123.82,Team Piazza,142.14,0,1,10,2021,Regular Season
+Team Graver,115.56,Team Loomis,107.2,1,0,10,2021,Regular Season
+Team Loomis,107.2,Team Graver,115.56,0,1,10,2021,Regular Season
+Team Acquarulo,120.38,Team Chasse,126.08,0,1,11,2021,Regular Season
+Team Chasse,126.08,Team Acquarulo,120.38,1,0,11,2021,Regular Season
+Team Shamas,124.92,Team Perrotti,134.24,0,1,11,2021,Regular Season
+Team Perrotti,134.24,Team Shamas,124.92,1,0,11,2021,Regular Season
+Team Sachs,92.66,Team Graver,168.38,0,1,11,2021,Regular Season
+Team Graver,168.38,Team Sachs,92.66,1,0,11,2021,Regular Season
+Team Piazza,146.2,Team Pawlowicz,85.68,1,0,11,2021,Regular Season
+Team Pawlowicz,85.68,Team Piazza,146.2,0,1,11,2021,Regular Season
+Team Dupre,86.46,Team Loomis,154.9,0,1,11,2021,Regular Season
+Team Loomis,154.9,Team Dupre,86.46,1,0,11,2021,Regular Season
+Team Chasse,104.94,Team Pawlowicz,99.4,1,0,12,2021,Regular Season
+Team Pawlowicz,99.4,Team Chasse,104.94,0,1,12,2021,Regular Season
+Team Graver,117.98,Team Acquarulo,68.66,1,0,12,2021,Regular Season
+Team Acquarulo,68.66,Team Graver,117.98,0,1,12,2021,Regular Season
+Team Perrotti,138.8,Team Piazza,114.82,1,0,12,2021,Regular Season
+Team Piazza,114.82,Team Perrotti,138.8,0,1,12,2021,Regular Season
+Team Loomis,128.18,Team Shamas,142.38,0,1,12,2021,Regular Season
+Team Shamas,142.38,Team Loomis,128.18,1,0,12,2021,Regular Season
+Team Dupre,124.6,Team Sachs,97.2,1,0,12,2021,Regular Season
+Team Sachs,97.2,Team Dupre,124.6,0,1,12,2021,Regular Season
+Team Chasse,107.1,Team Perrotti,139.82,0,1,13,2021,Regular Season
+Team Perrotti,139.82,Team Chasse,107.1,1,0,13,2021,Regular Season
+Team Loomis,125.24,Team Piazza,87.96,1,0,13,2021,Regular Season
+Team Piazza,87.96,Team Loomis,125.24,0,1,13,2021,Regular Season
+Team Pawlowicz,120.42,Team Acquarulo,88.36,1,0,13,2021,Regular Season
+Team Acquarulo,88.36,Team Pawlowicz,120.42,0,1,13,2021,Regular Season
+Team Graver,192.28,Team Dupre,68.3,1,0,13,2021,Regular Season
+Team Dupre,68.3,Team Graver,192.28,0,1,13,2021,Regular Season
+Team Shamas,159.92,Team Sachs,133.32,1,0,13,2021,Regular Season
+Team Sachs,133.32,Team Shamas,159.92,0,1,13,2021,Regular Season
+Team Chasse,106.28,Team Dupre,90.02,1,0,14,2021,Regular Season
+Team Dupre,90.02,Team Chasse,106.28,0,1,14,2021,Regular Season
+Team Perrotti,125.14,Team Sachs,118.88,1,0,14,2021,Regular Season
+Team Sachs,118.88,Team Perrotti,125.14,0,1,14,2021,Regular Season
+Team Acquarulo,106.2,Team Shamas,140.9,0,1,14,2021,Regular Season
+Team Shamas,140.9,Team Acquarulo,106.2,1,0,14,2021,Regular Season
+Team Piazza,145.72,Team Graver,155.5,0,1,14,2021,Regular Season
+Team Graver,155.5,Team Piazza,145.72,1,0,14,2021,Regular Season
+Team Pawlowicz,130.52,Team Loomis,149.74,0,1,14,2021,Regular Season
+Team Loomis,149.74,Team Pawlowicz,130.52,1,0,14,2021,Regular Season
+Team Perrotti,86.48,Team Loomis,86.92,0,1,15,2021,Quarterfinals
+Team Loomis,86.92,Team Perrotti,86.48,1,0,15,2021,Quarterfinals
+Team Shamas,113.26,Team Sachs,86.44,1,0,15,2021,Quarterfinals
+Team Sachs,86.44,Team Shamas,113.26,0,1,15,2021,Quarterfinals
+Team Chasse,63.18,Team Loomis,102.38,0,1,16,2021,Semifinals
+Team Loomis,102.38,Team Chasse,63.18,1,0,16,2021,Semifinals
+Team Graver,132.74,Team Shamas,120.38,1,0,16,2021,Semifinals
+Team Shamas,120.38,Team Graver,132.74,0,1,16,2021,Semifinals
+Team Loomis,113.72,Team Graver,88.18,1,0,17,2021,Finals
+Team Graver,88.18,Team Loomis,113.72,0,1,17,2021,Finals
+Justin Jefferson,123.62,PEDeAndre Hopkins,143.38,0,1,1,2022,Regular Season
+PEDeAndre Hopkins,143.38,Justin Jefferson,123.62,1,0,1,2022,Regular Season
+Silence D at work,109.02,Dave Sucks,106.12,1,0,1,2022,Regular Season
+Dave Sucks,106.12,Silence D at work,109.02,0,1,1,2022,Regular Season
+Scammer got Scammed,98.9,The DakStreet Boys,93.86,1,0,1,2022,Regular Season
+The DakStreet Boys,93.86,Scammer got Scammed,98.9,0,1,1,2022,Regular Season
+Dylan ate my Fantasy Points,123.88,Najee Germany,112.9,1,0,1,2022,Regular Season
+Najee Germany,112.9,Dylan ate my Fantasy Points,123.88,0,1,1,2022,Regular Season
+My Boy,142.32,Justin is Brown,126.26,1,0,1,2022,Regular Season
+Justin is Brown,126.26,My Boy,142.32,0,1,1,2022,Regular Season
+PEDeAndre Hopkins,118.68,Dylan ate my Fantasy Points,86.2,1,0,2,2022,Regular Season
+Dylan ate my Fantasy Points,86.2,PEDeAndre Hopkins,118.68,0,1,2,2022,Regular Season
+Scammer got Scammed,145.18,Silence D at work,125.52,1,0,2,2022,Regular Season
+Silence D at work,125.52,Scammer got Scammed,145.18,0,1,2,2022,Regular Season
+Justin Jefferson,128.46,My Boy,132.38,0,1,2,2022,Regular Season
+My Boy,132.38,Justin Jefferson,128.46,1,0,2,2022,Regular Season
+Dave Sucks,146.92,Najee Germany,101.56,1,0,2,2022,Regular Season
+Najee Germany,101.56,Dave Sucks,146.92,0,1,2,2022,Regular Season
+The DakStreet Boys,124.88,Justin is Brown,168.26,0,1,2,2022,Regular Season
+Justin is Brown,168.26,The DakStreet Boys,124.88,1,0,2,2022,Regular Season
+Dave Sucks,115.82,PEDeAndre Hopkins,136.9,0,1,3,2022,Regular Season
+PEDeAndre Hopkins,136.9,Dave Sucks,115.82,1,0,3,2022,Regular Season
+My Boy,97.06,Dylan ate my Fantasy Points,94.54,1,0,3,2022,Regular Season
+Dylan ate my Fantasy Points,94.54,My Boy,97.06,0,1,3,2022,Regular Season
+Najee Germany,95.66,Silence D at work,137.7,0,1,3,2022,Regular Season
+Silence D at work,137.7,Najee Germany,95.66,1,0,3,2022,Regular Season
+Justin is Brown,101.58,Scammer got Scammed,114.82,0,1,3,2022,Regular Season
+Scammer got Scammed,114.82,Justin is Brown,101.58,1,0,3,2022,Regular Season
+The DakStreet Boys,85.54,Justin Jefferson,130.3,0,1,3,2022,Regular Season
+Justin Jefferson,130.3,The DakStreet Boys,85.54,1,0,3,2022,Regular Season
+Silence D at work,103.16,PEDeAndre Hopkins,175.12,0,1,4,2022,Regular Season
+PEDeAndre Hopkins,175.12,Silence D at work,103.16,1,0,4,2022,Regular Season
+Justin is Brown,124.86,Najee Germany,100.8,1,0,4,2022,Regular Season
+Najee Germany,100.8,Justin is Brown,124.86,0,1,4,2022,Regular Season
+Dylan ate my Fantasy Points,94.16,Dave Sucks,147.76,0,1,4,2022,Regular Season
+Dave Sucks,147.76,Dylan ate my Fantasy Points,94.16,1,0,4,2022,Regular Season
+My Boy,111.98,The DakStreet Boys,141.32,0,1,4,2022,Regular Season
+The DakStreet Boys,141.32,My Boy,111.98,1,0,4,2022,Regular Season
+Scammer got Scammed,155.92,Justin Jefferson,103.98,1,0,4,2022,Regular Season
+Justin Jefferson,103.98,Scammer got Scammed,155.92,0,1,4,2022,Regular Season
+PEDeAndre Hopkins,175.46,Najee Germany,108.82,1,0,5,2022,Regular Season
+Najee Germany,108.82,PEDeAndre Hopkins,175.46,0,1,5,2022,Regular Season
+The DakStreet Boys,104.56,Dave Sucks,137.26,0,1,5,2022,Regular Season
+Dave Sucks,137.26,The DakStreet Boys,104.56,1,0,5,2022,Regular Season
+Justin Jefferson,151.98,Justin is Brown,109.88,1,0,5,2022,Regular Season
+Justin is Brown,109.88,Justin Jefferson,151.98,0,1,5,2022,Regular Season
+Silence D at work,108.46,Dylan ate my Fantasy Points,106.14,1,0,5,2022,Regular Season
+Dylan ate my Fantasy Points,106.14,Silence D at work,108.46,0,1,5,2022,Regular Season
+Scammer got Scammed,121.8,My Boy,114.7,1,0,5,2022,Regular Season
+My Boy,114.7,Scammer got Scammed,121.8,0,1,5,2022,Regular Season
+PEDeAndre Hopkins,126.56,The DakStreet Boys,95.02,1,0,6,2022,Regular Season
+The DakStreet Boys,95.02,PEDeAndre Hopkins,126.56,0,1,6,2022,Regular Season
+Silence D at work,120.1,Justin Jefferson,153.5,0,1,6,2022,Regular Season
+Justin Jefferson,153.5,Silence D at work,120.1,1,0,6,2022,Regular Season
+Dylan ate my Fantasy Points,80.82,Scammer got Scammed,103.1,0,1,6,2022,Regular Season
+Scammer got Scammed,103.1,Dylan ate my Fantasy Points,80.82,1,0,6,2022,Regular Season
+Najee Germany,90.82,My Boy,120.28,0,1,6,2022,Regular Season
+My Boy,120.28,Najee Germany,90.82,1,0,6,2022,Regular Season
+Dave Sucks,120.6,Justin is Brown,106.92,1,0,6,2022,Regular Season
+Justin is Brown,106.92,Dave Sucks,120.6,0,1,6,2022,Regular Season
+Justin is Brown,97.9,PEDeAndre Hopkins,116.04,0,1,7,2022,Regular Season
+PEDeAndre Hopkins,116.04,Justin is Brown,97.9,1,0,7,2022,Regular Season
+Justin Jefferson,93.44,Dylan ate my Fantasy Points,99.92,0,1,7,2022,Regular Season
+Dylan ate my Fantasy Points,99.92,Justin Jefferson,93.44,1,0,7,2022,Regular Season
+Scammer got Scammed,154.84,Najee Germany,133.52,1,0,7,2022,Regular Season
+Najee Germany,133.52,Scammer got Scammed,154.84,0,1,7,2022,Regular Season
+My Boy,132.26,Dave Sucks,118.8,1,0,7,2022,Regular Season
+Dave Sucks,118.8,My Boy,132.26,0,1,7,2022,Regular Season
+The DakStreet Boys,131.58,Silence D at work,99.12,1,0,7,2022,Regular Season
+Silence D at work,99.12,The DakStreet Boys,131.58,0,1,7,2022,Regular Season
+PEDeAndre Hopkins,166.02,My Boy,158.94,1,0,8,2022,Regular Season
+My Boy,158.94,PEDeAndre Hopkins,166.02,0,1,8,2022,Regular Season
+Najee Germany,113.54,Justin Jefferson,158.24,0,1,8,2022,Regular Season
+Justin Jefferson,158.24,Najee Germany,113.54,1,0,8,2022,Regular Season
+Dave Sucks,156.82,Scammer got Scammed,106.54,1,0,8,2022,Regular Season
+Scammer got Scammed,106.54,Dave Sucks,156.82,0,1,8,2022,Regular Season
+Silence D at work,104.6,Justin is Brown,115.98,0,1,8,2022,Regular Season
+Justin is Brown,115.98,Silence D at work,104.6,1,0,8,2022,Regular Season
+Dylan ate my Fantasy Points,133.84,The DakStreet Boys,91.2,1,0,8,2022,Regular Season
+The DakStreet Boys,91.2,Dylan ate my Fantasy Points,133.84,0,1,8,2022,Regular Season
+Najee Germany,137.3,PEDeAndre Hopkins,142.9,0,1,9,2022,Regular Season
+PEDeAndre Hopkins,142.9,Najee Germany,137.3,1,0,9,2022,Regular Season
+Justin Jefferson,120.34,Dave Sucks,135.62,0,1,9,2022,Regular Season
+Dave Sucks,135.62,Justin Jefferson,120.34,1,0,9,2022,Regular Season
+The DakStreet Boys,150.3,Scammer got Scammed,112,1,0,9,2022,Regular Season
+Scammer got Scammed,112,The DakStreet Boys,150.3,0,1,9,2022,Regular Season
+Dylan ate my Fantasy Points,110.94,Silence D at work,84.14,1,0,9,2022,Regular Season
+Silence D at work,84.14,Dylan ate my Fantasy Points,110.94,0,1,9,2022,Regular Season
+Justin is Brown,91.3,My Boy,91.8,0,1,9,2022,Regular Season
+My Boy,91.8,Justin is Brown,91.3,1,0,9,2022,Regular Season
+Scammer got Scammed,119.02,PEDeAndre Hopkins,89.8,1,0,10,2022,Regular Season
+PEDeAndre Hopkins,89.8,Scammer got Scammed,119.02,0,1,10,2022,Regular Season
+Dave Sucks,62.7,Silence D at work,123,0,1,10,2022,Regular Season
+Silence D at work,123,Dave Sucks,62.7,1,0,10,2022,Regular Season
+My Boy,105.08,Justin Jefferson,153.48,0,1,10,2022,Regular Season
+Justin Jefferson,153.48,My Boy,105.08,1,0,10,2022,Regular Season
+Najee Germany,141.5,Dylan ate my Fantasy Points,83.3,1,0,10,2022,Regular Season
+Dylan ate my Fantasy Points,83.3,Najee Germany,141.5,0,1,10,2022,Regular Season
+Justin is Brown,132.94,The DakStreet Boys,107.7,1,0,10,2022,Regular Season
+The DakStreet Boys,107.7,Justin is Brown,132.94,0,1,10,2022,Regular Season
+Dylan ate my Fantasy Points,118.64,PEDeAndre Hopkins,152.28,0,1,11,2022,Regular Season
+PEDeAndre Hopkins,152.28,Dylan ate my Fantasy Points,118.64,1,0,11,2022,Regular Season
+My Boy,109.74,Silence D at work,122.8,0,1,11,2022,Regular Season
+Silence D at work,122.8,My Boy,109.74,1,0,11,2022,Regular Season
+Scammer got Scammed,91,Justin is Brown,158.16,0,1,11,2022,Regular Season
+Justin is Brown,158.16,Scammer got Scammed,91,1,0,11,2022,Regular Season
+Najee Germany,116.2,Dave Sucks,111.62,1,0,11,2022,Regular Season
+Dave Sucks,111.62,Najee Germany,116.2,0,1,11,2022,Regular Season
+Justin Jefferson,98.32,The DakStreet Boys,88.64,1,0,11,2022,Regular Season
+The DakStreet Boys,88.64,Justin Jefferson,98.32,0,1,11,2022,Regular Season
+PEDeAndre Hopkins,114.52,Dave Sucks,95.86,1,0,12,2022,Regular Season
+Dave Sucks,95.86,PEDeAndre Hopkins,114.52,0,1,12,2022,Regular Season
+Justin is Brown,117.7,Dylan ate my Fantasy Points,131.04,0,1,12,2022,Regular Season
+Dylan ate my Fantasy Points,131.04,Justin is Brown,117.7,1,0,12,2022,Regular Season
+Silence D at work,116.42,Najee Germany,98.76,1,0,12,2022,Regular Season
+Najee Germany,98.76,Silence D at work,116.42,0,1,12,2022,Regular Season
+The DakStreet Boys,90.62,My Boy,123.84,0,1,12,2022,Regular Season
+My Boy,123.84,The DakStreet Boys,90.62,1,0,12,2022,Regular Season
+Justin Jefferson,129.02,Scammer got Scammed,135.2,0,1,12,2022,Regular Season
+Scammer got Scammed,135.2,Justin Jefferson,129.02,1,0,12,2022,Regular Season
+PEDeAndre Hopkins,104.06,Silence D at work,115,0,1,13,2022,Regular Season
+Silence D at work,115,PEDeAndre Hopkins,104.06,1,0,13,2022,Regular Season
+The DakStreet Boys,98.58,Najee Germany,144,0,1,13,2022,Regular Season
+Najee Germany,144,The DakStreet Boys,98.58,1,0,13,2022,Regular Season
+Dave Sucks,69.04,Dylan ate my Fantasy Points,167.2,0,1,13,2022,Regular Season
+Dylan ate my Fantasy Points,167.2,Dave Sucks,69.04,1,0,13,2022,Regular Season
+Justin is Brown,109.22,Justin Jefferson,138.32,0,1,13,2022,Regular Season
+Justin Jefferson,138.32,Justin is Brown,109.22,1,0,13,2022,Regular Season
+My Boy,104.08,Scammer got Scammed,128.84,0,1,13,2022,Regular Season
+Scammer got Scammed,128.84,My Boy,104.08,1,0,13,2022,Regular Season
+PEDeAndre Hopkins,91.94,Justin Jefferson,129.58,0,1,14,2022,Regular Season
+Justin Jefferson,129.58,PEDeAndre Hopkins,91.94,1,0,14,2022,Regular Season
+Silence D at work,132.28,Scammer got Scammed,119.86,1,0,14,2022,Regular Season
+Scammer got Scammed,119.86,Silence D at work,132.28,0,1,14,2022,Regular Season
+Dylan ate my Fantasy Points,125.46,My Boy,102.46,1,0,14,2022,Regular Season
+My Boy,102.46,Dylan ate my Fantasy Points,125.46,0,1,14,2022,Regular Season
+Najee Germany,121.18,Justin is Brown,98.98,1,0,14,2022,Regular Season
+Justin is Brown,98.98,Najee Germany,121.18,0,1,14,2022,Regular Season
+Dave Sucks,126.28,The DakStreet Boys,111.16,1,0,14,2022,Regular Season
+The DakStreet Boys,111.16,Dave Sucks,126.28,0,1,14,2022,Regular Season
+Dave Sucks,113.94,Justin Jefferson,166.16,0,1,15,2022,Quarterfinals
+Justin Jefferson,166.16,Dave Sucks,113.94,1,0,15,2022,Quarterfinals
+My Boy,98.82,Scammer got Scammed,137.7,0,1,15,2022,Quarterfinals
+Scammer got Scammed,137.7,My Boy,98.82,1,0,15,2022,Quarterfinals
+Justin Jefferson,148.88,PEDeAndre Hopkins,103.16,1,0,16,2022,Semifinals
+PEDeAndre Hopkins,103.16,Justin Jefferson,148.88,0,1,16,2022,Semifinals
+Scammer got Scammed,112,Silence D at work,164.5,0,1,16,2022,Semifinals
+Silence D at work,164.5,Scammer got Scammed,112,1,0,16,2022,Semifinals
+Justin Jefferson,117.6,Silence D at work,85.16,1,0,17,2022,Finals
+Silence D at work,85.16,Justin Jefferson,117.6,0,1,17,2022,Finals
+S(kittle),86.56,PEDeAndre Hopkins,91.34,0,1,1,2023,Regular Season
+PEDeAndre Hopkins,91.34,S(kittle),86.56,1,0,1,2023,Regular Season
+Team Chieffo,146.06,Pocket Aces,95.84,1,0,1,2023,Regular Season
+Pocket Aces,95.84,Team Chieffo,146.06,0,1,1,2023,Regular Season
+Mr. FigureItOut,129.24,Jah is gay,88.24,1,0,1,2023,Regular Season
+Jah is gay,88.24,Mr. FigureItOut,129.24,0,1,1,2023,Regular Season
+My digg hurts,138.7,Riley Reid Option,76.08,1,0,1,2023,Regular Season
+Riley Reid Option,76.08,My digg hurts,138.7,0,1,1,2023,Regular Season
+Chase-ing Young Children,108.26,Cup of Joe,115.66,0,1,1,2023,Regular Season
+Cup of Joe,115.66,Chase-ing Young Children,108.26,1,0,1,2023,Regular Season
+Riley Reid Option,100.68,PEDeAndre Hopkins,111.4,0,1,2,2023,Regular Season
+PEDeAndre Hopkins,111.4,Riley Reid Option,100.68,1,0,2,2023,Regular Season
+My digg hurts,130.02,Mr. FigureItOut,77.04,1,0,2,2023,Regular Season
+Mr. FigureItOut,77.04,My digg hurts,130.02,0,1,2,2023,Regular Season
+Pocket Aces,135.44,Chase-ing Young Children,170.54,0,1,2,2023,Regular Season
+Chase-ing Young Children,170.54,Pocket Aces,135.44,1,0,2,2023,Regular Season
+Team Chieffo,110.48,S(kittle),116.9,0,1,2,2023,Regular Season
+S(kittle),116.9,Team Chieffo,110.48,1,0,2,2023,Regular Season
+Jah is gay,115.76,Cup of Joe,129.2,0,1,2,2023,Regular Season
+Cup of Joe,129.2,Jah is gay,115.76,1,0,2,2023,Regular Season
+PEDeAndre Hopkins,125.48,My digg hurts,106.28,1,0,3,2023,Regular Season
+My digg hurts,106.28,PEDeAndre Hopkins,125.48,0,1,3,2023,Regular Season
+S(kittle),201.62,Chase-ing Young Children,129.74,1,0,3,2023,Regular Season
+Chase-ing Young Children,129.74,S(kittle),201.62,0,1,3,2023,Regular Season
+Cup of Joe,134.8,Mr. FigureItOut,103.26,1,0,3,2023,Regular Season
+Mr. FigureItOut,103.26,Cup of Joe,134.8,0,1,3,2023,Regular Season
+Jah is gay,130.32,Pocket Aces,120.36,1,0,3,2023,Regular Season
+Pocket Aces,120.36,Jah is gay,130.32,0,1,3,2023,Regular Season
+Riley Reid Option,119.96,Team Chieffo,166.28,0,1,3,2023,Regular Season
+Team Chieffo,166.28,Riley Reid Option,119.96,1,0,3,2023,Regular Season
+PEDeAndre Hopkins,77.82,Cup of Joe,111.98,0,1,4,2023,Regular Season
+Cup of Joe,111.98,PEDeAndre Hopkins,77.82,1,0,4,2023,Regular Season
+Chase-ing Young Children,154.92,Jah is gay,91.28,1,0,4,2023,Regular Season
+Jah is gay,91.28,Chase-ing Young Children,154.92,0,1,4,2023,Regular Season
+S(kittle),101.92,Riley Reid Option,97.98,1,0,4,2023,Regular Season
+Riley Reid Option,97.98,S(kittle),101.92,0,1,4,2023,Regular Season
+Mr. FigureItOut,168.54,Pocket Aces,120.74,1,0,4,2023,Regular Season
+Pocket Aces,120.74,Mr. FigureItOut,168.54,0,1,4,2023,Regular Season
+My digg hurts,148.96,Team Chieffo,87.24,1,0,4,2023,Regular Season
+Team Chieffo,87.24,My digg hurts,148.96,0,1,4,2023,Regular Season
+Team Chieffo,134.24,PEDeAndre Hopkins,111.64,1,0,5,2023,Regular Season
+PEDeAndre Hopkins,111.64,Team Chieffo,134.24,0,1,5,2023,Regular Season
+Riley Reid Option,134.82,Jah is gay,122.36,1,0,5,2023,Regular Season
+Jah is gay,122.36,Riley Reid Option,134.82,0,1,5,2023,Regular Season
+Pocket Aces,86.62,Cup of Joe,106.64,0,1,5,2023,Regular Season
+Cup of Joe,106.64,Pocket Aces,86.62,1,0,5,2023,Regular Season
+Mr. FigureItOut,119.48,Chase-ing Young Children,119.04,1,0,5,2023,Regular Season
+Chase-ing Young Children,119.04,Mr. FigureItOut,119.48,0,1,5,2023,Regular Season
+My digg hurts,123.92,S(kittle),162.58,0,1,5,2023,Regular Season
+S(kittle),162.58,My digg hurts,123.92,1,0,5,2023,Regular Season
+Jah is gay,140.46,PEDeAndre Hopkins,141.44,0,1,6,2023,Regular Season
+PEDeAndre Hopkins,141.44,Jah is gay,140.46,1,0,6,2023,Regular Season
+Mr. FigureItOut,98.94,Team Chieffo,120.54,0,1,6,2023,Regular Season
+Team Chieffo,120.54,Mr. FigureItOut,98.94,1,0,6,2023,Regular Season
+Chase-ing Young Children,113.32,My digg hurts,108.8,1,0,6,2023,Regular Season
+My digg hurts,108.8,Chase-ing Young Children,113.32,0,1,6,2023,Regular Season
+Cup of Joe,107.88,S(kittle),108.8,0,1,6,2023,Regular Season
+S(kittle),108.8,Cup of Joe,107.88,1,0,6,2023,Regular Season
+Pocket Aces,94.42,Riley Reid Option,127.48,0,1,6,2023,Regular Season
+Riley Reid Option,127.48,Pocket Aces,94.42,1,0,6,2023,Regular Season
+PEDeAndre Hopkins,143.56,Pocket Aces,67,1,0,7,2023,Regular Season
+Pocket Aces,67,PEDeAndre Hopkins,143.56,0,1,7,2023,Regular Season
+Team Chieffo,143.82,Chase-ing Young Children,158.38,0,1,7,2023,Regular Season
+Chase-ing Young Children,158.38,Team Chieffo,143.82,1,0,7,2023,Regular Season
+My digg hurts,97.56,Cup of Joe,91.26,1,0,7,2023,Regular Season
+Cup of Joe,91.26,My digg hurts,97.56,0,1,7,2023,Regular Season
+S(kittle),125.28,Jah is gay,111.5,1,0,7,2023,Regular Season
+Jah is gay,111.5,S(kittle),125.28,0,1,7,2023,Regular Season
+Riley Reid Option,126.14,Mr. FigureItOut,109.5,1,0,7,2023,Regular Season
+Mr. FigureItOut,109.5,Riley Reid Option,126.14,0,1,7,2023,Regular Season
+Mr. FigureItOut,97.2,PEDeAndre Hopkins,135.1,0,1,8,2023,Regular Season
+PEDeAndre Hopkins,135.1,Mr. FigureItOut,97.2,1,0,8,2023,Regular Season
+Cup of Joe,126.52,Team Chieffo,112.96,1,0,8,2023,Regular Season
+Team Chieffo,112.96,Cup of Joe,126.52,0,1,8,2023,Regular Season
+Jah is gay,105.98,My digg hurts,117.96,0,1,8,2023,Regular Season
+My digg hurts,117.96,Jah is gay,105.98,1,0,8,2023,Regular Season
+Pocket Aces,139.76,S(kittle),137.4,1,0,8,2023,Regular Season
+S(kittle),137.4,Pocket Aces,139.76,0,1,8,2023,Regular Season
+Chase-ing Young Children,153.96,Riley Reid Option,108.26,1,0,8,2023,Regular Season
+Riley Reid Option,108.26,Chase-ing Young Children,153.96,0,1,8,2023,Regular Season
+PEDeAndre Hopkins,103,S(kittle),92.8,1,0,9,2023,Regular Season
+S(kittle),92.8,PEDeAndre Hopkins,103,0,1,9,2023,Regular Season
+Team Chieffo,105.7,Jah is gay,134.08,0,1,9,2023,Regular Season
+Jah is gay,134.08,Team Chieffo,105.7,1,0,9,2023,Regular Season
+Cup of Joe,96.26,Pocket Aces,144.46,0,1,9,2023,Regular Season
+Pocket Aces,144.46,Cup of Joe,96.26,1,0,9,2023,Regular Season
+Riley Reid Option,99.92,My digg hurts,127.78,0,1,9,2023,Regular Season
+My digg hurts,127.78,Riley Reid Option,99.92,1,0,9,2023,Regular Season
+Chase-ing Young Children,121.72,Mr. FigureItOut,94.96,1,0,9,2023,Regular Season
+Mr. FigureItOut,94.96,Chase-ing Young Children,121.72,0,1,9,2023,Regular Season
+PEDeAndre Hopkins,59.46,Riley Reid Option,109.78,0,1,10,2023,Regular Season
+Riley Reid Option,109.78,PEDeAndre Hopkins,59.46,1,0,10,2023,Regular Season
+My digg hurts,115.36,Pocket Aces,166.76,0,1,10,2023,Regular Season
+Pocket Aces,166.76,My digg hurts,115.36,1,0,10,2023,Regular Season
+Jah is gay,118.32,Mr. FigureItOut,85.22,1,0,10,2023,Regular Season
+Mr. FigureItOut,85.22,Jah is gay,118.32,0,1,10,2023,Regular Season
+S(kittle),114.38,Team Chieffo,156.14,0,1,10,2023,Regular Season
+Team Chieffo,156.14,S(kittle),114.38,1,0,10,2023,Regular Season
+Cup of Joe,130.02,Chase-ing Young Children,118.28,1,0,10,2023,Regular Season
+Chase-ing Young Children,118.28,Cup of Joe,130.02,0,1,10,2023,Regular Season
+My digg hurts,129.1,PEDeAndre Hopkins,128.08,1,0,11,2023,Regular Season
+PEDeAndre Hopkins,128.08,My digg hurts,129.1,0,1,11,2023,Regular Season
+S(kittle),120.02,Mr. FigureItOut,82.76,1,0,11,2023,Regular Season
+Mr. FigureItOut,82.76,S(kittle),120.02,0,1,11,2023,Regular Season
+Chase-ing Young Children,105.5,Pocket Aces,76.56,1,0,11,2023,Regular Season
+Pocket Aces,76.56,Chase-ing Young Children,105.5,0,1,11,2023,Regular Season
+Cup of Joe,134.3,Jah is gay,121.96,1,0,11,2023,Regular Season
+Jah is gay,121.96,Cup of Joe,134.3,0,1,11,2023,Regular Season
+Team Chieffo,128.54,Riley Reid Option,112.4,1,0,11,2023,Regular Season
+Riley Reid Option,112.4,Team Chieffo,128.54,0,1,11,2023,Regular Season
+PEDeAndre Hopkins,136.02,Chase-ing Young Children,135.46,1,0,12,2023,Regular Season
+Chase-ing Young Children,135.46,PEDeAndre Hopkins,136.02,0,1,12,2023,Regular Season
+Mr. FigureItOut,97.68,Cup of Joe,85.58,1,0,12,2023,Regular Season
+Cup of Joe,85.58,Mr. FigureItOut,97.68,0,1,12,2023,Regular Season
+Riley Reid Option,102.22,S(kittle),119.96,0,1,12,2023,Regular Season
+S(kittle),119.96,Riley Reid Option,102.22,1,0,12,2023,Regular Season
+Pocket Aces,117.94,Jah is gay,120.78,0,1,12,2023,Regular Season
+Jah is gay,120.78,Pocket Aces,117.94,1,0,12,2023,Regular Season
+Team Chieffo,169.96,My digg hurts,143,1,0,12,2023,Regular Season
+My digg hurts,143,Team Chieffo,169.96,0,1,12,2023,Regular Season
+PEDeAndre Hopkins,132.6,Team Chieffo,127.76,1,0,13,2023,Regular Season
+Team Chieffo,127.76,PEDeAndre Hopkins,132.6,0,1,13,2023,Regular Season
+Riley Reid Option,145.9,Cup of Joe,83.48,1,0,13,2023,Regular Season
+Cup of Joe,83.48,Riley Reid Option,145.9,0,1,13,2023,Regular Season
+Jah is gay,0,Chase-ing Young Children,134.44,0,1,13,2023,Regular Season
+Chase-ing Young Children,134.44,Jah is gay,0,1,0,13,2023,Regular Season
+Pocket Aces,180.36,Mr. FigureItOut,104.34,1,0,13,2023,Regular Season
+Mr. FigureItOut,104.34,Pocket Aces,180.36,0,1,13,2023,Regular Season
+S(kittle),126.56,My digg hurts,104.82,1,0,13,2023,Regular Season
+My digg hurts,104.82,S(kittle),126.56,0,1,13,2023,Regular Season
+Cup of Joe,115.04,PEDeAndre Hopkins,143.24,0,1,14,2023,Regular Season
+PEDeAndre Hopkins,143.24,Cup of Joe,115.04,1,0,14,2023,Regular Season
+Pocket Aces,147.24,Team Chieffo,121.84,1,0,14,2023,Regular Season
+Team Chieffo,121.84,Pocket Aces,147.24,0,1,14,2023,Regular Season
+Mr. FigureItOut,109.26,My digg hurts,92.58,1,0,14,2023,Regular Season
+My digg hurts,92.58,Mr. FigureItOut,109.26,0,1,14,2023,Regular Season
+Chase-ing Young Children,133.62,S(kittle),103.72,1,0,14,2023,Regular Season
+S(kittle),103.72,Chase-ing Young Children,133.62,0,1,14,2023,Regular Season
+Jah is gay,65.92,Riley Reid Option,78.8,0,1,14,2023,Regular Season
+Riley Reid Option,78.8,Jah is gay,65.92,1,0,14,2023,Regular Season
+Team Chieffo,126.94,Cup of Joe,120.62,1,0,15,2023,Quarterfinals
+Cup of Joe,120.62,Team Chieffo,126.94,0,1,15,2023,Quarterfinals
+My digg hurts,94.22,S(kittle),169.68,0,1,15,2023,Quarterfinals
+S(kittle),169.68,My digg hurts,94.22,1,0,15,2023,Quarterfinals
+Team Chieffo,105.2,PEDeAndre Hopkins,140,0,1,16,2023,Semifinals
+PEDeAndre Hopkins,140,Team Chieffo,105.2,1,0,16,2023,Semifinals
+S(kittle),105.1,Chase-ing Young Children,114.28,0,1,16,2023,Semifinals
+Chase-ing Young Children,114.28,S(kittle),105.1,1,0,16,2023,Semifinals
+Chase-ing Young Children,112.16,PEDeAndre Hopkins,128.4,0,1,17,2023,Finals
+PEDeAndre Hopkins,128.4,Chase-ing Young Children,112.16,1,0,17,2023,Finals
+Reigning,178.38,Team Chieffo,98.3,1,0,1,2024,Regular Season
+Team Chieffo,98.3,Reigning,178.38,0,1,1,2024,Regular Season
+'fore i repeat it ima forget it,145.86,Amon a new Level,92.62,1,0,1,2024,Regular Season
+Amon a new Level,92.62,'fore i repeat it ima forget it,145.86,0,1,1,2024,Regular Season
+Mixon it (K)upp,121.66,Under the InfluWentz,98.06,1,0,1,2024,Regular Season
+Under the InfluWentz,98.06,Mixon it (K)upp,121.66,0,1,1,2024,Regular Season
+Jah is gay,89.78,Dyls belly,121.28,0,1,1,2024,Regular Season
+Dyls belly,121.28,Jah is gay,89.78,1,0,1,2024,Regular Season
+Njigbas Be Wildin,167.94,Kode,63.72,1,0,1,2024,Regular Season
+Kode,63.72,Njigbas Be Wildin,167.94,0,1,1,2024,Regular Season
+willimantic crack addicts,131.26,Big Johnson,129.92,1,0,1,2024,Regular Season
+Big Johnson,129.92,willimantic crack addicts,131.26,0,1,1,2024,Regular Season
+Under the InfluWentz,91.1,Reigning,84.16,1,0,2,2024,Regular Season
+Reigning,84.16,Under the InfluWentz,91.1,0,1,2,2024,Regular Season
+Dyls belly,128.66,Njigbas Be Wildin,76.54,1,0,2,2024,Regular Season
+Njigbas Be Wildin,76.54,Dyls belly,128.66,0,1,2,2024,Regular Season
+willimantic crack addicts,145.72,Mixon it (K)upp,123.94,1,0,2,2024,Regular Season
+Mixon it (K)upp,123.94,willimantic crack addicts,145.72,0,1,2,2024,Regular Season
+'fore i repeat it ima forget it,135.42,Jah is gay,147.64,0,1,2,2024,Regular Season
+Jah is gay,147.64,'fore i repeat it ima forget it,135.42,1,0,2,2024,Regular Season
+Amon a new Level,148.02,Kode,114.76,1,0,2,2024,Regular Season
+Kode,114.76,Amon a new Level,148.02,0,1,2,2024,Regular Season
+Big Johnson,89.98,Team Chieffo,115.08,0,1,2,2024,Regular Season
+Team Chieffo,115.08,Big Johnson,89.98,1,0,2,2024,Regular Season
+Mixon it (K)upp,128.06,Reigning,100.02,1,0,3,2024,Regular Season
+Reigning,100.02,Mixon it (K)upp,128.06,0,1,3,2024,Regular Season
+Kode,131.22,'fore i repeat it ima forget it,138.36,0,1,3,2024,Regular Season
+'fore i repeat it ima forget it,138.36,Kode,131.22,1,0,3,2024,Regular Season
+Team Chieffo,123.72,willimantic crack addicts,97.28,1,0,3,2024,Regular Season
+willimantic crack addicts,97.28,Team Chieffo,123.72,0,1,3,2024,Regular Season
+Jah is gay,112.08,Njigbas Be Wildin,104.08,1,0,3,2024,Regular Season
+Njigbas Be Wildin,104.08,Jah is gay,112.08,0,1,3,2024,Regular Season
+Amon a new Level,108.34,Dyls belly,107.48,1,0,3,2024,Regular Season
+Dyls belly,107.48,Amon a new Level,108.34,0,1,3,2024,Regular Season
+Big Johnson,109.98,Under the InfluWentz,82,1,0,3,2024,Regular Season
+Under the InfluWentz,82,Big Johnson,109.98,0,1,3,2024,Regular Season
+Reigning,140.6,Big Johnson,110.44,1,0,4,2024,Regular Season
+Big Johnson,110.44,Reigning,140.6,0,1,4,2024,Regular Season
+Njigbas Be Wildin,92.54,Amon a new Level,132.3,0,1,4,2024,Regular Season
+Amon a new Level,132.3,Njigbas Be Wildin,92.54,1,0,4,2024,Regular Season
+Team Chieffo,150.5,Mixon it (K)upp,114.02,1,0,4,2024,Regular Season
+Mixon it (K)upp,114.02,Team Chieffo,150.5,0,1,4,2024,Regular Season
+Kode,112.38,Jah is gay,98.08,1,0,4,2024,Regular Season
+Jah is gay,98.08,Kode,112.38,0,1,4,2024,Regular Season
+'fore i repeat it ima forget it,97.34,Dyls belly,85.94,1,0,4,2024,Regular Season
+Dyls belly,85.94,'fore i repeat it ima forget it,97.34,0,1,4,2024,Regular Season
+willimantic crack addicts,116.08,Under the InfluWentz,96.5,1,0,4,2024,Regular Season
+Under the InfluWentz,96.5,willimantic crack addicts,116.08,0,1,4,2024,Regular Season
+willimantic crack addicts,134.18,Reigning,95.34,1,0,5,2024,Regular Season
+Reigning,95.34,willimantic crack addicts,134.18,0,1,5,2024,Regular Season
+Dyls belly,115.18,Kode,110.76,1,0,5,2024,Regular Season
+Kode,110.76,Dyls belly,115.18,0,1,5,2024,Regular Season
+Mixon it (K)upp,143.02,Big Johnson,125.62,1,0,5,2024,Regular Season
+Big Johnson,125.62,Mixon it (K)upp,143.02,0,1,5,2024,Regular Season
+Jah is gay,91.7,Amon a new Level,141.66,0,1,5,2024,Regular Season
+Amon a new Level,141.66,Jah is gay,91.7,1,0,5,2024,Regular Season
+'fore i repeat it ima forget it,120.56,Njigbas Be Wildin,95.94,1,0,5,2024,Regular Season
+Njigbas Be Wildin,95.94,'fore i repeat it ima forget it,120.56,0,1,5,2024,Regular Season
+Under the InfluWentz,128.04,Team Chieffo,149.66,0,1,5,2024,Regular Season
+Team Chieffo,149.66,Under the InfluWentz,128.04,1,0,5,2024,Regular Season
+Reigning,97,Njigbas Be Wildin,111.42,0,1,6,2024,Regular Season
+Njigbas Be Wildin,111.42,Reigning,97,1,0,6,2024,Regular Season
+Under the InfluWentz,140.4,Dyls belly,149.72,0,1,6,2024,Regular Season
+Dyls belly,149.72,Under the InfluWentz,140.4,1,0,6,2024,Regular Season
+Team Chieffo,116.58,Kode,79.84,1,0,6,2024,Regular Season
+Kode,79.84,Team Chieffo,116.58,0,1,6,2024,Regular Season
+Mixon it (K)upp,93.96,Jah is gay,98.2,0,1,6,2024,Regular Season
+Jah is gay,98.2,Mixon it (K)upp,93.96,1,0,6,2024,Regular Season
+willimantic crack addicts,118.42,'fore i repeat it ima forget it,130.3,0,1,6,2024,Regular Season
+'fore i repeat it ima forget it,130.3,willimantic crack addicts,118.42,1,0,6,2024,Regular Season
+Big Johnson,115.72,Amon a new Level,152.86,0,1,6,2024,Regular Season
+Amon a new Level,152.86,Big Johnson,115.72,1,0,6,2024,Regular Season
+Kode,82.36,Reigning,97.72,0,1,7,2024,Regular Season
+Reigning,97.72,Kode,82.36,1,0,7,2024,Regular Season
+'fore i repeat it ima forget it,156.06,Under the InfluWentz,79.84,1,0,7,2024,Regular Season
+Under the InfluWentz,79.84,'fore i repeat it ima forget it,156.06,0,1,7,2024,Regular Season
+Amon a new Level,131.36,Team Chieffo,116.1,1,0,7,2024,Regular Season
+Team Chieffo,116.1,Amon a new Level,131.36,0,1,7,2024,Regular Season
+Dyls belly,102.64,Mixon it (K)upp,85.14,1,0,7,2024,Regular Season
+Mixon it (K)upp,85.14,Dyls belly,102.64,0,1,7,2024,Regular Season
+Njigbas Be Wildin,123.6,willimantic crack addicts,116.04,1,0,7,2024,Regular Season
+willimantic crack addicts,116.04,Njigbas Be Wildin,123.6,0,1,7,2024,Regular Season
+Jah is gay,96.38,Big Johnson,154.64,0,1,7,2024,Regular Season
+Big Johnson,154.64,Jah is gay,96.38,1,0,7,2024,Regular Season
+Reigning,90.02,Amon a new Level,132.5,0,1,8,2024,Regular Season
+Amon a new Level,132.5,Reigning,90.02,1,0,8,2024,Regular Season
+Under the InfluWentz,103.5,Njigbas Be Wildin,117.46,0,1,8,2024,Regular Season
+Njigbas Be Wildin,117.46,Under the InfluWentz,103.5,1,0,8,2024,Regular Season
+Team Chieffo,139.8,Jah is gay,159.18,0,1,8,2024,Regular Season
+Jah is gay,159.18,Team Chieffo,139.8,1,0,8,2024,Regular Season
+Mixon it (K)upp,93.14,'fore i repeat it ima forget it,110,0,1,8,2024,Regular Season
+'fore i repeat it ima forget it,110,Mixon it (K)upp,93.14,1,0,8,2024,Regular Season
+willimantic crack addicts,129.36,Kode,118.26,1,0,8,2024,Regular Season
+Kode,118.26,willimantic crack addicts,129.36,0,1,8,2024,Regular Season
+Big Johnson,155.16,Dyls belly,114.04,1,0,8,2024,Regular Season
+Dyls belly,114.04,Big Johnson,155.16,0,1,8,2024,Regular Season
+Jah is gay,114.86,Reigning,85.7,1,0,9,2024,Regular Season
+Reigning,85.7,Jah is gay,114.86,0,1,9,2024,Regular Season
+Kode,83.92,Under the InfluWentz,117.34,0,1,9,2024,Regular Season
+Under the InfluWentz,117.34,Kode,83.92,1,0,9,2024,Regular Season
+Dyls belly,104.7,Team Chieffo,133,0,1,9,2024,Regular Season
+Team Chieffo,133,Dyls belly,104.7,1,0,9,2024,Regular Season
+Njigbas Be Wildin,120.02,Mixon it (K)upp,123.06,0,1,9,2024,Regular Season
+Mixon it (K)upp,123.06,Njigbas Be Wildin,120.02,1,0,9,2024,Regular Season
+Amon a new Level,137.4,willimantic crack addicts,132.14,1,0,9,2024,Regular Season
+willimantic crack addicts,132.14,Amon a new Level,137.4,0,1,9,2024,Regular Season
+'fore i repeat it ima forget it,133.7,Big Johnson,108.7,1,0,9,2024,Regular Season
+Big Johnson,108.7,'fore i repeat it ima forget it,133.7,0,1,9,2024,Regular Season
+Reigning,123,Dyls belly,90.96,1,0,10,2024,Regular Season
+Dyls belly,90.96,Reigning,123,0,1,10,2024,Regular Season
+Under the InfluWentz,95.9,Amon a new Level,110.68,0,1,10,2024,Regular Season
+Amon a new Level,110.68,Under the InfluWentz,95.9,1,0,10,2024,Regular Season
+Team Chieffo,133.14,'fore i repeat it ima forget it,97.64,1,0,10,2024,Regular Season
+'fore i repeat it ima forget it,97.64,Team Chieffo,133.14,0,1,10,2024,Regular Season
+Mixon it (K)upp,113.18,Kode,114.5,0,1,10,2024,Regular Season
+Kode,114.5,Mixon it (K)upp,113.18,1,0,10,2024,Regular Season
+willimantic crack addicts,136.72,Jah is gay,122.64,1,0,10,2024,Regular Season
+Jah is gay,122.64,willimantic crack addicts,136.72,0,1,10,2024,Regular Season
+Big Johnson,111.4,Njigbas Be Wildin,92.1,1,0,10,2024,Regular Season
+Njigbas Be Wildin,92.1,Big Johnson,111.4,0,1,10,2024,Regular Season
+'fore i repeat it ima forget it,159.74,Reigning,109.38,1,0,11,2024,Regular Season
+Reigning,109.38,'fore i repeat it ima forget it,159.74,0,1,11,2024,Regular Season
+Amon a new Level,140.04,Mixon it (K)upp,116.64,1,0,11,2024,Regular Season
+Mixon it (K)upp,116.64,Amon a new Level,140.04,0,1,11,2024,Regular Season
+Jah is gay,89.02,Under the InfluWentz,72.5,1,0,11,2024,Regular Season
+Under the InfluWentz,72.5,Jah is gay,89.02,0,1,11,2024,Regular Season
+willimantic crack addicts,147.64,Dyls belly,92.18,1,0,11,2024,Regular Season
+Dyls belly,92.18,willimantic crack addicts,147.64,0,1,11,2024,Regular Season
+Njigbas Be Wildin,140.36,Team Chieffo,98.04,1,0,11,2024,Regular Season
+Team Chieffo,98.04,Njigbas Be Wildin,140.36,0,1,11,2024,Regular Season
+Kode,116.58,Big Johnson,107.38,1,0,11,2024,Regular Season
+Big Johnson,107.38,Kode,116.58,0,1,11,2024,Regular Season
+Njigbas Be Wildin,126.92,Reigning,118.78,1,0,12,2024,Regular Season
+Reigning,118.78,Njigbas Be Wildin,126.92,0,1,12,2024,Regular Season
+Mixon it (K)upp,143.32,Jah is gay,91.2,1,0,12,2024,Regular Season
+Jah is gay,91.2,Mixon it (K)upp,143.32,0,1,12,2024,Regular Season
+Dyls belly,137.38,Under the InfluWentz,85.3,1,0,12,2024,Regular Season
+Under the InfluWentz,85.3,Dyls belly,137.38,0,1,12,2024,Regular Season
+'fore i repeat it ima forget it,136.4,willimantic crack addicts,73.46,1,0,12,2024,Regular Season
+willimantic crack addicts,73.46,'fore i repeat it ima forget it,136.4,0,1,12,2024,Regular Season
+Kode,124.12,Team Chieffo,90.16,1,0,12,2024,Regular Season
+Team Chieffo,90.16,Kode,124.12,0,1,12,2024,Regular Season
+Amon a new Level,126.96,Big Johnson,113.08,1,0,12,2024,Regular Season
+Big Johnson,113.08,Amon a new Level,126.96,0,1,12,2024,Regular Season
+Kode,116.76,Reigning,116.22,1,0,13,2024,Regular Season
+Reigning,116.22,Kode,116.76,0,1,13,2024,Regular Season
+Dyls belly,118.22,Mixon it (K)upp,87.68,1,0,13,2024,Regular Season
+Mixon it (K)upp,87.68,Dyls belly,118.22,0,1,13,2024,Regular Season
+'fore i repeat it ima forget it,142.64,Under the InfluWentz,102.78,1,0,13,2024,Regular Season
+Under the InfluWentz,102.78,'fore i repeat it ima forget it,142.64,0,1,13,2024,Regular Season
+willimantic crack addicts,132.36,Njigbas Be Wildin,108.46,1,0,13,2024,Regular Season
+Njigbas Be Wildin,108.46,willimantic crack addicts,132.36,0,1,13,2024,Regular Season
+Amon a new Level,109.02,Team Chieffo,87.8,1,0,13,2024,Regular Season
+Team Chieffo,87.8,Amon a new Level,109.02,0,1,13,2024,Regular Season
+Big Johnson,165.18,Jah is gay,127.3,1,0,13,2024,Regular Season
+Jah is gay,127.3,Big Johnson,165.18,0,1,13,2024,Regular Season
+Reigning,130.48,Amon a new Level,111.92,1,0,14,2024,Regular Season
+Amon a new Level,111.92,Reigning,130.48,0,1,14,2024,Regular Season
+'fore i repeat it ima forget it,159.38,Mixon it (K)upp,135.02,1,0,14,2024,Regular Season
+Mixon it (K)upp,135.02,'fore i repeat it ima forget it,159.38,0,1,14,2024,Regular Season
+Njigbas Be Wildin,109.5,Under the InfluWentz,104.82,1,0,14,2024,Regular Season
+Under the InfluWentz,104.82,Njigbas Be Wildin,109.5,0,1,14,2024,Regular Season
+willimantic crack addicts,129.66,Kode,118.36,1,0,14,2024,Regular Season
+Kode,118.36,willimantic crack addicts,129.66,0,1,14,2024,Regular Season
+Team Chieffo,130,Jah is gay,118.16,1,0,14,2024,Regular Season
+Jah is gay,118.16,Team Chieffo,130,0,1,14,2024,Regular Season
+Big Johnson,154.12,Dyls belly,143.52,1,0,14,2024,Regular Season
+Dyls belly,143.52,Big Johnson,154.12,0,1,14,2024,Regular Season
+Dyls belly,116.16,Team Chieffo,100.82,1,0,15,2024,Quarterfinals
+Team Chieffo,100.82,Dyls belly,116.16,0,1,15,2024,Quarterfinals
+Njigbas Be Wildin,139.58,willimantic crack addicts,127.34,1,0,15,2024,Quarterfinals
+willimantic crack addicts,127.34,Njigbas Be Wildin,139.58,0,1,15,2024,Quarterfinals
+Big Johnson,148.9,Amon a new Level,148.2,1,0,15,2024,Quarterfinals
+Amon a new Level,148.2,Big Johnson,148.9,0,1,15,2024,Quarterfinals
+'fore i repeat it ima forget it,169.42,Dyls belly,141.74,1,0,16,2024,Semifinals
+Dyls belly,141.74,'fore i repeat it ima forget it,169.42,0,1,16,2024,Semifinals
+Big Johnson,144.28,Njigbas Be Wildin,142.12,1,0,16,2024,Semifinals
+Njigbas Be Wildin,142.12,Big Johnson,144.28,0,1,16,2024,Semifinals
+Big Johnson,144.42,'fore i repeat it ima forget it,97.88,1,0,17,2024,Finals
+'fore i repeat it ima forget it,97.88,Big Johnson,144.42,0,1,17,2024,Finals
+Saquon Bustley,116.82,Team Chieffo,82.92,1,0,1,2025,Regular Season
+Team Chieffo,82.92,Saquon Bustley,116.82,0,1,1,2025,Regular Season
+Nix my Balls,126.44,Njigbas in Paris,130.76,0,1,1,2025,Regular Season
+Njigbas in Paris,130.76,Nix my Balls,126.44,1,0,1,2025,Regular Season
+lets get this money,121.78,High Speed Chase,74.48,1,0,1,2025,Regular Season
+High Speed Chase,74.48,lets get this money,121.78,0,1,1,2025,Regular Season
+Bower Rangers,111.6,Beef One My Balls,135.98,0,1,1,2025,Regular Season
+Beef One My Balls,135.98,Bower Rangers,111.6,1,0,1,2025,Regular Season
+Cook my Balls,104.92,S(hamas),94.86,1,0,1,2025,Regular Season
+S(hamas),94.86,Cook my Balls,104.92,0,1,1,2025,Regular Season
+willimantic crack addicts,89.62,Kupp my balls,111.62,0,1,1,2025,Regular Season
+Kupp my balls,111.62,willimantic crack addicts,89.62,1,0,1,2025,Regular Season
+S(hamas),110.82,Saquon Bustley,113,0,1,2,2025,Regular Season
+Saquon Bustley,113,S(hamas),110.82,1,0,2,2025,Regular Season
+lets get this money,135.74,Nix my Balls,133.44,1,0,2,2025,Regular Season
+Nix my Balls,133.44,lets get this money,135.74,0,1,2,2025,Regular Season
+Njigbas in Paris,111.9,Bower Rangers,108.48,1,0,2,2025,Regular Season
+Bower Rangers,108.48,Njigbas in Paris,111.9,0,1,2,2025,Regular Season
+High Speed Chase,116.88,Beef One My Balls,108.1,1,0,2,2025,Regular Season
+Beef One My Balls,108.1,High Speed Chase,116.88,0,1,2,2025,Regular Season
+willimantic crack addicts,150.48,Cook my Balls,115.38,1,0,2,2025,Regular Season
+Cook my Balls,115.38,willimantic crack addicts,150.48,0,1,2,2025,Regular Season
+Kupp my balls,97.8,Team Chieffo,94.54,1,0,2,2025,Regular Season
+Team Chieffo,94.54,Kupp my balls,97.8,0,1,2,2025,Regular Season
+Cook my Balls,109.7,Saquon Bustley,125.42,0,1,3,2025,Regular Season
+Saquon Bustley,125.42,Cook my Balls,109.7,1,0,3,2025,Regular Season
+Nix my Balls,121.92,Bower Rangers,75.58,1,0,3,2025,Regular Season
+Bower Rangers,75.58,Nix my Balls,121.92,0,1,3,2025,Regular Season
+Beef One My Balls,144.52,lets get this money,118.74,1,0,3,2025,Regular Season
+lets get this money,118.74,Beef One My Balls,144.52,0,1,3,2025,Regular Season
+High Speed Chase,134.32,Njigbas in Paris,126.62,1,0,3,2025,Regular Season
+Njigbas in Paris,126.62,High Speed Chase,134.32,0,1,3,2025,Regular Season
+Team Chieffo,107.32,willimantic crack addicts,92.86,1,0,3,2025,Regular Season
+willimantic crack addicts,92.86,Team Chieffo,107.32,0,1,3,2025,Regular Season
+Kupp my balls,100.56,S(hamas),116.22,0,1,3,2025,Regular Season
+S(hamas),116.22,Kupp my balls,100.56,1,0,3,2025,Regular Season
+Saquon Bustley,114.42,Kupp my balls,120.4,0,1,4,2025,Regular Season
+Kupp my balls,120.4,Saquon Bustley,114.42,1,0,4,2025,Regular Season
+Beef One My Balls,144.86,Nix my Balls,141.44,1,0,4,2025,Regular Season
+Nix my Balls,141.44,Beef One My Balls,144.86,0,1,4,2025,Regular Season
+Bower Rangers,129.34,High Speed Chase,136.58,0,1,4,2025,Regular Season
+High Speed Chase,136.58,Bower Rangers,129.34,1,0,4,2025,Regular Season
+lets get this money,108,Njigbas in Paris,107.08,1,0,4,2025,Regular Season
+Njigbas in Paris,107.08,lets get this money,108,0,1,4,2025,Regular Season
+Team Chieffo,136.78,Cook my Balls,137.92,0,1,4,2025,Regular Season
+Cook my Balls,137.92,Team Chieffo,136.78,1,0,4,2025,Regular Season
+willimantic crack addicts,148.9,S(hamas),87.86,1,0,4,2025,Regular Season
+S(hamas),87.86,willimantic crack addicts,148.9,0,1,4,2025,Regular Season
+willimantic crack addicts,105.54,Saquon Bustley,95.54,1,0,5,2025,Regular Season
+Saquon Bustley,95.54,willimantic crack addicts,105.54,0,1,5,2025,Regular Season
+Nix my Balls,152.96,High Speed Chase,121.18,1,0,5,2025,Regular Season
+High Speed Chase,121.18,Nix my Balls,152.96,0,1,5,2025,Regular Season
+Njigbas in Paris,134.12,Beef One My Balls,174.18,0,1,5,2025,Regular Season
+Beef One My Balls,174.18,Njigbas in Paris,134.12,1,0,5,2025,Regular Season
+lets get this money,145.1,Bower Rangers,134.82,1,0,5,2025,Regular Season
+Bower Rangers,134.82,lets get this money,145.1,0,1,5,2025,Regular Season
+Cook my Balls,100.44,Kupp my balls,101.9,0,1,5,2025,Regular Season
+Kupp my balls,101.9,Cook my Balls,100.44,1,0,5,2025,Regular Season
+S(hamas),49.82,Team Chieffo,140.38,0,1,5,2025,Regular Season
+Team Chieffo,140.38,S(hamas),49.82,1,0,5,2025,Regular Season
+Saquon Bustley,134.14,Bower Rangers,78.32,1,0,6,2025,Regular Season
+Bower Rangers,78.32,Saquon Bustley,134.14,0,1,6,2025,Regular Season
+Cook my Balls,83.66,Nix my Balls,97.06,0,1,6,2025,Regular Season
+Nix my Balls,97.06,Cook my Balls,83.66,1,0,6,2025,Regular Season
+S(hamas),69.9,Njigbas in Paris,144.98,0,1,6,2025,Regular Season
+Njigbas in Paris,144.98,S(hamas),69.9,1,0,6,2025,Regular Season
+willimantic crack addicts,105.38,lets get this money,154.42,0,1,6,2025,Regular Season
+lets get this money,154.42,willimantic crack addicts,105.38,1,0,6,2025,Regular Season
+Team Chieffo,113.58,Beef One My Balls,80.54,1,0,6,2025,Regular Season
+Beef One My Balls,80.54,Team Chieffo,113.58,0,1,6,2025,Regular Season
+Kupp my balls,147.42,High Speed Chase,103.46,1,0,6,2025,Regular Season
+High Speed Chase,103.46,Kupp my balls,147.42,0,1,6,2025,Regular Season
+Beef One My Balls,125.86,Saquon Bustley,144.04,0,1,7,2025,Regular Season
+Saquon Bustley,144.04,Beef One My Balls,125.86,1,0,7,2025,Regular Season
+Njigbas in Paris,154.98,Cook my Balls,103.1,1,0,7,2025,Regular Season
+Cook my Balls,103.1,Njigbas in Paris,154.98,0,1,7,2025,Regular Season
+lets get this money,93.24,S(hamas),82.66,1,0,7,2025,Regular Season
+S(hamas),82.66,lets get this money,93.24,0,1,7,2025,Regular Season
+Bower Rangers,55.94,willimantic crack addicts,108.54,0,1,7,2025,Regular Season
+willimantic crack addicts,108.54,Bower Rangers,55.94,1,0,7,2025,Regular Season
+High Speed Chase,118.66,Team Chieffo,104.12,1,0,7,2025,Regular Season
+Team Chieffo,104.12,High Speed Chase,118.66,0,1,7,2025,Regular Season
+Nix my Balls,140.56,Kupp my balls,109.62,1,0,7,2025,Regular Season
+Kupp my balls,109.62,Nix my Balls,140.56,0,1,7,2025,Regular Season
+Saquon Bustley,145.88,High Speed Chase,123.7,1,0,8,2025,Regular Season
+High Speed Chase,123.7,Saquon Bustley,145.88,0,1,8,2025,Regular Season
+Cook my Balls,139.98,lets get this money,110.86,1,0,8,2025,Regular Season
+lets get this money,110.86,Cook my Balls,139.98,0,1,8,2025,Regular Season
+S(hamas),103.12,Bower Rangers,100.92,1,0,8,2025,Regular Season
+Bower Rangers,100.92,S(hamas),103.12,0,1,8,2025,Regular Season
+willimantic crack addicts,87.36,Beef One My Balls,86.82,1,0,8,2025,Regular Season
+Beef One My Balls,86.82,willimantic crack addicts,87.36,0,1,8,2025,Regular Season
+Team Chieffo,144.04,Nix my Balls,113.18,1,0,8,2025,Regular Season
+Nix my Balls,113.18,Team Chieffo,144.04,0,1,8,2025,Regular Season
+Kupp my balls,119.68,Njigbas in Paris,102.2,1,0,8,2025,Regular Season
+Njigbas in Paris,102.2,Kupp my balls,119.68,0,1,8,2025,Regular Season
+Nix my Balls,96.52,Saquon Bustley,93.26,1,0,9,2025,Regular Season
+Saquon Bustley,93.26,Nix my Balls,96.52,0,1,9,2025,Regular Season
+Bower Rangers,141.8,Cook my Balls,134.3,1,0,9,2025,Regular Season
+Cook my Balls,134.3,Bower Rangers,141.8,0,1,9,2025,Regular Season
+Beef One My Balls,102.3,S(hamas),92.92,1,0,9,2025,Regular Season
+S(hamas),92.92,Beef One My Balls,102.3,0,1,9,2025,Regular Season
+High Speed Chase,116.22,willimantic crack addicts,101.4,1,0,9,2025,Regular Season
+willimantic crack addicts,101.4,High Speed Chase,116.22,0,1,9,2025,Regular Season
+Njigbas in Paris,153.76,Team Chieffo,121.88,1,0,9,2025,Regular Season
+Team Chieffo,121.88,Njigbas in Paris,153.76,0,1,9,2025,Regular Season
+lets get this money,122.54,Kupp my balls,134.94,0,1,9,2025,Regular Season
+Kupp my balls,134.94,lets get this money,122.54,1,0,9,2025,Regular Season
+Saquon Bustley,160.8,Njigbas in Paris,132.44,1,0,10,2025,Regular Season
+Njigbas in Paris,132.44,Saquon Bustley,160.8,0,1,10,2025,Regular Season
+Cook my Balls,90.4,Beef One My Balls,114.6,0,1,10,2025,Regular Season
+Beef One My Balls,114.6,Cook my Balls,90.4,1,0,10,2025,Regular Season
+S(hamas),104.84,High Speed Chase,98.04,1,0,10,2025,Regular Season
+High Speed Chase,98.04,S(hamas),104.84,0,1,10,2025,Regular Season
+willimantic crack addicts,84.22,Nix my Balls,144.6,0,1,10,2025,Regular Season
+Nix my Balls,144.6,willimantic crack addicts,84.22,1,0,10,2025,Regular Season
+Team Chieffo,117.6,lets get this money,131.82,0,1,10,2025,Regular Season
+lets get this money,131.82,Team Chieffo,117.6,1,0,10,2025,Regular Season
+Kupp my balls,135.32,Bower Rangers,101.2,1,0,10,2025,Regular Season
+Bower Rangers,101.2,Kupp my balls,135.32,0,1,10,2025,Regular Season
+lets get this money,115.5,Saquon Bustley,92.74,1,0,11,2025,Regular Season
+Saquon Bustley,92.74,lets get this money,115.5,0,1,11,2025,Regular Season
+High Speed Chase,141.66,Cook my Balls,115.54,1,0,11,2025,Regular Season
+Cook my Balls,115.54,High Speed Chase,141.66,0,1,11,2025,Regular Season
+Nix my Balls,72.8,S(hamas),131.38,0,1,11,2025,Regular Season
+S(hamas),131.38,Nix my Balls,72.8,1,0,11,2025,Regular Season
+Njigbas in Paris,110.32,willimantic crack addicts,110.34,0,1,11,2025,Regular Season
+willimantic crack addicts,110.34,Njigbas in Paris,110.32,1,0,11,2025,Regular Season
+Bower Rangers,115.76,Team Chieffo,79.7,1,0,11,2025,Regular Season
+Team Chieffo,79.7,Bower Rangers,115.76,0,1,11,2025,Regular Season
+Beef One My Balls,100.7,Kupp my balls,112.62,0,1,11,2025,Regular Season
+Kupp my balls,112.62,Beef One My Balls,100.7,1,0,11,2025,Regular Season
+Bower Rangers,96.56,Saquon Bustley,89.46,1,0,12,2025,Regular Season
+Saquon Bustley,89.46,Bower Rangers,96.56,0,1,12,2025,Regular Season
+Nix my Balls,165.18,Cook my Balls,98.52,1,0,12,2025,Regular Season
+Cook my Balls,98.52,Nix my Balls,165.18,0,1,12,2025,Regular Season
+Njigbas in Paris,137.12,S(hamas),97.62,1,0,12,2025,Regular Season
+S(hamas),97.62,Njigbas in Paris,137.12,0,1,12,2025,Regular Season
+lets get this money,128.76,willimantic crack addicts,75.58,1,0,12,2025,Regular Season
+willimantic crack addicts,75.58,lets get this money,128.76,0,1,12,2025,Regular Season
+Beef One My Balls,103.92,Team Chieffo,125.54,0,1,12,2025,Regular Season
+Team Chieffo,125.54,Beef One My Balls,103.92,1,0,12,2025,Regular Season
+High Speed Chase,91.46,Kupp my balls,134.44,0,1,12,2025,Regular Season
+Kupp my balls,134.44,High Speed Chase,91.46,1,0,12,2025,Regular Season
+Saquon Bustley,137.68,Beef One My Balls,88.22,1,0,13,2025,Regular Season
+Beef One My Balls,88.22,Saquon Bustley,137.68,0,1,13,2025,Regular Season
+Cook my Balls,91.94,Njigbas in Paris,91.96,0,1,13,2025,Regular Season
+Njigbas in Paris,91.96,Cook my Balls,91.94,1,0,13,2025,Regular Season
+S(hamas),142.32,lets get this money,129.3,1,0,13,2025,Regular Season
+lets get this money,129.3,S(hamas),142.32,0,1,13,2025,Regular Season
+willimantic crack addicts,135.34,Bower Rangers,104.84,1,0,13,2025,Regular Season
+Bower Rangers,104.84,willimantic crack addicts,135.34,0,1,13,2025,Regular Season
+Team Chieffo,96.94,High Speed Chase,107.34,0,1,13,2025,Regular Season
+High Speed Chase,107.34,Team Chieffo,96.94,1,0,13,2025,Regular Season
+Kupp my balls,104.94,Nix my Balls,76.94,1,0,13,2025,Regular Season
+Nix my Balls,76.94,Kupp my balls,104.94,0,1,13,2025,Regular Season
+High Speed Chase,119.26,Saquon Bustley,93.12,1,0,14,2025,Regular Season
+Saquon Bustley,93.12,High Speed Chase,119.26,0,1,14,2025,Regular Season
+lets get this money,89.7,Cook my Balls,83.26,1,0,14,2025,Regular Season
+Cook my Balls,83.26,lets get this money,89.7,0,1,14,2025,Regular Season
+Bower Rangers,115.46,S(hamas),126.94,0,1,14,2025,Regular Season
+S(hamas),126.94,Bower Rangers,115.46,1,0,14,2025,Regular Season
+Beef One My Balls,131.34,willimantic crack addicts,90.9,1,0,14,2025,Regular Season
+willimantic crack addicts,90.9,Beef One My Balls,131.34,0,1,14,2025,Regular Season
+Nix my Balls,115.38,Team Chieffo,54.4,1,0,14,2025,Regular Season
+Team Chieffo,54.4,Nix my Balls,115.38,0,1,14,2025,Regular Season
+Njigbas in Paris,137.54,Kupp my balls,83.86,1,0,14,2025,Regular Season
+Kupp my balls,83.86,Njigbas in Paris,137.54,0,1,14,2025,Regular Season
+Saquon Bustley,150.2,Nix my Balls,126.4,1,0,15,2025,Quarterfinals
+Nix my Balls,126.4,Saquon Bustley,150.2,0,1,15,2025,Quarterfinals
+High Speed Chase,152.5,Njigbas in Paris,135.5,1,0,15,2025,Quarterfinals
+Njigbas in Paris,135.5,High Speed Chase,152.5,0,1,15,2025,Quarterfinals
+Beef One My Balls,127.42,lets get this money,93.1,1,0,15,2025,Quarterfinals
+lets get this money,93.1,Beef One My Balls,127.42,0,1,15,2025,Quarterfinals
+Saquon Bustley,145.8,Kupp my balls,112.52,1,0,16,2025,Semifinals
+Kupp my balls,112.52,Saquon Bustley,145.8,0,1,16,2025,Semifinals
+Beef One My Balls,143.66,High Speed Chase,159.76,0,1,16,2025,Semifinals
+High Speed Chase,159.76,Beef One My Balls,143.66,1,0,16,2025,Semifinals
+Njigbas Be Wildin,122.18,Dyls belly,143.58,0,1,17,2024,Third Place
+Dyls belly,143.58,Njigbas Be Wildin,122.18,1,0,17,2024,Third Place
+Team Chieffo,140.62,S(kittle),116.7,1,0,17,2023,Third Place
+S(kittle),116.7,Team Chieffo,140.62,0,1,17,2023,Third Place
+Scammer got Scammed,99.7,PEDeAndre Hopkins,52.7,1,0,17,2022,Third Place
+PEDeAndre Hopkins,52.7,Scammer got Scammed,99.7,0,1,17,2022,Third Place
+Saquon Bustley,170.84,High Speed Chase,155.7,1,0,17,2025,Finals
+High Speed Chase,155.7,Saquon Bustley,170.84,0,1,17,2025,Finals
+Beef One My Balls,95.78,Kupp my balls,94.68,1,0,17,2025,Third Place
+Kupp my balls,94.68,Beef One My Balls,95.78,0,1,17,2025,Third Place

@@ -1,0 +1,20 @@
+Package: fantasyapp
+Type: Project
+Title: Fantasy League Hub
+Version: 0.0.0.9000
+Description: Mobile friendly Shiny application for a fantasy football league.
+Authors@R: person(given = "Fantasy", family = "League Hub", role = c("aut", "cre"), email = "noreply@example.com")
+License: MIT
+Encoding: UTF-8
+Imports:
+    shiny,
+    dplyr,
+    ggplot2,
+    DT,
+    readr,
+    tidyr,
+    stringr,
+    janitor,
+    scales
+Config/Needs/deploy:
+    rsconnect

@@ -60,19 +60,37 @@ pct_fmt <- function(x) {
   ifelse(is.na(x), "—", scales::percent(x, accuracy = 0.1))
 }
 
+responsive_column_defs <- function(data) {
+  definitions <- list(
+    list(responsivePriority = 1, targets = 0)
+  )
+
+  if (ncol(data) >= 2) {
+    definitions <- c(
+      definitions,
+      list(list(responsivePriority = 2, targets = 1))
+    )
+  }
+
+  definitions
+}
+
 datatable_clean <- function(data, page_length = 15) {
   DT::datatable(
     data,
     rownames = FALSE,
     filter = "top",
-    extensions = "Buttons",
+    extensions = c("Buttons", "Responsive"),
     options = list(
       pageLength = page_length,
-      scrollX = TRUE,
+      responsive = TRUE,
+      autoWidth = FALSE,
+      scrollX = FALSE,
       dom = "Bfrtip",
-      buttons = c("copy", "csv", "excel")
+      buttons = c("copy", "csv", "excel"),
+      columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact"
+    class = "stripe hover compact nowrap"
   )
 }
 
@@ -81,13 +99,17 @@ datatable_simple <- function(data, page_length = 5) {
     data,
     rownames = FALSE,
     filter = "none",
+    extensions = "Responsive",
     options = list(
       pageLength = page_length,
-      scrollX = TRUE,
+      responsive = TRUE,
+      autoWidth = FALSE,
+      scrollX = FALSE,
       dom = "t",
-      ordering = FALSE
+      ordering = FALSE,
+      columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact"
+    class = "stripe hover compact nowrap"
   )
 }
 
@@ -96,12 +118,16 @@ datatable_no_buttons <- function(data, page_length = 25) {
     data,
     rownames = FALSE,
     filter = "top",
+    extensions = "Responsive",
     options = list(
       pageLength = page_length,
-      scrollX = TRUE,
-      dom = "frtip"
+      responsive = TRUE,
+      autoWidth = FALSE,
+      scrollX = FALSE,
+      dom = "frtip",
+      columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact"
+    class = "stripe hover compact nowrap"
   )
 }
 
@@ -110,13 +136,17 @@ datatable_record <- function(data, page_length = 5) {
     data,
     rownames = FALSE,
     filter = "none",
+    extensions = "Responsive",
     options = list(
       pageLength = page_length,
-      scrollX = TRUE,
+      responsive = TRUE,
+      autoWidth = FALSE,
+      scrollX = FALSE,
       dom = "t",
-      ordering = FALSE
+      ordering = FALSE,
+      columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact"
+    class = "stripe hover compact nowrap"
   )
 }
 
@@ -401,6 +431,17 @@ ui <- navbarPage(
   windowTitle = "Fantasy League Hub",
 
   header = tags$head(
+    tags$meta(
+      name = "viewport",
+      content = "width=device-width, initial-scale=1, viewport-fit=cover"
+    ),
+    tags$meta(name = "theme-color", content = "#0f172a"),
+    tags$meta(name = "apple-mobile-web-app-capable", content = "yes"),
+    tags$meta(name = "apple-mobile-web-app-status-bar-style", content = "black-translucent"),
+    tags$meta(name = "apple-mobile-web-app-title", content = "Fantasy Hub"),
+    tags$link(rel = "manifest", href = "manifest.json"),
+    tags$link(rel = "apple-touch-icon", sizes = "192x192", href = "icon-192.png"),
+    tags$link(rel = "icon", type = "image/png", sizes = "192x192", href = "icon-192.png"),
     tags$style(HTML("
       :root {
         --navy: #0f172a;
@@ -756,6 +797,243 @@ ui <- navbarPage(
       table.dataTable tbody tr:hover {
         background-color: #dbeafe !important;
       }
+
+      .app-loading-indicator {
+        display: none;
+        position: fixed;
+        left: 50%;
+        bottom: calc(18px + env(safe-area-inset-bottom));
+        transform: translateX(-50%);
+        align-items: center;
+        gap: 10px;
+        padding: 11px 16px;
+        border-radius: 999px;
+        background: rgba(15, 23, 42, 0.96);
+        color: #ffffff;
+        font-size: 14px;
+        font-weight: 800;
+        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.28);
+        z-index: 2500;
+        pointer-events: none;
+      }
+
+      body.shiny-busy .app-loading-indicator {
+        display: flex;
+      }
+
+      .app-loading-spinner {
+        width: 18px;
+        height: 18px;
+        border: 3px solid rgba(255, 255, 255, 0.35);
+        border-top-color: #ffffff;
+        border-radius: 50%;
+        animation: app-spin 0.8s linear infinite;
+      }
+
+      @keyframes app-spin {
+        to { transform: rotate(360deg); }
+      }
+
+      table.dataTable > tbody > tr.child ul.dtr-details {
+        display: block;
+        width: 100%;
+      }
+
+      table.dataTable > tbody > tr.child span.dtr-title {
+        min-width: 120px;
+      }
+
+      @media (max-width: 767px) {
+
+        html,
+        body {
+          width: 100%;
+          overflow-x: hidden;
+        }
+
+        body {
+          font-size: 16px;
+        }
+
+        .navbar-brand {
+          max-width: calc(100vw - 75px);
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
+        .navbar-toggle {
+          margin-right: 12px;
+        }
+
+        .navbar-collapse {
+          border-top: 1px solid rgba(255, 255, 255, 0.18);
+          box-shadow: none;
+        }
+
+        .navbar-nav {
+          margin-top: 0;
+          margin-bottom: 0;
+        }
+
+        .navbar-default .navbar-nav > li > a {
+          padding: 14px 20px;
+          font-size: 16px;
+        }
+
+        .page-wrap {
+          padding: 12px;
+        }
+
+        .section-card {
+          padding: 16px;
+          margin-bottom: 12px;
+          border-radius: 14px;
+        }
+
+        .hero-card h2 {
+          margin-top: 0;
+          font-size: 26px;
+        }
+
+        .hero-card h4 {
+          font-size: 16px;
+          line-height: 1.4;
+        }
+
+        .metric-grid {
+          grid-template-columns: 1fr;
+          gap: 10px;
+          margin-bottom: 12px;
+        }
+
+        .metric-card {
+          min-height: 0;
+          padding: 15px;
+          border-radius: 14px;
+        }
+
+        .metric-value {
+          font-size: 21px;
+          overflow-wrap: anywhere;
+        }
+
+        .control-row {
+          display: block;
+          margin-bottom: 4px;
+        }
+
+        .control-row .form-group {
+          width: 100%;
+          min-width: 0;
+          margin-bottom: 12px;
+        }
+
+        .control-row .selectize-control,
+        .control-row .form-control {
+          width: 100%;
+        }
+
+        .recap-card {
+          grid-template-columns: 1fr;
+          border-width: 3px;
+          border-radius: 14px;
+          margin-bottom: 12px;
+        }
+
+        .recap-team {
+          min-height: 0;
+          padding: 18px;
+        }
+
+        .recap-team:first-child {
+          border-right: none;
+          border-bottom: 3px solid #0f172a;
+        }
+
+        .recap-team-name {
+          font-size: 20px;
+        }
+
+        .recap-team-score {
+          font-size: 27px;
+        }
+
+        .matchup-detail-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .record-grid {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        .record-table-card {
+          padding: 12px;
+          border-radius: 14px;
+        }
+
+        .section-title-row {
+          justify-content: space-between;
+        }
+
+        .info-button {
+          flex: 0 0 auto;
+        }
+
+        #top_players_plot {
+          height: 320px !important;
+        }
+
+        #manager_score_trend {
+          height: 310px !important;
+        }
+
+        #manager_position_spider {
+          height: 360px !important;
+        }
+
+        .shiny-plot-output {
+          max-width: 100%;
+        }
+
+        .dataTables_wrapper {
+          font-size: 13px;
+        }
+
+        .dataTables_wrapper .dataTables_filter,
+        .dataTables_wrapper .dataTables_length {
+          float: none;
+          text-align: left;
+          margin-bottom: 8px;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+          width: calc(100% - 75px);
+          max-width: none;
+        }
+
+        .dataTables_wrapper .dt-buttons {
+          float: none;
+          margin-bottom: 8px;
+        }
+
+        .dataTables_wrapper .dt-buttons .dt-button {
+          margin-bottom: 5px;
+        }
+
+        table.dataTable thead th,
+        table.dataTable tbody td {
+          white-space: nowrap;
+        }
+
+        .app-loading-indicator {
+          width: calc(100vw - 32px);
+          justify-content: center;
+          text-align: center;
+        }
+      }
     ")),
     tags$script(HTML("
       $(document).on('click', '.navbar-brand', function(e) {
@@ -765,7 +1043,23 @@ ui <- navbarPage(
           dashboardTab.tab('show');
         }
       });
+
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('service-worker.js').catch(function(error) {
+            console.warn('Service worker registration failed:', error);
+          });
+        });
+      }
     "))
+  ),
+
+  footer = div(
+    class = "app-loading-indicator",
+    role = "status",
+    `aria-live` = "polite",
+    div(class = "app-loading-spinner"),
+    span("Updating league data...")
   ),
 
   tabPanel(

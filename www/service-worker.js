@@ -1,4 +1,4 @@
-const VERSION = "fantasy-hub-v1";
+const VERSION = "fantasy-hub-v2";
 
 self.addEventListener("install", () => {
   self.skipWaiting();

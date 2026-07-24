@@ -29,9 +29,8 @@ jobs:
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::rsconnect, any::cpp11, any::progress
+          extra-packages: any::rsconnect
           needs: deploy
-          cache-version: 2
 
       - name: Deploy to shinyapps.io
         env:

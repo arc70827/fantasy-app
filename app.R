@@ -75,10 +75,11 @@ responsive_column_defs <- function(data) {
   definitions
 }
 
-datatable_clean <- function(data, page_length = 15) {
+datatable_clean <- function(data, page_length = 15, selection = "none") {
   DT::datatable(
     data,
     rownames = FALSE,
+    selection = selection,
     filter = "top",
     extensions = c("Buttons", "Responsive"),
     options = list(
@@ -90,14 +91,15 @@ datatable_clean <- function(data, page_length = 15) {
       buttons = c("copy", "csv", "excel"),
       columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact nowrap"
+    class = "stripe compact nowrap"
   )
 }
 
-datatable_simple <- function(data, page_length = 5) {
+datatable_simple <- function(data, page_length = 5, selection = "none") {
   DT::datatable(
     data,
     rownames = FALSE,
+    selection = selection,
     filter = "none",
     extensions = "Responsive",
     options = list(
@@ -109,14 +111,15 @@ datatable_simple <- function(data, page_length = 5) {
       ordering = FALSE,
       columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact nowrap"
+    class = "stripe compact nowrap"
   )
 }
 
-datatable_no_buttons <- function(data, page_length = 25) {
+datatable_no_buttons <- function(data, page_length = 25, selection = "none") {
   DT::datatable(
     data,
     rownames = FALSE,
+    selection = selection,
     filter = "top",
     extensions = "Responsive",
     options = list(
@@ -127,14 +130,15 @@ datatable_no_buttons <- function(data, page_length = 25) {
       dom = "frtip",
       columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact nowrap"
+    class = "stripe compact nowrap"
   )
 }
 
-datatable_record <- function(data, page_length = 5) {
+datatable_record <- function(data, page_length = 5, selection = "none") {
   DT::datatable(
     data,
     rownames = FALSE,
+    selection = selection,
     filter = "none",
     extensions = "Responsive",
     options = list(
@@ -146,7 +150,7 @@ datatable_record <- function(data, page_length = 5) {
       ordering = FALSE,
       columnDefs = responsive_column_defs(data)
     ),
-    class = "stripe hover compact nowrap"
+    class = "stripe compact nowrap"
   )
 }
 
@@ -425,7 +429,7 @@ card <- function(title, value, subtitle = NULL, class = "accent-blue") {
 }
 
 ui <- navbarPage(
-  title = div(class = "brand-title", span(class = "brand-mark", "🏈"), " Fantasy League Hub"),
+  title = div(class = "brand-title", "Fantasy League Hub"),
   id = "main_tabs",
   selected = "Dashboard",
   windowTitle = "Fantasy League Hub",
@@ -435,159 +439,366 @@ ui <- navbarPage(
       name = "viewport",
       content = "width=device-width, initial-scale=1, viewport-fit=cover"
     ),
-    tags$meta(name = "theme-color", content = "#0f172a"),
+    tags$meta(name = "theme-color", content = "#9D0B1E"),
     tags$meta(name = "apple-mobile-web-app-capable", content = "yes"),
     tags$meta(name = "apple-mobile-web-app-status-bar-style", content = "black-translucent"),
     tags$meta(name = "apple-mobile-web-app-title", content = "Fantasy Hub"),
     tags$link(rel = "manifest", href = "manifest.json"),
-    tags$link(rel = "apple-touch-icon", sizes = "192x192", href = "icon-192.png"),
-    tags$link(rel = "icon", type = "image/png", sizes = "192x192", href = "icon-192.png"),
+    tags$link(rel = "apple-touch-icon", sizes = "192x192", href = "img/icon-192.png"),
+    tags$link(rel = "icon", type = "image/png", sizes = "192x192", href = "img/icon-192.png"),
+    tags$link(rel = "preconnect", href = "https://fonts.googleapis.com"),
+    tags$link(rel = "preconnect", href = "https://fonts.gstatic.com", crossorigin = "anonymous"),
+    tags$link(
+      rel = "stylesheet",
+      href = "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&display=swap"
+    ),
     tags$style(HTML("
       :root {
-        --navy: #0f172a;
-        --navy-2: #111827;
-        --blue: #2563eb;
-        --cyan: #06b6d4;
-        --green: #16a34a;
-        --gold: #f59e0b;
-        --red: #dc2626;
-        --purple: #7c3aed;
-        --bg: #eef4ff;
-        --card: #ffffff;
-        --text: #0f172a;
-        --muted: #64748b;
-        --border: #dbeafe;
+        --primary-red: #BE1C30;
+        --dark-red: #9D0B1E;
+        --near-black: #2B1E1E;
+        --off-white: #E0E3E4;
+        --charcoal: #4C4142;
+        --surface: #ffffff;
+        --surface-soft: rgba(255, 255, 255, 0.95);
+        --muted: rgba(76, 65, 66, 0.80);
+        --border: rgba(76, 65, 66, 0.22);
+      }
+
+      html {
+        scroll-padding-top: 54px;
       }
 
       body {
+        margin: 0;
+        padding-top: calc(48px + env(safe-area-inset-top));
         background:
-          radial-gradient(circle at top left, rgba(37, 99, 235, 0.18), transparent 35%),
-          radial-gradient(circle at top right, rgba(245, 158, 11, 0.16), transparent 30%),
-          var(--bg);
-        color: var(--text);
+          linear-gradient(135deg, rgba(190, 28, 48, 0.08), transparent 34%),
+          linear-gradient(315deg, rgba(43, 30, 30, 0.07), transparent 38%),
+          var(--off-white);
+        color: var(--near-black);
+        font-family: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 500;
+        line-height: 1.25;
+      }
+
+      a {
+        color: var(--dark-red);
+      }
+
+      a:hover,
+      a:focus {
+        color: var(--primary-red);
+      }
+
+      h1, h2, h3, h4, h5, h6,
+      .navbar-brand,
+      .btn,
+      label,
+      table.dataTable thead th {
+        font-family: 'Barlow Condensed', 'Arial Narrow', 'Roboto Condensed', Arial, sans-serif;
+      }
+
+      h2, h3 {
+        color: var(--near-black);
+        font-weight: 900;
+        letter-spacing: 0.01em;
+      }
+
+      h2 {
+        font-size: 24px;
+        margin-top: 0;
+        margin-bottom: 6px;
+      }
+
+      h3 {
+        font-size: 19px;
+        margin-top: 0;
+        margin-bottom: 8px;
+      }
+
+      p {
+        margin-bottom: 7px;
       }
 
       .navbar {
-        border-radius: 0;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1030;
+        padding-top: env(safe-area-inset-top);
+        min-height: 48px;
         margin-bottom: 0;
         border: none;
-        background: linear-gradient(90deg, var(--navy), #1e3a8a);
-        box-shadow: 0 6px 20px rgba(15, 23, 42, 0.25);
+        border-radius: 0;
+        background: linear-gradient(90deg, var(--dark-red), var(--near-black));
+        box-shadow: 0 4px 14px rgba(43, 30, 30, 0.28);
       }
 
-      .navbar-default .navbar-brand,
-      .navbar-default .navbar-nav > li > a {
+      .navbar > .container,
+      .navbar > .container-fluid {
+        position: relative;
+        padding-right: 0;
+        padding-left: 0;
+      }
+
+      .navbar-header {
+        float: none !important;
+        width: 100%;
+      }
+
+      .navbar-toggle {
+        display: none !important;
+      }
+
+      .navbar-default .navbar-brand {
+        float: none !important;
+        display: flex;
+        align-items: center;
+        width: 100%;
+        height: 48px;
+        margin: 0 !important;
+        padding: 0 14px;
+        color: var(--off-white) !important;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+        user-select: none;
+      }
+
+      .navbar-default .navbar-brand:hover,
+      .navbar-default .navbar-brand:focus {
         color: #ffffff !important;
+        background: rgba(255, 255, 255, 0.06) !important;
+      }
+
+      .navbar-brand::after {
+        content: '▾';
+        margin-left: auto;
+        font-size: 16px;
+        transition: transform 0.18s ease;
+      }
+
+      .navbar.menu-open .navbar-brand::after {
+        transform: rotate(180deg);
+      }
+
+      .brand-title {
+        display: contents;
+      }
+
+      .navbar .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        left: 0;
+        max-height: calc(100vh - 48px);
+        padding: 0;
+        overflow-y: auto;
+        border: none;
+        background: var(--near-black);
+        box-shadow: 0 12px 24px rgba(43, 30, 30, 0.32);
+      }
+
+      .navbar .navbar-collapse.collapse {
+        display: none !important;
+      }
+
+      .navbar .navbar-collapse.collapse.in {
+        display: block !important;
+      }
+
+      .navbar .navbar-nav {
+        float: none !important;
+        margin: 0 !important;
+      }
+
+      .navbar .navbar-nav > li {
+        float: none !important;
+      }
+
+      .navbar-default .navbar-nav > li > a {
+        padding: 10px 16px;
+        border-top: 1px solid rgba(224, 227, 228, 0.10);
+        color: var(--off-white) !important;
+        font-size: 16px;
         font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .navbar-default .navbar-nav > li > a:hover,
+      .navbar-default .navbar-nav > li > a:focus {
+        background: rgba(190, 28, 48, 0.28) !important;
+        color: #ffffff !important;
       }
 
       .navbar-default .navbar-nav > .active > a,
       .navbar-default .navbar-nav > .active > a:focus,
       .navbar-default .navbar-nav > .active > a:hover {
-        background: rgba(255, 255, 255, 0.16) !important;
+        background: var(--primary-red) !important;
         color: #ffffff !important;
       }
 
-      .navbar-default .navbar-nav > li > a:hover {
-        background: rgba(255, 255, 255, 0.10) !important;
-      }
-
-      .brand-title {
-        font-weight: 900;
-        letter-spacing: 0.2px;
-      }
-
-      .brand-mark {
-        margin-right: 4px;
-      }
-
       .page-wrap {
-        padding: 24px;
+        width: 100%;
+        max-width: 1500px;
+        margin: 0 auto;
+        padding: 14px;
       }
 
       .section-card {
-        background: rgba(255, 255, 255, 0.96);
-        border-radius: 18px;
-        padding: 22px;
-        margin-bottom: 18px;
-        border: 1px solid rgba(219, 234, 254, 0.95);
-        box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+        margin-bottom: 10px;
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface-soft);
+        box-shadow: 0 5px 16px rgba(43, 30, 30, 0.07);
       }
 
       .hero-card {
-        background: linear-gradient(135deg, #0f172a, #1d4ed8);
-        color: white;
+        padding: 13px 15px;
         border: none;
+        background: linear-gradient(130deg, var(--near-black), var(--dark-red));
+        color: #ffffff;
+      }
+
+      .hero-card h2,
+      .hero-card h3 {
+        color: #ffffff;
+      }
+
+      .hero-card h4 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+      }
+
+      .hero-card p {
+        margin: 2px 0 0;
       }
 
       .hero-card .muted {
-        color: rgba(255,255,255,0.78);
+        color: rgba(255, 255, 255, 0.78);
       }
 
       .metric-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(215px, 1fr));
-        gap: 14px;
-        margin-bottom: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 8px;
+        margin-bottom: 10px;
       }
 
       .metric-card {
-        background: var(--card);
-        border-radius: 18px;
-        padding: 18px;
-        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
-        min-height: 120px;
-        border: 1px solid rgba(226, 232, 240, 0.9);
-        border-top: 6px solid var(--blue);
+        min-height: 86px;
+        padding: 11px 12px;
+        border: 1px solid var(--border);
+        border-top: 4px solid var(--primary-red);
+        border-radius: 10px;
+        background: var(--surface);
+        box-shadow: 0 4px 12px rgba(43, 30, 30, 0.07);
       }
 
-      .metric-card.accent-green { border-top-color: var(--green); }
-      .metric-card.accent-gold { border-top-color: var(--gold); }
-      .metric-card.accent-red { border-top-color: var(--red); }
-      .metric-card.accent-purple { border-top-color: var(--purple); }
-      .metric-card.accent-cyan { border-top-color: var(--cyan); }
+      .metric-card.accent-blue,
+      .metric-card.accent-red {
+        border-top-color: var(--primary-red);
+      }
+
+      .metric-card.accent-green,
+      .metric-card.accent-cyan {
+        border-top-color: var(--dark-red);
+      }
+
+      .metric-card.accent-gold {
+        border-top-color: var(--charcoal);
+      }
+
+      .metric-card.accent-purple {
+        border-top-color: var(--near-black);
+      }
 
       .metric-title {
+        margin-bottom: 3px;
         color: var(--muted);
-        font-size: 12px;
+        font-size: 10.5px;
         font-weight: 800;
-        text-transform: uppercase;
         letter-spacing: 0.06em;
-        margin-bottom: 8px;
+        line-height: 1.1;
+        text-transform: uppercase;
       }
 
       .metric-value {
-        color: var(--text);
-        font-size: 25px;
+        color: var(--near-black);
+        font-size: 21px;
         font-weight: 900;
-        line-height: 1.1;
+        line-height: 1.02;
+        overflow-wrap: anywhere;
       }
 
       .score-number {
-        color: #1d4ed8 !important;
+        color: var(--primary-red) !important;
       }
 
       .metric-subtitle {
+        margin-top: 4px;
         color: var(--muted);
-        font-size: 13px;
-        margin-top: 8px;
+        font-size: 11.5px;
+        line-height: 1.12;
       }
 
       .control-row {
         display: flex;
-        gap: 12px;
-        flex-wrap: wrap;
         align-items: end;
-        margin-bottom: 16px;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
+      .control-row > * {
+        min-width: 0;
       }
 
       .control-row .form-group {
-        min-width: 190px;
+        min-width: 145px;
         margin-bottom: 0;
       }
 
-      h2, h3 {
-        font-weight: 900;
+      .form-group {
+        margin-bottom: 8px;
+      }
+
+      .control-label,
+      label {
+        margin-bottom: 3px;
+        color: var(--near-black);
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 0.025em;
+      }
+
+      .form-control,
+      .selectize-input {
+        min-height: 34px;
+        padding: 5px 8px;
+        border-color: var(--border);
+        border-radius: 7px;
+        font-size: 14px;
+        line-height: 1.2;
+        box-shadow: none;
+      }
+
+      .form-control:focus,
+      .selectize-input.focus {
+        border-color: var(--primary-red);
+        box-shadow: 0 0 0 2px rgba(190, 28, 48, 0.12);
+      }
+
+      .selectize-dropdown .active {
+        background: var(--primary-red);
+        color: #ffffff;
       }
 
       .muted {
@@ -597,113 +808,114 @@ ui <- navbarPage(
       .recap-card {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        background: #ffffff;
-        border: 4px solid #0f172a;
-        border-radius: 10px;
+        margin-bottom: 9px;
         overflow: hidden;
-        margin-bottom: 18px;
-        box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+        border: 2px solid var(--near-black);
+        border-radius: 9px;
+        background: #ffffff;
+        box-shadow: 0 4px 12px rgba(43, 30, 30, 0.07);
       }
 
       .recap-team {
-        min-height: 145px;
-        padding: 24px;
         display: flex;
+        min-height: 100px;
+        padding: 13px;
         flex-direction: column;
         justify-content: center;
       }
 
       .recap-team:first-child {
-        border-right: 4px solid #0f172a;
+        border-right: 2px solid var(--near-black);
       }
 
       .recap-team-name {
-        font-size: 24px;
+        margin-bottom: 5px;
+        color: var(--near-black);
+        font-size: 19px;
         font-weight: 900;
-        color: #0f172a;
-        line-height: 1.05;
-        margin-bottom: 10px;
+        line-height: 1.02;
       }
 
       .recap-team-score {
-        font-size: 30px;
+        color: var(--primary-red);
+        font-size: 25px;
         font-weight: 900;
-        color: #1d4ed8;
         line-height: 1;
       }
 
       .recap-winner {
-        background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(245, 158, 11, 0.08));
+        background: linear-gradient(135deg, rgba(190, 28, 48, 0.10), rgba(224, 227, 228, 0.45));
       }
 
       .finish-card {
+        margin-bottom: 10px;
+        padding: 13px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
         background: #ffffff;
-        border-radius: 18px;
-        padding: 20px;
-        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
-        border: 1px solid rgba(226, 232, 240, 0.9);
-        margin-bottom: 18px;
+        box-shadow: 0 4px 12px rgba(43, 30, 30, 0.07);
       }
 
       .finish-title {
-        font-size: 22px;
+        margin-bottom: 7px;
+        color: var(--near-black);
+        font-size: 19px;
         font-weight: 900;
-        color: #0f172a;
-        margin-bottom: 12px;
       }
 
       .finish-row {
         display: grid;
-        grid-template-columns: 70px 1fr;
-        gap: 12px;
-        border-top: 1px solid #e5e7eb;
-        padding: 12px 0;
+        grid-template-columns: 52px 1fr;
         align-items: center;
+        gap: 8px;
+        padding: 7px 0;
+        border-top: 1px solid var(--border);
       }
 
       .finish-rank {
-        font-size: 24px;
+        color: var(--primary-red);
+        font-size: 20px;
         font-weight: 900;
-        color: #1d4ed8;
       }
 
       .finish-detail {
+        color: var(--near-black);
         font-weight: 800;
-        color: #0f172a;
       }
 
       .matchup-detail-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
-        gap: 18px;
+        gap: 10px;
       }
 
       .matchup-team-panel {
-        background: #ffffff;
-        border: 3px solid #0f172a;
-        border-radius: 14px;
         overflow: hidden;
+        border: 2px solid var(--near-black);
+        border-radius: 9px;
+        background: #ffffff;
       }
 
       .matchup-team-header {
-        background: linear-gradient(135deg, #0f172a, #1d4ed8);
+        padding: 10px 12px;
+        background: linear-gradient(130deg, var(--near-black), var(--dark-red));
         color: #ffffff;
-        padding: 18px;
       }
 
       .matchup-team-title {
-        font-size: 22px;
+        margin-bottom: 2px;
+        font-size: 18px;
         font-weight: 900;
-        margin-bottom: 4px;
+        line-height: 1.05;
       }
 
       .matchup-team-score {
-        font-size: 30px;
+        font-size: 24px;
         font-weight: 900;
       }
 
       .matchup-team-body {
-        padding: 14px;
+        padding: 7px;
       }
 
       .rank-one {
@@ -712,16 +924,16 @@ ui <- navbarPage(
 
       .record-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
-        gap: 18px;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 10px;
       }
 
       .record-table-card {
+        padding: 11px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
         background: #ffffff;
-        border-radius: 18px;
-        padding: 18px;
-        border: 1px solid rgba(226, 232, 240, 0.9);
-        box-shadow: 0 10px 26px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 4px 12px rgba(43, 30, 30, 0.07);
       }
 
       .record-table-card h3 {
@@ -730,25 +942,25 @@ ui <- navbarPage(
 
       .power-ranking-wrap table.dataTable {
         border-collapse: separate !important;
-        border-spacing: 0 8px !important;
+        border-spacing: 0 4px !important;
       }
 
       .power-ranking-wrap table.dataTable tbody tr {
         background: #ffffff !important;
-        box-shadow: 0 4px 14px rgba(15, 23, 42, 0.08);
+        box-shadow: 0 2px 7px rgba(43, 30, 30, 0.06);
       }
 
       .power-ranking-wrap table.dataTable tbody td {
+        padding-top: 7px !important;
+        padding-bottom: 7px !important;
         font-weight: 700;
-        padding-top: 14px !important;
-        padding-bottom: 14px !important;
       }
 
       .section-title-row {
         display: flex;
         align-items: center;
-        gap: 10px;
-        margin-bottom: 10px;
+        gap: 7px;
+        margin-bottom: 6px;
       }
 
       .section-title-row h3 {
@@ -756,82 +968,110 @@ ui <- navbarPage(
       }
 
       .info-button {
-        width: 26px;
-        height: 26px;
-        border-radius: 50%;
+        width: 23px;
+        height: 23px;
         padding: 0 !important;
-        font-weight: 900;
-        color: #ffffff !important;
-        background: #2563eb !important;
         border: none !important;
-        line-height: 26px;
+        border-radius: 50%;
+        background: var(--primary-red) !important;
+        color: #ffffff !important;
+        font-weight: 900;
+        line-height: 23px;
         text-align: center;
       }
 
-      .info-button:hover {
-        background: #1d4ed8 !important;
+      .info-button:hover,
+      .info-button:focus {
+        background: var(--dark-red) !important;
       }
 
-      /* Hide the Dashboard nav tab. The brand text is the home/dashboard link. */
-      .navbar-nav > li > a[data-value='Dashboard'] {
-        display: none !important;
+      .btn-primary,
+      .btn-default {
+        border-color: var(--dark-red) !important;
+        background: var(--primary-red) !important;
+        color: #ffffff !important;
+        font-weight: 800;
       }
 
-      .navbar-brand {
-        cursor: pointer;
+      .btn-primary:hover,
+      .btn-primary:focus,
+      .btn-default:hover,
+      .btn-default:focus {
+        border-color: var(--near-black) !important;
+        background: var(--dark-red) !important;
+        color: #ffffff !important;
+      }
+
+      .dataTables_wrapper {
+        color: var(--near-black);
+        font-size: 13px;
       }
 
       .dataTables_wrapper .dt-buttons .dt-button {
-        background: #1d4ed8 !important;
-        color: white !important;
+        margin-right: 4px;
+        padding: 3px 7px !important;
         border: none !important;
-        border-radius: 8px !important;
-        padding: 5px 10px !important;
+        border-radius: 6px !important;
+        background: var(--primary-red) !important;
+        color: #ffffff !important;
+        font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .dataTables_wrapper .dataTables_filter input,
+      .dataTables_wrapper .dataTables_length select {
+        min-height: 29px;
+        padding: 3px 6px;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+      }
+
+      table.dataTable {
+        width: 100% !important;
       }
 
       table.dataTable thead th {
-        background: #1e3a8a !important;
-        color: white !important;
-      }
-
-      table.dataTable tbody tr:hover {
-        background-color: #dbeafe !important;
-      }
-
-      .app-loading-indicator {
-        display: none;
-        position: fixed;
-        left: 50%;
-        bottom: calc(18px + env(safe-area-inset-bottom));
-        transform: translateX(-50%);
-        align-items: center;
-        gap: 10px;
-        padding: 11px 16px;
-        border-radius: 999px;
-        background: rgba(15, 23, 42, 0.96);
-        color: #ffffff;
-        font-size: 14px;
+        padding: 6px 7px !important;
+        border-bottom: none !important;
+        background: var(--dark-red) !important;
+        color: #ffffff !important;
+        font-size: 12px;
         font-weight: 800;
-        box-shadow: 0 12px 30px rgba(15, 23, 42, 0.28);
-        z-index: 2500;
-        pointer-events: none;
+        letter-spacing: 0.02em;
       }
 
-      body.shiny-busy .app-loading-indicator {
-        display: flex;
+      table.dataTable tbody td {
+        padding: 5px 7px !important;
       }
 
-      .app-loading-spinner {
-        width: 18px;
-        height: 18px;
-        border: 3px solid rgba(255, 255, 255, 0.35);
-        border-top-color: #ffffff;
-        border-radius: 50%;
-        animation: app-spin 0.8s linear infinite;
+      table.dataTable tbody tr,
+      table.dataTable tbody td {
+        cursor: default !important;
       }
 
-      @keyframes app-spin {
-        to { transform: rotate(360deg); }
+      table.dataTable tbody tr.selected,
+      table.dataTable tbody tr.selected > *,
+      table.dataTable tbody tr.selected:hover,
+      table.dataTable tbody tr.selected:hover > * {
+        color: var(--near-black) !important;
+        background: inherit !important;
+        box-shadow: none !important;
+      }
+
+      #history_matchups_table table.dataTable tbody tr,
+      #history_matchups_table table.dataTable tbody td {
+        cursor: pointer !important;
+      }
+
+      #history_matchups_table table.dataTable tbody tr:hover > * {
+        background: rgba(190, 28, 48, 0.08) !important;
+      }
+
+      #history_matchups_table table.dataTable tbody tr.selected > * {
+        background: rgba(190, 28, 48, 0.15) !important;
+        color: var(--near-black) !important;
+        box-shadow: none !important;
       }
 
       table.dataTable > tbody > tr.child ul.dtr-details {
@@ -840,11 +1080,89 @@ ui <- navbarPage(
       }
 
       table.dataTable > tbody > tr.child span.dtr-title {
-        min-width: 120px;
+        min-width: 105px;
+      }
+
+      .modal-backdrop.in {
+        opacity: 0.68;
+      }
+
+      .modal-content {
+        overflow: hidden;
+        border: 2px solid var(--dark-red);
+        border-radius: 11px;
+        box-shadow: 0 18px 44px rgba(43, 30, 30, 0.42);
+      }
+
+      .modal-header {
+        padding: 9px 13px;
+        border-bottom: none;
+        background: linear-gradient(90deg, var(--dark-red), var(--near-black));
+        color: #ffffff;
+      }
+
+      .modal-title {
+        color: #ffffff;
+        font-size: 20px;
+        font-weight: 900;
+      }
+
+      .modal-header .close {
+        color: #ffffff;
+        opacity: 0.9;
+        text-shadow: none;
+      }
+
+      .modal-body {
+        max-height: calc(100vh - 145px);
+        padding: 11px;
+        overflow-y: auto;
+        background: var(--off-white);
+      }
+
+      .modal-footer {
+        padding: 7px 11px;
+        border-top: 1px solid var(--border);
+        background: #ffffff;
+      }
+
+      .app-loading-indicator {
+        display: none;
+        position: fixed;
+        left: 50%;
+        bottom: calc(12px + env(safe-area-inset-bottom));
+        z-index: 2500;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        transform: translateX(-50%);
+        border-radius: 999px;
+        background: rgba(43, 30, 30, 0.96);
+        color: #ffffff;
+        box-shadow: 0 10px 24px rgba(43, 30, 30, 0.28);
+        font-size: 12px;
+        font-weight: 800;
+        pointer-events: none;
+      }
+
+      body.shiny-busy .app-loading-indicator {
+        display: flex;
+      }
+
+      .app-loading-spinner {
+        width: 15px;
+        height: 15px;
+        border: 2px solid rgba(255, 255, 255, 0.35);
+        border-top-color: var(--primary-red);
+        border-radius: 50%;
+        animation: app-spin 0.8s linear infinite;
+      }
+
+      @keyframes app-spin {
+        to { transform: rotate(360deg); }
       }
 
       @media (max-width: 767px) {
-
         html,
         body {
           width: 100%;
@@ -852,146 +1170,175 @@ ui <- navbarPage(
         }
 
         body {
-          font-size: 16px;
+          padding-top: calc(46px + env(safe-area-inset-top));
+          font-size: 14px;
         }
 
-        .navbar-brand {
-          max-width: calc(100vw - 75px);
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
+        .navbar-default .navbar-brand {
+          height: 46px;
+          padding: 0 11px;
+          font-size: 17px;
         }
 
-        .navbar-toggle {
-          margin-right: 12px;
-        }
-
-        .navbar-collapse {
-          border-top: 1px solid rgba(255, 255, 255, 0.18);
-          box-shadow: none;
-        }
-
-        .navbar-nav {
-          margin-top: 0;
-          margin-bottom: 0;
+        .navbar .navbar-collapse {
+          max-height: calc(100vh - 46px);
         }
 
         .navbar-default .navbar-nav > li > a {
-          padding: 14px 20px;
-          font-size: 16px;
+          padding: 9px 13px;
+          font-size: 15px;
         }
 
         .page-wrap {
-          padding: 12px;
+          padding: 7px;
         }
 
         .section-card {
-          padding: 16px;
-          margin-bottom: 12px;
-          border-radius: 14px;
+          margin-bottom: 7px;
+          padding: 9px;
+          border-radius: 8px;
+        }
+
+        .hero-card {
+          padding: 9px 11px;
         }
 
         .hero-card h2 {
-          margin-top: 0;
-          font-size: 26px;
-        }
-
-        .hero-card h4 {
-          font-size: 16px;
-          line-height: 1.4;
-        }
-
-        .metric-grid {
-          grid-template-columns: 1fr;
-          gap: 10px;
-          margin-bottom: 12px;
-        }
-
-        .metric-card {
-          min-height: 0;
-          padding: 15px;
-          border-radius: 14px;
-        }
-
-        .metric-value {
-          font-size: 21px;
-          overflow-wrap: anywhere;
-        }
-
-        .control-row {
-          display: block;
-          margin-bottom: 4px;
-        }
-
-        .control-row .form-group {
-          width: 100%;
-          min-width: 0;
-          margin-bottom: 12px;
-        }
-
-        .control-row .selectize-control,
-        .control-row .form-control {
-          width: 100%;
-        }
-
-        .recap-card {
-          grid-template-columns: 1fr;
-          border-width: 3px;
-          border-radius: 14px;
-          margin-bottom: 12px;
-        }
-
-        .recap-team {
-          min-height: 0;
-          padding: 18px;
-        }
-
-        .recap-team:first-child {
-          border-right: none;
-          border-bottom: 3px solid #0f172a;
-        }
-
-        .recap-team-name {
+          margin-bottom: 3px;
           font-size: 20px;
         }
 
-        .recap-team-score {
-          font-size: 27px;
+        .hero-card h4,
+        .hero-card p {
+          font-size: 12.5px;
+          line-height: 1.15;
         }
 
-        .matchup-detail-grid {
-          grid-template-columns: 1fr;
-          gap: 12px;
+        h3 {
+          margin-bottom: 5px;
+          font-size: 17px;
+        }
+
+        .metric-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 6px;
+          margin-bottom: 7px;
+        }
+
+        .metric-card {
+          min-height: 70px;
+          padding: 8px;
+          border-top-width: 3px;
+          border-radius: 8px;
+        }
+
+        .metric-title {
+          font-size: 9px;
+        }
+
+        .metric-value {
+          font-size: 17.5px;
+        }
+
+        .metric-subtitle {
+          margin-top: 2px;
+          font-size: 10px;
+        }
+
+        .control-row {
+          display: grid;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 6px;
+          margin-bottom: 4px;
+        }
+
+        .control-row .form-group,
+        .control-row .shiny-html-output {
+          width: 100%;
+          min-width: 0;
+          margin-bottom: 0;
+        }
+
+        .control-row > :only-child {
+          grid-column: 1 / -1;
+        }
+
+        .control-label,
+        label {
+          margin-bottom: 2px;
+          font-size: 10.5px;
+        }
+
+        .form-control,
+        .selectize-input {
+          min-height: 31px;
+          padding: 4px 6px;
+          font-size: 12.5px;
+        }
+
+        .recap-card {
+          margin-bottom: 6px;
+          border-width: 2px;
+          border-radius: 7px;
+        }
+
+        .recap-team {
+          min-height: 78px;
+          padding: 8px;
+        }
+
+        .recap-team:first-child {
+          border-right-width: 2px;
+        }
+
+        .recap-team-name {
+          margin-bottom: 3px;
+          font-size: 15.5px;
+        }
+
+        .recap-team-score {
+          font-size: 21px;
+        }
+
+        .finish-card {
+          margin-bottom: 7px;
+          padding: 9px;
+        }
+
+        .finish-row {
+          grid-template-columns: 43px 1fr;
+          gap: 5px;
+          padding: 5px 0;
+        }
+
+        .finish-rank {
+          font-size: 17px;
         }
 
         .record-grid {
           grid-template-columns: 1fr;
-          gap: 12px;
+          gap: 7px;
         }
 
         .record-table-card {
-          padding: 12px;
-          border-radius: 14px;
+          padding: 7px;
+          border-radius: 8px;
         }
 
         .section-title-row {
           justify-content: space-between;
         }
 
-        .info-button {
-          flex: 0 0 auto;
-        }
-
         #top_players_plot {
-          height: 320px !important;
+          height: 275px !important;
         }
 
         #manager_score_trend {
-          height: 310px !important;
+          height: 255px !important;
         }
 
         #manager_position_spider {
-          height: 360px !important;
+          height: 315px !important;
         }
 
         .shiny-plot-output {
@@ -999,58 +1346,147 @@ ui <- navbarPage(
         }
 
         .dataTables_wrapper {
-          font-size: 13px;
+          font-size: 11.5px;
         }
 
         .dataTables_wrapper .dataTables_filter,
         .dataTables_wrapper .dataTables_length {
           float: none;
+          margin-bottom: 4px;
           text-align: left;
-          margin-bottom: 8px;
         }
 
         .dataTables_wrapper .dataTables_filter input {
-          width: calc(100% - 75px);
+          width: calc(100% - 54px);
           max-width: none;
         }
 
         .dataTables_wrapper .dt-buttons {
           float: none;
-          margin-bottom: 8px;
-        }
-
-        .dataTables_wrapper .dt-buttons .dt-button {
-          margin-bottom: 5px;
+          margin-bottom: 4px;
         }
 
         table.dataTable thead th,
         table.dataTable tbody td {
+          padding: 4px 5px !important;
           white-space: nowrap;
         }
 
+        .modal-dialog {
+          width: calc(100% - 10px);
+          margin: 5px;
+        }
+
+        .modal-body {
+          max-height: calc(100vh - 116px);
+          padding: 7px;
+        }
+
+        .matchup-detail-grid {
+          grid-template-columns: 1fr;
+          gap: 7px;
+        }
+
+        .matchup-team-header {
+          padding: 8px 9px;
+        }
+
+        .matchup-team-title {
+          font-size: 16px;
+        }
+
+        .matchup-team-score {
+          font-size: 21px;
+        }
+
+        .matchup-team-body {
+          padding: 4px;
+        }
+
         .app-loading-indicator {
-          width: calc(100vw - 32px);
+          width: calc(100vw - 24px);
           justify-content: center;
           text-align: center;
         }
       }
+
+      @media (max-width: 360px) {
+        .metric-grid {
+          grid-template-columns: 1fr;
+        }
+      }
     ")),
     tags$script(HTML("
-      $(document).on('click', '.navbar-brand', function(e) {
-        e.preventDefault();
-        var dashboardTab = $('a[data-value=\"Dashboard\"]');
-        if (dashboardTab.length) {
-          dashboardTab.tab('show');
+      (function() {
+        function navbarElements() {
+          var navbar = $('.navbar').first();
+          return {
+            navbar: navbar,
+            menu: navbar.find('.navbar-collapse').first(),
+            brand: navbar.find('.navbar-brand').first()
+          };
         }
-      });
 
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('service-worker.js').catch(function(error) {
-            console.warn('Service worker registration failed:', error);
+        function closeHubMenu() {
+          var elements = navbarElements();
+          elements.menu.removeClass('in').attr('aria-expanded', 'false');
+          elements.navbar.removeClass('menu-open');
+          elements.brand.attr('aria-expanded', 'false');
+        }
+
+        $(function() {
+          var elements = navbarElements();
+          elements.brand.attr({
+            role: 'button',
+            tabindex: '0',
+            'aria-haspopup': 'true',
+            'aria-expanded': 'false'
           });
+          elements.menu.attr('aria-expanded', 'false');
         });
-      }
+
+        $(document).on('click', '.navbar-brand', function(e) {
+          e.preventDefault();
+          e.stopPropagation();
+
+          var elements = navbarElements();
+          var opening = !elements.menu.hasClass('in');
+          elements.menu.toggleClass('in', opening).attr('aria-expanded', opening ? 'true' : 'false');
+          elements.navbar.toggleClass('menu-open', opening);
+          elements.brand.attr('aria-expanded', opening ? 'true' : 'false');
+        });
+
+        $(document).on('keydown', '.navbar-brand', function(e) {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            $(this).trigger('click');
+          }
+        });
+
+        $(document).on('click', '.navbar-nav > li > a', function() {
+          window.setTimeout(closeHubMenu, 0);
+        });
+
+        $(document).on('click', function(e) {
+          if (!$(e.target).closest('.navbar').length) {
+            closeHubMenu();
+          }
+        });
+
+        $(document).on('keydown', function(e) {
+          if (e.key === 'Escape') {
+            closeHubMenu();
+          }
+        });
+
+        if ('serviceWorker' in navigator) {
+          window.addEventListener('load', function() {
+            navigator.serviceWorker.register('service-worker.js').catch(function(error) {
+              console.warn('Service worker registration failed:', error);
+            });
+          });
+        }
+      })();
     "))
   ),
 
@@ -1163,7 +1599,7 @@ ui <- navbarPage(
       div(
         class = "section-card hero-card",
         h2("History"),
-        p(class = "muted", "Every matchup in league history. Filter the archive, then click a matchup to view player-level data.")
+        p(class = "muted", "Every matchup in league history. Filter the archive, then tap a matchup to view player-level data.")
       ),
       div(
         class = "section-card",
@@ -1177,10 +1613,9 @@ ui <- navbarPage(
       div(
         class = "section-card",
         h3("Matchup Archive"),
-        p(class = "muted", "Click a row to view the players from that matchup."),
+        p(class = "muted", "Tap a matchup to open its player details."),
         DTOutput("history_matchups_table")
-      ),
-      uiOutput("history_detail_ui")
+      )
     )
   )
 
@@ -1639,8 +2074,8 @@ server <- function(input, output, session) {
     }
 
     ggplot(trend_data, aes(x = game_index, y = points_for)) +
-      geom_line(linewidth = 1.1, color = "#2563eb") +
-      geom_point(size = 2.7, color = "#f59e0b") +
+      geom_line(linewidth = 1.1, color = "#BE1C30") +
+      geom_point(size = 2.7, color = "#BE1C30") +
       scale_x_continuous(breaks = x_breaks, labels = x_labels) +
       labs(
         x = x_title,
@@ -1792,40 +2227,40 @@ server <- function(input, output, session) {
       geom_path(
         data = grid_data,
         aes(x = x, y = y, group = level),
-        color = "#dbeafe",
+        color = "#E0E3E4",
         linewidth = 0.8
       ) +
       geom_segment(
         data = axis_data,
         aes(x = x, y = y, xend = xend, yend = yend),
-        color = "#e5e7eb",
+        color = "#E0E3E4",
         linewidth = 0.8
       ) +
       geom_polygon(
         data = polygon_data,
         aes(x = x, y = y),
-        fill = "#2563eb",
+        fill = "#BE1C30",
         alpha = 0.22,
-        color = "#1d4ed8",
+        color = "#BE1C30",
         linewidth = 1.3
       ) +
       geom_path(
         data = polygon_data,
         aes(x = x, y = y),
-        color = "#1d4ed8",
+        color = "#BE1C30",
         linewidth = 1.3
       ) +
       geom_point(
         data = selected_ranks,
         aes(x = x, y = y),
-        color = "#f59e0b",
+        color = "#BE1C30",
         size = 3.2
       ) +
       geom_text(
         data = selected_ranks,
         aes(x = label_x, y = label_y, label = paste0(pos_clean, "\n", rank_label)),
         fontface = "bold",
-        color = "#0f172a",
+        color = "#2B1E1E",
         size = 4.3,
         lineheight = 0.9
       ) +
@@ -1894,13 +2329,13 @@ server <- function(input, output, session) {
         aes(y = total_fpts + max_points * 0.06, label = rank_label),
         fontface = "bold",
         size = 8,
-        color = "#0f172a"
+        color = "#2B1E1E"
       ) +
       geom_text(
         aes(y = total_fpts * 0.50, label = paste0(display_label, "\n", score_fmt(total_fpts), " pts")),
         fontface = "bold",
         size = 5.2,
-        color = "#0f172a",
+        color = "#2B1E1E",
         lineheight = 0.95
       ) +
       scale_x_discrete(labels = NULL) +
@@ -2029,7 +2464,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = record_limit()) |>
       DT::formatStyle(
         columns = "Score",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2056,7 +2491,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = record_limit()) |>
       DT::formatStyle(
         columns = c("Winning Score", "Losing Score", "Margin"),
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2083,7 +2518,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = record_limit()) |>
       DT::formatStyle(
         columns = c("Winning Score", "Losing Score", "Margin"),
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2121,7 +2556,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = 5) |>
       DT::formatStyle(
         columns = "Total Points",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2144,7 +2579,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = 5) |>
       DT::formatStyle(
         columns = "Wins",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2164,7 +2599,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = 5) |>
       DT::formatStyle(
         columns = "Championships",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2190,7 +2625,7 @@ server <- function(input, output, session) {
       datatable_record(page_length = 15) |>
       DT::formatStyle(
         columns = "Points",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2252,58 +2687,63 @@ server <- function(input, output, session) {
         `Losing Team` = losing_team,
         `Losing Score` = round(losing_score, 2)
       ) |>
-      datatable_no_buttons(page_length = 15) |>
+      datatable_no_buttons(page_length = 15, selection = "single") |>
       DT::formatStyle(
         columns = c("Winning Score", "Losing Score"),
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
 
-  selected_history_matchup <- reactive({
+  selected_history_matchup <- reactiveVal(NULL)
+  history_matchups_proxy <- DT::dataTableProxy("history_matchups_table")
+
+  observeEvent(input$history_matchups_table_rows_selected, {
     selected_row <- input$history_matchups_table_rows_selected
+    req(length(selected_row) > 0)
 
-    if (is.null(selected_row) || length(selected_row) == 0) {
-      return(NULL)
-    }
+    matchup <- history_matchups() |>
+      slice(selected_row[1])
 
-    history_matchups()[selected_row[1], ]
-  })
+    selected_history_matchup(matchup)
 
-  output$history_detail_ui <- renderUI({
-    matchup <- selected_history_matchup()
-
-    if (is.null(matchup)) {
-      return(NULL)
-    }
-
-    div(
-      class = "section-card",
-      h3("Matchup Detail"),
-      p(class = "muted", paste0(matchup$matchup_type, " — Week ", matchup$week, ", ", matchup$year)),
-      div(
-        class = "matchup-detail-grid",
+    showModal(
+      modalDialog(
+        title = "Matchup Detail",
+        size = "l",
+        easyClose = FALSE,
+        footer = actionButton("close_history_modal", "Close", class = "btn-primary"),
+        p(class = "muted", paste0(matchup$matchup_type, " — Week ", matchup$week, ", ", matchup$year)),
         div(
-          class = "matchup-team-panel",
+          class = "matchup-detail-grid",
           div(
-            class = "matchup-team-header",
-            div(class = "matchup-team-title", paste0(matchup$manager_a, " — ", matchup$team_a)),
-            div(class = "matchup-team-score", score_fmt(matchup$score_a))
+            class = "matchup-team-panel",
+            div(
+              class = "matchup-team-header",
+              div(class = "matchup-team-title", paste0(matchup$manager_a, " — ", matchup$team_a)),
+              div(class = "matchup-team-score", score_fmt(matchup$score_a))
+            ),
+            div(class = "matchup-team-body", DTOutput("history_team_a_players"))
           ),
-          div(class = "matchup-team-body", DTOutput("history_team_a_players"))
-        ),
-        div(
-          class = "matchup-team-panel",
           div(
-            class = "matchup-team-header",
-            div(class = "matchup-team-title", paste0(matchup$manager_b, " — ", matchup$team_b)),
-            div(class = "matchup-team-score", score_fmt(matchup$score_b))
-          ),
-          div(class = "matchup-team-body", DTOutput("history_team_b_players"))
+            class = "matchup-team-panel",
+            div(
+              class = "matchup-team-header",
+              div(class = "matchup-team-title", paste0(matchup$manager_b, " — ", matchup$team_b)),
+              div(class = "matchup-team-score", score_fmt(matchup$score_b))
+            ),
+            div(class = "matchup-team-body", DTOutput("history_team_b_players"))
+          )
         )
       )
     )
-  })
+  }, ignoreInit = TRUE)
+
+  observeEvent(input$close_history_modal, {
+    removeModal()
+    selected_history_matchup(NULL)
+    DT::selectRows(history_matchups_proxy, NULL)
+  }, ignoreInit = TRUE)
 
   roster_slot_order <- c("QB", "RB", "RB/WR", "WR", "TE", "FLEX", "D/ST", "K", "BE", "IR")
 
@@ -2331,7 +2771,7 @@ server <- function(input, output, session) {
     datatable_simple(matchup_player_table(matchup$team_a, matchup), page_length = 20) |>
       DT::formatStyle(
         columns = "Points",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)
@@ -2343,7 +2783,7 @@ server <- function(input, output, session) {
     datatable_simple(matchup_player_table(matchup$team_b, matchup), page_length = 20) |>
       DT::formatStyle(
         columns = "Points",
-        color = "#1d4ed8",
+        color = "#BE1C30",
         fontWeight = "bold"
       )
   }, server = FALSE)

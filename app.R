@@ -604,12 +604,28 @@ ui <- navbarPage(
         box-shadow: 0 12px 24px rgba(43, 30, 30, 0.32);
       }
 
-      .navbar .navbar-collapse.collapse {
+      /* Keep the menu closed unless our own state class explicitly opens it.
+         These selectors override Bootstrap regardless of its collapse state. */
+      body .navbar .navbar-collapse,
+      body .navbar .navbar-collapse.collapse,
+      body .navbar .navbar-collapse.collapsing,
+      body .navbar .navbar-collapse.in,
+      body .navbar .navbar-collapse.show {
         display: none !important;
+        height: 0 !important;
+        min-height: 0 !important;
+        overflow: hidden !important;
       }
 
-      .navbar .navbar-collapse.collapse.in {
+      body .navbar.hub-menu-open .navbar-collapse,
+      body .navbar.hub-menu-open .navbar-collapse.collapse,
+      body .navbar.hub-menu-open .navbar-collapse.collapsing,
+      body .navbar.hub-menu-open .navbar-collapse.in,
+      body .navbar.hub-menu-open .navbar-collapse.show {
         display: block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        overflow-y: auto !important;
       }
 
       .navbar .navbar-nav {
@@ -1418,66 +1434,131 @@ ui <- navbarPage(
     ")),
     tags$script(HTML("
       (function() {
-        function navbarElements() {
-          var navbar = $('.navbar').first();
-          return {
-            navbar: navbar,
-            menu: navbar.find('.navbar-collapse').first(),
-            brand: navbar.find('.navbar-brand').first()
-          };
+        function getNavbar() {
+          return document.querySelector('.navbar');
+        }
+
+        function getMenu(navbar) {
+          return navbar ? navbar.querySelector('.navbar-collapse') : null;
+        }
+
+        function getBrand(navbar) {
+          return navbar ? navbar.querySelector('.navbar-brand') : null;
+        }
+
+        function getToggle(navbar) {
+          return navbar ? navbar.querySelector('.navbar-toggle') : null;
+        }
+
+        function setHubMenu(open) {
+          var navbar = getNavbar();
+          var menu = getMenu(navbar);
+          var brand = getBrand(navbar);
+          var toggle = getToggle(navbar);
+
+          if (!navbar || !menu || !brand) return;
+
+          navbar.classList.toggle('hub-menu-open', open);
+          navbar.classList.toggle('menu-open', open);
+
+          /* Remove every Bootstrap collapse state, then enforce our state. */
+          menu.classList.remove('in', 'show', 'collapsing');
+          menu.style.setProperty('display', open ? 'block' : 'none', 'important');
+          menu.style.setProperty('height', open ? 'auto' : '0', 'important');
+          menu.style.setProperty('min-height', '0', 'important');
+          menu.style.setProperty('overflow-y', open ? 'auto' : 'hidden', 'important');
+          menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+          brand.setAttribute('aria-expanded', open ? 'true' : 'false');
+
+          if (toggle) {
+            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+            toggle.classList.toggle('collapsed', !open);
+          }
         }
 
         function closeHubMenu() {
-          var elements = navbarElements();
-          elements.menu.removeClass('in').attr('aria-expanded', 'false');
-          elements.navbar.removeClass('menu-open');
-          elements.brand.attr('aria-expanded', 'false');
+          setHubMenu(false);
         }
 
-        $(function() {
-          var elements = navbarElements();
-          elements.brand.attr({
-            role: 'button',
-            tabindex: '0',
-            'aria-haspopup': 'true',
-            'aria-expanded': 'false'
-          });
-          elements.menu.attr('aria-expanded', 'false');
-        });
+        function initializeHubMenu() {
+          var navbar = getNavbar();
+          var brand = getBrand(navbar);
+          var toggle = getToggle(navbar);
 
-        $(document).on('click', '.navbar-brand', function(e) {
-          e.preventDefault();
-          e.stopPropagation();
+          if (!navbar || !brand) return;
 
-          var elements = navbarElements();
-          var opening = !elements.menu.hasClass('in');
-          elements.menu.toggleClass('in', opening).attr('aria-expanded', opening ? 'true' : 'false');
-          elements.navbar.toggleClass('menu-open', opening);
-          elements.brand.attr('aria-expanded', opening ? 'true' : 'false');
-        });
+          brand.setAttribute('role', 'button');
+          brand.setAttribute('tabindex', '0');
+          brand.setAttribute('aria-haspopup', 'true');
 
-        $(document).on('keydown', '.navbar-brand', function(e) {
-          if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            $(this).trigger('click');
+          /* Disable Bootstrap's own collapse handler so it cannot fight ours. */
+          if (toggle) {
+            toggle.removeAttribute('data-toggle');
+            toggle.removeAttribute('data-target');
+            toggle.removeAttribute('aria-controls');
           }
-        });
 
-        $(document).on('click', '.navbar-nav > li > a', function() {
+          closeHubMenu();
+        }
+
+        function toggleFromControl(event) {
+          var navbar = getNavbar();
+          if (!navbar) return;
+
+          event.preventDefault();
+          event.stopPropagation();
+          if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+
+          setHubMenu(!navbar.classList.contains('hub-menu-open'));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+          initializeHubMenu();
           window.setTimeout(closeHubMenu, 0);
         });
 
-        $(document).on('click', function(e) {
-          if (!$(e.target).closest('.navbar').length) {
-            closeHubMenu();
-          }
+        window.addEventListener('load', function() {
+          initializeHubMenu();
+          closeHubMenu();
         });
 
-        $(document).on('keydown', function(e) {
-          if (e.key === 'Escape') {
+        /* Capture phase lets us intercept the Bootstrap toggle before Bootstrap. */
+        document.addEventListener('click', function(event) {
+          var navbar = getNavbar();
+          if (!navbar) return;
+
+          var menuControl = event.target.closest('.navbar-brand, .navbar-toggle');
+          var tabLink = event.target.closest('.navbar-nav > li > a');
+
+          if (menuControl) {
+            toggleFromControl(event);
+            return;
+          }
+
+          if (tabLink) {
+            /* Let Bootstrap switch tabs first, then close the menu. */
+            window.setTimeout(closeHubMenu, 0);
+            return;
+          }
+
+          if (!event.target.closest('.navbar')) {
             closeHubMenu();
           }
-        });
+        }, true);
+
+        document.addEventListener('keydown', function(event) {
+          var control = event.target.closest ?
+            event.target.closest('.navbar-brand, .navbar-toggle') : null;
+
+          if (control && (event.key === 'Enter' || event.key === ' ')) {
+            toggleFromControl(event);
+            return;
+          }
+
+          if (event.key === 'Escape') {
+            closeHubMenu();
+          }
+        }, true);
 
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {

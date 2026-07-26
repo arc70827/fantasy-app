@@ -434,7 +434,8 @@ ui <- navbarPage(
   selected = "Dashboard",
   windowTitle = "Fantasy League Hub",
 
-  header = tags$head(
+  header = tagList(
+    tags$head(
     tags$meta(
       name = "viewport",
       content = "width=device-width, initial-scale=1, viewport-fit=cover"
@@ -1178,6 +1179,108 @@ ui <- navbarPage(
         to { transform: rotate(360deg); }
       }
 
+      /* Custom Fantasy League Hub menu. The generated Bootstrap navbar stays
+         in the document only so Shiny can manage the tab panels. It is not shown. */
+      .navbar {
+        display: none !important;
+      }
+
+      .hub-nav {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 1100;
+        padding-top: env(safe-area-inset-top);
+        background: linear-gradient(90deg, var(--dark-red), var(--near-black));
+        box-shadow: 0 4px 14px rgba(43, 30, 30, 0.28);
+      }
+
+      .hub-nav-bar {
+        height: 48px;
+      }
+
+      .hub-nav-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        height: 48px;
+        margin: 0;
+        padding: 0 14px;
+        border: 0;
+        border-radius: 0;
+        background: transparent;
+        color: var(--off-white);
+        font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+        font-size: 18px;
+        font-weight: 900;
+        letter-spacing: 0.055em;
+        text-align: left;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: none;
+      }
+
+      .hub-nav-toggle:hover,
+      .hub-nav-toggle:focus,
+      .hub-nav-toggle:active {
+        outline: none;
+        background: rgba(255, 255, 255, 0.06);
+        color: #ffffff;
+        box-shadow: none;
+      }
+
+      .hub-nav-chevron {
+        flex: 0 0 auto;
+        margin-left: 12px;
+        font-size: 16px;
+        transition: transform 0.18s ease;
+      }
+
+      .hub-nav.is-open .hub-nav-chevron {
+        transform: rotate(180deg);
+      }
+
+      .hub-nav-menu {
+        display: none;
+        max-height: calc(100vh - 48px - env(safe-area-inset-top));
+        overflow-y: auto;
+        background: var(--near-black);
+        box-shadow: 0 12px 24px rgba(43, 30, 30, 0.32);
+      }
+
+      .hub-nav.is-open .hub-nav-menu {
+        display: block;
+      }
+
+      .hub-nav-item.btn {
+        display: block;
+        width: 100%;
+        margin: 0;
+        padding: 10px 16px;
+        border: 0;
+        border-top: 1px solid rgba(224, 227, 228, 0.10);
+        border-radius: 0;
+        background: transparent;
+        color: var(--off-white);
+        font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+        font-size: 16px;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        text-align: left;
+        box-shadow: none;
+      }
+
+      .hub-nav-item.btn:hover,
+      .hub-nav-item.btn:focus,
+      .hub-nav-item.btn:active {
+        outline: none;
+        background: rgba(190, 28, 48, 0.28);
+        color: #ffffff;
+        box-shadow: none;
+      }
+
       @media (max-width: 767px) {
         html,
         body {
@@ -1188,6 +1291,25 @@ ui <- navbarPage(
         body {
           padding-top: calc(46px + env(safe-area-inset-top));
           font-size: 14px;
+        }
+
+        .hub-nav-bar,
+        .hub-nav-toggle {
+          height: 46px;
+        }
+
+        .hub-nav-toggle {
+          padding: 0 11px;
+          font-size: 17px;
+        }
+
+        .hub-nav-menu {
+          max-height: calc(100vh - 46px - env(safe-area-inset-top));
+        }
+
+        .hub-nav-item.btn {
+          padding: 9px 13px;
+          font-size: 15px;
         }
 
         .navbar-default .navbar-brand {
@@ -1434,131 +1556,40 @@ ui <- navbarPage(
     ")),
     tags$script(HTML("
       (function() {
-        function getNavbar() {
-          return document.querySelector('.navbar');
+        function getHubNav() {
+          return document.getElementById('hub_nav');
         }
 
-        function getMenu(navbar) {
-          return navbar ? navbar.querySelector('.navbar-collapse') : null;
-        }
-
-        function getBrand(navbar) {
-          return navbar ? navbar.querySelector('.navbar-brand') : null;
-        }
-
-        function getToggle(navbar) {
-          return navbar ? navbar.querySelector('.navbar-toggle') : null;
-        }
-
-        function setHubMenu(open) {
-          var navbar = getNavbar();
-          var menu = getMenu(navbar);
-          var brand = getBrand(navbar);
-          var toggle = getToggle(navbar);
-
-          if (!navbar || !menu || !brand) return;
-
-          navbar.classList.toggle('hub-menu-open', open);
-          navbar.classList.toggle('menu-open', open);
-
-          /* Remove every Bootstrap collapse state, then enforce our state. */
-          menu.classList.remove('in', 'show', 'collapsing');
-          menu.style.setProperty('display', open ? 'block' : 'none', 'important');
-          menu.style.setProperty('height', open ? 'auto' : '0', 'important');
-          menu.style.setProperty('min-height', '0', 'important');
-          menu.style.setProperty('overflow-y', open ? 'auto' : 'hidden', 'important');
-          menu.setAttribute('aria-expanded', open ? 'true' : 'false');
-          brand.setAttribute('aria-expanded', open ? 'true' : 'false');
-
-          if (toggle) {
-            toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-            toggle.classList.toggle('collapsed', !open);
-          }
+        function getHubToggle() {
+          return document.getElementById('hub_menu_toggle');
         }
 
         function closeHubMenu() {
-          setHubMenu(false);
+          var nav = getHubNav();
+          var toggle = getHubToggle();
+
+          if (nav) nav.classList.remove('is-open');
+          if (toggle) toggle.setAttribute('aria-expanded', 'false');
         }
 
         function initializeHubMenu() {
-          var navbar = getNavbar();
-          var brand = getBrand(navbar);
-          var toggle = getToggle(navbar);
-
-          if (!navbar || !brand) return;
-
-          brand.setAttribute('role', 'button');
-          brand.setAttribute('tabindex', '0');
-          brand.setAttribute('aria-haspopup', 'true');
-
-          /* Disable Bootstrap's own collapse handler so it cannot fight ours. */
-          if (toggle) {
-            toggle.removeAttribute('data-toggle');
-            toggle.removeAttribute('data-target');
-            toggle.removeAttribute('aria-controls');
-          }
-
           closeHubMenu();
+
+          if (document.documentElement.dataset.hubMenuBound === 'true') return;
+          document.documentElement.dataset.hubMenuBound = 'true';
+
+          document.addEventListener('click', function(event) {
+            var nav = getHubNav();
+            if (nav && !nav.contains(event.target)) closeHubMenu();
+          });
+
+          document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') closeHubMenu();
+          });
         }
 
-        function toggleFromControl(event) {
-          var navbar = getNavbar();
-          if (!navbar) return;
-
-          event.preventDefault();
-          event.stopPropagation();
-          if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-
-          setHubMenu(!navbar.classList.contains('hub-menu-open'));
-        }
-
-        document.addEventListener('DOMContentLoaded', function() {
-          initializeHubMenu();
-          window.setTimeout(closeHubMenu, 0);
-        });
-
-        window.addEventListener('load', function() {
-          initializeHubMenu();
-          closeHubMenu();
-        });
-
-        /* Capture phase lets us intercept the Bootstrap toggle before Bootstrap. */
-        document.addEventListener('click', function(event) {
-          var navbar = getNavbar();
-          if (!navbar) return;
-
-          var menuControl = event.target.closest('.navbar-brand, .navbar-toggle');
-          var tabLink = event.target.closest('.navbar-nav > li > a');
-
-          if (menuControl) {
-            toggleFromControl(event);
-            return;
-          }
-
-          if (tabLink) {
-            /* Let Bootstrap switch tabs first, then close the menu. */
-            window.setTimeout(closeHubMenu, 0);
-            return;
-          }
-
-          if (!event.target.closest('.navbar')) {
-            closeHubMenu();
-          }
-        }, true);
-
-        document.addEventListener('keydown', function(event) {
-          var control = event.target.closest ?
-            event.target.closest('.navbar-brand, .navbar-toggle') : null;
-
-          if (control && (event.key === 'Enter' || event.key === ' ')) {
-            toggleFromControl(event);
-            return;
-          }
-
-          if (event.key === 'Escape') {
-            closeHubMenu();
-          }
-        }, true);
+        document.addEventListener('DOMContentLoaded', initializeHubMenu);
+        window.addEventListener('load', initializeHubMenu);
 
         if ('serviceWorker' in navigator) {
           window.addEventListener('load', function() {
@@ -1569,6 +1600,59 @@ ui <- navbarPage(
         }
       })();
     "))
+    ),
+    div(
+      id = "hub_nav",
+      class = "hub-nav",
+      div(
+        class = "hub-nav-bar",
+        tags$button(
+          id = "hub_menu_toggle",
+          type = "button",
+          class = "hub-nav-toggle",
+          `aria-controls` = "hub_nav_menu",
+          `aria-expanded` = "false",
+          onclick = "var nav=document.getElementById('hub_nav'); var open=nav.classList.toggle('is-open'); this.setAttribute('aria-expanded', open ? 'true' : 'false');",
+          span(class = "hub-nav-title", "Fantasy League Hub"),
+          span(class = "hub-nav-chevron", `aria-hidden` = "true", "▾")
+        )
+      ),
+      div(
+        id = "hub_nav_menu",
+        class = "hub-nav-menu",
+        role = "menu",
+        actionButton(
+          "hub_nav_dashboard",
+          "Dashboard",
+          class = "hub-nav-item",
+          onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
+        ),
+        actionButton(
+          "hub_nav_managers",
+          "Managers",
+          class = "hub-nav-item",
+          onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
+        ),
+        actionButton(
+          "hub_nav_players",
+          "Players",
+          class = "hub-nav-item",
+          onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
+        ),
+        actionButton(
+          "hub_nav_record_book",
+          "Record Book",
+          class = "hub-nav-item",
+          onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
+        ),
+        actionButton(
+          "hub_nav_history",
+          "History",
+          class = "hub-nav-item",
+          onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
+        )
+      )
+    )
   ),
 
   footer = div(
@@ -1705,6 +1789,26 @@ ui <- navbarPage(
 # ---- Server ----
 
 server <- function(input, output, session) {
+
+  observeEvent(input$hub_nav_dashboard, {
+    updateNavbarPage(session, "main_tabs", selected = "Dashboard")
+  }, ignoreInit = TRUE)
+
+  observeEvent(input$hub_nav_managers, {
+    updateNavbarPage(session, "main_tabs", selected = "Managers")
+  }, ignoreInit = TRUE)
+
+  observeEvent(input$hub_nav_players, {
+    updateNavbarPage(session, "main_tabs", selected = "Players")
+  }, ignoreInit = TRUE)
+
+  observeEvent(input$hub_nav_record_book, {
+    updateNavbarPage(session, "main_tabs", selected = "Record Book")
+  }, ignoreInit = TRUE)
+
+  observeEvent(input$hub_nav_history, {
+    updateNavbarPage(session, "main_tabs", selected = "History")
+  }, ignoreInit = TRUE)
 
   observeEvent(input$power_info, {
     showModal(

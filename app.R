@@ -174,18 +174,24 @@ datatable_player_performance <- function(data, page_length = 25) {
   DT::datatable(
     data,
     rownames = FALSE,
-    selection = "none",
+    selection = list(mode = "single", target = "row"),
     filter = "none",
-    extensions = "Responsive",
+    width = "100%",
     options = list(
       pageLength = page_length,
-      responsive = TRUE,
+      lengthChange = FALSE,
+      searching = FALSE,
       autoWidth = FALSE,
       scrollX = FALSE,
-      dom = "rtip",
-      columnDefs = responsive_column_defs(data)
+      dom = "tip",
+      columnDefs = list(
+        list(width = "29%", targets = 0),
+        list(width = "14%", targets = 1),
+        list(width = "39%", targets = 2),
+        list(width = "18%", targets = 3, className = "dt-right")
+      )
     ),
-    class = "stripe compact nowrap"
+    class = "stripe compact player-performance-table"
   )
 }
 
@@ -998,6 +1004,70 @@ ui <- navbarPage(
       .selectize-dropdown .active {
         background: var(--primary-red);
         color: #ffffff;
+      }
+
+      select.form-control {
+        width: 100%;
+        min-height: 34px;
+        padding-right: 28px;
+        cursor: pointer;
+        background-color: #ffffff;
+      }
+
+      .player-performance-table {
+        width: 100% !important;
+        table-layout: fixed;
+      }
+
+      .player-performance-table thead th,
+      .player-performance-table tbody td {
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+      }
+
+      .player-performance-table tbody tr {
+        cursor: pointer;
+      }
+
+      .player-performance-table tbody td:last-child {
+        color: var(--primary-red);
+        font-weight: 900;
+      }
+
+      .player-detail-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 8px;
+      }
+
+      .player-detail-item {
+        padding: 9px 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: rgba(224, 227, 228, 0.34);
+      }
+
+      .player-detail-label {
+        margin-bottom: 2px;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.055em;
+        text-transform: uppercase;
+      }
+
+      .player-detail-value {
+        color: var(--near-black);
+        font-size: 16px;
+        font-weight: 800;
+        line-height: 1.1;
+        overflow-wrap: anywhere;
+      }
+
+      .player-detail-value.player-detail-points {
+        color: var(--primary-red);
+        font-size: 20px;
+        font-weight: 900;
       }
 
       .muted {
@@ -1877,7 +1947,7 @@ ui <- navbarPage(
         }
 
         #manager_position_spider {
-          height: 315px !important;
+          height: 390px !important;
         }
 
         .shiny-plot-output {
@@ -2046,76 +2116,9 @@ ui <- navbarPage(
           window.setTimeout(markAppReady, 15000);
         }
 
-        function bindSelectizeToggleBehavior() {
-          if (document.documentElement.dataset.selectizeToggleBound === 'true') return;
-          document.documentElement.dataset.selectizeToggleBound = 'true';
-
-          function getSelectizeControl(event) {
-            if (!event.target || !event.target.closest) return null;
-
-            var input = event.target.closest('.selectize-control .selectize-input');
-            if (!input) return null;
-
-            return input.closest('.selectize-control');
-          }
-
-          function getSelectizeInstance(control) {
-            if (!control || !control.parentElement) return null;
-
-            var originalInput = control.parentElement.querySelector(
-              'select.selectized, input.selectized'
-            );
-
-            return originalInput && originalInput.selectize
-              ? originalInput.selectize
-              : null;
-          }
-
-          function stopReopen(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
-          }
-
-          var pressEvent = window.PointerEvent ? 'pointerdown' : 'mousedown';
-
-          document.addEventListener(
-            pressEvent,
-            function(event) {
-              var control = getSelectizeControl(event);
-              var selectize = getSelectizeInstance(control);
-
-              if (!selectize || !selectize.isOpen) return;
-
-              stopReopen(event);
-              control.dataset.fantasyJustClosed = 'true';
-              selectize.close();
-              selectize.blur();
-
-              window.setTimeout(function() {
-                delete control.dataset.fantasyJustClosed;
-              }, 350);
-            },
-            true
-          );
-
-          document.addEventListener(
-            'click',
-            function(event) {
-              var control = getSelectizeControl(event);
-
-              if (control && control.dataset.fantasyJustClosed === 'true') {
-                stopReopen(event);
-              }
-            },
-            true
-          );
-        }
-
         function initializeHubMenu() {
           closeHubMenu();
           bindLoadingScreen();
-          bindSelectizeToggleBehavior();
           registerTableMessageHandler();
 
           if (document.documentElement.dataset.hubMenuBound === 'true') return;
@@ -2261,15 +2264,12 @@ ui <- navbarPage(
         h2("Manager Hub"),
         div(
           class = "control-row",
-          selectizeInput(
+          selectInput(
             "manager_select",
             "Manager",
             choices = c("Select manager" = "", managers),
             selected = "",
-            options = list(
-              dropdownParent = "body",
-              maxOptions = length(managers) + 1
-            )
+            selectize = FALSE
           ),
           uiOutput("manager_period_ui")
         )
@@ -2291,12 +2291,12 @@ ui <- navbarPage(
           uiOutput("player_year_ui"),
           uiOutput("player_week_ui"),
           uiOutput("player_manager_ui"),
-          selectizeInput(
+          selectInput(
             "player_slot",
             "Roster Slot",
-            choices = c("All Slots", "QB", "RB", "WR", "TE", "FLEX", "D/ST", "K", "Bench", "IR", "SLOT"),
+            choices = c("All Slots", "QB", "RB", "WR", "TE", "FLEX", "D/ST", "K", "Bench", "IR"),
             selected = "All Slots",
-            options = list(dropdownParent = "body")
+            selectize = FALSE
           ),
           textInput("player_search", "Player Search", placeholder = "Example: Josh Allen")
         )
@@ -2322,7 +2322,7 @@ ui <- navbarPage(
         class = "section-card",
         div(
           class = "control-row",
-          selectInput("record_scope", "Season", choices = c("All Time", years), selected = "All Time")
+          selectInput("record_scope", "Season", choices = c("All Time", years), selected = "All Time", selectize = FALSE)
         )
       ),
       uiOutput("record_book_tables")
@@ -2342,9 +2342,9 @@ ui <- navbarPage(
         class = "section-card",
         div(
           class = "control-row",
-          selectInput("history_year", "Season", choices = c("All Seasons", years), selected = "All Seasons"),
+          selectInput("history_year", "Season", choices = c("All Seasons", years), selected = "All Seasons", selectize = FALSE),
           uiOutput("history_week_ui"),
-          selectInput("history_manager", "Manager", choices = c("All Managers", managers), selected = "All Managers")
+          selectInput("history_manager", "Manager", choices = c("All Managers", managers), selected = "All Managers", selectize = FALSE)
         )
       ),
       div(
@@ -2429,12 +2429,12 @@ server <- function(input, output, session) {
       "All Years"
     }
 
-    selectizeInput(
+    selectInput(
       "player_year",
       "Season",
       choices = year_choices,
       selected = selected_year,
-      options = list(dropdownParent = "body")
+      selectize = FALSE
     )
   })
 
@@ -2455,12 +2455,12 @@ server <- function(input, output, session) {
       "All Managers"
     }
 
-    selectizeInput(
+    selectInput(
       "player_manager",
       "Manager",
       choices = c("All Managers", manager_choices),
       selected = selected_manager,
-      options = list(dropdownParent = "body")
+      selectize = FALSE
     )
   })
 
@@ -2486,23 +2486,23 @@ server <- function(input, output, session) {
       if (length(weeks) > 0) max(weeks, na.rm = TRUE) else NA_integer_
     }
 
-    selectizeInput(
+    selectInput(
       "player_week",
       "Week",
       choices = c("All Weeks", weeks),
       selected = selected_week,
-      options = list(dropdownParent = "body")
+      selectize = FALSE
     )
   })
 
   output$manager_period_ui <- renderUI({
     if (is.null(input$manager_select) || input$manager_select == "") {
-      return(selectizeInput(
+      return(selectInput(
         "manager_period",
         "Years / Team Name",
         choices = c("Select manager first" = ""),
         selected = "",
-        options = list(dropdownParent = "body")
+        selectize = FALSE
       ))
     }
 
@@ -2525,15 +2525,12 @@ server <- function(input, output, session) {
       values <- c(values, as.character(manager_years))
     }
 
-    selectizeInput(
+    selectInput(
       "manager_period",
       "Years / Team Name",
       choices = stats::setNames(values, labels),
       selected = "All Years",
-      options = list(
-        dropdownParent = "body",
-        maxOptions = length(values)
-      )
+      selectize = FALSE
     )
   })
 
@@ -2630,7 +2627,7 @@ server <- function(input, output, session) {
         "accent-red"
       ),
       card(
-        "League Avg Score",
+        "League Average Score",
         HTML(paste0("<span class='score-number'>", score_fmt(league_avg), "</span>")),
         NULL,
         "accent-purple"
@@ -2696,10 +2693,11 @@ server <- function(input, output, session) {
     season_data <- matchups |>
       filter(year == current_year, week <= current_week)
 
-    recent_start <- max(1, current_week - 2)
-
     recent_data <- season_data |>
-      filter(week >= recent_start)
+      arrange(manager, desc(week)) |>
+      group_by(manager) |>
+      slice_head(n = 3) |>
+      ungroup()
 
     base <- season_data |>
       group_by(manager) |>
@@ -2790,7 +2788,7 @@ server <- function(input, output, session) {
     positional_panel <- div(
       class = "section-card",
       h3("Positional Ranking Breakdown"),
-      div(class = "section-subtitle", "Points per week by position"),
+      div(class = "section-subtitle", "Points Per Week by Position"),
       plotOutput("manager_position_spider", height = "480px")
     )
 
@@ -2920,7 +2918,7 @@ server <- function(input, output, session) {
 
     div(
       class = "championship-shrine",
-      div(class = "championship-shrine-title", "Championship Hall"),
+      div(class = "championship-shrine-title", "Trophy Case"),
       div(
         class = paste(
           "championship-grid",
@@ -3073,8 +3071,8 @@ server <- function(input, output, session) {
         angle = angles,
         x = rank_score * cos(angle),
         y = rank_score * sin(angle),
-        label_x = 1.16 * cos(angle),
-        label_y = 1.16 * sin(angle),
+        label_x = 1.09 * cos(angle),
+        label_y = 1.09 * sin(angle),
         subtitle_x = label_x,
         subtitle_y = label_y - 0.10
       )
@@ -3144,14 +3142,14 @@ server <- function(input, output, session) {
         color = "#75696A",
         size = 3.0
       ) +
-      coord_equal(xlim = c(-1.38, 1.38), ylim = c(-1.38, 1.38), clip = "off") +
+      coord_equal(xlim = c(-1.23, 1.23), ylim = c(-1.23, 1.23), clip = "off") +
       labs(
         x = NULL,
         y = NULL
       ) +
       theme_void(base_size = 13) +
       theme(
-        plot.margin = margin(24, 52, 24, 52)
+        plot.margin = margin(8, 16, 8, 16)
       )
   })
 
@@ -3184,9 +3182,9 @@ server <- function(input, output, session) {
   })
 
 
-  output$players_table <- renderDT({
+  player_performance_data <- reactive({
     player_filtered() |>
-      arrange(desc(fpts)) |>
+      arrange(desc(fpts), desc(year), desc(week), player_name) |>
       transmute(
         Game = paste0(year, " Week ", week),
         Position = pos,
@@ -3196,15 +3194,71 @@ server <- function(input, output, session) {
         `Roster Slot` = slot,
         Proj = round(proj, 2),
         Pts = round(fpts, 2)
-      ) |>
-      datatable_player_performance(page_length = 25)
+      )
   })
 
+  output$players_table <- renderDT({
+    player_performance_data() |>
+      transmute(
+        Game,
+        Position,
+        Player,
+        Points = Pts
+      ) |>
+      datatable_player_performance(page_length = 25) |>
+      DT::formatStyle(
+        columns = "Points",
+        color = "#BE1C30",
+        fontWeight = "900"
+      )
+  })
 
+  selected_player_performance <- reactiveVal(NULL)
+  players_table_proxy <- DT::dataTableProxy("players_table")
 
+  observeEvent(input$players_table_rows_selected, {
+    selected_row <- input$players_table_rows_selected
+    req(length(selected_row) > 0)
 
+    player_row <- player_performance_data() |>
+      slice(selected_row[1])
 
+    selected_player_performance(player_row)
 
+    detail_item <- function(label, value, value_class = NULL) {
+      div(
+        class = "player-detail-item",
+        div(class = "player-detail-label", label),
+        div(class = paste("player-detail-value", value_class), value)
+      )
+    }
+
+    showModal(
+      modalDialog(
+        title = player_row$Player[[1]],
+        size = "m",
+        easyClose = FALSE,
+        footer = actionButton("close_player_modal", "Close", class = "btn-primary"),
+        div(
+          class = "player-detail-grid",
+          detail_item("Game", player_row$Game[[1]]),
+          detail_item("Position", player_row$Position[[1]]),
+          detail_item("Player", player_row$Player[[1]]),
+          detail_item("Fantasy Team", player_row$`Fantasy Team`[[1]]),
+          detail_item("NFL Team", player_row$`NFL Team`[[1]]),
+          detail_item("Roster Slot", player_row$`Roster Slot`[[1]]),
+          detail_item("Proj", score_fmt(player_row$Proj[[1]])),
+          detail_item("Points", score_fmt(player_row$Pts[[1]]), "player-detail-points")
+        )
+      )
+    )
+  }, ignoreInit = TRUE)
+
+  observeEvent(input$close_player_modal, {
+    removeModal()
+    selected_player_performance(NULL)
+    DT::selectRows(players_table_proxy, NULL)
+  }, ignoreInit = TRUE)
 
 
 
@@ -3471,7 +3525,8 @@ server <- function(input, output, session) {
       "history_week",
       "Week",
       choices = c("All Weeks", weeks_available),
-      selected = "All Weeks"
+      selected = "All Weeks",
+      selectize = FALSE
     )
   })
 

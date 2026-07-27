@@ -5,7 +5,7 @@ Chase Edmonds,Team Dupre,RB,,RB,,14.6,1,2021
 Calvin Ridley,Team Dupre,WR,,WR,,10.1,1,2021
 Terry McLaurin,Team Dupre,WR,,WR,,10.2,1,2021
 Kyle Pitts,Team Dupre,TE,,TE,,7.1,1,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,15.8,1,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,15.8,1,2021
 Bills,Team Dupre,D/ST,,D/ST,,4,1,2021
 Younghoe Koo,Team Dupre,K,,K,,6,1,2021
 Tom Brady,Team Chasse,QB,,QB,,27.16,1,2021
@@ -14,7 +14,7 @@ Najee Harris,Team Chasse,RB,,RB,,5.9,1,2021
 A.J. Brown,Team Chasse,WR,,WR,,14.9,1,2021
 Amari Cooper,Team Chasse,WR,,WR,,38.9,1,2021
 Noah Fant,Team Chasse,TE,,TE,,12.2,1,2021
-Chris Godwin,Team Chasse,FLEX,,FLEX,,23.5,1,2021
+Chris Godwin,Team Chasse,WR,,FLEX,,23.5,1,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,-3,1,2021
 Graham Gano,Team Chasse,K,,K,,1,1,2021
 Kyler Murray,Team Perrotti,QB,,QB,,33.56,1,2021
@@ -23,7 +23,7 @@ Miles Sanders,Team Perrotti,RB,,RB,,17.3,1,2021
 DK Metcalf,Team Perrotti,WR,,WR,,16,1,2021
 Jerry Jeudy,Team Perrotti,WR,,WR,,13.2,1,2021
 George Kittle,Team Perrotti,TE,,TE,,11.8,1,2021
-Raheem Mostert,Team Perrotti,FLEX,,FLEX,,2,1,2021
+Raheem Mostert,Team Perrotti,RB,,FLEX,,2,1,2021
 Dolphins,Team Perrotti,D/ST,,D/ST,,5,1,2021
 Josh Lambo,Team Perrotti,K,,K,,2,1,2021
 Ryan Tannehill,Team Sachs,QB,,QB,,14.18,1,2021
@@ -32,7 +32,7 @@ Aaron Jones,Team Sachs,RB,,RB,,4.2,1,2021
 CeeDee Lamb,Team Sachs,WR,,WR,,23.4,1,2021
 Cooper Kupp,Team Sachs,WR,,WR,,23.8,1,2021
 T.J. Hockenson,Team Sachs,TE,,TE,,25.7,1,2021
-David Montgomery,Team Sachs,FLEX,,FLEX,,18.8,1,2021
+David Montgomery,Team Sachs,RB,,FLEX,,18.8,1,2021
 Giants,Team Sachs,D/ST,,D/ST,,1,1,2021
 Matt Gay,Team Sachs,K,,K,,12,1,2021
 Lamar Jackson,Team Acquarulo,QB,,QB,,18,1,2021
@@ -41,7 +41,7 @@ James Robinson,Team Acquarulo,RB,,RB,,8.4,1,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,15.9,1,2021
 Julio Jones,Team Acquarulo,WR,,WR,,5.9,1,2021
 Logan Thomas,Team Acquarulo,TE,,TE,,12,1,2021
-Brandon Aiyuk,Team Acquarulo,FLEX,,FLEX,,0,1,2021
+Brandon Aiyuk,Team Acquarulo,WR,,FLEX,,0,1,2021
 49ers,Team Acquarulo,D/ST,,D/ST,,7,1,2021
 Brandon McManus,Team Acquarulo,K,,K,,9,1,2021
 Jalen Hurts,Team Shamas,QB,,QB,,28.76,1,2021
@@ -50,7 +50,7 @@ Joe Mixon,Team Shamas,RB,,RB,,25,1,2021
 Allen Robinson,Team Shamas,WR,,WR,,9.5,1,2021
 Adam Thielen,Team Shamas,WR,,WR,,30.2,1,2021
 Travis Kelce,Team Shamas,TE,,TE,,25.6,1,2021
-D'Andre Swift,Team Shamas,FLEX,,FLEX,,24.4,1,2021
+D'Andre Swift,Team Shamas,RB,,FLEX,,24.4,1,2021
 Broncos,Team Shamas,D/ST,,D/ST,,7,1,2021
 Jason Myers,Team Shamas,K,,K,,4,1,2021
 Dak Prescott,Team Pawlowicz,QB,,QB,,27.42,1,2021
@@ -59,7 +59,7 @@ Empty,Team Pawlowicz,RB,,RB,,0,1,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,37.1,1,2021
 Tyler Lockett,Team Pawlowicz,WR,,WR,,26,1,2021
 Robert Tonyan,Team Pawlowicz,TE,,TE,,2.8,1,2021
-Justin Jefferson,Team Pawlowicz,FLEX,,FLEX,,12.54,1,2021
+Justin Jefferson,Team Pawlowicz,WR,,FLEX,,12.54,1,2021
 Steelers,Team Pawlowicz,D/ST,,D/ST,,13,1,2021
 Jason Sanders,Team Pawlowicz,K,,K,,6,1,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,1.32,1,2021
@@ -68,7 +68,7 @@ Chris Carson,Team Loomis,RB,,RB,,12.7,1,2021
 DeAndre Hopkins,Team Loomis,WR,,WR,,26.3,1,2021
 Keenan Allen,Team Loomis,WR,,WR,,19,1,2021
 Mike Gesicki,Team Loomis,TE,,TE,,0,1,2021
-Henry Ruggs III,Team Loomis,FLEX,,FLEX,,6.6,1,2021
+Henry Ruggs III,Team Loomis,WR,,FLEX,,6.6,1,2021
 Rams,Team Loomis,D/ST,,D/ST,,8,1,2021
 Harrison Butker,Team Loomis,K,,K,,10,1,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,33.28,1,2021
@@ -77,7 +77,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,17.1,1,2021
 Davante Adams,Team Piazza,WR,,WR,,10.6,1,2021
 Robert Woods,Team Piazza,WR,,WR,,12.4,1,2021
 Mark Andrews,Team Piazza,TE,,TE,,5,1,2021
-Michael Gallup,Team Piazza,FLEX,,FLEX,,7.6,1,2021
+Alex Collins,Team Shamas,RB,,FLEX,,9.2,5,2021
 Commanders,Team Piazza,D/ST,,D/ST,,1,1,2021
 Justin Tucker,Team Piazza,K,,K,,11,1,2021
 Justin Herbert,Team Graver,QB,,QB,,13.38,1,2021
@@ -86,7 +86,7 @@ Clyde Edwards-Helaire,Team Graver,RB,,RB,,10.2,1,2021
 Mike Evans,Team Graver,WR,,WR,,5.4,1,2021
 Diontae Johnson,Team Graver,WR,,WR,,14.6,1,2021
 Darren Waller,Team Graver,TE,,TE,,26.5,1,2021
-Robby Anderson,Team Graver,FLEX,,FLEX,,12.7,1,2021
+Robby Anderson,Team Graver,WR,,FLEX,,12.7,1,2021
 Ravens,Team Graver,D/ST,,D/ST,,-1,1,2021
 Matt Prater,Team Graver,K,,K,,7,1,2021
 Josh Allen,Team Dupre,QB,,QB,,16.66,2,2021
@@ -95,7 +95,7 @@ Chase Edmonds,Team Dupre,RB,,RB,,12.5,2,2021
 Calvin Ridley,Team Dupre,WR,,WR,,19.3,2,2021
 Terry McLaurin,Team Dupre,WR,,WR,,27.7,2,2021
 Kyle Pitts,Team Dupre,TE,,TE,,12.3,2,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,16,2,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,16,2,2021
 Bills,Team Dupre,D/ST,,D/ST,,19,2,2021
 Younghoe Koo,Team Dupre,K,,K,,5,2,2021
 Tom Brady,Team Chasse,QB,,QB,,29.64,2,2021
@@ -104,7 +104,7 @@ Najee Harris,Team Chasse,RB,,RB,,19.1,2,2021
 A.J. Brown,Team Chasse,WR,,WR,,7.3,2,2021
 Amari Cooper,Team Chasse,WR,,WR,,5.4,2,2021
 Noah Fant,Team Chasse,TE,,TE,,13.3,2,2021
-Chris Godwin,Team Chasse,FLEX,,FLEX,,16.2,2,2021
+Chris Godwin,Team Chasse,WR,,FLEX,,16.2,2,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,19,2,2021
 Graham Gano,Team Chasse,K,,K,,22,2,2021
 Kyler Murray,Team Perrotti,QB,,QB,,33.1,2,2021
@@ -113,7 +113,7 @@ Dalvin Cook,Team Perrotti,RB,,RB,,16.8,2,2021
 Allen Robinson II,Team Perrotti,WR,,WR,,10.4,2,2021
 Julio Joes,Team Perrotti,WR,,WR,,18.8,2,2021
 Logan Thomas,Team Perrotti,TE,,TE,,9.5,2,2021
-Devonta Smith,Team Perrotti,FLEX,,FLEX,,3.6,2,2021
+Devonta Smith,Team Perrotti,WR,,FLEX,,3.6,2,2021
 Saints,Team Perrotti,D/ST,,D/ST,,5,2,2021
 Chase McLaughlin,Team Perrotti,K,,K,,7,2,2021
 Matthew Stafford,Team Sachs,QB,,QB,,17.22,2,2021
@@ -122,7 +122,7 @@ Aaron Jones,Team Sachs,RB,,RB,,41.5,2,2021
 CeeDee Lamb,Team Sachs,WR,,WR,,17.4,2,2021
 Cooper Kupp,Team Sachs,WR,,WR,,36.8,2,2021
 T.J. Hockenson,Team Sachs,TE,,TE,,20.6,2,2021
-David Montgomery,Team Sachs,FLEX,,FLEX,,10.9,2,2021
+David Montgomery,Team Sachs,RB,,FLEX,,10.9,2,2021
 Giants,Team Sachs,D/ST,,D/ST,,-1,2,2021
 Matt Gay,Team Sachs,K,,K,,9,2,2021
 Lamar Jackson,Team Acquarulo,QB,,QB,,32.26,2,2021
@@ -131,7 +131,7 @@ Joe Mixon,Team Acquarulo,RB,,RB,,8.1,2,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,16,2,2021
 Adam Thielen,Team Acquarulo,WR,,WR,,15.9,2,2021
 George Kittle,Team Acquarulo,TE,,TE,,5.7,2,2021
-Corey Davis,Team Acquarulo,FLEX,,FLEX,,2.8,2,2021
+Antonio Gibson,Team Shamas,RB,,FLEX,,23.6,12,2021
 Browns,Team Acquarulo,D/ST,,D/ST,,5,2,2021
 Brandon McManus,Team Acquarulo,K,,K,,13,2,2021
 Jalen Hurts,Team Shamas,QB,,QB,,21.8,2,2021
@@ -140,7 +140,7 @@ Christian McCaffrey,Team Shamas,RB,,RB,,24.7,2,2021
 DK Metcalf,Team Shamas,WR,,WR,,11.3,2,2021
 Mike Evans,Team Shamas,WR,,WR,,24.5,2,2021
 Travis Kelce,Team Shamas,TE,,TE,,23.9,2,2021
-Ty'Son Williams,Team Shamas,FLEX,,FLEX,,11.3,2,2021
+Antonio Gibson,Team Shamas,RB,,FLEX,,22.1,13,2021
 Broncos,Team Shamas,D/ST,,D/ST,,11,2,2021
 Daniel Carlson,Team Shamas,K,,K,,17,2,2021
 Dak Prescott,Team Pawlowicz,QB,,QB,,7.48,2,2021
@@ -149,7 +149,7 @@ AJ Dillon,Team Pawlowicz,RB,,RB,,3.6,2,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,5.9,2,2021
 Tyler Lockett,Team Pawlowicz,WR,,WR,,31.8,2,2021
 Rob Gronkowski,Team Pawlowicz,TE,,TE,,19.9,2,2021
-Justin Jefferson,Team Pawlowicz,FLEX,,FLEX,,18.5,2,2021
+Justin Jefferson,Team Pawlowicz,WR,,FLEX,,18.5,2,2021
 Steelers,Team Pawlowicz,D/ST,,D/ST,,-1,2,2021
 Jason Sanders,Team Pawlowicz,K,,K,,0,2,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,26.8,2,2021
@@ -158,7 +158,7 @@ Chris Carson,Team Loomis,RB,,RB,,15.1,2,2021
 DeAndre Hopkins,Team Loomis,WR,,WR,,15.4,2,2021
 Keenan Allen,Team Loomis,WR,,WR,,14.8,2,2021
 Tyler Higbee,Team Loomis,TE,,TE,,1.8,2,2021
-Chase Claypool,Team Loomis,FLEX,,FLEX,,9.7,2,2021
+Chase Claypool,Team Loomis,WR,,FLEX,,9.7,2,2021
 Rams,Team Loomis,D/ST,,D/ST,,6,2,2021
 Harrison Butker,Team Loomis,K,,K,,5,2,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,24.02,2,2021
@@ -167,7 +167,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,6.3,2,2021
 Davante Adams,Team Piazza,WR,,WR,,20.1,2,2021
 Robert Woods,Team Piazza,WR,,WR,,12,2,2021
 Mark Andrews,Team Piazza,TE,,TE,,10.7,2,2021
-Antonio Brown,Team Piazza,FLEX,,FLEX,,2.7,2,2021
+Antonio Brown,Team Piazza,WR,,FLEX,,2.7,2,2021
 Commanders,Team Piazza,D/ST,,D/ST,,2,2,2021
 Justin Tucker,Team Piazza,K,,K,,7,2,2021
 Justin Herbert,Team Graver,QB,,QB,,14.72,2,2021
@@ -176,7 +176,7 @@ Clyde Edwards-Helaire,Team Graver,RB,,RB,,2.6,2,2021
 Diontae Johnson,Team Graver,WR,,WR,,19.5,2,2021
 Courtland Sutton,Team Graver,WR,,WR,,24.9,2,2021
 Darren Waller,Team Graver,TE,,TE,,11.5,2,2021
-Deebo Samuel,Team Graver,FLEX,,FLEX,,16.1,2,2021
+Deebo Samuel,Team Graver,WR,,FLEX,,16.1,2,2021
 Patriots,Team Graver,D/ST,,D/ST,,16,2,2021
 Matt Prater,Team Graver,K,,K,,13,2,2021
 Josh Allen,Team Dupre,QB,,QB,,37.22,3,2021
@@ -185,7 +185,7 @@ Chase Edmonds,Team Dupre,RB,,RB,,14.5,3,2021
 Calvin Ridley,Team Dupre,WR,,WR,,14.1,3,2021
 Terry McLaurin,Team Dupre,WR,,WR,,10.2,3,2021
 Kyle Pitts,Team Dupre,TE,,TE,,5.5,3,2021
-Tyler Boyd,Team Dupre,FLEX,,FLEX,,13.6,3,2021
+Antonio Gibson,Team Shamas,RB,,FLEX,,4.1,14,2021
 Bills,Team Dupre,D/ST,,D/ST,,9,3,2021
 Younghoe Koo,Team Dupre,K,,K,,6,3,2021
 Lamar Jackson,Team Chasse,QB,,QB,,19.28,3,2021
@@ -194,7 +194,7 @@ Najee Harris,Team Chasse,RB,,RB,,28.2,3,2021
 A.J. Brown,Team Chasse,WR,,WR,,0.3,3,2021
 Mike Williams,Team Chasse,WR,,WR,,33.2,3,2021
 Noah Fant,Team Chasse,TE,,TE,,3.5,3,2021
-Chris Godwin,Team Chasse,FLEX,,FLEX,,19.6,3,2021
+Chris Godwin,Team Chasse,WR,,FLEX,,19.6,3,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,-3,3,2021
 Graham Gano,Team Chasse,K,,K,,6,3,2021
 Kyler Murray,Team Perrotti,QB,,QB,,18.54,3,2021
@@ -203,7 +203,7 @@ Austin Ekeler,Team Perrotti,RB,,RB,,22.7,3,2021
 Allen Robinson II,Team Perrotti,WR,,WR,,4.7,3,2021
 CeeDee Lamb,Team Perrotti,WR,,WR,,9.5,3,2021
 Logan Thomas,Team Perrotti,TE,,TE,,12.2,3,2021
-Chase Claypool,Team Perrotti,FLEX,,FLEX,,18.6,3,2021
+Chase Claypool,Team Perrotti,WR,,FLEX,,18.6,3,2021
 Saints,Team Perrotti,D/ST,,D/ST,,19,3,2021
 Greg Zuerlein,Team Perrotti,K,,K,,5,3,2021
 Daniel Jones,Team Sachs,QB,,QB,,16.54,3,2021
@@ -212,7 +212,7 @@ Christian McCaffrey,Team Sachs,RB,,RB,,6,3,2021
 Cooper Kupp,Team Sachs,WR,,WR,,30.6,3,2021
 Amari Cooper,Team Sachs,WR,,WR,,5.6,3,2021
 T.J. Hockenson,Team Sachs,TE,,TE,,3,3,2021
-Mike Evans,Team Sachs,FLEX,,FLEX,,18.6,3,2021
+Mike Evans,Team Sachs,WR,,FLEX,,18.6,3,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,16,3,2021
 Matt Gay,Team Sachs,K,,K,,11,3,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,20.54,3,2021
@@ -221,7 +221,7 @@ Saquon Barkley,Team Acquarulo,RB,,RB,,21.4,3,2021
 Adam Thielen,Team Acquarulo,WR,,WR,,17,3,2021
 DJ Moore,Team Acquarulo,WR,,WR,,20.5,3,2021
 George Kittle,Team Acquarulo,TE,,TE,,17.1,3,2021
-David Montgomery,Team Acquarulo,FLEX,,FLEX,,7.5,3,2021
+David Montgomery,Team Acquarulo,RB,,FLEX,,7.5,3,2021
 Panthers,Team Acquarulo,D/ST,,D/ST,,10,3,2021
 Brandon McManus,Team Acquarulo,K,,K,,16,3,2021
 Russell Wilson,Team Shamas,QB,,QB,,16.62,3,2021
@@ -230,7 +230,7 @@ Joe Mixon,Team Shamas,RB,,RB,,10.4,3,2021
 DK Metcalf,Team Shamas,WR,,WR,,22.7,3,2021
 Stefon Diggs,Team Shamas,WR,,WR,,12.2,3,2021
 Travis Kelce,Team Shamas,TE,,TE,,17.4,3,2021
-Julio Jones,Team Shamas,FLEX,,FLEX,,7.7,3,2021
+Julio Jones,Team Shamas,WR,,FLEX,,7.7,3,2021
 Broncos,Team Shamas,D/ST,,D/ST,,17,3,2021
 Daniel Carlson,Team Shamas,K,,K,,13,3,2021
 Dak Prescott,Team Pawlowicz,QB,,QB,,20.12,3,2021
@@ -239,7 +239,7 @@ Zack Moss,Team Pawlowicz,RB,,RB,,18.1,3,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,9.7,3,2021
 Tyler Lockett,Team Pawlowicz,WR,,WR,,7.1,3,2021
 Rob Gronkowski,Team Pawlowicz,TE,,TE,,9.5,3,2021
-Justin Jefferson,Team Pawlowicz,FLEX,,FLEX,,26.8,3,2021
+Justin Jefferson,Team Pawlowicz,WR,,FLEX,,26.8,3,2021
 Steelers,Team Pawlowicz,D/ST,,D/ST,,4,3,2021
 Jason Myers,Team Pawlowicz,K,,K,,6,3,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,19.04,3,2021
@@ -248,7 +248,7 @@ Chris Carson,Team Loomis,RB,,RB,,16.2,3,2021
 DeAndre Hopkins,Team Loomis,WR,,WR,,5.1,3,2021
 Keenan Allen,Team Loomis,WR,,WR,,19,3,2021
 Tyler Higbee,Team Loomis,TE,,TE,,15,3,2021
-JuJu Smith-Schuster,Team Loomis,FLEX,,FLEX,,5.5,3,2021
+JuJu Smith-Schuster,Team Loomis,WR,,FLEX,,5.5,3,2021
 Browns,Team Loomis,D/ST,,D/ST,,18,3,2021
 Harrison Butker,Team Loomis,K,,K,,6,3,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,22.9,3,2021
@@ -257,7 +257,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,27.5,3,2021
 Davante Adams,Team Piazza,WR,,WR,,31.2,3,2021
 Robert Woods,Team Piazza,WR,,WR,,6.8,3,2021
 Mark Andrews,Team Piazza,TE,,TE,,15.9,3,2021
-Marvin Jones Jr.,Team Piazza,FLEX,,FLEX,,12.2,3,2021
+Antonio Gibson,Team Shamas,RB,,FLEX,,18.5,15,2021
 Raiders,Team Piazza,D/ST,,D/ST,,4,3,2021
 Justin Tucker,Team Piazza,K,,K,,17,3,2021
 Justin Herbert,Team Graver,QB,,QB,,30.84,3,2021
@@ -266,7 +266,7 @@ Clyde Edwards-Helaire,Team Graver,RB,,RB,,16.9,3,2021
 Marquise Brown,Team Graver,WR,,WR,,8.3,3,2021
 Courtland Sutton,Team Graver,WR,,WR,,8.7,3,2021
 Darren Waller,Team Graver,TE,,TE,,10.4,3,2021
-Deebo Samuel,Team Graver,FLEX,,FLEX,,10.2,3,2021
+Deebo Samuel,Team Graver,WR,,FLEX,,10.2,3,2021
 Patriots,Team Graver,D/ST,,D/ST,,5,3,2021
 Matt Prater,Team Graver,K,,K,,6,3,2021
 Josh Allen,Team Dupre,QB,,QB,,20.02,4,2021
@@ -275,7 +275,7 @@ Chase Edmonds,Team Dupre,RB,,RB,,17.9,4,2021
 Terry McLaurin,Team Dupre,WR,,WR,,30.3,4,2021
 Adam Thielen,Team Dupre,WR,,WR,,7.6,4,2021
 Kyle Pitts,Team Dupre,TE,,TE,,9,4,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,0,4,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,0,4,2021
 Bills,Team Dupre,D/ST,,D/ST,,21,4,2021
 Younghoe Koo,Team Dupre,K,,K,,6,4,2021
 Tom Brady,Team Chasse,QB,,QB,,11.06,4,2021
@@ -284,7 +284,7 @@ Najee Harris,Team Chasse,RB,,RB,,21.1,4,2021
 Brandin Cooks,Team Chasse,WR,,WR,,9.7,4,2021
 Mike Williams,Team Chasse,WR,,WR,,2.1,4,2021
 Noah Fant,Team Chasse,TE,,TE,,16.6,4,2021
-Chris Godwin,Team Chasse,FLEX,,FLEX,,8.5,4,2021
+Chris Godwin,Team Chasse,WR,,FLEX,,8.5,4,2021
 Titans,Team Chasse,D/ST,,D/ST,,2,4,2021
 Graham Gano,Team Chasse,K,,K,,7,4,2021
 Dak Prescott,Team Perrotti,QB,,QB,,27.02,4,2021
@@ -293,7 +293,7 @@ Joe Mixon,Team Perrotti,RB,,RB,,13.7,4,2021
 Allen Robinson II,Team Perrotti,WR,,WR,,9.3,4,2021
 Justin Jefferson,Team Perrotti,WR,,WR,,20.4,4,2021
 Logan Thomas,Team Perrotti,TE,,TE,,0,4,2021
-Chuba Hubbard,Team Perrotti,FLEX,,FLEX,,9.1,4,2021
+Chuba Hubbard,Team Perrotti,RB,,FLEX,,9.1,4,2021
 Saints,Team Perrotti,D/ST,,D/ST,,-3,4,2021
 Greg Zuerlein,Team Perrotti,K,,K,,6,4,2021
 Matthew Stafford,Team Sachs,QB,,QB,,19.3,4,2021
@@ -302,7 +302,7 @@ Jamaal Williams,Team Sachs,RB,,RB,,6.6,4,2021
 Cooper Kupp,Team Sachs,WR,,WR,,11.4,4,2021
 Amari Cooper,Team Sachs,WR,,WR,,15.9,4,2021
 T.J. Hockenson,Team Sachs,TE,,TE,,8.2,4,2021
-Mike Evans,Team Sachs,FLEX,,FLEX,,14.5,4,2021
+Mike Evans,Team Sachs,WR,,FLEX,,14.5,4,2021
 Dolphins,Team Sachs,D/ST,,D/ST,,4,4,2021
 Matt Gay,Team Sachs,K,,K,,8,4,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,28.18,4,2021
@@ -311,7 +311,7 @@ David Montgomery,Team Acquarulo,RB,,RB,,22.6,4,2021
 DJ Moore,Team Acquarulo,WR,,WR,,31.9,4,2021
 Calvin Ridley,Team Acquarulo,WR,,WR,,15,4,2021
 George Kittle,Team Acquarulo,TE,,TE,,8,4,2021
-Saquon Barkley,Team Acquarulo,FLEX,,FLEX,,29.6,4,2021
+Saquon Barkley,Team Acquarulo,RB,,FLEX,,29.6,4,2021
 Colts,Team Acquarulo,D/ST,,D/ST,,10,4,2021
 Brandon McManus,Team Acquarulo,K,,K,,1,4,2021
 Russell Wilson,Team Shamas,QB,,QB,,22.56,4,2021
@@ -320,7 +320,7 @@ James Robinson,Team Shamas,RB,,RB,,20.6,4,2021
 DK Metcalf,Team Shamas,WR,,WR,,16.5,4,2021
 Stefon Diggs,Team Shamas,WR,,WR,,18.4,4,2021
 Travis Kelce,Team Shamas,TE,,TE,,6.3,4,2021
-CeeDee Lamb,Team Shamas,FLEX,,FLEX,,3.3,4,2021
+CeeDee Lamb,Team Shamas,WR,,FLEX,,3.3,4,2021
 Bears,Team Shamas,D/ST,,D/ST,,8,4,2021
 Daniel Carlson,Team Shamas,K,,K,,1,4,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,22.62,4,2021
@@ -329,7 +329,7 @@ Zack Moss,Team Pawlowicz,RB,,RB,,12.1,4,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,47.6,4,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,13.7,4,2021
 Robert Tonyan,Team Pawlowicz,TE,,TE,,2.8,4,2021
-Tyler Lockett,Team Pawlowicz,FLEX,,FLEX,,6.4,4,2021
+Tyler Lockett,Team Pawlowicz,WR,,FLEX,,6.4,4,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,7,4,2021
 Greg Joseph,Team Pawlowicz,K,,K,,1,4,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,24.12,4,2021
@@ -338,7 +338,7 @@ Chris Carson,Team Loomis,RB,,RB,,4.1,4,2021
 DeAndre Hopkins,Team Loomis,WR,,WR,,10.7,4,2021
 Keenan Allen,Team Loomis,WR,,WR,,10.6,4,2021
 Tyler Higbee,Team Loomis,TE,,TE,,7.6,4,2021
-Odell Beckham Jr.,Team Loomis,FLEX,,FLEX,,5.1,4,2021
+Odell Beckham Jr.,Team Loomis,WR,,FLEX,,5.1,4,2021
 Browns,Team Loomis,D/ST,,D/ST,,9,4,2021
 Harrison Butker,Team Loomis,K,,K,,6,4,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,31.72,4,2021
@@ -347,7 +347,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,16.6,4,2021
 Davante Adams,Team Piazza,WR,,WR,,12.4,4,2021
 Robert Woods,Team Piazza,WR,,WR,,14.8,4,2021
 Mark Andrews,Team Piazza,TE,,TE,,11.7,4,2021
-Marvin Jones Jr.,Team Piazza,FLEX,,FLEX,,5.4,4,2021
+Antonio Gibson,Team Shamas,RB,,FLEX,,13.8,16,2021
 Commanders,Team Piazza,D/ST,,D/ST,,5,4,2021
 Justin Tucker,Team Piazza,K,,K,,13,4,2021
 Justin Herbert,Team Graver,QB,,QB,,21.28,4,2021
@@ -356,7 +356,7 @@ Darrell Henderson Jr.,Team Graver,RB,,RB,,16.6,4,2021
 Diontae Johnson,Team Graver,WR,,WR,,24.2,4,2021
 Courtland Sutton,Team Graver,WR,,WR,,7.7,4,2021
 Darren Waller,Team Graver,TE,,TE,,15,4,2021
-Deebo Samuel,Team Graver,FLEX,,FLEX,,35.7,4,2021
+Deebo Samuel,Team Graver,WR,,FLEX,,35.7,4,2021
 Bengals,Team Graver,D/ST,,D/ST,,1,4,2021
 Matt Prater,Team Graver,K,,K,,15,4,2021
 Josh Allen,Team Dupre,QB,,QB,,36.5,5,2021
@@ -365,7 +365,7 @@ Chase Edmonds,Team Dupre,RB,,RB,,4.4,5,2021
 Terry McLaurin,Team Dupre,WR,,WR,,8.6,5,2021
 Adam Thielen,Team Dupre,WR,,WR,,6,5,2021
 Kyle Pitts,Team Dupre,TE,,TE,,26.9,5,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,10.2,5,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,10.2,5,2021
 Bills,Team Dupre,D/ST,,D/ST,,15,5,2021
 Younghoe Koo,Team Dupre,K,,K,,11,5,2021
 Tom Brady,Team Chasse,QB,,QB,,37.74,5,2021
@@ -374,7 +374,7 @@ Najee Harris,Team Chasse,RB,,RB,,22.2,5,2021
 Brandin Cooks,Team Chasse,WR,,WR,,5.3,5,2021
 Mike Williams,Team Chasse,WR,,WR,,36.5,5,2021
 Noah Fant,Team Chasse,TE,,TE,,5,5,2021
-Chris Godwin,Team Chasse,FLEX,,FLEX,,14,5,2021
+Chris Godwin,Team Chasse,WR,,FLEX,,14,5,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,8,5,2021
 Tyler Bass,Team Chasse,K,,K,,8,5,2021
 Dak Prescott,Team Perrotti,QB,,QB,,20.68,5,2021
@@ -383,7 +383,7 @@ Joe Mixon,Team Perrotti,RB,,RB,,10.5,5,2021
 Justin Jefferson,Team Perrotti,WR,,WR,,19.4,5,2021
 A.J. Brown,Team Perrotti,WR,,WR,,6.8,5,2021
 Dawson Knox,Team Perrotti,TE,,TE,,20.7,5,2021
-Jakobi Meyers,Team Perrotti,FLEX,,FLEX,,9.6,5,2021
+Jakobi Meyers,Team Perrotti,WR,,FLEX,,9.6,5,2021
 Patriots,Team Perrotti,D/ST,,D/ST,,4,5,2021
 Greg Zuerlein,Team Perrotti,K,,K,,14,5,2021
 Matthew Stafford,Team Sachs,QB,,QB,,16.5,5,2021
@@ -392,7 +392,7 @@ Chuba Hubbard,Team Sachs,RB,,RB,,18.4,5,2021
 Cooper Kupp,Team Sachs,WR,,WR,,16.2,5,2021
 Amari Cooper,Team Sachs,WR,,WR,,15,5,2021
 Mike Gesicki,Team Sachs,TE,,TE,,8.3,5,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,20.9,5,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,20.9,5,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,7,5,2021
 Matt Gay,Team Sachs,K,,K,,9,5,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,22.92,5,2021
@@ -401,7 +401,7 @@ James Robinson,Team Acquarulo,RB,,RB,,21.7,5,2021
 DJ Moore,Team Acquarulo,WR,,WR,,8.8,5,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,8.9,5,2021
 Austin Hooper,Team Acquarulo,TE,,TE,,2,5,2021
-Corey Davis,Team Acquarulo,FLEX,,FLEX,,8.5,5,2021
+Boston Scott,Team Perrotti,RB,,FLEX,,4,9,2021
 Raiders,Team Acquarulo,D/ST,,D/ST,,4,5,2021
 Daniel Carlson,Team Acquarulo,K,,K,,3,5,2021
 Russell Wilson,Team Shamas,QB,,QB,,9.08,5,2021
@@ -410,7 +410,7 @@ Alexander Mattison,Team Shamas,RB,,RB,,26.3,5,2021
 DK Metcalf,Team Shamas,WR,,WR,,26.8,5,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,18.8,5,2021
 Travis Kelce,Team Shamas,TE,,TE,,17.7,5,2021
-Alex Collins,Team Shamas,FLEX,,FLEX,,9.2,5,2021
+Bryan Edwards,Team Acquarulo,WR,,FLEX,,0,9,2021
 Broncos,Team Shamas,D/ST,,D/ST,,2,5,2021
 Brandon McManus,Team Shamas,K,,K,,7,5,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,13.66,5,2021
@@ -419,7 +419,7 @@ Josh Jacobs,Team Pawlowicz,RB,,RB,,16.7,5,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,14.8,5,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,27.9,5,2021
 Robert Tonyan,Team Pawlowicz,TE,,TE,,1.8,5,2021
-Tyler Lockett,Team Pawlowicz,FLEX,,FLEX,,10.7,5,2021
+Tyler Lockett,Team Pawlowicz,WR,,FLEX,,10.7,5,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,9,5,2021
 Ryan Succop,Team Pawlowicz,K,,K,,10,5,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,19.76,5,2021
@@ -428,7 +428,7 @@ Darrell Henderson Jr.,Team Loomis,RB,,RB,,16.9,5,2021
 Keenan Allen,Team Loomis,WR,,WR,,13.5,5,2021
 Deebo Samuel,Team Loomis,WR,,WR,,16.1,5,2021
 Darren Waller,Team Loomis,TE,,TE,,8.5,5,2021
-Kenny Golladay,Team Loomis,FLEX,,FLEX,,0,5,2021
+Kenny Golladay,Team Loomis,WR,,FLEX,,0,5,2021
 Browns,Team Loomis,D/ST,,D/ST,,-6,5,2021
 Harrison Butker,Team Loomis,K,,K,,10,5,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,18.98,5,2021
@@ -437,7 +437,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,25.9,5,2021
 Davante Adams,Team Piazza,WR,,WR,,37.6,5,2021
 Robert Woods,Team Piazza,WR,,WR,,27,5,2021
 Mark Andrews,Team Piazza,TE,,TE,,41.7,5,2021
-Marvin Jones Jr.,Team Piazza,FLEX,,FLEX,,3.5,5,2021
+Bryan Edwards,Team Acquarulo,WR,,FLEX,,18.4,10,2021
 Commanders,Team Piazza,D/ST,,D/ST,,4,5,2021
 Justin Tucker,Team Piazza,K,,K,,3,5,2021
 Justin Herbert,Team Graver,QB,,QB,,42.82,5,2021
@@ -446,7 +446,7 @@ Aaron Jones,Team Graver,RB,,RB,,14.9,5,2021
 Diontae Johnson,Team Graver,WR,,WR,,15.2,5,2021
 DeAndre Hopkins,Team Graver,WR,,WR,,20.7,5,2021
 T.J. Hockenson,Team Graver,TE,,TE,,4.2,5,2021
-Mike Evans,Team Graver,FLEX,,FLEX,,29.3,5,2021
+Mike Evans,Team Graver,WR,,FLEX,,29.3,5,2021
 Ravens,Team Graver,D/ST,,D/ST,,0,5,2021
 Matt Prater,Team Graver,K,,K,,4,5,2021
 Josh Allen,Team Dupre,QB,,QB,,28.72,6,2021
@@ -455,7 +455,7 @@ Myles Gaskin,Team Dupre,RB,,RB,,3.4,6,2021
 Terry McLaurin,Team Dupre,WR,,WR,,6.8,6,2021
 Adam Thielen,Team Dupre,WR,,WR,,29.8,6,2021
 Hunter Henry,Team Dupre,TE,,TE,,10.5,6,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,7.4,6,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,7.4,6,2021
 Bills,Team Dupre,D/ST,,D/ST,,0,6,2021
 Chris Boswell,Team Dupre,K,,K,,13,6,2021
 Tom Brady,Team Chasse,QB,,QB,,17.98,6,2021
@@ -464,7 +464,7 @@ Najee Harris,Team Chasse,RB,,RB,,24.7,6,2021
 Chris Godwin,Team Chasse,WR,,WR,,9.3,6,2021
 Mike Williams,Team Chasse,WR,,WR,,4.7,6,2021
 Jared Cook,Team Chasse,TE,,TE,,12.5,6,2021
-Leonard Fournette,Team Chasse,FLEX,,FLEX,,30.7,6,2021
+Leonard Fournette,Team Chasse,RB,,FLEX,,30.7,6,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,6,6,2021
 Tyler Bass,Team Chasse,K,,K,,13,6,2021
 Dak Prescott,Team Perrotti,QB,,QB,,26.8,6,2021
@@ -473,7 +473,7 @@ Darrell Henderson Jr.,Team Perrotti,RB,,RB,,24.7,6,2021
 Justin Jefferson,Team Perrotti,WR,,WR,,14,6,2021
 Marquise Brown,Team Perrotti,WR,,WR,,7.5,6,2021
 Dawson Knox,Team Perrotti,TE,,TE,,7.5,6,2021
-Chase Claypool,Team Perrotti,FLEX,,FLEX,,3.7,6,2021
+Chase Claypool,Team Perrotti,WR,,FLEX,,3.7,6,2021
 Colts,Team Perrotti,D/ST,,D/ST,,11,6,2021
 Greg Zuerlein,Team Perrotti,K,,K,,12,6,2021
 Matthew Stafford,Team Sachs,QB,,QB,,25.24,6,2021
@@ -482,7 +482,7 @@ Chuba Hubbard,Team Sachs,RB,,RB,,13.5,6,2021
 Cooper Kupp,Team Sachs,WR,,WR,,34,6,2021
 Amari Cooper,Team Sachs,WR,,WR,,10.5,6,2021
 Mike Gesicki,Team Sachs,TE,,TE,,19.5,6,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,5.8,6,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,5.8,6,2021
 Bengals,Team Sachs,D/ST,,D/ST,,8,6,2021
 Matt Gay,Team Sachs,K,,K,,8,6,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,25,6,2021
@@ -491,7 +491,7 @@ D'Andre Swift,Team Acquarulo,RB,,RB,,17.7,6,2021
 DJ Moore,Team Acquarulo,WR,,WR,,10.9,6,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,23.9,6,2021
 Zach Ertz,Team Acquarulo,TE,,TE,,12.9,6,2021
-Khalil Herbert,Team Acquarulo,FLEX,,FLEX,,19.2,6,2021
+Chase Edmonds,Team Sachs,RB,,FLEX,,5.3,15,2021
 Panthers,Team Acquarulo,D/ST,,D/ST,,2,6,2021
 Zane Gonzalez,Team Acquarulo,K,,K,,9,6,2021
 Sam Darnold,Team Shamas,QB,,QB,,15.08,6,2021
@@ -500,7 +500,7 @@ Joe Mixon,Team Shamas,RB,,RB,,26.3,6,2021
 DK Metcalf,Team Shamas,WR,,WR,,11.8,6,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,36.1,6,2021
 Travis Kelce,Team Shamas,TE,,TE,,17.9,6,2021
-Tim Patrick,Team Shamas,FLEX,,FLEX,,13.2,6,2021
+Corey Davis,Team Acquarulo,WR,,FLEX,,2.8,2,2021
 Broncos,Team Shamas,D/ST,,D/ST,,-2,6,2021
 Nick Folk,Team Shamas,K,,K,,3,6,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,25.76,6,2021
@@ -509,7 +509,7 @@ Josh Jacobs,Team Pawlowicz,RB,,RB,,15.2,6,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,22.6,6,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,13.7,6,2021
 Jonnu Smith,Team Pawlowicz,TE,,TE,,1.9,6,2021
-DeVonta Smith,Team Pawlowicz,FLEX,,FLEX,,5.1,6,2021
+DeVonta Smith,Team Pawlowicz,WR,,FLEX,,5.1,6,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,13,6,2021
 Ryan Succop,Team Pawlowicz,K,,K,,4,6,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,23.7,6,2021
@@ -518,7 +518,7 @@ Chase Edmonds,Team Loomis,RB,,RB,,8,6,2021
 Keenan Allen,Team Loomis,WR,,WR,,10,6,2021
 Kadarius Toney,Team Loomis,WR,,WR,,6.6,6,2021
 Darren Waller,Team Loomis,TE,,TE,,10.9,6,2021
-Zach Pascal,Team Loomis,FLEX,,FLEX,,0,6,2021
+Corey Davis,Team Acquarulo,WR,,FLEX,,8.5,5,2021
 Rams,Team Loomis,D/ST,,D/ST,,17,6,2021
 Harrison Butker,Team Loomis,K,,K,,9,6,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,22.98,6,2021
@@ -527,7 +527,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,10.8,6,2021
 Davante Adams,Team Piazza,WR,,WR,,12.9,6,2021
 Robert Woods,Team Piazza,WR,,WR,,11.1,6,2021
 Mark Andrews,Team Piazza,TE,,TE,,17.8,6,2021
-Antonio Brown,Team Piazza,FLEX,,FLEX,,24.3,6,2021
+Antonio Brown,Team Piazza,WR,,FLEX,,24.3,6,2021
 Commanders,Team Piazza,D/ST,,D/ST,,3,6,2021
 Justin Tucker,Team Piazza,K,,K,,12,6,2021
 Justin Herbert,Team Graver,QB,,QB,,11,6,2021
@@ -536,7 +536,7 @@ Aaron Jones,Team Graver,RB,,RB,,21,6,2021
 Diontae Johnson,Team Graver,WR,,WR,,18.6,6,2021
 DeAndre Hopkins,Team Graver,WR,,WR,,20.5,6,2021
 Dalton Schultz,Team Graver,TE,,TE,,12.9,6,2021
-Mike Evans,Team Graver,FLEX,,FLEX,,4.7,6,2021
+Mike Evans,Team Graver,WR,,FLEX,,4.7,6,2021
 Packers,Team Graver,D/ST,,D/ST,,9,6,2021
 Matt Prater,Team Graver,K,,K,,15,6,2021
 Matt Ryan,Team Dupre,QB,,QB,,17.44,7,2021
@@ -545,7 +545,7 @@ Elijah Mitchell,Team Dupre,RB,,RB,,16.7,7,2021
 Terry McLaurin,Team Dupre,WR,,WR,,25.2,7,2021
 Tyler Boyd,Team Dupre,WR,,WR,,7.9,7,2021
 Kyle Pitts,Team Dupre,TE,,TE,,23.3,7,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,13.2,7,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,13.2,7,2021
 Falcons,Team Dupre,D/ST,,D/ST,,3,7,2021
 Younghoe Koo,Team Dupre,K,,K,,12,7,2021
 Tom Brady,Team Chasse,QB,,QB,,24.44,7,2021
@@ -554,7 +554,7 @@ Leonard Fournette,Team Chasse,RB,,RB,,17,7,2021
 Chris Godwin,Team Chasse,WR,,WR,,25.1,7,2021
 Julio Jones,Team Chasse,WR,,WR,,5.8,7,2021
 Noah Fant,Team Chasse,TE,,TE,,8.9,7,2021
-Brandin Cooks,Team Chasse,FLEX,,FLEX,,7.1,7,2021
+Brandin Cooks,Team Chasse,WR,,FLEX,,7.1,7,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,18,7,2021
 Randy Bullock,Team Chasse,K,,K,,11,7,2021
 Ryan Tannehill,Team Perrotti,QB,,QB,,19.4,7,2021
@@ -563,7 +563,7 @@ Darrel Williams,Team Perrotti,RB,,RB,,8,7,2021
 Marquise Brown,Team Perrotti,WR,,WR,,19,7,2021
 A.J. Brown,Team Perrotti,WR,,WR,,27.3,7,2021
 Dallas Goedert,Team Perrotti,TE,,TE,,12,7,2021
-James Conner,Team Perrotti,FLEX,,FLEX,,12.4,7,2021
+James Conner,Team Perrotti,RB,,FLEX,,12.4,7,2021
 Colts,Team Perrotti,D/ST,,D/ST,,12,7,2021
 Daniel Carlson,Team Perrotti,K,,K,,9,7,2021
 Matthew Stafford,Team Sachs,QB,,QB,,27.16,7,2021
@@ -572,7 +572,7 @@ Chuba Hubbard,Team Sachs,RB,,RB,,9.6,7,2021
 Cooper Kupp,Team Sachs,WR,,WR,,37.6,7,2021
 Courtland Sutton,Team Sachs,WR,,WR,,11.8,7,2021
 Mike Gesicki,Team Sachs,TE,,TE,,21.5,7,2021
-Jaylen Waddle,Team Sachs,FLEX,,FLEX,,15.3,7,2021
+Jaylen Waddle,Team Sachs,WR,,FLEX,,15.3,7,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,11,7,2021
 Matt Gay,Team Sachs,K,,K,,9,7,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,23.54,7,2021
@@ -581,7 +581,7 @@ D'Andre Swift,Team Acquarulo,RB,,RB,,28.4,7,2021
 DJ Moore,Team Acquarulo,WR,,WR,,13.3,7,2021
 Allen Robinson II,Team Acquarulo,WR,,WR,,3.6,7,2021
 Zach Ertz,Team Acquarulo,TE,,TE,,16,7,2021
-Corey Davis,Team Acquarulo,FLEX,,FLEX,,14.7,7,2021
+Corey Davis,Team Acquarulo,WR,,FLEX,,14.7,7,2021
 Patriots,Team Acquarulo,D/ST,,D/ST,,13,7,2021
 Zane Gonzalez,Team Acquarulo,K,,K,,4,7,2021
 Tua Tagovailoa,Team Shamas,QB,,QB,,26.54,7,2021
@@ -590,7 +590,7 @@ Miles Sanders,Team Shamas,RB,,RB,,3.7,7,2021
 DK Metcalf,Team Shamas,WR,,WR,,17.6,7,2021
 Calvin Ridley,Team Shamas,WR,,WR,,12.6,7,2021
 Travis Kelce,Team Shamas,TE,,TE,,13.5,7,2021
-Tim Patrick,Team Shamas,FLEX,,FLEX,,3.6,7,2021
+Darrel Williams,Team Loomis,RB,,FLEX,,10.7,9,2021
 Saints,Team Shamas,D/ST,,D/ST,,10,7,2021
 Nick Folk,Team Shamas,K,,K,,14,7,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,21.44,7,2021
@@ -599,7 +599,7 @@ Josh Jacobs,Team Pawlowicz,RB,,RB,,15.8,7,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,12.7,7,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,34.1,7,2021
 Jonnu Smith,Team Pawlowicz,TE,,TE,,7.7,7,2021
-DeVonta Smith,Team Pawlowicz,FLEX,,FLEX,,11.1,7,2021
+DeVonta Smith,Team Pawlowicz,WR,,FLEX,,11.1,7,2021
 Raiders,Team Pawlowicz,D/ST,,D/ST,,5,7,2021
 Ryan Succop,Team Pawlowicz,K,,K,,7,7,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,24.66,7,2021
@@ -608,7 +608,7 @@ D'Ernest Johnson,Team Loomis,RB,,RB,,24.8,7,2021
 Deebo Samuel,Team Loomis,WR,,WR,,21,7,2021
 Darnell Mooney,Team Loomis,WR,,WR,,5.9,7,2021
 Tyler Higbee,Team Loomis,TE,,TE,,9.6,7,2021
-Devontae Booker,Team Loomis,FLEX,,FLEX,,14.6,7,2021
+Darrel Williams,Team Loomis,RB,,FLEX,,29.4,10,2021
 Rams,Team Loomis,D/ST,,D/ST,,3,7,2021
 Harrison Butker,Team Loomis,K,,K,,3,7,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,7.74,7,2021
@@ -617,7 +617,7 @@ Kenneth Gainwell,Team Piazza,RB,,RB,,14.1,7,2021
 Davante Adams,Team Piazza,WR,,WR,,19.6,7,2021
 Robert Woods,Team Piazza,WR,,WR,,15,7,2021
 Mark Andrews,Team Piazza,TE,,TE,,7.8,7,2021
-Christian Kirk,Team Piazza,FLEX,,FLEX,,15,7,2021
+Christian Kirk,Team Piazza,WR,,FLEX,,15,7,2021
 Giants,Team Piazza,D/ST,,D/ST,,17,7,2021
 Justin Tucker,Team Piazza,K,,K,,6,7,2021
 Taylor Heinecke,Team Graver,QB,,QB,,20.22,7,2021
@@ -626,7 +626,7 @@ Aaron Jones,Team Graver,RB,,RB,,8.9,7,2021
 DeAndre Hopkins,Team Graver,WR,,WR,,18.3,7,2021
 Hunter Renfrow,Team Graver,WR,,WR,,12.8,7,2021
 T.J. Hockenson,Team Graver,TE,,TE,,10.8,7,2021
-Mike Evans,Team Graver,FLEX,,FLEX,,31.6,7,2021
+Mike Evans,Team Graver,WR,,FLEX,,31.6,7,2021
 Ravens,Team Graver,D/ST,,D/ST,,-6,7,2021
 Matt Prater,Team Graver,K,,K,,7,7,2021
 Josh Allen,Team Dupre,QB,,QB,,29.46,8,2021
@@ -635,7 +635,7 @@ Elijah Mitchell,Team Dupre,RB,,RB,,19.7,8,2021
 Terry McLaurin,Team Dupre,WR,,WR,,6.5,8,2021
 Adam Thielen,Team Dupre,WR,,WR,,19.8,8,2021
 Kyle Pitts,Team Dupre,TE,,TE,,3.3,8,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,13.7,8,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,13.7,8,2021
 Bills,Team Dupre,D/ST,,D/ST,,13,8,2021
 Younghoe Koo,Team Dupre,K,,K,,9,8,2021
 Tom Brady,Team Chasse,QB,,QB,,25.2,8,2021
@@ -644,7 +644,7 @@ Najee Harris,Team Chasse,RB,,RB,,21,8,2021
 Chris Godwin,Team Chasse,WR,,WR,,28,8,2021
 Mike Williams,Team Chasse,WR,,WR,,3.9,8,2021
 Zach Ertz,Team Chasse,TE,,TE,,8.2,8,2021
-Leonard Fournette,Team Chasse,FLEX,,FLEX,,7.3,8,2021
+Leonard Fournette,Team Chasse,RB,,FLEX,,7.3,8,2021
 Buccaneers,Team Chasse,D/ST,,D/ST,,-1,8,2021
 Tyler Bass,Team Chasse,K,,K,,10,8,2021
 Cooper Rush,Team Perrotti,QB,,QB,,17.2,8,2021
@@ -653,7 +653,7 @@ Darrell Henderson Jr.,Team Perrotti,RB,,RB,,22.3,8,2021
 Justin Jefferson,Team Perrotti,WR,,WR,,4.1,8,2021
 A.J. Brown,Team Perrotti,WR,,WR,,31.5,8,2021
 Dallas Goedert,Team Perrotti,TE,,TE,,13.2,8,2021
-Empty,Team Perrotti,FLEX,,FLEX,,0,8,2021
+Darrel Williams,Team Piazza,RB,,FLEX,,11,13,2021
 Steelers,Team Perrotti,D/ST,,D/ST,,9,8,2021
 Greg Joseph,Team Perrotti,K,,K,,12,8,2021
 Matthew Stafford,Team Sachs,QB,,QB,,24.2,8,2021
@@ -662,7 +662,7 @@ Chuba Hubbard,Team Sachs,RB,,RB,,14.1,8,2021
 Cooper Kupp,Team Sachs,WR,,WR,,24.5,8,2021
 Courtland Sutton,Team Sachs,WR,,WR,,6,8,2021
 Mike Gesicki,Team Sachs,TE,,TE,,9.8,8,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,30.6,8,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,30.6,8,2021
 Bengals,Team Sachs,D/ST,,D/ST,,1,8,2021
 Matt Gay,Team Sachs,K,,K,,8,8,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,11.22,8,2021
@@ -671,7 +671,7 @@ D'Andre Swift,Team Acquarulo,RB,,RB,,8.1,8,2021
 DJ Moore,Team Acquarulo,WR,,WR,,9.9,8,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,15,8,2021
 Robert Tonyan,Team Acquarulo,TE,,TE,,7.9,8,2021
-Khalil Herbert,Team Acquarulo,FLEX,,FLEX,,8.8,8,2021
+Darrell Henderson Jr.,Team Perrotti,RB,,FLEX,,17.3,12,2021
 Broncos,Team Acquarulo,D/ST,,D/ST,,16,8,2021
 Brandon McManus,Team Acquarulo,K,,K,,5,8,2021
 Daniel Jones,Team Shamas,QB,,QB,,16.08,8,2021
@@ -680,7 +680,7 @@ Joe Mixon,Team Shamas,RB,,RB,,25.1,8,2021
 DK Metcalf,Team Shamas,WR,,WR,,22.3,8,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,17.2,8,2021
 Travis Kelce,Team Shamas,TE,,TE,,4.7,8,2021
-Jamison Crowder,Team Shamas,FLEX,,FLEX,,16.4,8,2021
+Devontae Booker,Team Loomis,RB,,FLEX,,14.6,7,2021
 Seahawks,Team Shamas,D/ST,,D/ST,,12,8,2021
 Nick Folk,Team Shamas,K,,K,,15,8,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,9.06,8,2021
@@ -689,7 +689,7 @@ Zack Moss,Team Pawlowicz,RB,,RB,,11.8,8,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,27.4,8,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,13.1,8,2021
 Ricky Seals-Jones,Team Pawlowicz,TE,,TE,,3.2,8,2021
-DeVonta Smith,Team Pawlowicz,FLEX,,FLEX,,2.5,8,2021
+DeVonta Smith,Team Pawlowicz,WR,,FLEX,,2.5,8,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,4,8,2021
 Ryan Succop,Team Pawlowicz,K,,K,,3,8,2021
 Kirk Cousins,Team Loomis,QB,,QB,,13.16,8,2021
@@ -698,7 +698,7 @@ Cordarrelle Patterson,Team Loomis,RB,,RB,,18.2,8,2021
 Keenan Allen,Team Loomis,WR,,WR,,19.7,8,2021
 Mike Evans,Team Loomis,WR,,WR,,12.8,8,2021
 Tyler Higbee,Team Loomis,TE,,TE,,5.5,8,2021
-Kadarius Toney,Team Loomis,FLEX,,FLEX,,7.36,8,2021
+Kadarius Toney,Team Loomis,WR,,FLEX,,7.36,8,2021
 Rams,Team Loomis,D/ST,,D/ST,,7,8,2021
 Harrison Butker,Team Loomis,K,,K,,8,8,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,14,8,2021
@@ -707,7 +707,7 @@ Kenneth Gainwell,Team Piazza,RB,,RB,,2.7,8,2021
 Robert Woods,Team Piazza,WR,,WR,,20.7,8,2021
 Marvin Jones Jr.,Team Piazza,WR,,WR,,8.5,8,2021
 Jared Cook,Team Piazza,TE,,TE,,4.5,8,2021
-Christian Kirk,Team Piazza,FLEX,,FLEX,,8.6,8,2021
+Christian Kirk,Team Piazza,WR,,FLEX,,8.6,8,2021
 Bears,Team Piazza,D/ST,,D/ST,,-6,8,2021
 Greg Zuerlein,Team Piazza,K,,K,,7,8,2021
 Justin Herbert,Team Graver,QB,,QB,,13.82,8,2021
@@ -716,7 +716,7 @@ Aaron Jones,Team Graver,RB,,RB,,24,8,2021
 Diontae Johnson,Team Graver,WR,,WR,,15.8,8,2021
 Deebo Samuel,Team Graver,WR,,WR,,23.1,8,2021
 T.J. Hockenson,Team Graver,TE,,TE,,18.9,8,2021
-DeAndre Hopkins,Team Graver,FLEX,,FLEX,,8.6,8,2021
+DeAndre Hopkins,Team Graver,WR,,FLEX,,8.6,8,2021
 Chargers,Team Graver,D/ST,,D/ST,,2,8,2021
 Matt Prater,Team Graver,K,,K,,3,8,2021
 Josh Allen,Team Dupre,QB,,QB,,9.56,9,2021
@@ -725,7 +725,7 @@ Elijah Mitchell,Team Dupre,RB,,RB,,12.9,9,2021
 Adam Thielen,Team Dupre,WR,,WR,,8.6,9,2021
 Cole Beasley,Team Dupre,WR,,WR,,11.3,9,2021
 Kyle Pitts,Team Dupre,TE,,TE,,9.2,9,2021
-Tee Higgins,Team Dupre,FLEX,,FLEX,,13.8,9,2021
+Tee Higgins,Team Dupre,WR,,FLEX,,13.8,9,2021
 Bills,Team Dupre,D/ST,,D/ST,,9,9,2021
 Younghoe Koo,Team Dupre,K,,K,,9,9,2021
 Lamar Jackson,Team Chasse,QB,,QB,,30.64,9,2021
@@ -734,7 +734,7 @@ Adrian Peterson,Team Chasse,RB,,RB,,9.6,9,2021
 Brandin Cooks,Team Chasse,WR,,WR,,11.6,9,2021
 Mike Williams,Team Chasse,WR,,WR,,7.8,9,2021
 Zach Ertz,Team Chasse,TE,,TE,,5.7,9,2021
-Marquise Brown,Team Chasse,FLEX,,FLEX,,20.6,9,2021
+Marquise Brown,Team Chasse,WR,,FLEX,,20.6,9,2021
 Patriots,Team Chasse,D/ST,,D/ST,,19,9,2021
 Tyler Bass,Team Chasse,K,,K,,7,9,2021
 Dak Prescott,Team Perrotti,QB,,QB,,18.88,9,2021
@@ -743,7 +743,7 @@ Darrell Henderson Jr.,Team Perrotti,RB,,RB,,8.8,9,2021
 Justin Jefferson,Team Perrotti,WR,,WR,,17,9,2021
 A.J. Brown,Team Perrotti,WR,,WR,,9.2,9,2021
 George Kittle,Team Perrotti,TE,,TE,,20.1,9,2021
-Boston Scott,Team Perrotti,FLEX,,FLEX,,4,9,2021
+Devontae Booker,Team Graver,RB,,FLEX,,15.2,9,2021
 Steelers,Team Perrotti,D/ST,,D/ST,,4,9,2021
 Greg Joseph,Team Perrotti,K,,K,,7,9,2021
 Matthew Stafford,Team Sachs,QB,,QB,,13.06,9,2021
@@ -752,7 +752,7 @@ Alvin Kamara,Team Sachs,RB,,RB,,20.4,9,2021
 Cooper Kupp,Team Sachs,WR,,WR,,20.5,9,2021
 Amari Cooper,Team Sachs,WR,,WR,,5.7,9,2021
 Mike Gesicki,Team Sachs,TE,,TE,,9.4,9,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,17.4,9,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,17.4,9,2021
 Saints,Team Sachs,D/ST,,D/ST,,1,9,2021
 Matt Gay,Team Sachs,K,,K,,12,9,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,16.68,9,2021
@@ -761,7 +761,7 @@ Myles Gaskin,Team Acquarulo,RB,,RB,,15.7,9,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,14.5,9,2021
 Chase Claypool,Team Acquarulo,WR,,WR,,7.3,9,2021
 Dallas Goedert,Team Acquarulo,TE,,TE,,7.3,9,2021
-Bryan Edwards,Team Acquarulo,FLEX,,FLEX,,0,9,2021
+Emmanuel Sanders,Team Pawlowicz,WR,,FLEX,,10.5,9,2021
 Panthers,Team Acquarulo,D/ST,,D/ST,,8,9,2021
 Graham Gano,Team Acquarulo,K,,K,,11,9,2021
 Tyrod Taylor,Team Shamas,QB,,QB,,5.9,9,2021
@@ -770,7 +770,7 @@ Michael Carter,Team Shamas,RB,,RB,,9.6,9,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,4.3,9,2021
 DJ Moore,Team Shamas,WR,,WR,,7.6,9,2021
 Travis Kelce,Team Shamas,TE,,TE,,17.8,9,2021
-Jerry Jeudy,Team Shamas,FLEX,,FLEX,,12.9,9,2021
+Jerry Jeudy,Team Shamas,WR,,FLEX,,12.9,9,2021
 Colts,Team Shamas,D/ST,,D/ST,,0,9,2021
 Nick Folk,Team Shamas,K,,K,,5,9,2021
 Joe Burrow,Team Pawlowicz,QB,,QB,,7.38,9,2021
@@ -779,7 +779,7 @@ Zack Moss,Team Pawlowicz,RB,,RB,,4.4,9,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,7.3,9,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,8.9,9,2021
 Tyler Conklin,Team Pawlowicz,TE,,TE,,9.5,9,2021
-Emmanuel Sanders,Team Pawlowicz,FLEX,,FLEX,,10.5,9,2021
+Emmanuel Sanders,Team Pawlowicz,WR,,FLEX,,7.1,10,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,0,9,2021
 Evan McPherson,Team Pawlowicz,K,,K,,4,9,2021
 Carson Wentz,Team Loomis,QB,,QB,,24.18,9,2021
@@ -788,7 +788,7 @@ Joe Mixon,Team Loomis,RB,,RB,,28,9,2021
 Keenan Allen,Team Loomis,WR,,WR,,22.4,9,2021
 Julio Jones,Team Loomis,WR,,WR,,7.5,9,2021
 Darren Waller,Team Loomis,TE,,TE,,16.2,9,2021
-Darrel Williams,Team Loomis,FLEX,,FLEX,,10.7,9,2021
+Empty,Team Perrotti,,,FLEX,,0,8,2021
 Rams,Team Loomis,D/ST,,D/ST,,8,9,2021
 Harrison Butker,Team Loomis,K,,K,,9,9,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,10.44,9,2021
@@ -797,7 +797,7 @@ Devin Singletary,Team Piazza,RB,,RB,,12.9,9,2021
 Davante Adams,Team Piazza,WR,,WR,,10.2,9,2021
 Robert Woods,Team Piazza,WR,,WR,,17.4,9,2021
 Mark Andrews,Team Piazza,TE,,TE,,9.4,9,2021
-Christian Kirk,Team Piazza,FLEX,,FLEX,,16.42,9,2021
+Christian Kirk,Team Piazza,WR,,FLEX,,16.42,9,2021
 Bears,Team Piazza,D/ST,,D/ST,,13,9,2021
 Greg Zuerlein,Team Piazza,K,,K,,0,9,2021
 Justin Herbert,Team Graver,QB,,QB,,31.64,9,2021
@@ -806,7 +806,7 @@ Aaron Jones,Team Graver,RB,,RB,,5.3,9,2021
 Diontae Johnson,Team Graver,WR,,WR,,11.7,9,2021
 Deebo Samuel,Team Graver,WR,,WR,,11.3,9,2021
 Dalton Schultz,Team Graver,TE,,TE,,9.4,9,2021
-Devontae Booker,Team Graver,FLEX,,FLEX,,15.2,9,2021
+James Robinson,Team Acquarulo,RB,,FLEX,,11.8,11,2021
 Dolphins,Team Graver,D/ST,,D/ST,,18,9,2021
 Matt Prater,Team Graver,K,,K,,7,9,2021
 Josh Allen,Team Dupre,QB,,QB,,20.94,10,2021
@@ -815,7 +815,7 @@ J.D. McKissic,Team Dupre,RB,,RB,,7.9,10,2021
 Adam Thielen,Team Dupre,WR,,WR,,11.5,10,2021
 Cole Beasley,Team Dupre,WR,,WR,,3.5,10,2021
 Kyle Pitts,Team Dupre,TE,,TE,,10,10,2021
-Terry McLaurin,Team Dupre,FLEX,,FLEX,,11.9,10,2021
+James Robinson,Team Acquarulo,RB,,FLEX,,12.5,12,2021
 Bills,Team Dupre,D/ST,,D/ST,,11,10,2021
 Younghoe Koo,Team Dupre,K,,K,,3,10,2021
 Lamar Jackson,Team Chasse,QB,,QB,,15.42,10,2021
@@ -824,7 +824,7 @@ Leonard Fournette,Team Chasse,RB,,RB,,17.2,10,2021
 Mike Williams,Team Chasse,WR,,WR,,7.3,10,2021
 Marquise Brown,Team Chasse,WR,,WR,,9.7,10,2021
 Zach Ertz,Team Chasse,TE,,TE,,8.6,10,2021
-Van Jefferson,Team Chasse,FLEX,,FLEX,,8.4,10,2021
+Van Jefferson,Team Chasse,WR,,FLEX,,8.4,10,2021
 Patriots,Team Chasse,D/ST,,D/ST,,12,10,2021
 Tyler Bass,Team Chasse,K,,K,,9,10,2021
 Dak Prescott,Team Perrotti,QB,,QB,,26.34,10,2021
@@ -833,7 +833,7 @@ Darrell Henderson Jr.,Team Perrotti,RB,,RB,,8.1,10,2021
 A.J. Brown,Team Perrotti,WR,,WR,,3.3,10,2021
 Chris Godwin,Team Perrotti,WR,,WR,,12.7,10,2021
 George Kittle,Team Perrotti,TE,,TE,,16,10,2021
-Justin Jefferson,Team Perrotti,FLEX,,FLEX,,22.9,10,2021
+Justin Jefferson,Team Perrotti,WR,,FLEX,,22.9,10,2021
 Steelers,Team Perrotti,D/ST,,D/ST,,5,10,2021
 Greg Joseph,Team Perrotti,K,,K,,10,10,2021
 Matthew Stafford,Team Sachs,QB,,QB,,9.82,10,2021
@@ -842,7 +842,7 @@ Melvin Gordon III,Team Sachs,RB,,RB,,9.3,10,2021
 Cooper Kupp,Team Sachs,WR,,WR,,23.2,10,2021
 Jaylen Waddle,Team Sachs,WR,,WR,,10.1,10,2021
 Mike Gesicki,Team Sachs,TE,,TE,,0,10,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,12.1,10,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,12.1,10,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,3,10,2021
 Matt Gay,Team Sachs,K,,K,,4,10,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,18.62,10,2021
@@ -851,7 +851,7 @@ Myles Gaskin,Team Acquarulo,RB,,RB,,22.7,10,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,30.2,10,2021
 Chase Claypool,Team Acquarulo,WR,,WR,,5.6,10,2021
 Dallas Goedert,Team Acquarulo,TE,,TE,,4.8,10,2021
-Bryan Edwards,Team Acquarulo,FLEX,,FLEX,,18.4,10,2021
+James Robinson,Team Acquarulo,RB,,FLEX,,2.5,13,2021
 Panthers,Team Acquarulo,D/ST,,D/ST,,5,10,2021
 Graham Gano,Team Acquarulo,K,,K,,2,10,2021
 Russell Wilson,Team Shamas,QB,,QB,,5.64,10,2021
@@ -860,7 +860,7 @@ Michael Carter,Team Shamas,RB,,RB,,18.2,10,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,28.6,10,2021
 DJ Moore,Team Shamas,WR,,WR,,6.4,10,2021
 Travis Kelce,Team Shamas,TE,,TE,,19.9,10,2021
-Jerry Jeudy,Team Shamas,FLEX,,FLEX,,11.1,10,2021
+Jerry Jeudy,Team Shamas,WR,,FLEX,,11.1,10,2021
 Colts,Team Shamas,D/ST,,D/ST,,14,10,2021
 Nick Folk,Team Shamas,K,,K,,9,10,2021
 Derek Carr,Team Pawlowicz,QB,,QB,,18.24,10,2021
@@ -869,7 +869,7 @@ Zack Moss,Team Pawlowicz,RB,,RB,,8.7,10,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,27.5,10,2021
 Tyler Lockett,Team Pawlowicz,WR,,WR,,4.3,10,2021
 Tyler Conklin,Team Pawlowicz,TE,,TE,,16.1,10,2021
-Emmanuel Sanders,Team Pawlowicz,FLEX,,FLEX,,7.1,10,2021
+Jamison Crowder,Team Shamas,WR,,FLEX,,16.4,8,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,22,10,2021
 Chris Boswell,Team Pawlowicz,K,,K,,12,10,2021
 Carson Wentz,Team Loomis,QB,,QB,,7.1,10,2021
@@ -878,7 +878,7 @@ James Conner,Team Loomis,RB,,RB,,15.4,10,2021
 Keenan Allen,Team Loomis,WR,,WR,,17.8,10,2021
 Mike Evans,Team Loomis,WR,,WR,,14.2,10,2021
 Darren Waller,Team Loomis,TE,,TE,,6.4,10,2021
-Darrel Williams,Team Loomis,FLEX,,FLEX,,29.4,10,2021
+Joshua Kelley,Mr. FigureItOut,RB,LAC,FLEX,14.3,3.9,2,2023
 Rams,Team Loomis,D/ST,,D/ST,,1,10,2021
 Harrison Butker,Team Loomis,K,,K,,11,10,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,36.24,10,2021
@@ -887,7 +887,7 @@ Devin Singletary,Team Piazza,RB,,RB,,11.9,10,2021
 Davante Adams,Team Piazza,WR,,WR,,14.8,10,2021
 Christian Kirk,Team Piazza,WR,,WR,,12.8,10,2021
 Mark Andrews,Team Piazza,TE,,TE,,18.3,10,2021
-Marvin Jones Jr.,Team Piazza,FLEX,,FLEX,,5.5,10,2021
+Joshua Kelley,Mr. FigureItOut,RB,LAC,FLEX,14.2,2.7,3,2023
 Packers,Team Piazza,D/ST,,D/ST,,14,10,2021
 Justin Tucker,Team Piazza,K,,K,,4,10,2021
 Justin Herbert,Team Graver,QB,,QB,,12,10,2021
@@ -896,7 +896,7 @@ Aaron Jones,Team Graver,RB,,RB,,12.6,10,2021
 Diontae Johnson,Team Graver,WR,,WR,,13.3,10,2021
 Deebo Samuel,Team Graver,WR,,WR,,30.3,10,2021
 T.J. Hockenson,Team Graver,TE,,TE,,0,10,2021
-Hunter Renfrow,Team Graver,FLEX,,FLEX,,17.6,10,2021
+Hunter Renfrow,Team Graver,WR,,FLEX,,17.6,10,2021
 Ravens,Team Graver,D/ST,,D/ST,,4,10,2021
 Matt Prater,Team Graver,K,,K,,5,10,2021
 Josh Allen,Team Dupre,QB,,QB,,16.16,11,2021
@@ -905,7 +905,7 @@ Elijah Mitchell,Team Dupre,RB,,RB,,0,11,2021
 Tee Higgins,Team Dupre,WR,,WR,,3.5,11,2021
 Adam Thielen,Team Dupre,WR,,WR,,22.2,11,2021
 Kyle Pitts,Team Dupre,TE,,TE,,5.9,11,2021
-Terry McLaurin,Team Dupre,FLEX,,FLEX,,21.3,11,2021
+Khalil Herbert,Team Acquarulo,RB,,FLEX,,19.2,6,2021
 Bills,Team Dupre,D/ST,,D/ST,,-4,11,2021
 Younghoe Koo,Team Dupre,K,,K,,-1,11,2021
 Tom Brady,Team Chasse,QB,,QB,,19.28,11,2021
@@ -914,7 +914,7 @@ Rhamondre Stevenson,Team Chasse,RB,,RB,,8.5,11,2021
 Brandin Cooks,Team Chasse,WR,,WR,,3.8,11,2021
 Mike Williams,Team Chasse,WR,,WR,,20.7,11,2021
 Travis Kelce,Team Chasse,TE,,TE,,18.8,11,2021
-Rob Gronkowski,Team Chasse,FLEX,,FLEX,,13.1,11,2021
+Rob Gronkowski,Team Chasse,TE,,FLEX,,13.1,11,2021
 Patriots,Team Chasse,D/ST,,D/ST,,26,11,2021
 Tyler Bass,Team Chasse,K,,K,,-1,11,2021
 Dak Prescott,Team Perrotti,QB,,QB,,2.64,11,2021
@@ -923,7 +923,7 @@ Saquon Barkley,Team Perrotti,RB,,RB,,11.6,11,2021
 Chris Godwin,Team Perrotti,WR,,WR,,19.2,11,2021
 Deebo Samuel,Team Perrotti,WR,,WR,,16.4,11,2021
 T.J. Hockenson,Team Perrotti,TE,,TE,,11.1,11,2021
-A.J. Brown,Team Perrotti,FLEX,,FLEX,,9.8,11,2021
+A.J. Brown,Team Perrotti,WR,,FLEX,,9.8,11,2021
 49ers,Team Perrotti,D/ST,,D/ST,,12,11,2021
 Greg Joseph,Team Perrotti,K,,K,,10,11,2021
 Justin Fields,Team Sachs,QB,,QB,,3.46,11,2021
@@ -932,7 +932,7 @@ D'Onta Foreman,Team Sachs,RB,,RB,,5,11,2021
 Jaylen Waddle,Team Sachs,WR,,WR,,20.6,11,2021
 Chase Claypool,Team Sachs,WR,,WR,,14.4,11,2021
 Mike Gesicki,Team Sachs,TE,,TE,,10,11,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,4.3,11,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,4.3,11,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,9,11,2021
 Randy Bullock,Team Sachs,K,,K,,1,11,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,30.78,11,2021
@@ -941,7 +941,7 @@ D'Andre Swift,Team Acquarulo,RB,,RB,,22.6,11,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,18.3,11,2021
 DK Metcalf,Team Acquarulo,WR,,WR,,7.1,11,2021
 Pat Freiermuth,Team Acquarulo,TE,,TE,,11.1,11,2021
-James Robinson,Team Acquarulo,FLEX,,FLEX,,11.8,11,2021
+Khalil Herbert,Team Acquarulo,RB,,FLEX,,8.8,8,2021
 Titans,Team Acquarulo,D/ST,,D/ST,,3,11,2021
 Daniel Carlson,Team Acquarulo,K,,K,,8,11,2021
 Tua Tagovailoa,Team Shamas,QB,,QB,,17.52,11,2021
@@ -950,7 +950,7 @@ Leonard Fournette,Team Shamas,RB,,RB,,13.4,11,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,4.4,11,2021
 DJ Moore,Team Shamas,WR,,WR,,16,11,2021
 Darren Waller,Team Shamas,TE,,TE,,18.6,11,2021
-Michael Carter,Team Shamas,FLEX,,FLEX,,7.5,11,2021
+Tee Higgins,Cup of Joe,WR,CIN,FLEX,11.1,10.4,4,2023
 Browns,Team Shamas,D/ST,,D/ST,,9,11,2021
 Nick Folk,Team Shamas,K,,K,,16,11,2021
 Tim Boyle,Team Pawlowicz,QB,,QB,,-0.92,11,2021
@@ -959,7 +959,7 @@ Zack Moss,Team Pawlowicz,RB,,RB,,0.5,11,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,20,11,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,13,11,2021
 Tyler Conklin,Team Pawlowicz,TE,,TE,,6.5,11,2021
-Tyler Lockett,Team Pawlowicz,FLEX,,FLEX,,15.5,11,2021
+Tyler Lockett,Team Pawlowicz,WR,,FLEX,,15.5,11,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,6,11,2021
 Chris Boswell,Team Pawlowicz,K,,K,,14,11,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,33.5,11,2021
@@ -968,7 +968,7 @@ Ezekiel Elliott,Team Loomis,RB,,RB,,12.8,11,2021
 Mike Evans,Team Loomis,WR,,WR,,20.3,11,2021
 Diontae Johnson,Team Loomis,WR,,WR,,23.1,11,2021
 Zach Ertz,Team Loomis,TE,,TE,,28.8,11,2021
-Hunter Renfrow,Team Loomis,FLEX,,FLEX,,7.5,11,2021
+Hunter Renfrow,Team Loomis,WR,,FLEX,,7.5,11,2021
 Empty,Team Loomis,D/ST,,D/ST,,0,11,2021
 Harrison Butker,Team Loomis,K,,K,,8,11,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,7.5,11,2021
@@ -977,7 +977,7 @@ Alex Collins,Team Piazza,RB,,RB,,3.6,11,2021
 Davante Adams,Team Piazza,WR,,WR,,30.5,11,2021
 Christian Kirk,Team Piazza,WR,,WR,,4.5,11,2021
 Mark Andrews,Team Piazza,TE,,TE,,15.3,11,2021
-Michael Gallup,Team Piazza,FLEX,,FLEX,,9.4,11,2021
+Marvin Jones Jr.,Team Piazza,WR,,FLEX,,12.2,3,2021
 Bears,Team Piazza,D/ST,,D/ST,,11,11,2021
 Justin Tucker,Team Piazza,K,,K,,11,11,2021
 Justin Herbert,Team Graver,QB,,QB,,34.28,11,2021
@@ -986,7 +986,7 @@ Joe Mixon,Team Graver,RB,,RB,,24.3,11,2021
 Justin Jefferson,Team Graver,WR,,WR,,37.2,11,2021
 Keenan Allen,Team Graver,WR,,WR,,20.2,11,2021
 George Kittle,Team Graver,TE,,TE,,13.4,11,2021
-Dalton Schultz,Team Graver,FLEX,,FLEX,,11.3,11,2021
+Dalton Schultz,Team Graver,TE,,FLEX,,11.3,11,2021
 Ravens,Team Graver,D/ST,,D/ST,,7,11,2021
 Matt Prater,Team Graver,K,,K,,5,11,2021
 Josh Allen,Team Dupre,QB,,QB,,26.7,12,2021
@@ -995,7 +995,7 @@ Myles Gaskin,Team Dupre,RB,,RB,,19.2,12,2021
 Adam Thielen,Team Dupre,WR,,WR,,23.2,12,2021
 Brandon Aiyuk,Team Dupre,WR,,WR,,12.5,12,2021
 Pat Freiermuth,Team Dupre,TE,,TE,,14,12,2021
-Terry McLaurin,Team Dupre,FLEX,,FLEX,,9.1,12,2021
+Marvin Jones Jr.,Team Piazza,WR,,FLEX,,5.4,4,2021
 Bills,Team Dupre,D/ST,,D/ST,,11,12,2021
 Younghoe Koo,Team Dupre,K,,K,,3,12,2021
 Tom Brady,Team Chasse,QB,,QB,,11.24,12,2021
@@ -1004,7 +1004,7 @@ Melvin Gordon III,Team Chasse,RB,,RB,,9.8,12,2021
 Brandin Cooks,Team Chasse,WR,,WR,,13.5,12,2021
 Mike Williams,Team Chasse,WR,,WR,,7.9,12,2021
 Rob Gronkowski,Team Chasse,TE,,TE,,19.3,12,2021
-Darnell Mooney,Team Chasse,FLEX,,FLEX,,17.5,12,2021
+Darnell Mooney,Team Chasse,WR,,FLEX,,17.5,12,2021
 Patriots,Team Chasse,D/ST,,D/ST,,12,12,2021
 Tyler Bass,Team Chasse,K,,K,,7,12,2021
 Dak Prescott,Team Perrotti,QB,,QB,,25.3,12,2021
@@ -1013,7 +1013,7 @@ Saquon Barkley,Team Perrotti,RB,,RB,,9.3,12,2021
 Chris Godwin,Team Perrotti,WR,,WR,,4.7,12,2021
 Deebo Samuel,Team Perrotti,WR,,WR,,20.8,12,2021
 T.J. Hockenson,Team Perrotti,TE,,TE,,12.5,12,2021
-Darrell Henderson Jr.,Team Perrotti,FLEX,,FLEX,,17.3,12,2021
+Marvin Jones Jr.,Team Piazza,WR,,FLEX,,3.5,5,2021
 Dolphins,Team Perrotti,D/ST,,D/ST,,25,12,2021
 Greg Joseph,Team Perrotti,K,,K,,2,12,2021
 Lamar Jackson,Team Sachs,QB,,QB,,9.4,12,2021
@@ -1022,7 +1022,7 @@ Devonta Freeman,Team Sachs,RB,,RB,,7,12,2021
 Cooper Kupp,Team Sachs,WR,,WR,,18.6,12,2021
 Jaylen Waddle,Team Sachs,WR,,WR,,28.7,12,2021
 Mike Gesicki,Team Sachs,TE,,TE,,4.7,12,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,9.3,12,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,9.3,12,2021
 Texans,Team Sachs,D/ST,,D/ST,,8,12,2021
 Matt Gay,Team Sachs,K,,K,,8,12,2021
 Jalen Hurts,Team Acquarulo,QB,,QB,,6.86,12,2021
@@ -1031,7 +1031,7 @@ D'Andre Swift,Team Acquarulo,RB,,RB,,3.9,12,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,20.4,12,2021
 DK Metcalf,Team Acquarulo,WR,,WR,,2.3,12,2021
 Darren Waller,Team Acquarulo,TE,,TE,,5.3,12,2021
-James Robinson,Team Acquarulo,FLEX,,FLEX,,12.5,12,2021
+Marvin Jones Jr.,Team Piazza,WR,,FLEX,,5.5,10,2021
 Jaguars,Team Acquarulo,D/ST,,D/ST,,3,12,2021
 Brandon McManus,Team Acquarulo,K,,K,,4,12,2021
 Cam Newton,Team Shamas,QB,,QB,,6.18,12,2021
@@ -1040,7 +1040,7 @@ Leonard Fournette,Team Shamas,RB,,RB,,44.1,12,2021
 DJ Moore,Team Shamas,WR,,WR,,14.3,12,2021
 Elijah Moore,Team Shamas,WR,,WR,,9.3,12,2021
 Kyle Pitts,Team Shamas,TE,,TE,,4.6,12,2021
-Antonio Gibson,Team Shamas,FLEX,,FLEX,,23.6,12,2021
+Marvin Jones Jr.,Team Piazza,WR,,FLEX,,8.3,12,2021
 Eagles,Team Shamas,D/ST,,D/ST,,6,12,2021
 Nick Folk,Team Shamas,K,,K,,20,12,2021
 Joe Burrow,Team Pawlowicz,QB,,QB,,16.4,12,2021
@@ -1049,7 +1049,7 @@ J.D. McKissic,Team Pawlowicz,RB,,RB,,22.6,12,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,6.9,12,2021
 Tyler Lockett,Team Pawlowicz,WR,,WR,,12.6,12,2021
 Tyler Conklin,Team Pawlowicz,TE,,TE,,4.5,12,2021
-DeVonta Smith,Team Pawlowicz,FLEX,,FLEX,,4.2,12,2021
+DeVonta Smith,Team Pawlowicz,WR,,FLEX,,4.2,12,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,0,12,2021
 Evan McPherson,Team Pawlowicz,K,,K,,13,12,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,26.28,12,2021
@@ -1058,7 +1058,7 @@ Ezekiel Elliott,Team Loomis,RB,,RB,,16.9,12,2021
 Mike Evans,Team Loomis,WR,,WR,,4.6,12,2021
 Diontae Johnson,Team Loomis,WR,,WR,,18.5,12,2021
 Tyler Higbee,Team Loomis,TE,,TE,,1.3,12,2021
-Marquise Brown,Team Loomis,FLEX,,FLEX,,13.1,12,2021
+Marquise Brown,Team Loomis,WR,,FLEX,,13.1,12,2021
 Ravens,Team Loomis,D/ST,,D/ST,,12,12,2021
 Ryan Succop,Team Loomis,K,,K,,8,12,2021
 Tyrod Taylor,Team Piazza,QB,,QB,,15.32,12,2021
@@ -1067,7 +1067,7 @@ Kareem Hunt,Team Piazza,RB,,RB,,2,12,2021
 Davante Adams,Team Piazza,WR,,WR,,18.4,12,2021
 Michael Gallup,Team Piazza,WR,,WR,,15.6,12,2021
 Mark Andrews,Team Piazza,TE,,TE,,16.5,12,2021
-Marvin Jones Jr.,Team Piazza,FLEX,,FLEX,,8.3,12,2021
+Michael Carter,Team Shamas,RB,,FLEX,,7.5,11,2021
 Bears,Team Piazza,D/ST,,D/ST,,6,12,2021
 Justin Tucker,Team Piazza,K,,K,,13,12,2021
 Justin Herbert,Team Graver,QB,,QB,,19.72,12,2021
@@ -1076,7 +1076,7 @@ Joe Mixon,Team Graver,RB,,RB,,32.3,12,2021
 Justin Jefferson,Team Graver,WR,,WR,,13.26,12,2021
 Keenan Allen,Team Graver,WR,,WR,,15.5,12,2021
 George Kittle,Team Graver,TE,,TE,,2.3,12,2021
-Dalton Schultz,Team Graver,FLEX,,FLEX,,15.6,12,2021
+Dalton Schultz,Team Graver,TE,,FLEX,,15.6,12,2021
 Buccaneers,Team Graver,D/ST,,D/ST,,11,12,2021
 Graham Gano,Team Graver,K,,K,,6,12,2021
 Josh Allen,Team Dupre,QB,,QB,,11.7,13,2021
@@ -1085,7 +1085,7 @@ Myles Gaskin,Team Dupre,RB,,RB,,6.9,13,2021
 Adam Thielen,Team Dupre,WR,,WR,,1,13,2021
 Brandon Aiyuk,Team Dupre,WR,,WR,,8.5,13,2021
 Pat Freiermuth,Team Dupre,TE,,TE,,7.6,13,2021
-Terry McLaurin,Team Dupre,FLEX,,FLEX,,5.2,13,2021
+Michael Gallup,Team Piazza,WR,,FLEX,,7.6,1,2021
 Bills,Team Dupre,D/ST,,D/ST,,5,13,2021
 Younghoe Koo,Team Dupre,K,,K,,5,13,2021
 Matthew Stafford,Team Chasse,QB,,QB,,24,13,2021
@@ -1094,7 +1094,7 @@ Rhamondre Stevenson,Team Chasse,RB,,RB,,7.8,13,2021
 Brandin Cooks,Team Chasse,WR,,WR,,8.4,13,2021
 Darnell Mooney,Team Chasse,WR,,WR,,7.7,13,2021
 Travis Kelce,Team Chasse,TE,,TE,,5.7,13,2021
-Rob Gronkowski,Team Chasse,FLEX,,FLEX,,21.8,13,2021
+Rob Gronkowski,Team Chasse,TE,,FLEX,,21.8,13,2021
 Patriots,Team Chasse,D/ST,,D/ST,,9,13,2021
 Nick Folk,Team Chasse,K,,K,,7,13,2021
 Dak Prescott,Team Perrotti,QB,,QB,,11.22,13,2021
@@ -1103,7 +1103,7 @@ Sony Michel,Team Perrotti,RB,,RB,,21.9,13,2021
 Chris Godwin,Team Perrotti,WR,,WR,,30.2,13,2021
 Odell Beckham Jr.,Team Perrotti,WR,,WR,,10.8,13,2021
 T.J. Hockenson,Team Perrotti,TE,,TE,,14.9,13,2021
-Saquon Barkley,Team Perrotti,FLEX,,FLEX,,13.4,13,2021
+Saquon Barkley,Team Perrotti,RB,,FLEX,,13.4,13,2021
 Dolphins,Team Perrotti,D/ST,,D/ST,,10,13,2021
 Greg Joseph,Team Perrotti,K,,K,,10,13,2021
 Lamar Jackson,Team Sachs,QB,,QB,,17.62,13,2021
@@ -1112,7 +1112,7 @@ Rex Burkhead,Team Sachs,RB,,RB,,5.5,13,2021
 Cooper Kupp,Team Sachs,WR,,WR,,26.9,13,2021
 Jaylen Waddle,Team Sachs,WR,,WR,,18,13,2021
 Mike Gesicki,Team Sachs,TE,,TE,,11.6,13,2021
-Michael Pittman Jr.,Team Sachs,FLEX,,FLEX,,17,13,2021
+Michael Pittman Jr.,Team Sachs,WR,,FLEX,,17,13,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,11,13,2021
 Matt Gay,Team Sachs,K,,K,,15,13,2021
 Derek Carr,Team Acquarulo,QB,,QB,,12.36,13,2021
@@ -1121,7 +1121,7 @@ Jamaal Williams,Team Acquarulo,RB,,RB,,9,13,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,9.1,13,2021
 DK Metcalf,Team Acquarulo,WR,,WR,,11,13,2021
 Noah Fant,Team Acquarulo,TE,,TE,,7.3,13,2021
-James Robinson,Team Acquarulo,FLEX,,FLEX,,2.5,13,2021
+Michael Gallup,Team Piazza,WR,,FLEX,,9.4,11,2021
 Vikings,Team Acquarulo,D/ST,,D/ST,,5,13,2021
 Brandon McManus,Team Acquarulo,K,,K,,4,13,2021
 Tom Brady,Team Shamas,QB,,QB,,28.62,13,2021
@@ -1130,7 +1130,7 @@ Leonard Fournette,Team Shamas,RB,,RB,,22.2,13,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,19.2,13,2021
 Elijah Moore,Team Shamas,WR,,WR,,20.6,13,2021
 Kyle Pitts,Team Shamas,TE,,TE,,8.8,13,2021
-Antonio Gibson,Team Shamas,FLEX,,FLEX,,22.1,13,2021
+Michael Gallup,Team Piazza,WR,,FLEX,,11,14,2021
 Eagles,Team Shamas,D/ST,,D/ST,,6,13,2021
 Daniel Carlson,Team Shamas,K,,K,,11,13,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,30.82,13,2021
@@ -1139,7 +1139,7 @@ Matt Breida,Team Pawlowicz,RB,,RB,,1.8,13,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,4.2,13,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,10.2,13,2021
 Tyler Conklin,Team Pawlowicz,TE,,TE,,12.6,13,2021
-Tyler Lockett,Team Pawlowicz,FLEX,,FLEX,,19.8,13,2021
+Tyler Lockett,Team Pawlowicz,WR,,FLEX,,19.8,13,2021
 Rams,Team Pawlowicz,D/ST,,D/ST,,12,13,2021
 Evan McPherson,Team Pawlowicz,K,,K,,5,13,2021
 Taylor Heinecke,Team Loomis,QB,,QB,,14.84,13,2021
@@ -1148,7 +1148,7 @@ James Conner,Team Loomis,RB,,RB,,19.1,13,2021
 Marquise Brown,Team Loomis,WR,,WR,,10.5,13,2021
 Diontae Johnson,Team Loomis,WR,,WR,,30.5,13,2021
 Logan Thomas,Team Loomis,TE,,TE,,13.8,13,2021
-Mike Evans,Team Loomis,FLEX,,FLEX,,16.9,13,2021
+Mike Evans,Team Loomis,WR,,FLEX,,16.9,13,2021
 Ravens,Team Loomis,D/ST,,D/ST,,1,13,2021
 Ryan Succop,Team Loomis,K,,K,,6,13,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,12.56,13,2021
@@ -1157,7 +1157,7 @@ Devin Singletary,Team Piazza,RB,,RB,,3.6,13,2021
 Marvin Jones Jr.,Team Piazza,WR,,WR,,3.1,13,2021
 Christian Kirk,Team Piazza,WR,,WR,,1.4,13,2021
 Mark Andrews,Team Piazza,TE,,TE,,9,13,2021
-Darrel Williams,Team Piazza,FLEX,,FLEX,,11,13,2021
+Russell Gage,Team Sachs,WR,,FLEX,,10.4,14,2021
 Colts,Team Piazza,D/ST,,D/ST,,16,13,2021
 Justin Tucker,Team Piazza,K,,K,,7,13,2021
 Justin Herbert,Team Graver,QB,,QB,,25.28,13,2021
@@ -1166,7 +1166,7 @@ Joe Mixon,Team Graver,RB,,RB,,9.4,13,2021
 Justin Jefferson,Team Graver,WR,,WR,,35.6,13,2021
 Keenan Allen,Team Graver,WR,,WR,,22.4,13,2021
 George Kittle,Team Graver,TE,,TE,,39.6,13,2021
-DeAndre Hopkins,Team Graver,FLEX,,FLEX,,11.2,13,2021
+DeAndre Hopkins,Team Graver,WR,,FLEX,,11.2,13,2021
 Buccaneers,Team Graver,D/ST,,D/ST,,9,13,2021
 Graham Gano,Team Graver,K,,K,,10,13,2021
 Josh Allen,Team Dupre,QB,,QB,,35.22,14,2021
@@ -1175,7 +1175,7 @@ Myles Gaskin,Team Dupre,RB,,RB,,9.7,14,2021
 Adam Thielen,Team Dupre,WR,,WR,,16.4,14,2021
 Brandon Aiyuk,Team Dupre,WR,,WR,,0,14,2021
 Pat Freiermuth,Team Dupre,TE,,TE,,11.2,14,2021
-Terry McLaurin,Team Dupre,FLEX,,FLEX,,0,14,2021
+Terry McLaurin,Team Dupre,WR,,FLEX,,11.9,10,2021
 Bills,Team Dupre,D/ST,,D/ST,,-4,14,2021
 Younghoe Koo,Team Dupre,K,,K,,12,14,2021
 Matthew Stafford,Team Chasse,QB,,QB,,23.48,14,2021
@@ -1184,7 +1184,7 @@ Dontrell Hilliard,Team Chasse,RB,,RB,,1.3,14,2021
 Mike Williams,Team Chasse,WR,,WR,,12.1,14,2021
 Amari Cooper,Team Chasse,WR,,WR,,16.1,14,2021
 Travis Kelce,Team Chasse,TE,,TE,,5.7,14,2021
-Rob Gronkowski,Team Chasse,FLEX,,FLEX,,11.2,14,2021
+Rob Gronkowski,Team Chasse,TE,,FLEX,,11.2,14,2021
 Panthers,Team Chasse,D/ST,,D/ST,,2,14,2021
 Tyler Bass,Team Chasse,K,,K,,9,14,2021
 Dak Prescott,Team Perrotti,QB,,QB,,9.94,14,2021
@@ -1193,7 +1193,7 @@ Sony Michel,Team Perrotti,RB,,RB,,0.9,14,2021
 Chris Godwin,Team Perrotti,WR,,WR,,20.5,14,2021
 Deebo Samuel,Team Perrotti,WR,,WR,,12.9,14,2021
 Dawson Knox,Team Perrotti,TE,,TE,,19,14,2021
-Saquon Barkley,Team Perrotti,FLEX,,FLEX,,18.5,14,2021
+Saquon Barkley,Team Perrotti,RB,,FLEX,,18.5,14,2021
 Saints,Team Perrotti,D/ST,,D/ST,,8,14,2021
 Greg Joseph,Team Perrotti,K,,K,,12,14,2021
 Lamar Jackson,Team Sachs,QB,,QB,,1.18,14,2021
@@ -1202,7 +1202,7 @@ Chuba Hubbard,Team Sachs,RB,,RB,,9.3,14,2021
 Cooper Kupp,Team Sachs,WR,,WR,,31.3,14,2021
 Chase Claypool,Team Sachs,WR,,WR,,17.5,14,2021
 Cole Kmet,Team Sachs,TE,,TE,,4.7,14,2021
-Russell Gage,Team Sachs,FLEX,,FLEX,,10.4,14,2021
+Terry McLaurin,Team Dupre,WR,,FLEX,,21.3,11,2021
 Chargers,Team Sachs,D/ST,,D/ST,,6,14,2021
 Matt Gay,Team Sachs,K,,K,,14,14,2021
 Russell Wilson,Team Acquarulo,QB,,QB,,21.2,14,2021
@@ -1211,7 +1211,7 @@ James Robinson,Team Acquarulo,RB,,RB,,0.4,14,2021
 Stefon Diggs,Team Acquarulo,WR,,WR,,14.4,14,2021
 DK Metcalf,Team Acquarulo,WR,,WR,,8.3,14,2021
 Noah Fant,Team Acquarulo,TE,,TE,,9.1,14,2021
-Jerry Jeudy,Team Acquarulo,FLEX,,FLEX,,9.7,14,2021
+Jerry Jeudy,Team Acquarulo,WR,,FLEX,,9.7,14,2021
 Titans,Team Acquarulo,D/ST,,D/ST,,19,14,2021
 Brandon McManus,Team Acquarulo,K,,K,,10,14,2021
 Taysom Hill,Team Shamas,QB,,QB,,26.3,14,2021
@@ -1220,7 +1220,7 @@ Leonard Fournette,Team Shamas,RB,,RB,,23.2,14,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,14.6,14,2021
 DJ Moore,Team Shamas,WR,,WR,,14.4,14,2021
 Kyle Pitts,Team Shamas,TE,,TE,,11.1,14,2021
-Antonio Gibson,Team Shamas,FLEX,,FLEX,,4.1,14,2021
+Terry McLaurin,Team Dupre,WR,,FLEX,,9.1,12,2021
 Broncos,Team Shamas,D/ST,,D/ST,,9,14,2021
 Daniel Carlson,Team Shamas,K,,K,,3,14,2021
 Kyler Murray,Team Pawlowicz,QB,,QB,,17.42,14,2021
@@ -1229,7 +1229,7 @@ J.D. McKissic,Team Pawlowicz,RB,,RB,,0,14,2021
 Tyreek Hill,Team Pawlowicz,WR,,WR,,11.6,14,2021
 Ja'Marr Chase,Team Pawlowicz,WR,,WR,,25.3,14,2021
 Tyler Conklin,Team Pawlowicz,TE,,TE,,4,14,2021
-Tyler Lockett,Team Pawlowicz,FLEX,,FLEX,,27.2,14,2021
+Tyler Lockett,Team Pawlowicz,WR,,FLEX,,27.2,14,2021
 Cowboys,Team Pawlowicz,D/ST,,D/ST,,24,14,2021
 Evan McPherson,Team Pawlowicz,K,,K,,11,14,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,29.64,14,2021
@@ -1238,7 +1238,7 @@ James Conner,Team Loomis,RB,,RB,,33.5,14,2021
 Marquise Brown,Team Loomis,WR,,WR,,9.1,14,2021
 Diontae Johnson,Team Loomis,WR,,WR,,15.3,14,2021
 Zach Ertz,Team Loomis,TE,,TE,,9.2,14,2021
-Mike Evans,Team Loomis,FLEX,,FLEX,,21.1,14,2021
+Mike Evans,Team Loomis,WR,,FLEX,,21.1,14,2021
 Ravens,Team Loomis,D/ST,,D/ST,,4,14,2021
 Harrison Butker,Team Loomis,K,,K,,14,14,2021
 Patrick Mahomes,Team Piazza,QB,,QB,,20.32,14,2021
@@ -1247,7 +1247,7 @@ D'Onta Foreman,Team Piazza,RB,,RB,,14.2,14,2021
 Davante Adams,Team Piazza,WR,,WR,,34.1,14,2021
 Van Jefferson,Team Piazza,WR,,WR,,14.8,14,2021
 Mark Andrews,Team Piazza,TE,,TE,,28.5,14,2021
-Michael Gallup,Team Piazza,FLEX,,FLEX,,11,14,2021
+Terry McLaurin,Team Dupre,WR,,FLEX,,5.2,13,2021
 Seahawks,Team Piazza,D/ST,,D/ST,,4,14,2021
 Justin Tucker,Team Piazza,K,,K,,15,14,2021
 Justin Herbert,Team Graver,QB,,QB,,24.9,14,2021
@@ -1256,7 +1256,7 @@ Joe Mixon,Team Graver,RB,,RB,,8.8,14,2021
 DeAndre Hopkins,Team Graver,WR,,WR,,10.4,14,2021
 Justin Jefferson,Team Graver,WR,,WR,,20.5,14,2021
 George Kittle,Team Graver,TE,,TE,,34.1,14,2021
-Javonte Williams,Team Graver,FLEX,,FLEX,,21.3,14,2021
+Javonte Williams,Team Graver,RB,,FLEX,,21.3,14,2021
 Packers,Team Graver,D/ST,,D/ST,,13,14,2021
 Graham Gano,Team Graver,K,,K,,1,14,2021
 Dak Prescott,Team Perrotti,QB,,QB,,10.58,15,2021
@@ -1265,7 +1265,7 @@ Saquon Barkley,Team Perrotti,RB,,RB,,9.4,15,2021
 Chris Godwin,Team Perrotti,WR,,WR,,10.9,15,2021
 Deebo Samuel,Team Perrotti,WR,,WR,,18.9,15,2021
 Dawson Knox,Team Perrotti,TE,,TE,,7.8,15,2021
-Odell Beckham Jr.,Team Perrotti,FLEX,,FLEX,,1.7,15,2021
+Odell Beckham Jr.,Team Perrotti,WR,,FLEX,,1.7,15,2021
 Jaguars,Team Perrotti,D/ST,,D/ST,,4,15,2021
 Greg Joseph,Team Perrotti,K,,K,,5,15,2021
 Tua Tagovailoa,Team Sachs,QB,,QB,,13.74,15,2021
@@ -1274,7 +1274,7 @@ Devonta Freeman,Team Sachs,RB,,RB,,3.4,15,2021
 Cooper Kupp,Team Sachs,WR,,WR,,34.7,15,2021
 Chase Claypool,Team Sachs,WR,,WR,,1.9,15,2021
 Mike Gesicki,Team Sachs,TE,,TE,,9.3,15,2021
-Chase Edmonds,Team Sachs,FLEX,,FLEX,,5.3,15,2021
+Terry McLaurin,Team Dupre,WR,,FLEX,,0,14,2021
 Cardinals,Team Sachs,D/ST,,D/ST,,3,15,2021
 Matt Gay,Team Sachs,K,,K,,10,15,2021
 Tom Brady,Team Shamas,QB,,QB,,4.76,15,2021
@@ -1283,7 +1283,7 @@ Leonard Fournette,Team Shamas,RB,,RB,,13.7,15,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,11,15,2021
 Amon-Ra St. Brown,Team Shamas,WR,,WR,,23.5,15,2021
 Kyle Pitts,Team Shamas,TE,,TE,,11.7,15,2021
-Antonio Gibson,Team Shamas,FLEX,,FLEX,,18.5,15,2021
+Terry McLaurin,Cup of Joe,WR,Wsh,FLEX,0,5.1,1,2023
 49ers,Team Shamas,D/ST,,D/ST,,10,15,2021
 Jake Elliott,Team Shamas,K,,K,,9,15,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,23.82,15,2021
@@ -1292,7 +1292,7 @@ James Conner,Team Loomis,RB,,RB,,9,15,2021
 Mike Evans,Team Loomis,WR,,WR,,2.4,15,2021
 Diontae Johnson,Team Loomis,WR,,WR,,9.8,15,2021
 Zach Ertz,Team Loomis,TE,,TE,,13.4,15,2021
-Hunter Renfrow,Team Loomis,FLEX,,FLEX,,6.2,15,2021
+Hunter Renfrow,Team Loomis,WR,,FLEX,,6.2,15,2021
 Dolphins,Team Loomis,D/ST,,D/ST,,10,15,2021
 Harrison Butker,Team Loomis,K,,K,,8,15,2021
 Matthew Stafford,Team Chasse,QB,,QB,,6.68,16,2021
@@ -1301,7 +1301,7 @@ Melvin Gordon III,Team Chasse,RB,,RB,,1,16,2021
 Amari Cooper,Team Chasse,WR,,WR,,21.5,16,2021
 Darnell Mooney,Team Chasse,WR,,WR,,10.9,16,2021
 Rob Gronkowski,Team Chasse,TE,,TE,,3.3,16,2021
-Dallas Goedert,Team Chasse,FLEX,,FLEX,,4.8,16,2021
+Dallas Goedert,Team Chasse,TE,,FLEX,,4.8,16,2021
 Patriots,Team Chasse,D/ST,,D/ST,,-4,16,2021
 Nick Folk,Team Chasse,K,,K,,3,16,2021
 Tom Brady,Team Shamas,QB,,QB,,14.38,16,2021
@@ -1310,7 +1310,7 @@ Ronald Jones II,Team Shamas,RB,,RB,,16.1,16,2021
 CeeDee Lamb,Team Shamas,WR,,WR,,10.4,16,2021
 DJ Moore,Team Shamas,WR,,WR,,10.5,16,2021
 Kyle Pitts,Team Shamas,TE,,TE,,16.2,16,2021
-Antonio Gibson,Team Shamas,FLEX,,FLEX,,13.8,16,2021
+Terry McLaurin,Cup of Joe,WR,Wsh,FLEX,13,16.4,2,2023
 Chiefs,Team Shamas,D/ST,,D/ST,,11,16,2021
 Elliot Fry,Team Shamas,K,,K,,12,16,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,19.98,16,2021
@@ -1319,7 +1319,7 @@ Ezekiel Elliott,Team Loomis,RB,,RB,,17.2,16,2021
 Marquise Brown,Team Loomis,WR,,WR,,9.4,16,2021
 Diontae Johnson,Team Loomis,WR,,WR,,15.1,16,2021
 Zach Ertz,Team Loomis,TE,,TE,,13.4,16,2021
-Hunter Renfrow,Team Loomis,FLEX,,FLEX,,13,16,2021
+Hunter Renfrow,Team Loomis,WR,,FLEX,,13,16,2021
 Dolphins,Team Loomis,D/ST,,D/ST,,25,16,2021
 Daniel Carlson,Team Loomis,K,,K,,6,16,2021
 Justin Herbert,Team Graver,QB,,QB,,16.94,16,2021
@@ -1328,7 +1328,7 @@ Joe Mixon,Team Graver,RB,,RB,,31.5,16,2021
 Justin Jefferson,Team Graver,WR,,WR,,19.6,16,2021
 Keenan Allen,Team Graver,WR,,WR,,7.5,16,2021
 George Kittle,Team Graver,TE,,TE,,4.1,16,2021
-Antonio Brown,Team Graver,FLEX,,FLEX,,20.1,16,2021
+Antonio Brown,Team Graver,WR,,FLEX,,20.1,16,2021
 Buccaneers,Team Graver,D/ST,,D/ST,,15,16,2021
 Greg Zuerlein,Team Graver,K,,K,,8,16,2021
 Aaron Rodgers,Team Loomis,QB,,QB,,20.32,17,2021
@@ -1337,7 +1337,7 @@ Sony Michel,Team Loomis,RB,,RB,,18.9,17,2021
 Mike Evans,Team Loomis,WR,,WR,,14.7,17,2021
 Diontae Johnson,Team Loomis,WR,,WR,,17.1,17,2021
 Zach Ertz,Team Loomis,TE,,TE,,11.1,17,2021
-Hunter Renfrow,Team Loomis,FLEX,,FLEX,,20.6,17,2021
+Hunter Renfrow,Team Loomis,WR,,FLEX,,20.6,17,2021
 Dolphins,Team Loomis,D/ST,,D/ST,,0,17,2021
 Harrison Butker,Team Loomis,K,,K,,7,17,2021
 Justin Herbert,Team Graver,QB,,QB,,17.68,17,2021
@@ -1346,7 +1346,7 @@ Joe Mixon,Team Graver,RB,,RB,,15.6,17,2021
 Justin Jefferson,Team Graver,WR,,WR,,11.8,17,2021
 Keenan Allen,Team Graver,WR,,WR,,14.4,17,2021
 George Kittle,Team Graver,TE,,TE,,4.5,17,2021
-Antonio Brown,Team Graver,FLEX,,FLEX,,5.6,17,2021
+Antonio Brown,Team Graver,WR,,FLEX,,5.6,17,2021
 Buccaneers,Team Graver,D/ST,,D/ST,,2,17,2021
 Greg Zuerlein,Team Graver,K,,K,,1,17,2021
 Joe Burrow,Justin Jefferson,QB,Cin,QB,18.1,18.22,1,2022
@@ -3782,7 +3782,7 @@ James Conner,S(kittle),RB,ARI,RB,0,12,1,2023
 A.J. Brown,S(kittle),WR,PHI,WR,0,17.8,1,2023
 Davante Adams,S(kittle),WR,LV,WR,0,12.6,1,2023
 George Kittle,S(kittle),TE,SF,TE,0,4.9,1,2023
-Keenan Allen,S(kittle),FLEX,LAC,FLEX,0,14.2,1,2023
+Keenan Allen,S(kittle),WR,LAC,FLEX,0,14.2,1,2023
 Dolphins,S(kittle),D/ST,MIA,D/ST,0,-1,1,2023
 Matt Gay,S(kittle),K,IND,K,8,3,1,2023
 George Pickens,S(kittle),WR,PIT,Bench,8.6,0,1,2023
@@ -3798,7 +3798,7 @@ Jamaal Williams,PEDeAndre Hopkins,RB,NO,RB,0,7.2,1,2023
 Jaylen Waddle,PEDeAndre Hopkins,WR,MIA,WR,0,11.8,1,2023
 DeVonta Smith,PEDeAndre Hopkins,WR,PHI,WR,0,17.7,1,2023
 Tyler Conklin,PEDeAndre Hopkins,TE,NYJ,TE,0,1.2,1,2023
-Raheem Mostert,PEDeAndre Hopkins,FLEX,MIA,FLEX,0,13,1,2023
+Raheem Mostert,PEDeAndre Hopkins,RB,MIA,FLEX,0,13,1,2023
 Patriots,PEDeAndre Hopkins,D/ST,NE,D/ST,0,7,1,2023
 Younghoe Koo,PEDeAndre Hopkins,K,ATL,K,7.9,7,1,2023
 Travis Kelce,PEDeAndre Hopkins,TE,KC,Bench,0,0,1,2023
@@ -3814,7 +3814,7 @@ Bijan Robinson,Mr. FigureItOut,RB,ATL,RB,0,20.3,1,2023
 Calvin Ridley,Mr. FigureItOut,WR,JAX,WR,0,24.1,1,2023
 Chris Godwin,Mr. FigureItOut,WR,TB,WR,0,4.4,1,2023
 David Njoku,Mr. FigureItOut,TE,CLE,TE,0,10.1,1,2023
-DeAndre Hopkins,Mr. FigureItOut,FLEX,TEN,FLEX,0,12.3,1,2023
+DeAndre Hopkins,Mr. FigureItOut,WR,TEN,FLEX,0,12.3,1,2023
 Ravens,Mr. FigureItOut,D/ST,BAL,D/ST,0,18,1,2023
 Jake Elliott,Mr. FigureItOut,K,PHI,K,8,8,1,2023
 Odell Beckham Jr.,Mr. FigureItOut,WR,BAL,Bench,10.8,5.7,1,2023
@@ -3830,7 +3830,7 @@ Derrick Henry,Jah is gay,RB,BAL,RB,0,0,1,2023
 Chris Olave,Jah is gay,WR,NO,WR,0,19.2,1,2023
 Amari Cooper,Jah is gay,WR,CLE,WR,0,5.7,1,2023
 Pat Freiermuth,Jah is gay,TE,PIT,TE,0,7.1,1,2023
-Miles Sanders,Jah is gay,FLEX,CAR,FLEX,0,11.8,1,2023
+Miles Sanders,Jah is gay,RB,CAR,FLEX,0,11.8,1,2023
 Falcons,Jah is gay,D/ST,ATL,D/ST,0,-2,1,2023
 Graham Gano,Jah is gay,K,NYG,K,8.1,0,1,2023
 Michael Pittman Jr.,Jah is gay,WR,IND,Bench,0,23.7,1,2023
@@ -3846,9 +3846,9 @@ Javonte Williams,My digg hurts,RB,DEN,RB,0,9.7,1,2023
 Michael Thomas,My digg hurts,WR,NO,WR,0,12.2,1,2023
 Stefon Diggs,My digg hurts,WR,BUF,WR,0,26.2,1,2023
 T.J. Hockenson,My digg hurts,TE,MIN,TE,0,12.5,1,2023
-Deebo Samuel,My digg hurts,FLEX,SF,FLEX,0,11.3,1,2023
+Deebo Samuel,My digg hurts,WR,SF,FLEX,0,11.3,1,2023
 Cowboys,My digg hurts,D/ST,DAL,D/ST,0,35,1,2023
-Brandon McManus,My digg hurts,K,WAS,K,8,8.3,1,2023
+Brandon McManus,My digg hurts,K,Wsh,K,8,8.3,1,2023
 Jonathan Taylor,My digg hurts,RB,IND,Bench,0,0,1,2023
 David Montgomery,My digg hurts,RB,DET,Bench,0,0,1,2023
 JuJu Smith-Schuster,My digg hurts,WR,NE,Bench,0,0,1,2023
@@ -3862,8 +3862,8 @@ Jahmyr Gibbs,Riley Reid Option,RB,DET,RB,0,8,1,2023
 Ja'Marr Chase,Riley Reid Option,WR,CIN,WR,0,9.1,1,2023
 Garrett Wilson,Riley Reid Option,WR,NYJ,WR,0,14.4,1,2023
 Dallas Goedert,Riley Reid Option,TE,PHI,TE,0,0,1,2023
-Tyler Lockett,Riley Reid Option,FLEX,SEA,FLEX,0,3,1,2023
-Commanders,Riley Reid Option,D/ST,WAS,D/ST,0,12,1,2023
+Tyler Lockett,Riley Reid Option,WR,SEA,FLEX,0,3,1,2023
+Commanders,Riley Reid Option,D/ST,Wsh,D/ST,0,12,1,2023
 Daniel Carlson,Riley Reid Option,K,LV,K,8.2,5,1,2023
 Mike Williams,Riley Reid Option,WR,NYJ,Bench,0,8.5,1,2023
 Jakobi Meyers,Riley Reid Option,WR,LV,Bench,0,29.3,1,2023
@@ -3877,7 +3877,7 @@ Kenneth Walker III,Chase-ing Young Children,RB,SEA,RB,0,10.7,1,2023
 Diontae Johnson,Chase-ing Young Children,WR,PIT,WR,0,10.7,1,2023
 Justin Jefferson,Chase-ing Young Children,WR,MIN,WR,0,24,1,2023
 Greg Dulcich,Chase-ing Young Children,TE,DEN,TE,0,4.2,1,2023
-Rhamondre Stevenson,Chase-ing Young Children,FLEX,NE,FLEX,0,14.9,1,2023
+Rhamondre Stevenson,Chase-ing Young Children,RB,NE,FLEX,0,14.9,1,2023
 Jaguars,Chase-ing Young Children,D/ST,JAX,D/ST,0,13,1,2023
 Jason Myers,Chase-ing Young Children,K,SEA,K,8.6,7,1,2023
 Dalvin Cook,Chase-ing Young Children,RB,NYJ,Bench,12,8.9,1,2023
@@ -3886,20 +3886,20 @@ Samaje Perine,Chase-ing Young Children,RB,DEN,Bench,11.8,0,1,2023
 Christian Kirk,Chase-ing Young Children,WR,JAX,Bench,11.6,1.9,1,2023
 Aaron Rodgers,Chase-ing Young Children,QB,NYJ,Bench,0,0,1,2023
 Mark Andrews,Chase-ing Young Children,TE,BAL,Bench,0,0,1,2023
-Brian Robinson Jr.,Chase-ing Young Children,RB,WAS,Bench,11.6,0,1,2023
+Brian Robinson Jr.,Chase-ing Young Children,RB,Wsh,Bench,11.6,0,1,2023
 Justin Herbert,Cup of Joe,QB,LAC,QB,0,20.86,1,2023
 Austin Ekeler,Cup of Joe,RB,LAC,RB,0,26.4,1,2023
 Joe Mixon,Cup of Joe,RB,CIN,RB,0,10.3,1,2023
 Amon-Ra St. Brown,Cup of Joe,WR,DET,WR,0,19.1,1,2023
 Tee Higgins,Cup of Joe,WR,CIN,WR,0,0,1,2023
 Evan Engram,Cup of Joe,TE,JAX,TE,0,9.9,1,2023
-Terry McLaurin,Cup of Joe,FLEX,WAS,FLEX,0,5.1,1,2023
+Tim Patrick,Team Shamas,WR,,FLEX,,13.2,6,2021
 Eagles,Cup of Joe,D/ST,PHI,D/ST,0,11,1,2023
 Tyler Bass,Cup of Joe,K,BUF,K,8,8,1,2023
 D'Andre Swift,Cup of Joe,RB,DET,Bench,0,1.3,1,2023
 Courtland Sutton,Cup of Joe,WR,DEN,Bench,0,13.2,1,2023
-Jahan Dotson,Cup of Joe,WR,WAS,Bench,0,0,1,2023
-Antonio Gibson,Cup of Joe,RB,WAS,Bench,0,0.9,1,2023
+Jahan Dotson,Cup of Joe,WR,Wsh,Bench,0,0,1,2023
+Antonio Gibson,Cup of Joe,RB,Wsh,Bench,0,0.9,1,2023
 Gabe Davis,Cup of Joe,WR,BUF,Bench,0,5.2,1,2023
 K.J. Osborn,Cup of Joe,WR,MIN,Bench,0,0,1,2023
 Jared Goff,Cup of Joe,QB,DET,Bench,0,14,1,2023
@@ -3909,7 +3909,7 @@ Aaron Jones,Team Chieffo,RB,MIN,RB,0,26.7,1,2023
 Tyreek Hill,Team Chieffo,WR,MIA,WR,0,44.5,1,2023
 Mike Evans,Team Chieffo,WR,TB,WR,0,18.6,1,2023
 Darren Waller,Team Chieffo,TE,NYG,TE,0,6.6,1,2023
-Isiah Pacheco,Team Chieffo,FLEX,KC,FLEX,0,9.4,1,2023
+Isiah Pacheco,Team Chieffo,RB,KC,FLEX,0,9.4,1,2023
 49ers,Team Chieffo,D/ST,SF,D/ST,0,14,1,2023
 Evan McPherson,Team Chieffo,K,CIN,K,0,3,1,2023
 Jerry Jeudy,Team Chieffo,WR,DEN,Bench,0,0,1,2023
@@ -3925,7 +3925,7 @@ Dameon Pierce,Pocket Aces,RB,HOU,RB,0,6.7,1,2023
 CeeDee Lamb,Pocket Aces,WR,DAL,WR,0,11.7,1,2023
 DK Metcalf,Pocket Aces,WR,SEA,WR,0,6.4,1,2023
 Kyle Pitts,Pocket Aces,TE,ATL,TE,0,13.7,1,2023
-Cam Akers,Pocket Aces,FLEX,MIN,FLEX,0,13.5,1,2023
+Cam Akers,Pocket Aces,RB,MIN,FLEX,0,13.5,1,2023
 Steelers,Pocket Aces,D/ST,PIT,D/ST,0,8.9,1,2023
 Justin Tucker,Pocket Aces,K,BAL,K,0,5.8,1,2023
 Marquise Brown,Pocket Aces,WR,KC,Bench,0,8.7,1,2023
@@ -3941,9 +3941,9 @@ Javonte Williams,My digg hurts,RB,DEN,RB,7.8,7.8,2,2023
 Deebo Samuel,My digg hurts,WR,SF,WR,14.3,22.1,2,2023
 Stefon Diggs,My digg hurts,WR,BUF,WR,18,17.9,2,2023
 T.J. Hockenson,My digg hurts,TE,MIN,TE,13.5,25.6,2,2023
-Tyler Allgeier,My digg hurts,FLEX,ATL,FLEX,13.2,4.8,2,2023
+Tim Patrick,Team Shamas,WR,,FLEX,,3.6,7,2021
 Cowboys,My digg hurts,D/ST,DAL,D/ST,8.3,10,2,2023
-Brandon McManus,My digg hurts,K,WAS,K,8.4,10,2,2023
+Brandon McManus,My digg hurts,K,Wsh,K,8.4,10,2,2023
 Jonathan Taylor,My digg hurts,RB,IND,Bench,0,0,2,2023
 David Montgomery,My digg hurts,RB,DET,Bench,12.4,12.4,2,2023
 JuJu Smith-Schuster,My digg hurts,WR,NE,Bench,5.4,7.8,2,2023
@@ -3957,7 +3957,7 @@ Bijan Robinson,Mr. FigureItOut,RB,ATL,RB,16.4,9.9,2,2023
 Calvin Ridley,Mr. FigureItOut,WR,JAX,WR,16.8,5.2,2,2023
 Chris Godwin,Mr. FigureItOut,WR,TB,WR,13.8,10.8,2,2023
 David Njoku,Mr. FigureItOut,TE,CLE,TE,9.5,6.8,2,2023
-Joshua Kelley,Mr. FigureItOut,FLEX,LAC,FLEX,14.3,3.9,2,2023
+Tyler Allgeier,My digg hurts,RB,ATL,FLEX,13.2,4.8,2,2023
 Giants,Mr. FigureItOut,D/ST,NYG,D/ST,7.5,2,2,2023
 Jake Elliott,Mr. FigureItOut,K,PHI,K,8.8,12,2,2023
 DeAndre Hopkins,Mr. FigureItOut,WR,TEN,Bench,12.9,8,2,2023
@@ -3974,8 +3974,8 @@ James Cook,Riley Reid Option,RB,BUF,RB,19.9,14.9,2,2023
 Ja'Marr Chase,Riley Reid Option,WR,CIN,WR,20.2,8.1,2,2023
 Garrett Wilson,Riley Reid Option,WR,NYJ,WR,16.3,14,2,2023
 Dallas Goedert,Riley Reid Option,TE,PHI,TE,8.2,12.6,2,2023
-Jahmyr Gibbs,Riley Reid Option,FLEX,DET,FLEX,13.2,12.6,2,2023
-Commanders,Riley Reid Option,D/ST,WAS,D/ST,6.6,9,2,2023
+Jahmyr Gibbs,Riley Reid Option,RB,DET,FLEX,13.2,12.6,2,2023
+Commanders,Riley Reid Option,D/ST,Wsh,D/ST,6.6,9,2,2023
 Daniel Carlson,Riley Reid Option,K,LV,K,7.6,5,2,2023
 Mike Williams,Riley Reid Option,WR,NYJ,Bench,16.6,12.6,2,2023
 Tyler Lockett,Riley Reid Option,WR,SEA,Bench,13,25.9,2,2023
@@ -3990,7 +3990,7 @@ Jamaal Williams,PEDeAndre Hopkins,RB,NO,RB,13.2,2.9,2,2023
 Jaylen Waddle,PEDeAndre Hopkins,WR,MIA,WR,14.5,12.4,2,2023
 DeVonta Smith,PEDeAndre Hopkins,WR,PHI,WR,15,23.1,2,2023
 Travis Kelce,PEDeAndre Hopkins,TE,KC,TE,16.8,12.6,2,2023
-Breece Hall,PEDeAndre Hopkins,FLEX,NYJ,FLEX,10.5,0.9,2,2023
+Breece Hall,PEDeAndre Hopkins,RB,NYJ,FLEX,10.5,0.9,2,2023
 Patriots,PEDeAndre Hopkins,D/ST,NE,D/ST,4.3,4,2,2023
 Younghoe Koo,PEDeAndre Hopkins,K,ATL,K,7.8,13,2,2023
 Christian Watson,PEDeAndre Hopkins,WR,GB,Bench,0,0,2,2023
@@ -4006,7 +4006,7 @@ Kenneth Walker III,Chase-ing Young Children,RB,SEA,RB,15,18.4,2,2023
 Justin Jefferson,Chase-ing Young Children,WR,MIN,WR,22.1,24.9,2,2023
 Puka Nacua,Chase-ing Young Children,WR,LAR,WR,12.2,30.1,2,2023
 Mark Andrews,Chase-ing Young Children,TE,BAL,TE,12.4,15.5,2,2023
-Rhamondre Stevenson,Chase-ing Young Children,FLEX,NE,FLEX,14.7,15,2,2023
+Rhamondre Stevenson,Chase-ing Young Children,RB,NE,FLEX,14.7,15,2,2023
 Bills,Chase-ing Young Children,D/ST,BUF,D/ST,6.1,11,2,2023
 Jason Myers,Chase-ing Young Children,K,SEA,K,8,10,2,2023
 Diontae Johnson,Chase-ing Young Children,WR,PIT,Bench,0,0,2,2023
@@ -4014,14 +4014,14 @@ Dalvin Cook,Chase-ing Young Children,RB,NYJ,Bench,10.4,0.2,2,2023
 Samaje Perine,Chase-ing Young Children,RB,DEN,Bench,9.4,5.4,2,2023
 Greg Dulcich,Chase-ing Young Children,TE,DEN,Bench,9.4,0,2,2023
 Christian Kirk,Chase-ing Young Children,WR,JAX,Bench,10.7,21.96,2,2023
-Brian Robinson Jr.,Chase-ing Young Children,RB,WAS,Bench,10.7,28.9,2,2023
+Brian Robinson Jr.,Chase-ing Young Children,RB,Wsh,Bench,10.7,28.9,2,2023
 Justin Fields,Pocket Aces,QB,CHI,QB,22.3,14.74,2,2023
 Christian McCaffrey,Pocket Aces,RB,SF,RB,19,22.5,2,2023
 Dameon Pierce,Pocket Aces,RB,HOU,RB,13.1,5.5,2,2023
 CeeDee Lamb,Pocket Aces,WR,DAL,WR,16.1,25.3,2,2023
 DK Metcalf,Pocket Aces,WR,SEA,WR,15.4,13.5,2,2023
 Kyle Pitts,Pocket Aces,TE,ATL,TE,9.2,9.2,2,2023
-Marquise Brown,Pocket Aces,FLEX,KC,FLEX,12.1,1.4,2,2023
+Marquise Brown,Pocket Aces,WR,KC,FLEX,12.1,1.4,2,2023
 Steelers,Pocket Aces,D/ST,PIT,D/ST,5.9,23,2,2023
 Justin Tucker,Pocket Aces,K,BAL,K,8.4,10,2,2023
 Cam Akers,Pocket Aces,RB,MIN,Bench,0,0,2,2023
@@ -4037,7 +4037,7 @@ Derrick Henry,Jah is gay,RB,BAL,RB,17.8,18.5,2,2023
 Chris Olave,Jah is gay,WR,NO,WR,14.5,14.6,2,2023
 Brandon Aiyuk,Jah is gay,WR,SF,WR,13.9,7.3,2,2023
 Pat Freiermuth,Jah is gay,TE,PIT,TE,9.5,1.2,2,2023
-A.J. Dillon,Jah is gay,FLEX,GB,FLEX,15.4,7.3,2,2023
+A.J. Dillon,Jah is gay,RB,GB,FLEX,15.4,7.3,2,2023
 Browns,Jah is gay,D/ST,CLE,D/ST,7.8,9,2,2023
 Graham Gano,Jah is gay,K,NYG,K,8.6,3,2,2023
 Amari Cooper,Jah is gay,WR,CLE,Bench,0,16,2,2023
@@ -4050,16 +4050,16 @@ Falcons,Jah is gay,D/ST,ATL,Bench,3,0,2,2023
 Jeff Wilson Jr.,Jah is gay,RB,MIA,IR,0,0,2,2023
 Justin Herbert,Cup of Joe,QB,LAC,QB,19,22.5,2,2023
 Joe Mixon,Cup of Joe,RB,CIN,RB,16,13.5,2,2023
-Antonio Gibson,Cup of Joe,RB,WAS,RB,17.5,8.3,2,2023
+Antonio Gibson,Cup of Joe,RB,Wsh,RB,17.5,8.3,2,2023
 Amon-Ra St. Brown,Cup of Joe,WR,DET,WR,16.6,14.2,2,2023
 Tee Higgins,Cup of Joe,WR,CIN,WR,14.7,28.9,2,2023
 Evan Engram,Cup of Joe,TE,JAX,TE,9.8,11.7,2,2023
-Terry McLaurin,Cup of Joe,FLEX,WAS,FLEX,13,16.4,2,2023
+Tyler Boyd,Team Dupre,WR,,FLEX,,13.6,3,2021
 Eagles,Cup of Joe,D/ST,PHI,D/ST,5.1,6,2,2023
 Tyler Bass,Cup of Joe,K,BUF,K,7,7,2,2023
 D'Andre Swift,Cup of Joe,RB,DET,Bench,12.1,27.1,2,2023
 Courtland Sutton,Cup of Joe,WR,DEN,Bench,11.2,11.6,2,2023
-Jahan Dotson,Cup of Joe,WR,WAS,Bench,11.7,5.2,2,2023
+Jahan Dotson,Cup of Joe,WR,Wsh,Bench,11.7,5.2,2,2023
 Gabe Davis,Cup of Joe,WR,BUF,Bench,9.4,2.2,2,2023
 K.J. Osborn,Cup of Joe,WR,MIN,Bench,8.6,8.6,2,2023
 Jared Goff,Cup of Joe,QB,DET,Bench,22.52,0,2,2023
@@ -4071,7 +4071,7 @@ Isiah Pacheco,Team Chieffo,RB,KC,RB,12.6,8,2,2023
 Tyreek Hill,Team Chieffo,WR,MIA,WR,22,13.9,2,2023
 Mike Evans,Team Chieffo,WR,TB,WR,29.1,13.6,2,2023
 Darren Waller,Team Chieffo,TE,NYG,TE,11.1,2.8,2,2023
-Jerry Jeudy,Team Chieffo,FLEX,DEN,FLEX,11.7,5.5,2,2023
+Jerry Jeudy,Team Chieffo,WR,DEN,FLEX,11.7,5.5,2,2023
 49ers,Team Chieffo,D/ST,SF,D/ST,6.5,4,2,2023
 Evan McPherson,Team Chieffo,K,CIN,K,8.6,2.7,2,2023
 Aaron Jones,Team Chieffo,RB,MIN,Bench,0,0,2,2023
@@ -4087,7 +4087,7 @@ James Conner,S(kittle),RB,ARI,RB,15.1,16.6,2,2023
 A.J. Brown,S(kittle),WR,PHI,WR,19.2,6.9,2,2023
 Davante Adams,S(kittle),WR,LV,WR,20.4,19,2,2023
 George Kittle,S(kittle),TE,SF,TE,11.4,11.4,2,2023
-Keenan Allen,S(kittle),FLEX,LAC,FLEX,31.1,0,2,2023
+Keenan Allen,S(kittle),WR,LAC,FLEX,31.1,0,2,2023
 Dolphins,S(kittle),D/ST,MIA,D/ST,7.8,6.9,2,2023
 Matt Gay,S(kittle),K,IND,K,8,0,2,2023
 George Pickens,S(kittle),WR,PIT,Bench,11.4,11.4,2,2023
@@ -4103,7 +4103,7 @@ Gus Edwards,S(kittle),RB,BAL,RB,12.9,5.1,3,2023
 A.J. Brown,S(kittle),WR,PHI,WR,15.1,22.1,3,2023
 Davante Adams,S(kittle),WR,LV,WR,18.2,47.2,3,2023
 George Kittle,S(kittle),TE,SF,TE,12,16,3,2023
-Keenan Allen,S(kittle),FLEX,LAC,FLEX,16.2,45.46,3,2023
+Keenan Allen,S(kittle),WR,LAC,FLEX,16.2,45.46,3,2023
 Dolphins,S(kittle),D/ST,MIA,D/ST,6.2,6,3,2023
 Matt Gay,S(kittle),K,IND,K,7.5,4,3,2023
 Najee Harris,S(kittle),RB,PIT,Bench,12.7,6.5,3,2023
@@ -4119,7 +4119,7 @@ Jahmyr Gibbs,Chase-ing Young Children,RB,DET,RB,13.7,15.9,3,2023
 Justin Jefferson,Chase-ing Young Children,WR,MIN,WR,23.1,27.9,3,2023
 Ja'Marr Chase,Chase-ing Young Children,WR,CIN,WR,20,26.1,3,2023
 Mark Andrews,Chase-ing Young Children,TE,BAL,TE,13.7,7.5,3,2023
-Rhamondre Stevenson,Chase-ing Young Children,FLEX,NE,FLEX,14.5,7.2,3,2023
+Rhamondre Stevenson,Chase-ing Young Children,RB,NE,FLEX,14.5,7.2,3,2023
 Jaguars,Chase-ing Young Children,D/ST,JAX,D/ST,7,4,3,2023
 Brandon Aubrey,Chase-ing Young Children,K,DAL,K,8.5,11,3,2023
 Bills,Chase-ing Young Children,D/ST,BUF,Bench,6.6,3.1,3,2023
@@ -4136,12 +4136,12 @@ D'Andre Swift,Cup of Joe,RB,DET,RB,10.4,14.8,3,2023
 Amon-Ra St. Brown,Cup of Joe,WR,DET,WR,15.7,13.6,3,2023
 Tee Higgins,Cup of Joe,WR,CIN,WR,19.4,4.1,3,2023
 Evan Engram,Cup of Joe,TE,JAX,TE,9.4,13.7,3,2023
-Gabe Davis,Cup of Joe,FLEX,BUF,FLEX,11.5,10.3,3,2023
+Gabe Davis,Cup of Joe,WR,BUF,FLEX,11.5,10.3,3,2023
 Eagles,Cup of Joe,D/ST,PHI,D/ST,6.9,14,3,2023
 Tyler Bass,Cup of Joe,K,BUF,K,8.2,15,3,2023
-Terry McLaurin,Cup of Joe,WR,WAS,Bench,10.1,12.4,3,2023
+Terry McLaurin,Cup of Joe,WR,Wsh,Bench,10.1,12.4,3,2023
 Courtland Sutton,Cup of Joe,WR,DEN,Bench,19.1,0,3,2023
-Antonio Gibson,Cup of Joe,RB,WAS,Bench,6.3,11.4,3,2023
+Antonio Gibson,Cup of Joe,RB,Wsh,Bench,6.3,11.4,3,2023
 K.J. Osborn,Cup of Joe,WR,MIN,Bench,8.4,10.6,3,2023
 Jared Goff,Cup of Joe,QB,DET,Bench,18.02,15.3,3,2023
 Justice Hill,Cup of Joe,RB,BAL,Bench,0,0,3,2023
@@ -4153,7 +4153,7 @@ Kyren Williams,Mr. FigureItOut,RB,LAR,RB,18,8.5,3,2023
 Chris Godwin,Mr. FigureItOut,WR,TB,WR,13.4,8.2,3,2023
 Stefon Diggs,Mr. FigureItOut,WR,BUF,WR,22,19.1,3,2023
 Sam LaPorta,Mr. FigureItOut,TE,DET,TE,9,22.4,3,2023
-Joshua Kelley,Mr. FigureItOut,FLEX,LAC,FLEX,14.2,2.7,3,2023
+Ty'Son Williams,Team Shamas,RB,,FLEX,,11.3,2,2021
 Ravens,Mr. FigureItOut,D/ST,BAL,D/ST,6.6,7,3,2023
 Jake Elliott,Mr. FigureItOut,K,PHI,K,8.5,11,3,2023
 DeAndre Hopkins,Mr. FigureItOut,WR,TEN,Bench,13.7,7.8,3,2023
@@ -4162,7 +4162,7 @@ DJ Moore,Mr. FigureItOut,WR,CHI,Bench,12.7,10.4,3,2023
 Kenneth Gainwell,Mr. FigureItOut,RB,PHI,Bench,10.4,5.8,3,2023
 Alexander Mattison,Mr. FigureItOut,RB,LV,Bench,14.5,17.5,3,2023
 Dalvin Cook,Mr. FigureItOut,RB,NYJ,Bench,11.1,4.1,3,2023
-Jahan Dotson,Mr. FigureItOut,WR,WAS,Bench,10.1,5.9,3,2023
+Jahan Dotson,Mr. FigureItOut,WR,Wsh,Bench,10.1,5.9,3,2023
 Odell Beckham Jr.,Mr. FigureItOut,WR,BAL,IR,0,0,3,2023
 Patrick Mahomes,PEDeAndre Hopkins,QB,KC,QB,24.1,25.68,3,2023
 Rachaad White,PEDeAndre Hopkins,RB,TB,RB,12.7,7.2,3,2023
@@ -4170,7 +4170,7 @@ Raheem Mostert,PEDeAndre Hopkins,RB,MIA,RB,14.1,45.2,3,2023
 Jaylen Waddle,PEDeAndre Hopkins,WR,MIA,WR,18.2,6.8,3,2023
 DeVonta Smith,PEDeAndre Hopkins,WR,PHI,WR,15.2,6.8,3,2023
 Travis Kelce,PEDeAndre Hopkins,TE,KC,TE,18.2,19.9,3,2023
-Breece Hall,PEDeAndre Hopkins,FLEX,NYJ,FLEX,10.7,3.7,3,2023
+Breece Hall,PEDeAndre Hopkins,RB,NYJ,FLEX,10.7,3.7,3,2023
 Patriots,PEDeAndre Hopkins,D/ST,NE,D/ST,7.4,11,3,2023
 Younghoe Koo,PEDeAndre Hopkins,K,ATL,K,8.3,6,3,2023
 Christian Watson,PEDeAndre Hopkins,WR,GB,Bench,0,0,3,2023
@@ -4185,7 +4185,7 @@ Josh Jacobs,My digg hurts,RB,GB,RB,16.9,11,3,2023
 Deebo Samuel,My digg hurts,WR,SF,WR,18.8,25.1,3,2023
 Calvin Ridley,My digg hurts,WR,JAX,WR,14.9,7,3,2023
 T.J. Hockenson,My digg hurts,TE,MIN,TE,14.5,13.8,3,2023
-Michael Thomas,My digg hurts,FLEX,NO,FLEX,12.8,17.8,3,2023
+Michael Thomas,My digg hurts,WR,NO,FLEX,12.8,17.8,3,2023
 Cowboys,My digg hurts,D/ST,DAL,D/ST,8.6,8.2,3,2023
 Juko Moody,My digg hurts,K,SF,K,8.2,2,3,2023
 Jonathan Taylor,My digg hurts,RB,IND,Bench,0,0,3,2023
@@ -4202,7 +4202,7 @@ Miles Sanders,Jah is gay,RB,CAR,RB,15.7,17.2,3,2023
 Chris Olave,Jah is gay,WR,NO,WR,15.5,18.4,3,2023
 Amari Cooper,Jah is gay,WR,CLE,WR,13.3,24.6,3,2023
 Pat Freiermuth,Jah is gay,TE,PIT,TE,8.4,13.1,3,2023
-Michael Pittman Jr.,Jah is gay,FLEX,IND,FLEX,15.6,16.7,3,2023
+Michael Pittman Jr.,Jah is gay,WR,IND,FLEX,15.6,16.7,3,2023
 Browns,Jah is gay,D/ST,CLE,D/ST,7.4,14,3,2023
 Cameron Dicker,Jah is gay,K,LAC,K,8.6,3,3,2023
 Saquon Barkley,Jah is gay,RB,PHI,Bench,0,0,3,2023
@@ -4219,7 +4219,7 @@ Dameon Pierce,Pocket Aces,RB,HOU,RB,10.7,14.9,3,2023
 CeeDee Lamb,Pocket Aces,WR,DAL,WR,16.2,10.2,3,2023
 DK Metcalf,Pocket Aces,WR,SEA,WR,14.1,17.2,3,2023
 Kyle Pitts,Pocket Aces,TE,ATL,TE,8.9,8.7,3,2023
-Marquise Brown,Pocket Aces,FLEX,KC,FLEX,12.5,17.1,3,2023
+Marquise Brown,Pocket Aces,WR,KC,FLEX,12.5,17.1,3,2023
 Steelers,Pocket Aces,D/ST,PIT,D/ST,5.7,9,3,2023
 Justin Tucker,Pocket Aces,K,BAL,K,8.7,6,3,2023
 Justin Fields,Pocket Aces,QB,CHI,Bench,18.7,10.66,3,2023
@@ -4235,7 +4235,7 @@ Tony Pollard,Riley Reid Option,RB,DAL,RB,19.3,15.1,3,2023
 Tyler Lockett,Riley Reid Option,WR,SEA,WR,13,12.2,3,2023
 Puka Nacua,Riley Reid Option,WR,LAR,WR,16.2,8.4,3,2023
 Dallas Goedert,Riley Reid Option,TE,PHI,TE,9.8,9.1,3,2023
-Zay Flowers,Riley Reid Option,FLEX,BAL,FLEX,12.7,13,3,2023
+Zay Flowers,Riley Reid Option,WR,BAL,FLEX,12.7,13,3,2023
 Chiefs,Riley Reid Option,D/ST,KC,D/ST,7.8,12,3,2023
 Daniel Carlson,Riley Reid Option,K,LV,K,7.6,4,3,2023
 Garrett Wilson,Riley Reid Option,WR,NYJ,Bench,14.3,9.8,3,2023
@@ -4243,7 +4243,7 @@ Joe Burrow,Riley Reid Option,QB,CIN,Bench,19.4,19,3,2023
 Mike Williams,Riley Reid Option,WR,NYJ,Bench,25.1,0,3,2023
 James Cook,Riley Reid Option,RB,BUF,Bench,14.2,13.2,3,2023
 Jakobi Meyers,Riley Reid Option,WR,LV,Bench,15.5,12.4,3,2023
-Brian Robinson Jr.,Riley Reid Option,RB,WAS,Bench,12.9,4.8,3,2023
+Brian Robinson Jr.,Riley Reid Option,RB,Wsh,Bench,12.9,4.8,3,2023
 Tua Tagovailoa,Riley Reid Option,QB,MIA,Bench,7,0,3,2023
 Lamar Jackson,Team Chieffo,QB,BAL,QB,20.4,28.18,3,2023
 Isiah Pacheco,Team Chieffo,RB,KC,RB,14.4,15.8,3,2023
@@ -4251,7 +4251,7 @@ Jerome Ford,Team Chieffo,RB,CLE,RB,13.2,19.1,3,2023
 Tyreek Hill,Team Chieffo,WR,MIA,WR,23.8,30.7,3,2023
 Mike Evans,Team Chieffo,WR,TB,WR,14.6,17,3,2023
 Darren Waller,Team Chieffo,TE,NYG,TE,12,5,3,2023
-Zack Moss,Team Chieffo,FLEX,CIN,FLEX,13.9,22.5,3,2023
+Zach Pascal,Team Loomis,WR,,FLEX,,0,6,2021
 49ers,Team Chieffo,D/ST,SF,D/ST,8.7,10,3,2023
 Evan McPherson,Team Chieffo,K,CIN,K,8.5,18,3,2023
 Aaron Jones,Team Chieffo,RB,MIN,Bench,0,0,3,2023
@@ -4268,9 +4268,9 @@ Josh Jacobs,My digg hurts,RB,GB,RB,15.2,27.9,4,2023
 Calvin Ridley,My digg hurts,WR,JAX,WR,14.2,11.8,4,2023
 Garrett Wilson,My digg hurts,WR,NYJ,WR,15,15,4,2023
 T.J. Hockenson,My digg hurts,TE,MIN,TE,14.1,4.4,4,2023
-Deebo Samuel,My digg hurts,FLEX,SF,FLEX,16.6,0.6,4,2023
+Deebo Samuel,My digg hurts,WR,SF,FLEX,16.6,0.6,4,2023
 Cowboys,My digg hurts,D/ST,DAL,D/ST,7.3,26,4,2023
-Brandon McManus,My digg hurts,K,WAS,K,8.7,5,4,2023
+Brandon McManus,My digg hurts,K,Wsh,K,8.7,5,4,2023
 Jonathan Taylor,My digg hurts,RB,IND,Bench,0,0,4,2023
 Michael Thomas,My digg hurts,WR,NO,Bench,11.9,9.3,4,2023
 Hunter Henry,My digg hurts,TE,NE,Bench,9.1,8.3,4,2023
@@ -4283,7 +4283,7 @@ Alvin Kamara,Team Chieffo,RB,NO,RB,14.5,21.4,4,2023
 Lyneel Hill,Team Chieffo,WR,BUF,WR,22.1,10.2,4,2023
 Mike Evans,Team Chieffo,WR,TB,WR,14.1,7,4,2023
 Dalton Schultz,Team Chieffo,TE,HOU,TE,10.9,5.1,4,2023
-Zack Moss,Team Chieffo,FLEX,CIN,FLEX,14.3,9,4,2023
+Zack Moss,Team Chieffo,RB,CIN,FLEX,13.9,22.5,3,2023
 49ers,Team Chieffo,D/ST,SF,D/ST,7.7,3,4,2023
 Evan McPherson,Team Chieffo,K,CIN,K,8.3,3,4,2023
 Jerry Jeudy,Team Chieffo,WR,DEN,Bench,13.4,8.2,4,2023
@@ -4299,7 +4299,7 @@ Breece Hall,Chase-ing Young Children,RB,NYJ,RB,17.7,18.7,4,2023
 Ja'Marr Chase,Chase-ing Young Children,WR,CIN,WR,19.7,14.3,4,2023
 Stefon Diggs,Chase-ing Young Children,WR,BUF,WR,17.8,36,4,2023
 Mark Andrews,Chase-ing Young Children,TE,BAL,TE,12.2,25,4,2023
-Alexander Mattison,Chase-ing Young Children,FLEX,LV,FLEX,15.2,10.8,4,2023
+Alexander Mattison,Chase-ing Young Children,RB,LV,FLEX,15.2,10.8,4,2023
 Saints,Chase-ing Young Children,D/ST,NO,D/ST,7.8,12,4,2023
 Brandon Aubrey,Chase-ing Young Children,K,DAL,K,7.8,12,4,2023
 Rhamondre Stevenson,Chase-ing Young Children,RB,NE,Bench,12.8,6,4,2023
@@ -4316,7 +4316,7 @@ Miles Sanders,Jah is gay,RB,CAR,RB,15.6,6.2,4,2023
 Chris Olave,Jah is gay,WR,NO,WR,16.8,1.4,4,2023
 Amari Cooper,Jah is gay,WR,CLE,WR,9.2,2.6,4,2023
 Pat Freiermuth,Jah is gay,TE,PIT,TE,9.1,3.7,4,2023
-Michael Pittman Jr.,Jah is gay,FLEX,IND,FLEX,15,4.5,4,2023
+Michael Pittman Jr.,Jah is gay,WR,IND,FLEX,15,4.5,4,2023
 Browns,Jah is gay,D/ST,CLE,D/ST,6.9,6,4,2023
 Cameron Dicker,Jah is gay,K,LAC,K,8.6,6,4,2023
 Saquon Barkley,Jah is gay,RB,PHI,Bench,0,0,4,2023
@@ -4333,14 +4333,14 @@ Jahmyr Gibbs,Mr. FigureItOut,RB,DET,RB,12.5,9.1,4,2023
 Justin Jefferson,Mr. FigureItOut,WR,MIN,WR,22.1,3.9,4,2023
 Tank Dell,Mr. FigureItOut,WR,HOU,WR,12.2,26.5,4,2023
 Sam LaPorta,Mr. FigureItOut,TE,DET,TE,10.7,9.6,4,2023
-DJ Moore,Mr. FigureItOut,FLEX,CHI,FLEX,12.3,27.1,4,2023
+DJ Moore,Mr. FigureItOut,WR,CHI,FLEX,12.3,27.1,4,2023
 Seahawks,Mr. FigureItOut,D/ST,SEA,D/ST,7,29,4,2023
 Jake Elliott,Mr. FigureItOut,K,PHI,K,8.7,18,4,2023
 DeAndre Hopkins,Mr. FigureItOut,WR,TEN,Bench,13.1,10.3,4,2023
 Trevor Lawrence,Mr. FigureItOut,QB,JAX,Bench,15.9,12.7,4,2023
 Chris Godwin,Mr. FigureItOut,WR,TB,Bench,19.4,16.4,4,2023
 Kenneth Gainwell,Mr. FigureItOut,RB,PHI,Bench,8.5,6.1,4,2023
-Jahan Dotson,Mr. FigureItOut,WR,WAS,Bench,10.4,12.7,4,2023
+Jahan Dotson,Mr. FigureItOut,WR,Wsh,Bench,10.4,12.7,4,2023
 Nico Collins,Mr. FigureItOut,WR,HOU,Bench,12.2,25.8,4,2023
 Rhamondre Stevenson,Mr. FigureItOut,RB,NE,Bench,11.1,2.5,4,2023
 Dak Prescott,Pocket Aces,QB,DAL,QB,17.4,14.34,4,2023
@@ -4349,7 +4349,7 @@ Dameon Pierce,Pocket Aces,RB,HOU,RB,17.4,11.8,4,2023
 CeeDee Lamb,Pocket Aces,WR,DAL,WR,14.8,14.8,4,2023
 DK Metcalf,Pocket Aces,WR,SEA,WR,14.4,12.4,4,2023
 Kyle Pitts,Pocket Aces,TE,ATL,TE,9.2,4.1,4,2023
-Marquise Brown,Pocket Aces,FLEX,KC,FLEX,13.3,16.6,4,2023
+Marquise Brown,Pocket Aces,WR,KC,FLEX,13.3,16.6,4,2023
 Steelers,Pocket Aces,D/ST,PIT,D/ST,6.3,-6,4,2023
 Justin Tucker,Pocket Aces,K,BAL,K,7.4,4,4,2023
 Justin Fields,Pocket Aces,QB,CHI,Bench,20,27.9,4,2023
@@ -4365,7 +4365,7 @@ Raheem Mostert,PEDeAndre Hopkins,RB,MIA,RB,14.3,1.3,4,2023
 Jaylen Waddle,PEDeAndre Hopkins,WR,MIA,WR,14.7,8.8,4,2023
 DeVonta Smith,PEDeAndre Hopkins,WR,PHI,WR,14.8,14.8,4,2023
 Travis Kelce,PEDeAndre Hopkins,TE,KC,TE,17,12,4,2023
-Breece Hall,PEDeAndre Hopkins,FLEX,NYJ,FLEX,11.4,9.9,4,2023
+Breece Hall,PEDeAndre Hopkins,RB,NYJ,FLEX,11.4,9.9,4,2023
 Patriots,PEDeAndre Hopkins,D/ST,NE,D/ST,4.5,1,4,2023
 Younghoe Koo,PEDeAndre Hopkins,K,ATL,K,7.6,2,4,2023
 Drake London,PEDeAndre Hopkins,WR,ATL,Bench,11.8,9.4,4,2023
@@ -4382,11 +4382,11 @@ D'Andre Swift,Cup of Joe,RB,DET,RB,14.3,1.3,4,2023
 Amon-Ra St. Brown,Cup of Joe,WR,DET,WR,16.7,16.6,4,2023
 Courtland Sutton,Cup of Joe,WR,DEN,WR,13.8,11.7,4,2023
 Evan Engram,Cup of Joe,TE,JAX,TE,10.4,12.9,4,2023
-Lee Higgins,Cup of Joe,FLEX,CIN,FLEX,11.1,10.4,4,2023
+Zack Moss,Team Chieffo,RB,CIN,FLEX,14.3,9,4,2023
 Eagles,Cup of Joe,D/ST,PHI,D/ST,8.6,3,4,2023
 Tyler Bass,Cup of Joe,K,BUF,K,8.9,14,4,2023
 Austin Ekeler,Cup of Joe,RB,LAC,Bench,13.8,1.4,4,2023
-Terry McLaurin,Cup of Joe,WR,WAS,Bench,12.8,15.1,4,2023
+Terry McLaurin,Cup of Joe,WR,Wsh,Bench,12.8,15.1,4,2023
 Courtland Sutton,Cup of Joe,WR,DEN,Bench,12.8,15.1,4,2023
 Gabe Davis,Cup of Joe,WR,BUF,Bench,10.6,12.8,4,2023
 K.J. Osborn,Cup of Joe,WR,MIN,Bench,8.6,11.4,4,2023
@@ -4399,7 +4399,7 @@ Javonte Williams,S(kittle),RB,DEN,RB,12.6,3.9,4,2023
 A.J. Brown,S(kittle),WR,PHI,WR,15.7,38.5,4,2023
 Davante Adams,S(kittle),WR,LV,WR,17.2,15.5,4,2023
 George Kittle,S(kittle),TE,SF,TE,11.2,1.9,4,2023
-Keenan Allen,S(kittle),FLEX,LAC,FLEX,19.8,17.2,4,2023
+Keenan Allen,S(kittle),WR,LAC,FLEX,19.8,17.2,4,2023
 Bengals,S(kittle),D/ST,CIN,D/ST,6.7,7,4,2023
 Matt Gay,S(kittle),K,IND,K,8.1,0,4,2023
 George Pickens,S(kittle),WR,PIT,Bench,16.2,5.5,4,2023
@@ -4415,13 +4415,13 @@ Tony Pollard,Riley Reid Option,RB,DAL,RB,18.6,9,4,2023
 Puka Nacua,Riley Reid Option,WR,LAR,WR,14.5,31.3,4,2023
 Jakobi Meyers,Riley Reid Option,WR,LV,WR,17.2,5.3,4,2023
 Dallas Goedert,Riley Reid Option,TE,PHI,TE,9.7,4.5,4,2023
-James Cook,Riley Reid Option,FLEX,BUF,FLEX,14.9,14.7,4,2023
+James Cook,Riley Reid Option,RB,BUF,FLEX,14.9,14.7,4,2023
 Chiefs,Riley Reid Option,D/ST,KC,D/ST,8.3,4,4,2023
 Daniel Carlson,Riley Reid Option,K,LV,K,9,0,4,2023
 Joe Burrow,Riley Reid Option,QB,CIN,Bench,18.9,4.7,4,2023
 Tyler Lockett,Riley Reid Option,WR,SEA,Bench,9.4,1.1,4,2023
 Zay Flowers,Riley Reid Option,WR,BAL,Bench,13.1,8,4,2023
-Brian Robinson Jr.,Riley Reid Option,RB,WAS,Bench,13.1,13.1,4,2023
+Brian Robinson Jr.,Riley Reid Option,RB,Wsh,Bench,13.1,13.1,4,2023
 Adam Thielen,Riley Reid Option,WR,CAR,Bench,15.2,15.2,4,2023
 Tutu Atwell,Riley Reid Option,WR,LAR,Bench,12.6,2.6,4,2023
 De'Von Achane,Riley Reid Option,RB,MIA,Bench,12.6,7.4,4,2023
@@ -10662,7 +10662,7 @@ Cade Otton,Kupp my balls,TE,TB,Bench,9.9,8,8,2025
 Davante Adams,Kupp my balls,WR,LAR,Bench,0,0,8,2025
 Ashton Jeanty,Kupp my balls,RB,LV,Bench,0,0,8,2025
 TreVeyon Henderson,Kupp my balls,RB,NE,Bench,8.3,5.5,8,2025
-Travis Hunter,Kupp my balls,CB,Jax,Bench,0,0,8,2025
+Travis Hunter,Kupp my balls,WR,Jax,Bench,0,0,8,2025
 Caleb Williams,Njigbas in Paris,QB,Chi,QB,18.4,11.8,8,2025
 Christian McCaffrey,Njigbas in Paris,RB,SF,RB,21.6,9.8,8,2025
 Cam Skattebo,Njigbas in Paris,RB,NYG,RB,14.3,10,8,2025
@@ -11053,7 +11053,7 @@ Cade Otton,Kupp my balls,TE,TB,Bench,9.6,17.2,10,2025
 TreVeyon Henderson,Kupp my balls,RB,NE,Bench,13.2,28,10,2025
 Jacoby Brissett,Kupp my balls,QB,Ari,Bench,15.3,19.42,10,2025
 Kyle Monangai,Kupp my balls,RB,Chi,Bench,11.4,8.8,10,2025
-Travis Hunter,Kupp my balls,CB,Jax,IR,0,0,10,2025
+Travis Hunter,Kupp my balls,WR,Jax,IR,0,0,10,2025
 Jared Goff,Bower Rangers,QB,Det,QB,18.7,24.8,10,2025
 Jacory Croskey-Merritt,Bower Rangers,RB,Wsh,RB,9.4,3,10,2025
 Travis Etienne Jr.,Bower Rangers,RB,Jax,RB,12.7,15.7,10,2025

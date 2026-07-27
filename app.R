@@ -181,6 +181,7 @@ datatable_player_performance <- function(data, page_length = 25) {
       pageLength = page_length,
       lengthChange = FALSE,
       searching = FALSE,
+      ordering = FALSE,
       autoWidth = FALSE,
       scrollX = FALSE,
       dom = "tip",
@@ -1378,6 +1379,16 @@ ui <- navbarPage(
         font-weight: 900 !important;
       }
 
+      .power-ranking-actions {
+        display: flex;
+        justify-content: center;
+        margin-top: 8px;
+      }
+
+      .power-ranking-toggle {
+        min-width: 110px;
+      }
+
       .section-title-row {
         display: flex;
         align-items: center;
@@ -2205,7 +2216,7 @@ ui <- navbarPage(
         ),
         actionButton(
           "hub_nav_history",
-          "History",
+          "Matchup Archive",
           class = "hub-nav-item",
           onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
         )
@@ -2250,7 +2261,15 @@ ui <- navbarPage(
             h3("Power Rankings"),
             actionButton("power_info", "i", class = "info-button", title = "How Power Score works")
         ),
-        div(class = "power-ranking-wrap", DTOutput("power_rankings_table"))
+        div(class = "power-ranking-wrap", DTOutput("power_rankings_table")),
+        div(
+          class = "power-ranking-actions",
+          actionButton(
+            "power_rankings_toggle",
+            "Show More",
+            class = "btn-primary power-ranking-toggle"
+          )
+        )
       )
     )
   ),
@@ -2315,8 +2334,7 @@ ui <- navbarPage(
       class = "page-wrap",
       div(
         class = "section-card hero-card",
-        h2("Record Book"),
-        p(class = "muted", "League records by season or all time.")
+        h2("Record Book")
       ),
       div(
         class = "section-card",
@@ -2330,13 +2348,13 @@ ui <- navbarPage(
   ),
 
   tabPanel(
-    "History",
+    title = "Matchup Archive",
+    value = "History",
     div(
       class = "page-wrap",
       div(
         class = "section-card hero-card",
-        h2("History"),
-        p(class = "muted", "Every matchup in league history. Filter the archive, then tap a matchup to view player-level data.")
+        h2("Matchup Archive")
       ),
       div(
         class = "section-card",
@@ -2349,8 +2367,8 @@ ui <- navbarPage(
       ),
       div(
         class = "section-card",
-        h3("Matchup Archive"),
-        p(class = "muted", "Tap a matchup to open its player details."),
+        h3("Past Matchups"),
+        p(class = "muted", "Tap on a matchup to explore more"),
         DTOutput("history_matchups_table")
       )
     )
@@ -2362,24 +2380,65 @@ ui <- navbarPage(
 
 server <- function(input, output, session) {
 
+  show_all_power_rankings <- reactiveVal(FALSE)
+
+  latest_player_year <- max(players$year, na.rm = TRUE)
+  latest_player_week <- max(
+    players$week[players$year == latest_player_year],
+    na.rm = TRUE
+  )
+
+  reset_tab_state <- function() {
+    show_all_power_rankings(FALSE)
+    updateActionButton(session, "power_rankings_toggle", label = "Show More")
+
+    updateSelectInput(session, "manager_select", selected = "")
+    updateSelectInput(session, "manager_period", selected = "")
+
+    updateSelectInput(
+      session,
+      "player_year",
+      selected = as.character(latest_player_year)
+    )
+    updateSelectInput(
+      session,
+      "player_week",
+      selected = as.character(latest_player_week)
+    )
+    updateSelectInput(session, "player_manager", selected = "All Managers")
+    updateSelectInput(session, "player_slot", selected = "All Slots")
+    updateTextInput(session, "player_search", value = "")
+
+    updateSelectInput(session, "record_scope", selected = "All Time")
+
+    updateSelectInput(session, "history_year", selected = "All Seasons")
+    updateSelectInput(session, "history_week", selected = "All Weeks")
+    updateSelectInput(session, "history_manager", selected = "All Managers")
+  }
+
   observeEvent(input$hub_nav_dashboard, {
+    reset_tab_state()
     updateNavbarPage(session, "main_tabs", selected = "Dashboard")
   }, ignoreInit = TRUE)
 
   observeEvent(input$hub_nav_managers, {
+    reset_tab_state()
     updateNavbarPage(session, "main_tabs", selected = "Managers")
   }, ignoreInit = TRUE)
 
   observeEvent(input$hub_nav_players, {
+    reset_tab_state()
     updateNavbarPage(session, "main_tabs", selected = "Players")
   }, ignoreInit = TRUE)
 
   observeEvent(input$hub_nav_record_book, {
+    reset_tab_state()
     updateNavbarPage(session, "main_tabs", selected = "Record Book")
     session$sendCustomMessage("recalculate_tables", list())
   }, ignoreInit = TRUE)
 
   observeEvent(input$hub_nav_history, {
+    reset_tab_state()
     updateNavbarPage(session, "main_tabs", selected = "History")
     session$sendCustomMessage("recalculate_tables", list())
   }, ignoreInit = TRUE)
@@ -2739,6 +2798,15 @@ server <- function(input, output, session) {
     ranked
   })
 
+  observeEvent(input$power_rankings_toggle, {
+    show_all_power_rankings(!show_all_power_rankings())
+    updateActionButton(
+      session,
+      "power_rankings_toggle",
+      label = if (show_all_power_rankings()) "Show Less" else "Show More"
+    )
+  }, ignoreInit = TRUE)
+
   output$power_rankings_table <- renderDT({
     ranking_data <- power_rankings() |>
       arrange(desc(power_score), desc(points_for)) |>
@@ -2753,8 +2821,14 @@ server <- function(input, output, session) {
         `Power Score` = round(power_score, 1)
       )
 
-    ranking_data |>
-      datatable_simple(page_length = max(1, nrow(ranking_data))) |>
+    displayed_rankings <- if (show_all_power_rankings()) {
+      ranking_data
+    } else {
+      ranking_data |> slice_head(n = 5)
+    }
+
+    displayed_rankings |>
+      datatable_simple(page_length = max(1, nrow(displayed_rankings))) |>
       DT::formatStyle(
         columns = "Power Score",
         fontWeight = "900"
@@ -3186,6 +3260,8 @@ server <- function(input, output, session) {
     player_filtered() |>
       arrange(desc(fpts), desc(year), desc(week), player_name) |>
       transmute(
+        Season = year,
+        Week = week,
         Game = paste0(year, " Week ", week),
         Position = pos,
         Player = player_name,
@@ -3241,14 +3317,14 @@ server <- function(input, output, session) {
         footer = actionButton("close_player_modal", "Close", class = "btn-primary"),
         div(
           class = "player-detail-grid",
-          detail_item("Game", player_row$Game[[1]]),
-          detail_item("Position", player_row$Position[[1]]),
-          detail_item("Player", player_row$Player[[1]]),
+          detail_item("Season", player_row$Season[[1]]),
+          detail_item("Week", player_row$Week[[1]]),
           detail_item("Fantasy Team", player_row$`Fantasy Team`[[1]]),
           detail_item("NFL Team", player_row$`NFL Team`[[1]]),
+          detail_item("Position", player_row$Position[[1]]),
           detail_item("Roster Slot", player_row$`Roster Slot`[[1]]),
           detail_item("Proj", score_fmt(player_row$Proj[[1]])),
-          detail_item("Points", score_fmt(player_row$Pts[[1]]), "player-detail-points")
+          detail_item("Pts", score_fmt(player_row$Pts[[1]]), "player-detail-points")
         )
       )
     )

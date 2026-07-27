@@ -10552,22 +10552,22 @@ Matthew Golden,lets get this money,WR,GB,Bench,10.3,3.4,8,2025
 Bam Knight,lets get this money,RB,Ari,Bench,0,0,8,2025
 Chuba Hubbard,lets get this money,RB,Car,Bench,12,9.4,8,2025
 Trey Benson,lets get this money,RB,Ari,IR,0,0,8,2025
-Josh Allen,5(hamas),QB,Buf,QB,20.3,23.22,8,2025
-Tyjae Spears,5(hamas),RB,Ten,RB,9.5,17.2,8,2025
-Alvin Kamara,5(hamas),RB,NO,RB,14.3,6.5,8,2025
-Jauan Jennings,5(hamas),WR,SF,WR,9,8.5,8,2025
-Rashid Shaheed,5(hamas),WR,NO,WR,12.2,14.5,8,2025
-Kyle Pitts Sr.,5(hamas),TE,Atl,TE,10.8,14.9,8,2025
-Juwan Johnson,5(hamas),TE,NO,FLEX,9.6,10.3,8,2025
-Falcons,5(hamas),D/ST,Atl,D/ST,6.7,0,8,2025
-Jake Elliott,5(hamas),K,Phi,K,8.7,8,8,2025
-A.J. Brown,5(hamas),WR,Phi,Bench,0,0,8,2025
-Kenneth Walker III,5(hamas),RB,Sea,Bench,0,0,8,2025
-Jameson Williams,5(hamas),WR,Det,Bench,0,0,8,2025
-Dylan Sampson,5(hamas),RB,Cle,Bench,2.4,7.9,8,2025
-Kayshon Boutte,5(hamas),WR,NE,Bench,7.6,16.5,8,2025
-Sterling Shepard,5(hamas),WR,TB,Bench,8,1.8,8,2025
-Jaxson Dart,5(hamas),QB,NYG,Bench,17.8,19.42,8,2025
+Josh Allen,S(hamas),QB,Buf,QB,20.3,23.22,8,2025
+Tyjae Spears,S(hamas),RB,Ten,RB,9.5,17.2,8,2025
+Alvin Kamara,S(hamas),RB,NO,RB,14.3,6.5,8,2025
+Jauan Jennings,S(hamas),WR,SF,WR,9,8.5,8,2025
+Rashid Shaheed,S(hamas),WR,NO,WR,12.2,14.5,8,2025
+Kyle Pitts Sr.,S(hamas),TE,Atl,TE,10.8,14.9,8,2025
+Juwan Johnson,S(hamas),TE,NO,FLEX,9.6,10.3,8,2025
+Falcons,S(hamas),D/ST,Atl,D/ST,6.7,0,8,2025
+Jake Elliott,S(hamas),K,Phi,K,8.7,8,8,2025
+A.J. Brown,S(hamas),WR,Phi,Bench,0,0,8,2025
+Kenneth Walker III,S(hamas),RB,Sea,Bench,0,0,8,2025
+Jameson Williams,S(hamas),WR,Det,Bench,0,0,8,2025
+Dylan Sampson,S(hamas),RB,Cle,Bench,2.4,7.9,8,2025
+Kayshon Boutte,S(hamas),WR,NE,Bench,7.6,16.5,8,2025
+Sterling Shepard,S(hamas),WR,TB,Bench,8,1.8,8,2025
+Jaxson Dart,S(hamas),QB,NYG,Bench,17.8,19.42,8,2025
 Joe Flacco,Bower Rangers,QB,Cin,QB,15.4,24.32,8,2025
 Jacory Croskey-Merritt,Bower Rangers,RB,Wsh,RB,11.5,2.5,8,2025
 Justice Hill,Bower Rangers,RB,Bal,RB,8,0.2,8,2025
@@ -12009,7 +12009,6 @@ Tyrone Tracy Jr.,High Speed Chase,RB,NYG,Bench,12.8,9.8,16,2025
 Tre Tucker,High Speed Chase,WR,LV,Bench,8.9,9.4,16,2025
 Cam Little,High Speed Chase,K,Jax,Bench,8.5,11.3,16,2025
 Chiefs,High Speed Chase,D/ST,KC,Bench,6.5,1,16,2025
-Player Name,Fantasy Team,POS,TEAM,SLOT,PROJ,FPTS,Week,Year
 Brock Purdy,Nijgbas Be Wildin,QB,SF,QB,18.5,30.28,17,2024
 Breece Hall,Nijgbas Be Wildin,RB,NYJ,RB,15.9,6.3,17,2024
 Bucky Irving,Nijgbas Be Wildin,RB,TB,RB,17.2,23,17,2024

@@ -1121,6 +1121,14 @@ ui <- navbarPage(
         background: linear-gradient(135deg, #F2D0B2, #C98B5B);
       }
 
+      .section-subtitle {
+        margin: -4px 0 8px;
+        color: var(--muted);
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: 0.01em;
+      }
+
       .championship-shrine {
         position: relative;
         margin-bottom: 10px;
@@ -1239,7 +1247,11 @@ ui <- navbarPage(
       table.dataTable tbody tr.record-holder-row > td {
         background: rgba(212, 175, 55, 0.18) !important;
         font-size: inherit !important;
-        font-weight: inherit !important;
+      }
+
+      table.dataTable tbody tr.record-holder-row > td:last-child,
+      table.dataTable tbody tr.record-holder-row > td:last-child strong {
+        font-weight: 900 !important;
       }
 
       .record-table-card .dataTables_wrapper,
@@ -1762,10 +1774,6 @@ ui <- navbarPage(
           font-size: 10px;
         }
 
-        .best-starter-card {
-          grid-column: 1 / -1;
-        }
-
         .record-table-card table.dataTable thead th,
         .record-table-card table.dataTable tbody td,
         #history_matchups_table table.dataTable tbody td.history-matchup-cell {
@@ -1961,6 +1969,12 @@ ui <- navbarPage(
           gap: 6px;
         }
 
+        .championship-grid.championship-grid-odd .championship-card:last-child {
+          grid-column: 1 / -1;
+          width: min(100%, 220px);
+          justify-self: center;
+        }
+
         .championship-trophy {
           font-size: 31px;
         }
@@ -2033,33 +2047,68 @@ ui <- navbarPage(
         }
 
         function bindSelectizeToggleBehavior() {
-          if (!window.jQuery) {
-            window.setTimeout(bindSelectizeToggleBehavior, 50);
-            return;
+          if (document.documentElement.dataset.selectizeToggleBound === 'true') return;
+          document.documentElement.dataset.selectizeToggleBound = 'true';
+
+          function getSelectizeControl(event) {
+            if (!event.target || !event.target.closest) return null;
+
+            var input = event.target.closest('.selectize-control .selectize-input');
+            if (!input) return null;
+
+            return input.closest('.selectize-control');
           }
 
-          var $document = window.jQuery(document);
-          $document.off('pointerdown.fantasyDropdownToggle', '.selectize-control .selectize-input');
-          $document.on(
-            'pointerdown.fantasyDropdownToggle',
-            '.selectize-control .selectize-input',
-            function(event) {
-              var $control = window.jQuery(this).closest('.selectize-control');
-              var selectElement = $control.siblings('select').get(0);
-              var selectize = selectElement && selectElement.selectize;
+          function getSelectizeInstance(control) {
+            if (!control || !control.parentElement) return null;
 
-              if (selectize && selectize.isOpen) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-                selectize.close();
-                selectize.blur();
-                window.setTimeout(function() {
-                  selectize.close();
-                  selectize.blur();
-                }, 0);
-                return false;
+            var originalInput = control.parentElement.querySelector(
+              'select.selectized, input.selectized'
+            );
+
+            return originalInput && originalInput.selectize
+              ? originalInput.selectize
+              : null;
+          }
+
+          function stopReopen(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.stopImmediatePropagation) event.stopImmediatePropagation();
+          }
+
+          var pressEvent = window.PointerEvent ? 'pointerdown' : 'mousedown';
+
+          document.addEventListener(
+            pressEvent,
+            function(event) {
+              var control = getSelectizeControl(event);
+              var selectize = getSelectizeInstance(control);
+
+              if (!selectize || !selectize.isOpen) return;
+
+              stopReopen(event);
+              control.dataset.fantasyJustClosed = 'true';
+              selectize.close();
+              selectize.blur();
+
+              window.setTimeout(function() {
+                delete control.dataset.fantasyJustClosed;
+              }, 350);
+            },
+            true
+          );
+
+          document.addEventListener(
+            'click',
+            function(event) {
+              var control = getSelectizeControl(event);
+
+              if (control && control.dataset.fantasyJustClosed === 'true') {
+                stopReopen(event);
               }
-            }
+            },
+            true
           );
         }
 
@@ -2741,6 +2790,7 @@ server <- function(input, output, session) {
     positional_panel <- div(
       class = "section-card",
       h3("Positional Ranking Breakdown"),
+      div(class = "section-subtitle", "Points per week by position"),
       plotOutput("manager_position_spider", height = "480px")
     )
 
@@ -2871,7 +2921,13 @@ server <- function(input, output, session) {
     div(
       class = "championship-shrine",
       div(class = "championship-shrine-title", "Championship Hall"),
-      div(class = "championship-grid", tagList(championship_cards))
+      div(
+        class = paste(
+          "championship-grid",
+          if (nrow(championships) %% 2L == 1L) "championship-grid-odd" else ""
+        ),
+        tagList(championship_cards)
+      )
     )
   })
 
@@ -2932,15 +2988,23 @@ server <- function(input, output, session) {
 
     position_levels <- c("QB", "RB", "WR", "TE", "D/ST", "K")
 
+    inactive_roster_slots <- c(
+      "BENCH", "BE", "BN", "IR", "INJURED RESERVE", "IL", "SLOT"
+    )
+
     position_data <- players |>
       mutate(
         pos_clean = case_when(
           pos %in% c("QB", "RB", "WR", "TE", "K") ~ pos,
           pos %in% c("D/ST", "DST", "DEF", "D") ~ "D/ST",
           TRUE ~ as.character(pos)
-        )
+        ),
+        roster_slot_clean = str_to_upper(str_squish(as.character(slot)))
       ) |>
-      filter(pos_clean %in% position_levels)
+      filter(
+        pos_clean %in% position_levels,
+        !roster_slot_clean %in% inactive_roster_slots
+      )
 
     games_played <- matchups |>
       distinct(manager, year, week)
@@ -2994,7 +3058,7 @@ server <- function(input, output, session) {
         rank = if_else(is.na(rank), n_managers, rank),
         rank_score = if_else(n_managers <= 1, 1, (n_managers - rank + 1) / n_managers),
         rank_label = ordinal_label(rank),
-        detail_label = paste0(rank_label, ", ", score_fmt(avg_points), " pts/wk"),
+        detail_label = paste0(rank_label, ", ", score_fmt(avg_points)),
         pos_clean = factor(pos_clean, levels = position_levels)
       )
 

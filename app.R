@@ -134,6 +134,26 @@ datatable_no_buttons <- function(data, page_length = 25, selection = "none") {
   )
 }
 
+
+datatable_player_performance <- function(data, page_length = 25) {
+  DT::datatable(
+    data,
+    rownames = FALSE,
+    selection = "none",
+    filter = "none",
+    extensions = "Responsive",
+    options = list(
+      pageLength = page_length,
+      responsive = TRUE,
+      autoWidth = FALSE,
+      scrollX = FALSE,
+      dom = "rtip",
+      columnDefs = responsive_column_defs(data)
+    ),
+    class = "stripe compact nowrap"
+  )
+}
+
 datatable_record <- function(data, page_length = 5, selection = "none") {
   DT::datatable(
     data,
@@ -148,10 +168,47 @@ datatable_record <- function(data, page_length = 5, selection = "none") {
       scrollX = FALSE,
       dom = "t",
       ordering = FALSE,
-      columnDefs = responsive_column_defs(data)
+      columnDefs = responsive_column_defs(data),
+      rowCallback = JS(
+        "function(row, data, displayNum) {",
+        "  if (displayNum === 0) {",
+        "    $(row).addClass('record-holder-row');",
+        "  }",
+        "}"
+      )
     ),
     class = "stripe compact nowrap"
   )
+}
+
+format_nonstarter_rows <- function(dt) {
+  inactive_slots <- c("Bench", "BE", "IR", "Injured Reserve", "IL")
+
+  dt |>
+    DT::formatStyle(
+      "Slot",
+      target = "row",
+      backgroundColor = DT::styleEqual(
+        inactive_slots,
+        rep("#D8D1D2", length(inactive_slots))
+      ),
+      color = DT::styleEqual(
+        inactive_slots,
+        rep("#665A5B", length(inactive_slots))
+      ),
+      fontStyle = DT::styleEqual(
+        inactive_slots,
+        rep("italic", length(inactive_slots))
+      )
+    )
+}
+
+record_scope_columns <- function(data, scope_year) {
+  if (!is.na(scope_year) && "Season" %in% names(data)) {
+    return(dplyr::select(data, -dplyr::all_of("Season")))
+  }
+
+  data
 }
 
 format_record_table <- function(dt) {
@@ -438,7 +495,7 @@ ui <- navbarPage(
     tags$head(
     tags$meta(
       name = "viewport",
-      content = "width=device-width, initial-scale=1, viewport-fit=cover"
+      content = "width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
     ),
     tags$meta(name = "theme-color", content = "#9D0B1E"),
     tags$meta(name = "apple-mobile-web-app-capable", content = "yes"),
@@ -468,6 +525,7 @@ ui <- navbarPage(
 
       html {
         scroll-padding-top: 54px;
+        touch-action: pan-x pan-y;
       }
 
       body {
@@ -702,6 +760,25 @@ ui <- navbarPage(
         color: rgba(255, 255, 255, 0.78);
       }
 
+      .hero-card label,
+      .hero-card .control-label {
+        color: #ffffff !important;
+      }
+
+      .hero-card {
+        position: relative;
+        z-index: 80;
+        overflow: visible;
+      }
+
+      .hero-card .selectize-control {
+        z-index: 90;
+      }
+
+      .selectize-dropdown {
+        z-index: 1200 !important;
+      }
+
       .metric-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -900,6 +977,68 @@ ui <- navbarPage(
         font-weight: 800;
       }
 
+      .season-finish-row {
+        grid-template-columns: minmax(90px, auto) 1fr;
+      }
+
+      .championship-shrine {
+        position: relative;
+        margin-bottom: 10px;
+        padding: 15px;
+        overflow: hidden;
+        border: 2px solid #C99A19;
+        border-radius: 12px;
+        background:
+          radial-gradient(circle at top, rgba(255, 230, 132, 0.35), transparent 44%),
+          linear-gradient(135deg, #FFF8D8, #ffffff 48%, #F4E4A1);
+        box-shadow: 0 8px 22px rgba(43, 30, 30, 0.13);
+      }
+
+      .championship-shrine-title {
+        margin-bottom: 10px;
+        color: var(--near-black);
+        font-size: 21px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .championship-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(145px, 1fr));
+        gap: 9px;
+      }
+
+      .championship-card {
+        padding: 11px 9px;
+        border: 1px solid rgba(155, 108, 0, 0.35);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.82);
+        text-align: center;
+      }
+
+      .championship-trophy {
+        display: block;
+        margin-bottom: 3px;
+        font-size: 38px;
+        line-height: 1;
+        filter: drop-shadow(0 3px 2px rgba(43, 30, 30, 0.20));
+      }
+
+      .championship-year {
+        color: var(--dark-red);
+        font-size: 23px;
+        font-weight: 900;
+      }
+
+      .championship-team {
+        color: var(--near-black);
+        font-size: 14px;
+        font-weight: 800;
+        line-height: 1.1;
+      }
+
       .matchup-detail-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
@@ -955,6 +1094,12 @@ ui <- navbarPage(
 
       .record-table-card h3 {
         margin-top: 0;
+      }
+
+      table.dataTable tbody tr.record-holder-row > td {
+        background: rgba(190, 28, 48, 0.10) !important;
+        font-size: 1.08em !important;
+        font-weight: 900 !important;
       }
 
       .power-ranking-wrap table.dataTable {
@@ -1100,6 +1245,26 @@ ui <- navbarPage(
         min-width: 105px;
       }
 
+      .modal {
+        z-index: 2200 !important;
+      }
+
+      .modal-backdrop {
+        z-index: 2100 !important;
+      }
+
+      .modal.in {
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        padding: calc(54px + env(safe-area-inset-top)) 8px 8px;
+      }
+
+      .modal-dialog {
+        width: min(920px, calc(100vw - 16px));
+        margin: 0 auto;
+      }
+
       .modal-backdrop.in {
         opacity: 0.68;
       }
@@ -1144,35 +1309,71 @@ ui <- navbarPage(
       }
 
       .app-loading-indicator {
-        display: none;
+        display: flex;
         position: fixed;
-        left: 50%;
-        bottom: calc(12px + env(safe-area-inset-bottom));
-        z-index: 2500;
+        inset: 0;
+        z-index: 4000;
         align-items: center;
-        gap: 8px;
-        padding: 8px 12px;
-        transform: translateX(-50%);
-        border-radius: 999px;
-        background: rgba(43, 30, 30, 0.96);
-        color: #ffffff;
-        box-shadow: 0 10px 24px rgba(43, 30, 30, 0.28);
-        font-size: 12px;
-        font-weight: 800;
+        justify-content: center;
+        flex-direction: column;
+        gap: 13px;
+        padding: 24px;
+        background:
+          radial-gradient(circle at center, rgba(255, 255, 255, 0.98), rgba(224, 227, 228, 0.98) 58%, rgba(190, 28, 48, 0.18)),
+          var(--off-white);
+        color: var(--near-black);
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 0.22s ease, visibility 0.22s ease;
+        pointer-events: all;
+      }
+
+      html.app-ready .app-loading-indicator {
+        opacity: 0;
+        visibility: hidden;
         pointer-events: none;
       }
 
-      body.shiny-busy .app-loading-indicator {
-        display: flex;
+      html.app-ready body.shiny-busy .app-loading-indicator {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+        transition-delay: 0.18s;
+      }
+
+      .app-loading-logo-shell {
+        position: relative;
+        width: 148px;
+        height: 148px;
+        padding: 10px;
+        border-radius: 50%;
+        background: #ffffff;
+        box-shadow: 0 12px 34px rgba(43, 30, 30, 0.25);
+      }
+
+      .app-loading-logo {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        object-fit: cover;
       }
 
       .app-loading-spinner {
-        width: 15px;
-        height: 15px;
-        border: 2px solid rgba(255, 255, 255, 0.35);
+        position: absolute;
+        inset: -8px;
+        border: 6px solid rgba(76, 65, 66, 0.22);
         border-top-color: var(--primary-red);
+        border-right-color: var(--dark-red);
         border-radius: 50%;
-        animation: app-spin 0.8s linear infinite;
+        animation: app-spin 0.9s linear infinite;
+      }
+
+      .app-loading-label {
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
       }
 
       @keyframes app-spin {
@@ -1449,6 +1650,10 @@ ui <- navbarPage(
           padding: 5px 0;
         }
 
+        .season-finish-row {
+          grid-template-columns: minmax(86px, auto) 1fr;
+        }
+
         .finish-rank {
           font-size: 17px;
         }
@@ -1511,8 +1716,8 @@ ui <- navbarPage(
         }
 
         .modal-dialog {
-          width: calc(100% - 10px);
-          margin: 5px;
+          width: calc(100% - 4px);
+          margin: 0;
         }
 
         .modal-body {
@@ -1521,30 +1726,60 @@ ui <- navbarPage(
         }
 
         .matchup-detail-grid {
-          grid-template-columns: 1fr;
-          gap: 7px;
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 4px;
+        }
+
+        .matchup-team-panel {
+          min-width: 0;
+          border-width: 1px;
         }
 
         .matchup-team-header {
-          padding: 8px 9px;
+          padding: 6px;
         }
 
         .matchup-team-title {
-          font-size: 16px;
+          font-size: 13px;
+          overflow-wrap: anywhere;
         }
 
         .matchup-team-score {
-          font-size: 21px;
+          font-size: 18px;
         }
 
         .matchup-team-body {
-          padding: 4px;
+          padding: 2px;
         }
 
-        .app-loading-indicator {
-          width: calc(100vw - 24px);
-          justify-content: center;
-          text-align: center;
+        #history_team_a_players .dataTables_wrapper,
+        #history_team_b_players .dataTables_wrapper {
+          font-size: 9px;
+        }
+
+        #history_team_a_players table.dataTable thead th,
+        #history_team_a_players table.dataTable tbody td,
+        #history_team_b_players table.dataTable thead th,
+        #history_team_b_players table.dataTable tbody td {
+          padding: 2px !important;
+        }
+
+        .championship-shrine {
+          padding: 10px;
+        }
+
+        .championship-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 6px;
+        }
+
+        .championship-trophy {
+          font-size: 31px;
+        }
+
+        .app-loading-logo-shell {
+          width: 126px;
+          height: 126px;
         }
       }
 
@@ -1572,8 +1807,23 @@ ui <- navbarPage(
           if (toggle) toggle.setAttribute('aria-expanded', 'false');
         }
 
+        function markAppReady() {
+          document.documentElement.classList.add('app-ready');
+        }
+
+        function bindLoadingScreen() {
+          if (window.jQuery) {
+            window.jQuery(document).one('shiny:idle', markAppReady);
+          } else {
+            window.setTimeout(bindLoadingScreen, 50);
+          }
+
+          window.setTimeout(markAppReady, 15000);
+        }
+
         function initializeHubMenu() {
           closeHubMenu();
+          bindLoadingScreen();
 
           if (document.documentElement.dataset.hubMenuBound === 'true') return;
           document.documentElement.dataset.hubMenuBound = 'true';
@@ -1623,7 +1873,7 @@ ui <- navbarPage(
         role = "menu",
         actionButton(
           "hub_nav_dashboard",
-          "Dashboard",
+          "Home",
           class = "hub-nav-item",
           onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
         ),
@@ -1659,19 +1909,26 @@ ui <- navbarPage(
     class = "app-loading-indicator",
     role = "status",
     `aria-live` = "polite",
-    div(class = "app-loading-spinner"),
-    span("Updating league data...")
+    div(
+      class = "app-loading-logo-shell",
+      tags$img(
+        class = "app-loading-logo",
+        src = "img/hornet-logo.png",
+        alt = "Fantasy League Hub hornet logo"
+      ),
+      div(class = "app-loading-spinner")
+    ),
+    span(class = "app-loading-label", "Loading Fantasy League Hub")
   ),
 
   tabPanel(
-    "Dashboard",
+    "Home",
     value = "Dashboard",
     div(
       class = "page-wrap",
       div(
         class = "section-card hero-card",
-        h2("Last Week's Recap"),
-        h4(textOutput("dashboard_week_label"))
+        h2(textOutput("dashboard_week_label", inline = TRUE))
       ),
       uiOutput("dashboard_cards"),
       div(
@@ -1720,7 +1977,12 @@ ui <- navbarPage(
           uiOutput("player_year_ui"),
           uiOutput("player_week_ui"),
           uiOutput("player_manager_ui"),
-          selectInput("player_slot", "Roster Slot", choices = c("All Slots", all_slots), selected = "All Slots"),
+          selectInput(
+            "player_slot",
+            "Roster Slot",
+            choices = c("All Slots", "QB", "RB", "WR", "TE", "FLEX", "D/ST", "K", "Bench", "IR", "SLOT"),
+            selected = "All Slots"
+          ),
           textInput("player_search", "Player Search", placeholder = "Example: Josh Allen")
         )
       ),
@@ -1750,7 +2012,7 @@ ui <- navbarPage(
         class = "section-card",
         div(
           class = "control-row",
-          selectInput("record_scope", "Record Scope", choices = c("All Time", years), selected = "All Time")
+          selectInput("record_scope", "Season", choices = c("All Time", years), selected = "All Time")
         )
       ),
       uiOutput("record_book_tables")
@@ -1843,13 +2105,16 @@ server <- function(input, output, session) {
       available_years <- available_years |> filter(manager == selected_manager)
     }
 
-    year_choices <- sort(unique(available_years$year), decreasing = TRUE)
+    numeric_years <- sort(unique(available_years$year), decreasing = TRUE)
+    year_choices <- c("All Years", as.character(numeric_years))
     current_selection <- isolate(input$player_year)
 
     selected_year <- if (!is.null(current_selection) && current_selection %in% year_choices) {
       current_selection
+    } else if (length(numeric_years) > 0) {
+      as.character(max(numeric_years, na.rm = TRUE))
     } else {
-      max(year_choices, na.rm = TRUE)
+      "All Years"
     }
 
     selectInput("player_year", "Season", choices = year_choices, selected = selected_year)
@@ -1859,8 +2124,8 @@ server <- function(input, output, session) {
     selected_year <- input$player_year
     available_managers <- players
 
-    if (!is.null(selected_year) && !is.na(selected_year)) {
-      available_managers <- available_managers |> filter(year == selected_year)
+    if (!is.null(selected_year) && selected_year != "All Years") {
+      available_managers <- available_managers |> filter(year == as.integer(selected_year))
     }
 
     manager_choices <- sort(unique(available_managers$manager))
@@ -1878,10 +2143,16 @@ server <- function(input, output, session) {
   output$player_week_ui <- renderUI({
     req(input$player_year)
 
-    weeks <- weeks_for_year(players, input$player_year)
+    weeks <- if (input$player_year == "All Years") {
+      sort(unique(players$week))
+    } else {
+      weeks_for_year(players, as.integer(input$player_year))
+    }
     current_week <- isolate(input$player_week)
 
-    selected_week <- if (is.null(current_week)) {
+    selected_week <- if (input$player_year == "All Years") {
+      "All Weeks"
+    } else if (is.null(current_week)) {
       if (length(weeks) > 0) max(weeks, na.rm = TRUE) else NA_integer_
     } else if (!is.null(current_week) && current_week %in% as.character(c("All Weeks", weeks))) {
       current_week
@@ -1946,7 +2217,7 @@ server <- function(input, output, session) {
   })
 
   output$dashboard_week_label <- renderText({
-    paste0("Week ", dashboard_week(), ", ", dashboard_year())
+    paste0(dashboard_year(), " Week ", dashboard_week(), " Recap")
   })
 
   season_matchups <- reactive({
@@ -1988,6 +2259,27 @@ server <- function(input, output, session) {
     blowout <- pair_data |> slice_max(margin, n = 1, with_ties = FALSE)
     league_avg <- mean(week_data$points_for, na.rm = TRUE)
 
+    best_start <- players |>
+      filter(year == current_year, week == current_week) |>
+      filter(!str_to_lower(slot) %in% c("bench", "be", "ir", "injured reserve", "il")) |>
+      slice_max(fpts, n = 1, with_ties = FALSE)
+
+    best_start_card <- if (nrow(best_start) > 0) {
+      card(
+        "Best Start",
+        best_start$player_name[[1]],
+        HTML(paste0(
+          best_start$fantasy_team[[1]],
+          " — <span class='score-number'>",
+          score_fmt(best_start$fpts[[1]]),
+          " pts</span>"
+        )),
+        "accent-gold"
+      )
+    } else {
+      NULL
+    }
+
     div(
       class = "metric-grid",
       card(
@@ -2019,7 +2311,8 @@ server <- function(input, output, session) {
         HTML(paste0("<span class='score-number'>", score_fmt(league_avg), "</span>")),
         NULL,
         "accent-purple"
-      )
+      ),
+      best_start_card
     )
   })
 
@@ -2147,30 +2440,36 @@ server <- function(input, output, session) {
   })
 
   output$manager_content <- renderUI({
-    if (is.null(input$manager_select) || input$manager_select == "") {
+    if (
+      is.null(input$manager_select) || input$manager_select == "" ||
+      is.null(input$manager_period) || input$manager_period == ""
+    ) {
       return(NULL)
     }
 
+    positional_panel <- div(
+      class = "section-card",
+      h3("Positional Ranking Breakdown"),
+      plotOutput("manager_position_spider", height = "480px")
+    )
+
+    if (input$manager_period == "All Years") {
+      return(tagList(
+        uiOutput("manager_championship_shrine"),
+        uiOutput("manager_cards"),
+        positional_panel
+      ))
+    }
+
     tagList(
+      uiOutput("manager_finish_summary"),
       uiOutput("manager_cards"),
       div(
         class = "section-card",
         h3("Weekly Score Trend"),
         plotOutput("manager_score_trend", height = "400px")
       ),
-      div(
-        class = "section-card",
-        div(
-          class = "matchup-detail-grid",
-          div(
-            h3("Positional Ranking Breakdown"),
-            plotOutput("manager_position_spider", height = "480px")
-          ),
-          div(
-            uiOutput("manager_finish_summary")
-          )
-        )
-      )
+      positional_panel
     )
   })
 
@@ -2274,54 +2573,87 @@ server <- function(input, output, session) {
       )
   })
 
-  output$manager_finish_summary <- renderUI({
-    req(input$manager_select)
+  output$manager_championship_shrine <- renderUI({
+    req(input$manager_select, input$manager_period)
     validate(need(input$manager_select != "", ""))
 
-    selected_finishes <- manager_finishes |>
-      filter(manager == input$manager_select)
+    if (input$manager_period != "All Years") {
+      return(NULL)
+    }
+
+    championships <- manager_finishes |>
+      filter(manager == input$manager_select, finish == 1L) |>
+      arrange(desc(year))
+
+    if (nrow(championships) == 0) {
+      return(NULL)
+    }
+
+    championship_cards <- lapply(seq_len(nrow(championships)), function(i) {
+      div(
+        class = "championship-card",
+        span(class = "championship-trophy", `aria-hidden` = "true", "🏆"),
+        div(class = "championship-year", championships$year[[i]]),
+        div(class = "championship-team", championships$team[[i]])
+      )
+    })
+
+    div(
+      class = "championship-shrine",
+      div(class = "championship-shrine-title", "Championship Hall"),
+      div(class = "championship-grid", tagList(championship_cards))
+    )
+  })
+
+  output$manager_finish_summary <- renderUI({
+    req(input$manager_select, input$manager_period)
+    validate(need(input$manager_select != "", ""))
 
     if (input$manager_period == "All Years") {
-      best_finishes <- selected_finishes |>
-        arrange(finish, desc(year)) |>
-        slice_head(n = 3)
-
-      if (nrow(best_finishes) == 0) {
-        return(div(class = "finish-card", div(class = "finish-title", "Best Finishes"), p(class = "muted", "No playoff finish data available yet.")))
-      }
-
-      finish_rows <- lapply(seq_len(nrow(best_finishes)), function(i) {
-        div(
-          class = "finish-row",
-          div(class = "finish-rank", best_finishes$finish_label[[i]]),
-          div(class = "finish-detail", paste0(best_finishes$year[[i]], " — ", best_finishes$team[[i]]))
-        )
-      })
-
-      div(
-        class = "finish-card",
-        div(class = "finish-title", "Best Finishes"),
-        tagList(finish_rows)
-      )
-    } else {
-      selected_year <- as.integer(input$manager_period)
-      finish <- selected_finishes |>
-        filter(year == selected_year) |>
-        slice_head(n = 1)
-
-      if (nrow(finish) == 0) {
-        return(div(class = "finish-card", div(class = "finish-title", "Season Finish"), p(class = "muted", "No playoff finish data available for this season.")))
-      }
-
-      div(
-        class = "finish-card",
-        div(class = "finish-title", "Season Finish"),
-        div(class = "finish-row",
-            div(class = "finish-rank", finish$finish_label[[1]]),
-            div(class = "finish-detail", finish$team[[1]])
-        )
-      )
+      return(NULL)
     }
+
+    selected_year <- as.integer(input$manager_period)
+    finish <- manager_finishes |>
+      filter(manager == input$manager_select, year == selected_year) |>
+      slice_head(n = 1)
+
+    team_name <- resolve_team_name_one(input$manager_select, selected_year)
+
+    if (nrow(finish) > 0) {
+      finish_label <- finish$finish_label[[1]]
+      finish_team <- finish$team[[1]]
+    } else {
+      season_games <- matchups |>
+        filter(manager == input$manager_select, year == selected_year) |>
+        arrange(week)
+
+      final_week <- if (nrow(season_games) > 0) max(season_games$week, na.rm = TRUE) else NA_integer_
+      lost_quarterfinal <- any(season_games$week == 15 & season_games$loss == 1, na.rm = TRUE)
+
+      finish_label <- case_when(
+        lost_quarterfinal ~ "Quarterfinals",
+        !is.na(final_week) && final_week == 14 ~ "Missed Playoffs",
+        TRUE ~ "Unavailable"
+      )
+      finish_team <- team_name
+    }
+
+    finish_note <- if (finish_label == "Unavailable") {
+      "No playoff finish data available for this season."
+    } else {
+      finish_team
+    }
+
+    div(
+      class = "finish-card",
+      div(class = "finish-title", "Season Finish"),
+      div(
+        class = "finish-row season-finish-row",
+        div(class = "finish-rank", finish_label),
+        div(class = "finish-detail", finish_note)
+      )
+    )
   })
 
   output$manager_position_spider <- renderPlot({
@@ -2463,7 +2795,11 @@ server <- function(input, output, session) {
   player_filtered <- reactive({
     req(input$player_year, input$player_week, input$player_manager, input$player_slot)
 
-    data <- players |> filter(year == input$player_year)
+    data <- players
+
+    if (input$player_year != "All Years") {
+      data <- data |> filter(year == as.integer(input$player_year))
+    }
 
     if (input$player_week != "All Weeks") {
       data <- data |> filter(week == as.integer(input$player_week))
@@ -2552,7 +2888,7 @@ server <- function(input, output, session) {
         Points = round(fpts, 2),
         `Over Projection` = round(fpts - proj, 2)
       ) |>
-      datatable_no_buttons(page_length = 25)
+      datatable_player_performance(page_length = 25)
   })
 
 
@@ -2646,6 +2982,7 @@ server <- function(input, output, session) {
         Opponent = opposing_team
       ) |>
       slice_head(n = record_limit()) |>
+      record_scope_columns(record_scope_year()) |>
       datatable_record(page_length = record_limit()) |>
       DT::formatStyle(
         columns = "Score",
@@ -2673,6 +3010,7 @@ server <- function(input, output, session) {
         Margin = round(margin, 2)
       ) |>
       slice_head(n = record_limit()) |>
+      record_scope_columns(record_scope_year()) |>
       datatable_record(page_length = record_limit()) |>
       DT::formatStyle(
         columns = c("Winning Score", "Losing Score", "Margin"),
@@ -2700,6 +3038,7 @@ server <- function(input, output, session) {
         Margin = round(margin, 2)
       ) |>
       slice_head(n = record_limit()) |>
+      record_scope_columns(record_scope_year()) |>
       datatable_record(page_length = record_limit()) |>
       DT::formatStyle(
         columns = c("Winning Score", "Losing Score", "Margin"),
@@ -2954,6 +3293,7 @@ server <- function(input, output, session) {
     req(matchup)
 
     datatable_simple(matchup_player_table(matchup$team_a, matchup), page_length = 20) |>
+      format_nonstarter_rows() |>
       DT::formatStyle(
         columns = "Points",
         color = "#BE1C30",
@@ -2966,6 +3306,7 @@ server <- function(input, output, session) {
     req(matchup)
 
     datatable_simple(matchup_player_table(matchup$team_b, matchup), page_length = 20) |>
+      format_nonstarter_rows() |>
       DT::formatStyle(
         columns = "Points",
         color = "#BE1C30",

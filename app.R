@@ -60,18 +60,22 @@ pct_fmt <- function(x) {
   ifelse(is.na(x), "—", scales::percent(x, accuracy = 0.1))
 }
 
-truncate_display_name <- function(x, max_chars = 13L) {
-  x <- as.character(x)
+ordinal_label <- function(x) {
+  x <- as.integer(x)
+  remainder_100 <- x %% 100L
+  remainder_10 <- x %% 10L
 
-  ifelse(
-    is.na(x),
-    "",
+  suffix <- ifelse(
+    remainder_100 %in% 11:13,
+    "th",
     ifelse(
-      nchar(x) > max_chars,
-      paste0(substr(x, 1L, max_chars), "..."),
-      x
+      remainder_10 == 1L,
+      "st",
+      ifelse(remainder_10 == 2L, "nd", ifelse(remainder_10 == 3L, "rd", "th"))
     )
   )
+
+  paste0(x, suffix)
 }
 
 matchup_html <- function(year, week, winning_team, winning_score, losing_team, losing_score) {
@@ -185,7 +189,42 @@ datatable_player_performance <- function(data, page_length = 25) {
   )
 }
 
-datatable_record <- function(data, page_length = 5, selection = "none", escape = TRUE) {
+datatable_record <- function(
+  data,
+  page_length = 5,
+  selection = "none",
+  escape = TRUE,
+  highlight_leader = TRUE
+) {
+  table_options <- list(
+    pageLength = page_length,
+    responsive = TRUE,
+    autoWidth = FALSE,
+    scrollX = FALSE,
+    dom = "t",
+    ordering = FALSE,
+    columnDefs = responsive_column_defs(data),
+    initComplete = JS(
+      "function(settings, json) {",
+      "  var table = this.api();",
+      "  window.setTimeout(function() {",
+      "    table.columns.adjust();",
+      "    if (table.responsive && table.responsive.recalc) table.responsive.recalc();",
+      "  }, 0);",
+      "}"
+    )
+  )
+
+  if (isTRUE(highlight_leader)) {
+    table_options$rowCallback <- JS(
+      "function(row, data, displayNum) {",
+      "  if (displayNum === 0) {",
+      "    $(row).addClass('record-holder-row');",
+      "  }",
+      "}"
+    )
+  }
+
   DT::datatable(
     data,
     rownames = FALSE,
@@ -194,31 +233,7 @@ datatable_record <- function(data, page_length = 5, selection = "none", escape =
     escape = escape,
     extensions = "Responsive",
     width = "100%",
-    options = list(
-      pageLength = page_length,
-      responsive = TRUE,
-      autoWidth = FALSE,
-      scrollX = FALSE,
-      dom = "t",
-      ordering = FALSE,
-      columnDefs = responsive_column_defs(data),
-      initComplete = JS(
-        "function(settings, json) {",
-        "  var table = this.api();",
-        "  window.setTimeout(function() {",
-        "    table.columns.adjust();",
-        "    if (table.responsive && table.responsive.recalc) table.responsive.recalc();",
-        "  }, 0);",
-        "}"
-      ),
-      rowCallback = JS(
-        "function(row, data, displayNum) {",
-        "  if (displayNum === 0) {",
-        "    $(row).addClass('record-holder-row');",
-        "  }",
-        "}"
-      )
-    ),
+    options = table_options,
     class = "stripe compact record-datatable"
   )
 }
@@ -844,15 +859,18 @@ ui <- navbarPage(
       }
 
       .hero-card .selectize-control {
+        position: relative;
         z-index: 90;
       }
 
-      .selectize-dropdown {
-        z-index: 5000 !important;
+      .selectize-control.dropdown-active,
+      .selectize-control.focus {
+        z-index: 6100 !important;
       }
 
+      .selectize-dropdown,
       body > .selectize-dropdown {
-        z-index: 5000 !important;
+        z-index: 6200 !important;
       }
 
       .selectize-dropdown-content {
@@ -1219,8 +1237,8 @@ ui <- navbarPage(
       }
 
       table.dataTable tbody tr.record-holder-row > td {
-        background: inherit !important;
-        font-size: 1.09em !important;
+        background: rgba(212, 175, 55, 0.18) !important;
+        font-size: inherit !important;
         font-weight: inherit !important;
       }
 
@@ -1268,6 +1286,14 @@ ui <- navbarPage(
         padding-top: 7px !important;
         padding-bottom: 7px !important;
         font-weight: 700;
+      }
+
+      #power_rankings_table table.dataTable tbody tr:first-child > td {
+        font-size: 1.08em !important;
+      }
+
+      #power_rankings_table table.dataTable tbody td:last-child {
+        font-weight: 900 !important;
       }
 
       .section-title-row {
@@ -2006,9 +2032,41 @@ ui <- navbarPage(
           window.setTimeout(markAppReady, 15000);
         }
 
+        function bindSelectizeToggleBehavior() {
+          if (!window.jQuery) {
+            window.setTimeout(bindSelectizeToggleBehavior, 50);
+            return;
+          }
+
+          var $document = window.jQuery(document);
+          $document.off('pointerdown.fantasyDropdownToggle', '.selectize-control .selectize-input');
+          $document.on(
+            'pointerdown.fantasyDropdownToggle',
+            '.selectize-control .selectize-input',
+            function(event) {
+              var $control = window.jQuery(this).closest('.selectize-control');
+              var selectElement = $control.siblings('select').get(0);
+              var selectize = selectElement && selectElement.selectize;
+
+              if (selectize && selectize.isOpen) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+                selectize.close();
+                selectize.blur();
+                window.setTimeout(function() {
+                  selectize.close();
+                  selectize.blur();
+                }, 0);
+                return false;
+              }
+            }
+          );
+        }
+
         function initializeHubMenu() {
           closeHubMenu();
           bindLoadingScreen();
+          bindSelectizeToggleBehavior();
           registerTableMessageHandler();
 
           if (document.documentElement.dataset.hubMenuBound === 'true') return;
@@ -2184,19 +2242,15 @@ ui <- navbarPage(
           uiOutput("player_year_ui"),
           uiOutput("player_week_ui"),
           uiOutput("player_manager_ui"),
-          selectInput(
+          selectizeInput(
             "player_slot",
             "Roster Slot",
             choices = c("All Slots", "QB", "RB", "WR", "TE", "FLEX", "D/ST", "K", "Bench", "IR", "SLOT"),
-            selected = "All Slots"
+            selected = "All Slots",
+            options = list(dropdownParent = "body")
           ),
           textInput("player_search", "Player Search", placeholder = "Example: Josh Allen")
         )
-      ),
-      div(
-        class = "section-card",
-        h3("Top 3"),
-        plotOutput("top_players_plot", height = "430px")
       ),
       div(
         class = "section-card",
@@ -2326,7 +2380,13 @@ server <- function(input, output, session) {
       "All Years"
     }
 
-    selectInput("player_year", "Season", choices = year_choices, selected = selected_year)
+    selectizeInput(
+      "player_year",
+      "Season",
+      choices = year_choices,
+      selected = selected_year,
+      options = list(dropdownParent = "body")
+    )
   })
 
   output$player_manager_ui <- renderUI({
@@ -2346,7 +2406,13 @@ server <- function(input, output, session) {
       "All Managers"
     }
 
-    selectInput("player_manager", "Manager", choices = c("All Managers", manager_choices), selected = selected_manager)
+    selectizeInput(
+      "player_manager",
+      "Manager",
+      choices = c("All Managers", manager_choices),
+      selected = selected_manager,
+      options = list(dropdownParent = "body")
+    )
   })
 
   output$player_week_ui <- renderUI({
@@ -2371,7 +2437,13 @@ server <- function(input, output, session) {
       if (length(weeks) > 0) max(weeks, na.rm = TRUE) else NA_integer_
     }
 
-    selectInput("player_week", "Week", choices = c("All Weeks", weeks), selected = selected_week)
+    selectizeInput(
+      "player_week",
+      "Week",
+      choices = c("All Weeks", weeks),
+      selected = selected_week,
+      options = list(dropdownParent = "body")
+    )
   })
 
   output$manager_period_ui <- renderUI({
@@ -2486,14 +2558,9 @@ server <- function(input, output, session) {
     best_start_card <- if (nrow(best_start) > 0) {
       card(
         "Best Starter",
-        HTML(paste0(
-          htmltools::htmlEscape(best_start$player_name[[1]]),
-          " <span class='score-number'>",
-          score_fmt(best_start$fpts[[1]]),
-          "</span>"
-        )),
-        best_start$fantasy_team[[1]],
-        "accent-gold one-line-card best-starter-card"
+        HTML(paste0("<span class='score-number'>", score_fmt(best_start$fpts[[1]]), "</span>")),
+        paste0(best_start$player_name[[1]], " - ", best_start$fantasy_team[[1]]),
+        "accent-gold best-starter-card"
       )
     } else {
       NULL
@@ -2503,26 +2570,23 @@ server <- function(input, output, session) {
       class = "metric-grid",
       card(
         "Highest Scorer",
-        HTML(paste0(
-          htmltools::htmlEscape(truncate_display_name(high_score$team[[1]])),
-          " <span class='score-number'>",
-          score_fmt(high_score$points_for[[1]]),
-          "</span>"
-        )),
-        NULL,
-        "accent-green one-line-card"
+        HTML(paste0("<span class='score-number'>", score_fmt(high_score$points_for[[1]]), "</span>")),
+        high_score$team[[1]],
+        "accent-green"
       ),
       card(
         "Lowest Scorer",
-        HTML(paste0(
-          htmltools::htmlEscape(truncate_display_name(low_score$team[[1]])),
-          " <span class='score-number'>",
-          score_fmt(low_score$points_for[[1]]),
-          "</span>"
-        )),
-        NULL,
-        "accent-red one-line-card"
+        HTML(paste0("<span class='score-number'>", score_fmt(low_score$points_for[[1]]), "</span>")),
+        low_score$team[[1]],
+        "accent-red"
       ),
+      card(
+        "League Avg Score",
+        HTML(paste0("<span class='score-number'>", score_fmt(league_avg), "</span>")),
+        NULL,
+        "accent-purple"
+      ),
+      best_start_card,
       card(
         "Closest Matchup",
         paste0(closest$team_a, " vs ", closest$team_b),
@@ -2534,14 +2598,7 @@ server <- function(input, output, session) {
         paste0(blowout$team_a, " vs ", blowout$team_b),
         HTML(paste0("Margin: <span class='score-number'>", score_fmt(blowout$margin), "</span>")),
         "accent-gold"
-      ),
-      card(
-        "League Avg Score",
-        HTML(paste0("<span class='score-number'>", score_fmt(league_avg), "</span>")),
-        NULL,
-        "accent-purple"
-      ),
-      best_start_card
+      )
     )
   })
 
@@ -2636,21 +2693,25 @@ server <- function(input, output, session) {
   })
 
   output$power_rankings_table <- renderDT({
-    power_rankings() |>
+    ranking_data <- power_rankings() |>
       arrange(desc(power_score), desc(points_for)) |>
-      slice_head(n = 5) |>
       mutate(
         team_name = mapply(resolve_team_name_one, manager, dashboard_year(), USE.NAMES = FALSE)
       ) |>
       transmute(
-        Rank = rank,
         `Team Name` = team_name,
         Record = record,
         `Win %` = pct_fmt(win_pct),
         `Last 3 Avg` = round(recent_avg, 2),
         `Power Score` = round(power_score, 1)
-      ) |>
-      datatable_simple(page_length = 5)
+      )
+
+    ranking_data |>
+      datatable_simple(page_length = max(1, nrow(ranking_data))) |>
+      DT::formatStyle(
+        columns = "Power Score",
+        fontWeight = "900"
+      )
   })
 
   selected_manager_data <- reactive({
@@ -2762,42 +2823,23 @@ server <- function(input, output, session) {
 
   output$manager_score_trend <- renderPlot({
     trend_data <- selected_manager_data() |>
-      arrange(year, week) |>
-      mutate(game_index = row_number())
+      arrange(week)
 
-    if (input$manager_period == "All Years") {
-      axis_breaks <- trend_data |>
-        group_by(year) |>
-        summarise(game_index = min(game_index), .groups = "drop")
+    week_breaks <- sort(unique(trend_data$week))
 
-      x_breaks <- axis_breaks$game_index
-      x_labels <- as.character(axis_breaks$year)
-      x_title <- "Season"
-    } else {
-      max_game <- max(trend_data$game_index, na.rm = TRUE)
-      step <- ifelse(max_game <= 8, 1, ifelse(max_game <= 14, 2, 3))
-      x_breaks <- seq(1, max_game, by = step)
-      week_lookup <- trend_data |>
-        select(game_index, week)
-
-      x_labels <- paste0(
-        "W",
-        week_lookup$week[match(x_breaks, week_lookup$game_index)]
-      )
-      x_title <- "Week"
-    }
-
-    ggplot(trend_data, aes(x = game_index, y = points_for)) +
+    ggplot(trend_data, aes(x = week, y = points_for)) +
       geom_line(linewidth = 1.1, color = "#BE1C30") +
       geom_point(size = 2.7, color = "#BE1C30") +
-      scale_x_continuous(breaks = x_breaks, labels = x_labels) +
+      scale_x_continuous(breaks = week_breaks, labels = week_breaks) +
       labs(
-        x = x_title,
+        x = "Week",
         y = "Points For"
       ) +
       theme_minimal(base_size = 13) +
       theme(
-        panel.grid.minor = element_blank()
+        panel.grid = element_blank(),
+        axis.line = element_line(color = "#4C4142", linewidth = 0.6),
+        axis.ticks = element_line(color = "#4C4142", linewidth = 0.5)
       )
   })
 
@@ -2900,54 +2942,77 @@ server <- function(input, output, session) {
       ) |>
       filter(pos_clean %in% position_levels)
 
+    games_played <- matchups |>
+      distinct(manager, year, week)
+
     if (input$manager_period != "All Years") {
+      selected_year <- as.integer(input$manager_period)
       position_data <- position_data |>
-        filter(year == as.integer(input$manager_period))
+        filter(year == selected_year)
+      games_played <- games_played |>
+        filter(year == selected_year)
     }
 
-    manager_position_totals <- position_data |>
+    games_played <- games_played |>
+      count(manager, name = "games_played")
+
+    manager_position_averages <- position_data |>
       group_by(manager, pos_clean) |>
-      summarise(points = sum(fpts, na.rm = TRUE), .groups = "drop")
+      summarise(total_points = sum(fpts, na.rm = TRUE), .groups = "drop") |>
+      left_join(games_played, by = "manager") |>
+      mutate(
+        games_played = pmax(coalesce(games_played, 0L), 1L),
+        avg_points = total_points / games_played
+      )
 
     validate(
-      need(nrow(manager_position_totals) > 0, "No player scoring data found for this period.")
+      need(nrow(manager_position_averages) > 0, "No player scoring data found for this period.")
     )
 
-    manager_position_totals <- manager_position_totals |>
+    manager_position_averages <- manager_position_averages |>
       group_by(pos_clean) |>
       mutate(
-        rank = dense_rank(desc(points)),
+        rank = dense_rank(desc(avg_points)),
         n_managers = n_distinct(manager)
       ) |>
       ungroup()
 
     selected_ranks <- tibble(pos_clean = position_levels) |>
       left_join(
-        manager_position_totals |>
+        manager_position_averages |>
           filter(manager == input$manager_select) |>
-          select(pos_clean, points, rank, n_managers),
+          select(pos_clean, avg_points, rank, n_managers),
         by = "pos_clean"
       ) |>
       mutate(
-        points = if_else(is.na(points), 0, points),
-        n_managers = if_else(is.na(n_managers), max(manager_position_totals$n_managers, na.rm = TRUE), n_managers),
+        avg_points = if_else(is.na(avg_points), 0, avg_points),
+        n_managers = if_else(
+          is.na(n_managers),
+          max(manager_position_averages$n_managers, na.rm = TRUE),
+          n_managers
+        ),
         rank = if_else(is.na(rank), n_managers, rank),
         rank_score = if_else(n_managers <= 1, 1, (n_managers - rank + 1) / n_managers),
-        rank_label = paste0("#", rank),
+        rank_label = ordinal_label(rank),
+        detail_label = paste0(rank_label, ", ", score_fmt(avg_points), " pts/wk"),
         pos_clean = factor(pos_clean, levels = position_levels)
       )
 
-    angles <- seq(pi / 2, pi / 2 - 2 * pi + 2 * pi / length(position_levels), length.out = length(position_levels))
+    angles <- seq(
+      pi / 2,
+      pi / 2 - 2 * pi + 2 * pi / length(position_levels),
+      length.out = length(position_levels)
+    )
 
     selected_ranks <- selected_ranks |>
       mutate(
         angle = angles,
         x = rank_score * cos(angle),
         y = rank_score * sin(angle),
-        label_x = 1.13 * cos(angle),
-        label_y = 1.13 * sin(angle),
-        rank_x = pmin(1.04, rank_score + 0.11) * cos(angle),
-        rank_y = pmin(1.04, rank_score + 0.11) * sin(angle)
+        label_x = 1.16 * cos(angle),
+        label_y = 1.16 * sin(angle),
+        subtitle_x = label_x,
+        subtitle_y = label_y - 0.10
       )
 
     polygon_data <- bind_rows(selected_ranks, selected_ranks[1, ])
@@ -3004,20 +3069,25 @@ server <- function(input, output, session) {
       ) +
       geom_text(
         data = selected_ranks,
-        aes(x = label_x, y = label_y, label = paste0(pos_clean, "\n", rank_label)),
+        aes(x = label_x, y = label_y, label = pos_clean),
         fontface = "bold",
         color = "#2B1E1E",
-        size = 4.3,
-        lineheight = 0.9
+        size = 4.2
       ) +
-      coord_equal(xlim = c(-1.25, 1.25), ylim = c(-1.25, 1.25), clip = "off") +
+      geom_text(
+        data = selected_ranks,
+        aes(x = subtitle_x, y = subtitle_y, label = detail_label),
+        color = "#75696A",
+        size = 3.0
+      ) +
+      coord_equal(xlim = c(-1.38, 1.38), ylim = c(-1.38, 1.38), clip = "off") +
       labs(
         x = NULL,
         y = NULL
       ) +
       theme_void(base_size = 13) +
       theme(
-        plot.margin = margin(20, 40, 20, 40)
+        plot.margin = margin(24, 52, 24, 52)
       )
   })
 
@@ -3049,73 +3119,19 @@ server <- function(input, output, session) {
     data
   })
 
-  output$top_players_plot <- renderPlot({
-    plot_data <- player_filtered() |>
-      group_by(player_name, pos, slot) |>
-      summarise(total_fpts = sum(fpts, na.rm = TRUE), .groups = "drop") |>
-      slice_max(total_fpts, n = 3) |>
-      arrange(desc(total_fpts)) |>
-      mutate(
-        rank = row_number(),
-        podium_order = case_when(
-          rank == 1 ~ 2,
-          rank == 2 ~ 1,
-          rank == 3 ~ 3
-        ),
-        rank_label = paste0("#", rank),
-        display_label = stringr::str_wrap(player_name, width = 14)
-      ) |>
-      arrange(podium_order)
-
-    validate(
-      need(nrow(plot_data) > 0, "No player data found for these filters.")
-    )
-
-    max_points <- max(plot_data$total_fpts, na.rm = TRUE)
-
-    ggplot(plot_data, aes(x = factor(podium_order), y = total_fpts)) +
-      geom_col(aes(fill = factor(rank)), width = 0.72, show.legend = FALSE) +
-      geom_text(
-        aes(y = total_fpts + max_points * 0.06, label = rank_label),
-        fontface = "bold",
-        size = 8,
-        color = "#2B1E1E"
-      ) +
-      geom_text(
-        aes(y = total_fpts * 0.50, label = paste0(display_label, "\n", score_fmt(total_fpts), " pts")),
-        fontface = "bold",
-        size = 5.2,
-        color = "#2B1E1E",
-        lineheight = 0.95
-      ) +
-      scale_x_discrete(labels = NULL) +
-      scale_y_continuous(limits = c(0, max_points * 1.18), expand = expansion(mult = c(0, 0.02))) +
-      scale_fill_manual(values = c("1" = "#D4AF37", "2" = "#C0C0C0", "3" = "#CD7F32")) +
-      labs(
-        x = NULL,
-        y = NULL
-      ) +
-      theme_void(base_size = 13) +
-      theme(
-        plot.margin = margin(20, 20, 20, 20)
-      )
-  })
 
   output$players_table <- renderDT({
     player_filtered() |>
       arrange(desc(fpts)) |>
       transmute(
-        Season = year,
-        Week = week,
-        Player = player_name,
-        Manager = manager,
-        `Fantasy Team` = fantasy_team,
+        Game = paste0(year, " Week ", week),
         Position = pos,
+        Player = player_name,
+        `Fantasy Team` = fantasy_team,
         `NFL Team` = team,
-        Slot = slot,
-        Projection = round(proj, 2),
-        Points = round(fpts, 2),
-        `Over Projection` = round(fpts - proj, 2)
+        `Roster Slot` = slot,
+        Proj = round(proj, 2),
+        Pts = round(fpts, 2)
       ) |>
       datatable_player_performance(page_length = 25)
   })
@@ -3169,7 +3185,7 @@ server <- function(input, output, session) {
   })
 
   record_limit <- reactive({
-    if (is.na(record_scope_year())) 5 else 3
+    5
   })
 
   output$record_book_tables <- renderUI({
@@ -3341,25 +3357,32 @@ server <- function(input, output, session) {
   }, server = FALSE)
 
   output$record_slot_points <- renderDT({
-    slot_order <- c("QB", "RB", "WR", "TE", "FLEX", "D/ST", "K", "Bench", "IR", "SLOT")
+    slot_order <- c("QB", "RB", "WR", "TE", "FLEX", "D/ST", "K")
 
     players |>
-      group_by(manager, slot) |>
+      mutate(
+        slot_clean = case_when(
+          str_to_upper(slot) %in% c("DST", "DEF", "D") ~ "D/ST",
+          TRUE ~ as.character(slot)
+        )
+      ) |>
+      filter(slot_clean %in% slot_order) |>
+      group_by(manager, slot_clean) |>
       summarise(
         Points = sum(fpts, na.rm = TRUE),
         .groups = "drop"
       ) |>
-      group_by(slot) |>
+      group_by(slot_clean) |>
       slice_max(Points, n = 1, with_ties = FALSE) |>
       ungroup() |>
-      mutate(slot = factor(slot, levels = slot_order)) |>
-      arrange(slot) |>
+      mutate(slot_clean = factor(slot_clean, levels = slot_order)) |>
+      arrange(slot_clean) |>
       transmute(
-        Slot = as.character(slot),
+        Slot = as.character(slot_clean),
         Manager = manager,
         Points = round(Points, 2)
       ) |>
-      datatable_record(page_length = 15) |>
+      datatable_record(page_length = 10, highlight_leader = FALSE) |>
       DT::formatStyle(
         columns = "Points",
         color = "#BE1C30",
@@ -3454,7 +3477,7 @@ server <- function(input, output, session) {
             class = "matchup-team-panel",
             div(
               class = "matchup-team-header",
-              div(class = "matchup-team-title", paste0(matchup$manager_a, " — ", matchup$team_a)),
+              div(class = "matchup-team-title", matchup$team_a),
               div(class = "matchup-team-score", score_fmt(matchup$score_a))
             ),
             div(class = "matchup-team-body", DTOutput("history_team_a_players"))
@@ -3463,7 +3486,7 @@ server <- function(input, output, session) {
             class = "matchup-team-panel",
             div(
               class = "matchup-team-header",
-              div(class = "matchup-team-title", paste0(matchup$manager_b, " — ", matchup$team_b)),
+              div(class = "matchup-team-title", matchup$team_b),
               div(class = "matchup-team-score", score_fmt(matchup$score_b))
             ),
             div(class = "matchup-team-body", DTOutput("history_team_b_players"))
@@ -3479,22 +3502,82 @@ server <- function(input, output, session) {
     DT::selectRows(history_matchups_proxy, NULL)
   }, ignoreInit = TRUE)
 
-  roster_slot_order <- c("QB", "RB", "RB/WR", "WR", "TE", "FLEX", "D/ST", "K", "BE", "IR")
+  roster_slot_order <- c("QB", "RB", "RB/WR", "WR", "TE", "FLEX", "D/ST", "K")
 
   matchup_player_table <- function(team_name_value, matchup) {
-    players |>
+    team_players <- players |>
       filter(
         year == matchup$year,
         week == matchup$week,
         fantasy_team == team_name_value
       ) |>
-      mutate(slot_order = match(slot, roster_slot_order)) |>
-      arrange(is.na(slot_order), slot_order, desc(fpts)) |>
-      transmute(
-        Player = player_name,
-        Slot = slot,
-        Projection = round(proj, 2),
-        Points = round(fpts, 2)
+      mutate(
+        display_slot = case_when(
+          str_to_upper(slot) %in% c("BE", "BENCH") ~ "Bench",
+          str_to_upper(slot) %in% c("IR", "INJURED RESERVE", "IL") ~ "IR",
+          str_to_upper(slot) %in% c("DST", "DEF", "D") ~ "D/ST",
+          TRUE ~ as.character(slot)
+        ),
+        is_starter = !display_slot %in% c("Bench", "IR"),
+        slot_order = match(display_slot, roster_slot_order)
+      )
+
+    starters <- team_players |>
+      filter(is_starter) |>
+      arrange(is.na(slot_order), slot_order, desc(fpts))
+
+    bench_players <- team_players |>
+      filter(display_slot == "Bench") |>
+      arrange(desc(fpts))
+
+    ir_players <- team_players |>
+      filter(display_slot == "IR") |>
+      arrange(desc(fpts))
+
+    display_columns <- function(data) {
+      data |>
+        transmute(
+          Player = player_name,
+          Slot = display_slot,
+          Proj = round(proj, 2),
+          Pts = round(fpts, 2)
+        )
+    }
+
+    total_row <- tibble(
+      Player = "Total",
+      Slot = "",
+      Proj = round(sum(starters$proj, na.rm = TRUE), 2),
+      Pts = round(sum(starters$fpts, na.rm = TRUE), 2)
+    )
+
+    bind_rows(
+      display_columns(starters),
+      total_row,
+      display_columns(bench_players),
+      display_columns(ir_players)
+    )
+  }
+
+  format_history_player_table <- function(data) {
+    datatable_simple(data, page_length = max(1, nrow(data))) |>
+      format_nonstarter_rows() |>
+      DT::formatStyle(
+        "Player",
+        target = "row",
+        backgroundColor = DT::styleEqual("Total", "#F4EFE7"),
+        fontWeight = DT::styleEqual("Total", "900"),
+        borderTop = DT::styleEqual("Total", "2px solid #4C4142"),
+        borderBottom = DT::styleEqual("Total", "2px solid #4C4142")
+      ) |>
+      DT::formatStyle(
+        columns = "Proj",
+        color = "#8A7E7F"
+      ) |>
+      DT::formatStyle(
+        columns = "Pts",
+        color = "#BE1C30",
+        fontWeight = "bold"
       )
   }
 
@@ -3502,27 +3585,18 @@ server <- function(input, output, session) {
     matchup <- selected_history_matchup()
     req(matchup)
 
-    datatable_simple(matchup_player_table(matchup$team_a, matchup), page_length = 20) |>
-      format_nonstarter_rows() |>
-      DT::formatStyle(
-        columns = "Points",
-        color = "#BE1C30",
-        fontWeight = "bold"
-      )
+    matchup_player_table(matchup$team_a, matchup) |>
+      format_history_player_table()
   }, server = FALSE)
 
   output$history_team_b_players <- renderDT({
     matchup <- selected_history_matchup()
     req(matchup)
 
-    datatable_simple(matchup_player_table(matchup$team_b, matchup), page_length = 20) |>
-      format_nonstarter_rows() |>
-      DT::formatStyle(
-        columns = "Points",
-        color = "#BE1C30",
-        fontWeight = "bold"
-      )
+    matchup_player_table(matchup$team_b, matchup) |>
+      format_history_player_table()
   }, server = FALSE)
+
 
 
 }

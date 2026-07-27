@@ -60,6 +60,37 @@ pct_fmt <- function(x) {
   ifelse(is.na(x), "—", scales::percent(x, accuracy = 0.1))
 }
 
+truncate_display_name <- function(x, max_chars = 13L) {
+  x <- as.character(x)
+
+  ifelse(
+    is.na(x),
+    "",
+    ifelse(
+      nchar(x) > max_chars,
+      paste0(substr(x, 1L, max_chars), "..."),
+      x
+    )
+  )
+}
+
+matchup_html <- function(year, week, winning_team, winning_score, losing_team, losing_score) {
+  paste0(
+    year,
+    " Week ",
+    week,
+    ": ",
+    htmltools::htmlEscape(as.character(winning_team)),
+    " <strong>",
+    score_fmt(winning_score),
+    "</strong> - ",
+    htmltools::htmlEscape(as.character(losing_team)),
+    " <strong>",
+    score_fmt(losing_score),
+    "</strong>"
+  )
+}
+
 responsive_column_defs <- function(data) {
   definitions <- list(
     list(responsivePriority = 1, targets = 0)
@@ -154,13 +185,15 @@ datatable_player_performance <- function(data, page_length = 25) {
   )
 }
 
-datatable_record <- function(data, page_length = 5, selection = "none") {
+datatable_record <- function(data, page_length = 5, selection = "none", escape = TRUE) {
   DT::datatable(
     data,
     rownames = FALSE,
     selection = selection,
     filter = "none",
+    escape = escape,
     extensions = "Responsive",
+    width = "100%",
     options = list(
       pageLength = page_length,
       responsive = TRUE,
@@ -169,6 +202,15 @@ datatable_record <- function(data, page_length = 5, selection = "none") {
       dom = "t",
       ordering = FALSE,
       columnDefs = responsive_column_defs(data),
+      initComplete = JS(
+        "function(settings, json) {",
+        "  var table = this.api();",
+        "  window.setTimeout(function() {",
+        "    table.columns.adjust();",
+        "    if (table.responsive && table.responsive.recalc) table.responsive.recalc();",
+        "  }, 0);",
+        "}"
+      ),
       rowCallback = JS(
         "function(row, data, displayNum) {",
         "  if (displayNum === 0) {",
@@ -177,7 +219,37 @@ datatable_record <- function(data, page_length = 5, selection = "none") {
         "}"
       )
     ),
-    class = "stripe compact nowrap"
+    class = "stripe compact record-datatable"
+  )
+}
+
+datatable_history <- function(data, page_length = 15) {
+  DT::datatable(
+    data,
+    rownames = FALSE,
+    selection = "single",
+    filter = "none",
+    escape = FALSE,
+    width = "100%",
+    options = list(
+      pageLength = page_length,
+      lengthChange = FALSE,
+      searching = FALSE,
+      ordering = FALSE,
+      autoWidth = FALSE,
+      scrollX = FALSE,
+      dom = "tip",
+      columnDefs = list(
+        list(targets = 0, className = "history-matchup-cell")
+      ),
+      initComplete = JS(
+        "function(settings, json) {",
+        "  var table = this.api();",
+        "  window.setTimeout(function() { table.columns.adjust(); }, 0);",
+        "}"
+      )
+    ),
+    class = "stripe compact history-matchup-table"
   )
 }
 
@@ -776,7 +848,16 @@ ui <- navbarPage(
       }
 
       .selectize-dropdown {
-        z-index: 1200 !important;
+        z-index: 5000 !important;
+      }
+
+      body > .selectize-dropdown {
+        z-index: 5000 !important;
+      }
+
+      .selectize-dropdown-content {
+        max-height: min(60vh, 420px) !important;
+        overscroll-behavior: contain;
       }
 
       .metric-grid {
@@ -834,6 +915,12 @@ ui <- navbarPage(
 
       .score-number {
         color: var(--primary-red) !important;
+      }
+
+      .one-line-card .metric-value {
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: clip;
       }
 
       .metric-subtitle {
@@ -981,6 +1068,41 @@ ui <- navbarPage(
         grid-template-columns: minmax(90px, auto) 1fr;
       }
 
+      .season-finish-card {
+        padding: 11px 13px;
+      }
+
+      .season-finish-inline {
+        display: flex;
+        align-items: baseline;
+        min-width: 0;
+        color: var(--near-black);
+        font-size: 18px;
+        font-weight: 900;
+        line-height: 1.05;
+        white-space: nowrap;
+      }
+
+      .season-finish-inline .finish-rank {
+        color: inherit;
+        font-size: inherit;
+      }
+
+      .finish-gold {
+        border-color: #B8860B;
+        background: linear-gradient(135deg, #FFF3B0, #E7C85F);
+      }
+
+      .finish-silver {
+        border-color: #9AA0A6;
+        background: linear-gradient(135deg, #F4F6F8, #C8CDD2);
+      }
+
+      .finish-bronze {
+        border-color: #9A5B2E;
+        background: linear-gradient(135deg, #F2D0B2, #C98B5B);
+      }
+
       .championship-shrine {
         position: relative;
         margin-bottom: 10px;
@@ -1097,9 +1219,39 @@ ui <- navbarPage(
       }
 
       table.dataTable tbody tr.record-holder-row > td {
-        background: rgba(190, 28, 48, 0.10) !important;
-        font-size: 1.08em !important;
-        font-weight: 900 !important;
+        background: inherit !important;
+        font-size: 1.09em !important;
+        font-weight: inherit !important;
+      }
+
+      .record-table-card .dataTables_wrapper,
+      .record-table-card table.dataTable {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      .record-table-card table.dataTable thead th,
+      .record-table-card table.dataTable tbody td {
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        word-break: normal;
+      }
+
+      #history_matchups_table .dataTables_filter,
+      #history_matchups_table .dataTables_length {
+        display: none !important;
+      }
+
+      #history_matchups_table table.dataTable,
+      #history_matchups_table .dataTables_wrapper {
+        width: 100% !important;
+        max-width: 100% !important;
+      }
+
+      #history_matchups_table table.dataTable tbody td.history-matchup-cell {
+        white-space: normal !important;
+        overflow-wrap: anywhere;
+        line-height: 1.18;
       }
 
       .power-ranking-wrap table.dataTable {
@@ -1584,6 +1736,16 @@ ui <- navbarPage(
           font-size: 10px;
         }
 
+        .best-starter-card {
+          grid-column: 1 / -1;
+        }
+
+        .record-table-card table.dataTable thead th,
+        .record-table-card table.dataTable tbody td,
+        #history_matchups_table table.dataTable tbody td.history-matchup-cell {
+          white-space: normal !important;
+        }
+
         .control-row {
           display: grid;
           grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1811,6 +1973,29 @@ ui <- navbarPage(
           document.documentElement.classList.add('app-ready');
         }
 
+        function recalculateVisibleTables() {
+          window.setTimeout(function() {
+            if (!window.jQuery || !window.jQuery.fn || !window.jQuery.fn.dataTable) return;
+
+            window.jQuery(window.jQuery.fn.dataTable.tables({ visible: true })).each(function() {
+              var table = window.jQuery(this).DataTable();
+              table.columns.adjust();
+              if (table.responsive && table.responsive.recalc) table.responsive.recalc();
+            });
+          }, 120);
+        }
+
+        function registerTableMessageHandler() {
+          if (document.documentElement.dataset.tableHandlerBound === 'true') return;
+
+          if (window.Shiny && window.Shiny.addCustomMessageHandler) {
+            window.Shiny.addCustomMessageHandler('recalculate_tables', recalculateVisibleTables);
+            document.documentElement.dataset.tableHandlerBound = 'true';
+          } else {
+            window.setTimeout(registerTableMessageHandler, 50);
+          }
+        }
+
         function bindLoadingScreen() {
           if (window.jQuery) {
             window.jQuery(document).one('shiny:idle', markAppReady);
@@ -1824,6 +2009,7 @@ ui <- navbarPage(
         function initializeHubMenu() {
           closeHubMenu();
           bindLoadingScreen();
+          registerTableMessageHandler();
 
           if (document.documentElement.dataset.hubMenuBound === 'true') return;
           document.documentElement.dataset.hubMenuBound = 'true';
@@ -1836,6 +2022,18 @@ ui <- navbarPage(
           document.addEventListener('keydown', function(event) {
             if (event.key === 'Escape') closeHubMenu();
           });
+
+          window.addEventListener('resize', recalculateVisibleTables);
+
+          if (window.jQuery) {
+            window.jQuery(document).on('shown.bs.tab', 'a[data-toggle=tab]', recalculateVisibleTables);
+            window.jQuery(document).on('shiny:value', function(event) {
+              var outputName = event && event.name ? event.name : '';
+              if (outputName.indexOf('record_') === 0 || outputName === 'history_matchups_table') {
+                recalculateVisibleTables();
+              }
+            });
+          }
         }
 
         document.addEventListener('DOMContentLoaded', initializeHubMenu);
@@ -1956,7 +2154,16 @@ ui <- navbarPage(
         h2("Manager Hub"),
         div(
           class = "control-row",
-          selectInput("manager_select", "Manager", choices = c("Select manager" = "", managers), selected = ""),
+          selectizeInput(
+            "manager_select",
+            "Manager",
+            choices = c("Select manager" = "", managers),
+            selected = "",
+            options = list(
+              dropdownParent = "body",
+              maxOptions = length(managers) + 1
+            )
+          ),
           uiOutput("manager_period_ui")
         )
       ),
@@ -2066,10 +2273,12 @@ server <- function(input, output, session) {
 
   observeEvent(input$hub_nav_record_book, {
     updateNavbarPage(session, "main_tabs", selected = "Record Book")
+    session$sendCustomMessage("recalculate_tables", list())
   }, ignoreInit = TRUE)
 
   observeEvent(input$hub_nav_history, {
     updateNavbarPage(session, "main_tabs", selected = "History")
+    session$sendCustomMessage("recalculate_tables", list())
   }, ignoreInit = TRUE)
 
   observeEvent(input$power_info, {
@@ -2167,7 +2376,13 @@ server <- function(input, output, session) {
 
   output$manager_period_ui <- renderUI({
     if (is.null(input$manager_select) || input$manager_select == "") {
-      return(selectInput("manager_period", "Years / Team Name", choices = c("Select manager first" = ""), selected = ""))
+      return(selectizeInput(
+        "manager_period",
+        "Years / Team Name",
+        choices = c("Select manager first" = ""),
+        selected = "",
+        options = list(dropdownParent = "body")
+      ))
     }
 
     manager_years <- sort(unique(matchups$year[matchups$manager == input$manager_select]), decreasing = TRUE)
@@ -2189,11 +2404,15 @@ server <- function(input, output, session) {
       values <- c(values, as.character(manager_years))
     }
 
-    selectInput(
+    selectizeInput(
       "manager_period",
       "Years / Team Name",
       choices = stats::setNames(values, labels),
-      selected = "All Years"
+      selected = "All Years",
+      options = list(
+        dropdownParent = "body",
+        maxOptions = length(values)
+      )
     )
   })
 
@@ -2266,15 +2485,15 @@ server <- function(input, output, session) {
 
     best_start_card <- if (nrow(best_start) > 0) {
       card(
-        "Best Start",
-        best_start$player_name[[1]],
+        "Best Starter",
         HTML(paste0(
-          best_start$fantasy_team[[1]],
-          " — <span class='score-number'>",
+          htmltools::htmlEscape(best_start$player_name[[1]]),
+          " <span class='score-number'>",
           score_fmt(best_start$fpts[[1]]),
-          " pts</span>"
+          "</span>"
         )),
-        "accent-gold"
+        best_start$fantasy_team[[1]],
+        "accent-gold one-line-card best-starter-card"
       )
     } else {
       NULL
@@ -2284,15 +2503,25 @@ server <- function(input, output, session) {
       class = "metric-grid",
       card(
         "Highest Scorer",
-        HTML(paste0(high_score$team, " — <span class='score-number'>", score_fmt(high_score$points_for), "</span>")),
+        HTML(paste0(
+          htmltools::htmlEscape(truncate_display_name(high_score$team[[1]])),
+          " <span class='score-number'>",
+          score_fmt(high_score$points_for[[1]]),
+          "</span>"
+        )),
         NULL,
-        "accent-green"
+        "accent-green one-line-card"
       ),
       card(
         "Lowest Scorer",
-        HTML(paste0(low_score$team, " — <span class='score-number'>", score_fmt(low_score$points_for), "</span>")),
+        HTML(paste0(
+          htmltools::htmlEscape(truncate_display_name(low_score$team[[1]])),
+          " <span class='score-number'>",
+          score_fmt(low_score$points_for[[1]]),
+          "</span>"
+        )),
         NULL,
-        "accent-red"
+        "accent-red one-line-card"
       ),
       card(
         "Closest Matchup",
@@ -2408,6 +2637,7 @@ server <- function(input, output, session) {
 
   output$power_rankings_table <- renderDT({
     power_rankings() |>
+      arrange(desc(power_score), desc(points_for)) |>
       slice_head(n = 5) |>
       mutate(
         team_name = mapply(resolve_team_name_one, manager, dashboard_year(), USE.NAMES = FALSE)
@@ -2466,7 +2696,7 @@ server <- function(input, output, session) {
       uiOutput("manager_cards"),
       div(
         class = "section-card",
-        h3("Weekly Score Trend"),
+        h3("Weekly Scoring Trend"),
         plotOutput("manager_score_trend", height = "400px")
       ),
       positional_panel
@@ -2563,12 +2793,10 @@ server <- function(input, output, session) {
       scale_x_continuous(breaks = x_breaks, labels = x_labels) +
       labs(
         x = x_title,
-        y = "Points For",
-        title = paste("Score Trend:", input$manager_select)
+        y = "Points For"
       ) +
       theme_minimal(base_size = 13) +
       theme(
-        plot.title = element_text(face = "bold"),
         panel.grid.minor = element_blank()
       )
   })
@@ -2639,19 +2867,20 @@ server <- function(input, output, session) {
       finish_team <- team_name
     }
 
-    finish_note <- if (finish_label == "Unavailable") {
-      "No playoff finish data available for this season."
-    } else {
-      finish_team
-    }
+    finish_class <- case_when(
+      finish_label == "1st" ~ "finish-gold",
+      finish_label == "2nd" ~ "finish-silver",
+      finish_label == "3rd" ~ "finish-bronze",
+      TRUE ~ "finish-neutral"
+    )
 
     div(
-      class = "finish-card",
-      div(class = "finish-title", "Season Finish"),
+      class = paste("finish-card season-finish-card", finish_class),
       div(
-        class = "finish-row season-finish-row",
-        div(class = "finish-rank", finish_label),
-        div(class = "finish-detail", finish_note)
+        class = "season-finish-inline",
+        span("Season Finish"),
+        span(" - "),
+        span(class = "finish-rank", finish_label)
       )
     )
   })
@@ -2952,9 +3181,9 @@ server <- function(input, output, session) {
           div(class = "record-table-card", h3("Biggest Blowouts"), DTOutput("record_blowouts")),
           div(class = "record-table-card", h3("Closest Games"), DTOutput("record_closest")),
           div(class = "record-table-card", h3("Hospital"), p(class = "muted", "Most weeks with a player in an IR slot."), DTOutput("record_hospital")),
-          div(class = "record-table-card", h3("Total Points"), DTOutput("record_total_points")),
-          div(class = "record-table-card", h3("Total Wins"), DTOutput("record_total_wins")),
-          div(class = "record-table-card", h3("Total Championships"), DTOutput("record_championships")),
+          div(class = "record-table-card", h3("Career Points"), DTOutput("record_total_points")),
+          div(class = "record-table-card", h3("Career Wins"), DTOutput("record_total_wins")),
+          div(class = "record-table-card", h3("Championships"), DTOutput("record_championships")),
           div(class = "record-table-card", h3("Points by Roster Slot"), DTOutput("record_slot_points"))
         )
       )
@@ -2978,8 +3207,7 @@ server <- function(input, output, session) {
         Week = week,
         Team = team,
         Manager = manager,
-        Score = round(points_for, 2),
-        Opponent = opposing_team
+        Score = round(points_for, 2)
       ) |>
       slice_head(n = record_limit()) |>
       record_scope_columns(record_scope_year()) |>
@@ -3001,22 +3229,17 @@ server <- function(input, output, session) {
         LosingScore = pmin(score_a, score_b)
       ) |>
       transmute(
-        Season = year,
-        Week = week,
-        `Winning Team` = WinningTeam,
-        `Winning Score` = round(WinningScore, 2),
-        `Losing Team` = LosingTeam,
-        `Losing Score` = round(LosingScore, 2),
-        Margin = round(margin, 2)
+        Matchup = matchup_html(
+          year,
+          week,
+          WinningTeam,
+          WinningScore,
+          LosingTeam,
+          LosingScore
+        )
       ) |>
       slice_head(n = record_limit()) |>
-      record_scope_columns(record_scope_year()) |>
-      datatable_record(page_length = record_limit()) |>
-      DT::formatStyle(
-        columns = c("Winning Score", "Losing Score", "Margin"),
-        color = "#BE1C30",
-        fontWeight = "bold"
-      )
+      datatable_record(page_length = record_limit(), escape = FALSE)
   }, server = FALSE)
 
   output$record_closest <- renderDT({
@@ -3029,22 +3252,17 @@ server <- function(input, output, session) {
         LosingScore = pmin(score_a, score_b)
       ) |>
       transmute(
-        Season = year,
-        Week = week,
-        `Winning Team` = WinningTeam,
-        `Winning Score` = round(WinningScore, 2),
-        `Losing Team` = LosingTeam,
-        `Losing Score` = round(LosingScore, 2),
-        Margin = round(margin, 2)
+        Matchup = matchup_html(
+          year,
+          week,
+          WinningTeam,
+          WinningScore,
+          LosingTeam,
+          LosingScore
+        )
       ) |>
       slice_head(n = record_limit()) |>
-      record_scope_columns(record_scope_year()) |>
-      datatable_record(page_length = record_limit()) |>
-      DT::formatStyle(
-        columns = c("Winning Score", "Losing Score", "Margin"),
-        color = "#BE1C30",
-        fontWeight = "bold"
-      )
+      datatable_record(page_length = record_limit(), escape = FALSE)
   }, server = FALSE)
 
   output$record_hospital <- renderDT({
@@ -3066,20 +3284,18 @@ server <- function(input, output, session) {
     matchups |>
       group_by(manager) |>
       summarise(
-        `Total Points` = sum(points_for, na.rm = TRUE),
+        `Career Points` = sum(points_for, na.rm = TRUE),
         .groups = "drop"
       ) |>
-      mutate(team_name = mapply(resolve_team_name_one, manager, latest_year, USE.NAMES = FALSE)) |>
-      arrange(desc(`Total Points`)) |>
+      arrange(desc(`Career Points`)) |>
       transmute(
-        Team = team_name,
         Manager = manager,
-        `Total Points` = round(`Total Points`, 2)
+        `Career Points` = round(`Career Points`, 2)
       ) |>
       slice_head(n = 5) |>
       datatable_record(page_length = 5) |>
       DT::formatStyle(
-        columns = "Total Points",
+        columns = "Career Points",
         color = "#BE1C30",
         fontWeight = "bold"
       )
@@ -3089,20 +3305,18 @@ server <- function(input, output, session) {
     matchups |>
       group_by(manager) |>
       summarise(
-        Wins = sum(win, na.rm = TRUE),
+        `Career Wins` = sum(win, na.rm = TRUE),
         .groups = "drop"
       ) |>
-      mutate(team_name = mapply(resolve_team_name_one, manager, latest_year, USE.NAMES = FALSE)) |>
-      arrange(desc(Wins)) |>
+      arrange(desc(`Career Wins`)) |>
       transmute(
-        Team = team_name,
         Manager = manager,
-        Wins
+        `Career Wins`
       ) |>
       slice_head(n = 5) |>
       datatable_record(page_length = 5) |>
       DT::formatStyle(
-        columns = "Wins",
+        columns = "Career Wins",
         color = "#BE1C30",
         fontWeight = "bold"
       )
@@ -3112,10 +3326,8 @@ server <- function(input, output, session) {
     manager_finishes |>
       filter(finish == 1L) |>
       count(manager, name = "Championships") |>
-      mutate(team_name = mapply(resolve_team_name_one, manager, latest_year, USE.NAMES = FALSE)) |>
       arrange(desc(Championships), manager) |>
       transmute(
-        Team = team_name,
         Manager = manager,
         Championships
       ) |>
@@ -3129,6 +3341,8 @@ server <- function(input, output, session) {
   }, server = FALSE)
 
   output$record_slot_points <- renderDT({
+    slot_order <- c("QB", "RB", "WR", "TE", "FLEX", "D/ST", "K", "Bench", "IR", "SLOT")
+
     players |>
       group_by(manager, slot) |>
       summarise(
@@ -3138,11 +3352,10 @@ server <- function(input, output, session) {
       group_by(slot) |>
       slice_max(Points, n = 1, with_ties = FALSE) |>
       ungroup() |>
-      mutate(team_name = mapply(resolve_team_name_one, manager, latest_year, USE.NAMES = FALSE)) |>
+      mutate(slot = factor(slot, levels = slot_order)) |>
       arrange(slot) |>
       transmute(
-        Slot = slot,
-        Team = team_name,
+        Slot = as.character(slot),
         Manager = manager,
         Points = round(Points, 2)
       ) |>
@@ -3204,19 +3417,16 @@ server <- function(input, output, session) {
   output$history_matchups_table <- renderDT({
     history_matchups() |>
       transmute(
-        Season = year,
-        Week = week,
-        `Winning Team` = winning_team,
-        `Winning Score` = round(winning_score, 2),
-        `Losing Team` = losing_team,
-        `Losing Score` = round(losing_score, 2)
+        Matchup = matchup_html(
+          year,
+          week,
+          winning_team,
+          winning_score,
+          losing_team,
+          losing_score
+        )
       ) |>
-      datatable_no_buttons(page_length = 15, selection = "single") |>
-      DT::formatStyle(
-        columns = c("Winning Score", "Losing Score"),
-        color = "#BE1C30",
-        fontWeight = "bold"
-      )
+      datatable_history(page_length = 15)
   }, server = FALSE)
 
   selected_history_matchup <- reactiveVal(NULL)

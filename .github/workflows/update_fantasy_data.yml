@@ -1,0 +1,128 @@
+name: Update fantasy data
+
+on:
+  schedule:
+    - cron: '17 7 * * 2'
+      timezone: "America/New_York"
+
+  workflow_dispatch:
+    inputs:
+      target_year:
+        description: "Optional season, for example 2026"
+        required: false
+        default: ""
+        type: string
+
+      target_week:
+        description: "Optional week, from 1 through 17"
+        required: false
+        default: ""
+        type: string
+
+      dry_run:
+        description: "Validate only and do not change files"
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: fantasy-data-update
+  cancel-in-progress: false
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::tidyverse
+            any::httr2
+            any::jsonlite
+            any::rsconnect
+            any::cpp11
+            any::progress
+          cache-version: 4
+
+      - name: Run weekly ESPN updater
+        shell: Rscript {0}
+        env:
+          ESPN_SWID: ${{ secrets.ESPN_SWID }}
+          ESPN_S2: ${{ secrets.ESPN_S2 }}
+          TARGET_YEAR: ${{ inputs.target_year }}
+          TARGET_WEEK: ${{ inputs.target_week }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+          DATA_DIR: data
+        run: |
+          source("scripts/update_weekly.R")
+
+      - name: Check whether production data changed
+        id: changes
+        shell: bash
+        run: |
+          if git diff --quiet -- \
+            data/fantasy_matchup_data.csv \
+            data/fantasy_player_data.csv \
+            data/fantasy_manager_data.csv
+          then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No production CSV changes detected."
+          else
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+            echo "Production CSV changes detected."
+          fi
+
+      - name: Commit updated CSV files
+        if: steps.changes.outputs.changed == 'true'
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add \
+            data/fantasy_matchup_data.csv \
+            data/fantasy_player_data.csv \
+            data/fantasy_manager_data.csv
+
+          git commit -m "Update fantasy data"
+          git push origin HEAD:main
+
+      # A push made with GITHUB_TOKEN does not normally trigger
+      # another workflow. Deploy here instead of relying on the
+      # existing deploy-shiny.yml workflow to start afterward.
+      - name: Deploy updated Shiny app
+        if: steps.changes.outputs.changed == 'true'
+        shell: Rscript {0}
+        env:
+          SHINYAPPS_ACCOUNT: ${{ secrets.SHINYAPPS_ACCOUNT }}
+          SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
+          SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+          SHINYAPPS_APP_NAME: ${{ secrets.SHINYAPPS_APP_NAME }}
+        run: |
+          rsconnect::setAccountInfo(
+            name = Sys.getenv("SHINYAPPS_ACCOUNT"),
+            token = Sys.getenv("SHINYAPPS_TOKEN"),
+            secret = Sys.getenv("SHINYAPPS_SECRET")
+          )
+
+          rsconnect::deployApp(
+            appDir = ".",
+            appName = Sys.getenv("SHINYAPPS_APP_NAME"),
+            account = Sys.getenv("SHINYAPPS_ACCOUNT"),
+            server = "shinyapps.io",
+            forceUpdate = TRUE,
+            launch.browser = FALSE
+          )

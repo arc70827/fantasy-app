@@ -1,5 +1,5 @@
 # ============================================================
-# ESPN FANTASY FOOTBALL WEEKLY UPDATER
+# ESPN FANTASY FOOTBALL WEEKLY UPDATER v4 - FIXED 2021 VALIDATION
 #
 # Purpose:
 #   Pull one completed fantasy week from ESPN, validate it,
@@ -44,9 +44,25 @@ library(tidyverse)
 
 league_id <- "254169010"
 
-matchup_file <- "data/fantasy_matchup_data.csv"
-player_file <- "data/fantasy_player_data.csv"
-manager_file <- "data/fantasy_manager_data.csv"
+data_dir <- Sys.getenv(
+  "DATA_DIR",
+  unset = "data"
+)
+
+matchup_file <- file.path(
+  data_dir,
+  "fantasy_matchup_data.csv"
+)
+
+player_file <- file.path(
+  data_dir,
+  "fantasy_player_data.csv"
+)
+
+manager_file <- file.path(
+  data_dir,
+  "fantasy_manager_data.csv"
+)
 
 final_fantasy_week <- 17L
 
@@ -2736,7 +2752,25 @@ validate_final_data <- function(
     )
   }
 
-  bad_player_rows <- player_data |>
+  # ----------------------------------------------------------
+  # PLAYER COMPLETENESS VALIDATION
+  #
+  # 2021 is preserved legacy data. ESPN no longer exposes that
+  # season for this league, and the manually saved 2021 rows
+  # intentionally contain missing historical TEAM / PROJ values.
+  # There is also at least one preserved "Empty" lineup row with
+  # no POS.
+  #
+  # Therefore:
+  #
+  #   Every season must have the core fields needed by the app.
+  #
+  #   2022 onward must additionally have complete POS, TEAM,
+  #   SLOT, PROJ, and FPTS values because those seasons were
+  #   rebuilt / scraped from ESPN.
+  # ----------------------------------------------------------
+
+  bad_core_player_rows <- player_data |>
     filter(
       is.na(
         `Player Name`
@@ -2750,6 +2784,37 @@ validate_final_data <- function(
       !nzchar(
         `Fantasy Team`
       ) |
+      is.na(
+        SLOT
+      ) |
+      is.na(
+        FPTS
+      ) |
+      is.na(
+        Week
+      ) |
+      is.na(
+        Year
+      )
+    )
+
+  if (
+    nrow(bad_core_player_rows) > 0
+  ) {
+
+    print(
+      bad_core_player_rows,
+      n = Inf
+    )
+
+    stop(
+      "The final player data contains missing core required values."
+    )
+  }
+
+  bad_scraped_player_rows <- player_data |>
+    filter(
+      Year >= 2022,
       is.na(
         POS
       ) |
@@ -2768,16 +2833,19 @@ validate_final_data <- function(
     )
 
   if (
-    nrow(bad_player_rows) > 0
+    nrow(bad_scraped_player_rows) > 0
   ) {
 
     print(
-      bad_player_rows,
+      bad_scraped_player_rows,
       n = Inf
     )
 
     stop(
-      "The final player data contains missing required values."
+      paste0(
+        "The 2022-or-later player data contains missing scraped values. ",
+        "No files were changed."
+      )
     )
   }
 
@@ -3119,6 +3187,13 @@ main <- function() {
   cat(
     "Dry run: ",
     dry_run,
+    "\n",
+    sep = ""
+  )
+
+  cat(
+    "Data directory: ",
+    data_dir,
     "\n\n",
     sep = ""
   )

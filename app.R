@@ -6,7 +6,7 @@
 # ├── app.R
 # └── data/
 #     ├── fantasy_matchup_data.csv
-#     ├── fantasy_name_data.csv
+#     ├── fantasy_manager_data.csv
 #     └── fantasy_player_data.csv
 
 required_packages <- c(
@@ -364,58 +364,146 @@ players <- safe_read("data/fantasy_player_data.csv") |>
     player_name = as.character(player_name)
   )
 
-team_names_raw <- safe_read("data/fantasy_name_data.csv")
-
-# Handles both the old name table format:
-# team_name, manager, year
-# and the new name table format:
-# team_name, manager, first_season, last_season
-if ("year" %in% names(team_names_raw) && !"first_season" %in% names(team_names_raw)) {
-  team_names <- team_names_raw |>
-    mutate(
-      first_season = as.integer(year),
-      last_season = as.integer(year)
-    ) |>
-    select(team_name, manager, first_season, last_season)
-} else {
-  team_names <- team_names_raw |>
-    mutate(
-      first_season = parse_season(first_season),
-      last_season = parse_season(last_season),
-      last_season = if_else(is.na(last_season), max(c(matchups$year, players$year), na.rm = TRUE), last_season)
-    ) |>
-    select(team_name, manager, first_season, last_season)
-}
-
-team_names <- team_names |>
+team_names <- safe_read("data/fantasy_manager_data.csv") |>
   mutate(
+    manager = as.character(manager),
+    espn_id = as.character(espn_id),
     team_name = as.character(team_name),
-    manager = as.character(manager)
+    start_year = as.integer(start_year),
+    start_week = as.integer(start_week),
+    end_year = as.integer(end_year),
+    end_week = as.integer(end_week)
   )
 
-resolve_manager_one <- function(team_name_value, year_value) {
+required_manager_columns <- c(
+  "manager",
+  "espn_id",
+  "team_name",
+  "start_year",
+  "start_week",
+  "end_year",
+  "end_week"
+)
+
+missing_manager_columns <- setdiff(required_manager_columns, names(team_names))
+
+if (length(missing_manager_columns) > 0) {
+  stop(
+    "fantasy_manager_data.csv is missing required columns: ",
+    paste(missing_manager_columns, collapse = ", "),
+    call. = FALSE
+  )
+}
+
+invalid_manager_ranges <- team_names |>
+  filter(
+    is.na(manager) |
+      is.na(team_name) |
+      is.na(start_year) |
+      is.na(start_week) |
+      is.na(end_year) |
+      is.na(end_week) |
+      start_week < 1 |
+      start_week > 18 |
+      end_week < 1 |
+      end_week > 18 |
+      start_year > end_year |
+      (start_year == end_year & start_week > end_week)
+  )
+
+if (nrow(invalid_manager_ranges) > 0) {
+  print(invalid_manager_ranges)
+  stop("fantasy_manager_data.csv contains an invalid manager range.", call. = FALSE)
+}
+
+manager_range_contains <- function(
+    start_year_value,
+    start_week_value,
+    end_year_value,
+    end_week_value,
+    year_value,
+    week_value
+) {
+  starts_before_or_on <-
+    start_year_value < year_value |
+    (start_year_value == year_value & start_week_value <= week_value)
+
+  ends_after_or_on <-
+    end_year_value > year_value |
+    (end_year_value == year_value & end_week_value >= week_value)
+
+  starts_before_or_on & ends_after_or_on
+}
+
+resolve_manager_one <- function(team_name_value, year_value, week_value) {
   result <- team_names |>
     filter(
       team_name == team_name_value,
-      year_value >= first_season,
-      year_value <= last_season
+      manager_range_contains(
+        start_year,
+        start_week,
+        end_year,
+        end_week,
+        year_value,
+        week_value
+      )
     ) |>
+    distinct(manager) |>
     pull(manager)
 
   if (length(result) == 0 || is.na(result[1])) {
     return(as.character(team_name_value))
   }
 
+  if (length(result) > 1) {
+    stop(
+      paste0(
+        "More than one manager matches team ",
+        team_name_value,
+        " in ",
+        year_value,
+        " Week ",
+        week_value,
+        "."
+      ),
+      call. = FALSE
+    )
+  }
+
   result[1]
 }
 
-resolve_team_name_one <- function(manager_value, year_value) {
-  result <- team_names |>
+resolve_team_name_one <- function(manager_value, year_value, week_value = NA_integer_) {
+  candidates <- team_names |>
     filter(
       manager == manager_value,
-      year_value >= first_season,
-      year_value <= last_season
-    ) |>
+      start_year <= year_value,
+      end_year >= year_value
+    )
+
+  if (!is.na(week_value)) {
+    candidates <- candidates |>
+      filter(
+        manager_range_contains(
+          start_year,
+          start_week,
+          end_year,
+          end_week,
+          year_value,
+          week_value
+        )
+      )
+  } else {
+    candidates <- candidates |>
+      arrange(
+        desc(end_year),
+        desc(end_week),
+        desc(start_year),
+        desc(start_week)
+      )
+  }
+
+  result <- candidates |>
     pull(team_name)
 
   if (length(result) == 0 || is.na(result[1])) {
@@ -427,19 +515,38 @@ resolve_team_name_one <- function(manager_value, year_value) {
 
 matchups <- matchups |>
   mutate(
-    manager = mapply(resolve_manager_one, team, year, USE.NAMES = FALSE),
-    opposing_manager = mapply(resolve_manager_one, opposing_team, year, USE.NAMES = FALSE)
+    manager = mapply(resolve_manager_one, team, year, week, USE.NAMES = FALSE),
+    opposing_manager = mapply(resolve_manager_one, opposing_team, year, week, USE.NAMES = FALSE)
   )
 
 players <- players |>
   mutate(
-    manager = mapply(resolve_manager_one, fantasy_team, year, USE.NAMES = FALSE)
+    manager = mapply(resolve_manager_one, fantasy_team, year, week, USE.NAMES = FALSE)
   )
 
-years <- sort(unique(c(matchups$year, players$year, team_names$first_season, team_names$last_season)), decreasing = TRUE)
+years <- sort(
+  unique(
+    c(
+      matchups$year,
+      players$year,
+      team_names$start_year,
+      team_names$end_year
+    )
+  ),
+  decreasing = TRUE
+)
 years <- years[!is.na(years)]
 
-managers <- sort(unique(c(matchups$manager, matchups$opposing_manager, team_names$manager)))
+managers <- sort(
+  unique(
+    c(
+      matchups$manager,
+      matchups$opposing_manager,
+      team_names$manager
+    )
+  )
+)
+
 all_teams <- sort(unique(c(matchups$team, matchups$opposing_team, players$fantasy_team)))
 all_positions <- sort(unique(players$pos))
 all_slots <- sort(unique(players$slot))

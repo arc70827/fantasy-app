@@ -60,6 +60,61 @@ pct_fmt <- function(x) {
   ifelse(is.na(x), "—", scales::percent(x, accuracy = 0.1))
 }
 
+signed_num_fmt <- function(x, digits = 1) {
+  ifelse(
+    is.na(x),
+    "—",
+    sprintf(paste0("%+.", digits, "f"), x)
+  )
+}
+
+signed_pct_fmt <- function(x, digits = 1) {
+  ifelse(
+    is.na(x),
+    "—",
+    sprintf(paste0("%+.", digits, "f%%"), 100 * x)
+  )
+}
+
+
+manager_image_slug <- function(manager_name) {
+  manager_name |>
+    str_to_lower() |>
+    str_replace_all("[^a-z0-9]+", "-") |>
+    str_replace_all("(^-+|-+$)", "")
+}
+
+manager_initials <- function(manager_name) {
+  parts <- str_split(str_squish(as.character(manager_name)), "\\s+")[[1]]
+  parts <- parts[nzchar(parts)]
+
+  if (length(parts) == 0) {
+    return("?")
+  }
+
+  initials <- str_sub(parts, 1, 1)
+  paste0(head(initials, 2), collapse = "") |>
+    str_to_upper()
+}
+
+manager_headshot_src <- function(manager_name) {
+  slug <- manager_image_slug(manager_name)
+  candidates <- paste0(
+    "img/managers/",
+    slug,
+    c(".png", ".PNG", ".jpg", ".JPG", ".jpeg", ".JPEG", ".webp", ".WEBP")
+  )
+
+  disk_paths <- file.path("www", candidates)
+  existing <- candidates[file.exists(disk_paths)]
+
+  if (length(existing) == 0) {
+    return(NA_character_)
+  }
+
+  existing[[1]]
+}
+
 ordinal_label <- function(x) {
   x <- as.integer(x)
   remainder_100 <- x %% 100L
@@ -201,7 +256,8 @@ datatable_record <- function(
   page_length = 5,
   selection = "none",
   escape = TRUE,
-  highlight_leader = TRUE
+  highlight_leader = TRUE,
+  leader_rows = 1L
 ) {
   table_options <- list(
     pageLength = page_length,
@@ -222,10 +278,15 @@ datatable_record <- function(
     )
   )
 
+  leader_rows <- suppressWarnings(as.integer(leader_rows))
+  if (is.na(leader_rows) || leader_rows < 1L) {
+    leader_rows <- 1L
+  }
+
   if (isTRUE(highlight_leader)) {
     table_options$rowCallback <- JS(
       "function(row, data, displayNum) {",
-      "  if (displayNum === 0) {",
+      paste0("  if (displayNum < ", leader_rows, ") {"),
       "    $(row).addClass('record-holder-row');",
       "  }",
       "}"
@@ -243,6 +304,27 @@ datatable_record <- function(
     options = table_options,
     class = "stripe compact record-datatable"
   )
+}
+
+leader_tie_count <- function(values, tolerance = 1e-9) {
+  values <- as.numeric(values)
+  values <- values[!is.na(values)]
+
+  if (length(values) == 0) {
+    return(0L)
+  }
+
+  as.integer(sum(abs(values - values[[1]]) <= tolerance))
+}
+
+record_rows_with_leader_ties <- function(data, value_col, n = 5L) {
+  if (nrow(data) == 0 || !value_col %in% names(data)) {
+    return(data)
+  }
+
+  leader_rows <- leader_tie_count(data[[value_col]])
+  data |>
+    slice_head(n = max(as.integer(n), leader_rows))
 }
 
 datatable_history <- function(data, page_length = 15) {
@@ -384,7 +466,6 @@ required_manager_columns <- c(
   "end_year",
   "end_week"
 )
-
 missing_manager_columns <- setdiff(required_manager_columns, names(team_names))
 
 if (length(missing_manager_columns) > 0) {
@@ -524,6 +605,12 @@ players <- players |>
     manager = mapply(resolve_manager_one, fantasy_team, year, week, USE.NAMES = FALSE)
   )
 
+regular_season_matchups <- matchups |>
+  filter(str_to_lower(str_squish(matchup_type)) == "regular season")
+
+regular_season_players <- players |>
+  filter(week <= 14)
+
 years <- sort(
   unique(
     c(
@@ -640,6 +727,73 @@ make_pair_games <- function(data) {
 pair_games <- make_pair_games(matchups)
 manager_finishes <- infer_manager_finishes()
 
+playoff_years <- pair_games |>
+  filter(str_to_lower(str_squish(matchup_type)) != "regular season") |>
+  distinct(year) |>
+  arrange(desc(year)) |>
+  pull(year)
+
+latest_playoff_year <- if (length(playoff_years) > 0) {
+  max(playoff_years, na.rm = TRUE)
+} else {
+  latest_year
+}
+
+manager_season_finish_info <- function(manager_value, year_value) {
+  finish <- manager_finishes |>
+    filter(manager == manager_value, year == year_value) |>
+    slice_head(n = 1)
+
+  team_name <- resolve_team_name_one(manager_value, year_value)
+
+  if (nrow(finish) > 0) {
+    return(list(
+      label = finish$finish_label[[1]],
+      team = finish$team[[1]]
+    ))
+  }
+
+  season_games <- matchups |>
+    filter(manager == manager_value, year == year_value) |>
+    arrange(week)
+
+  postseason_games <- season_games |>
+    filter(str_to_lower(str_squish(matchup_type)) != "regular season")
+
+  lost_semifinal <- any(
+    str_to_lower(str_squish(postseason_games$matchup_type)) == "semifinals" &
+      postseason_games$loss == 1,
+    na.rm = TRUE
+  )
+
+  lost_quarterfinal <- any(
+    str_to_lower(str_squish(postseason_games$matchup_type)) == "quarterfinals" &
+      postseason_games$loss == 1,
+    na.rm = TRUE
+  )
+
+  made_postseason <- nrow(postseason_games) > 0
+
+  season_max_week <- matchups |>
+    filter(year == year_value) |>
+    summarise(max_week = max(week, na.rm = TRUE)) |>
+    pull(max_week)
+
+  season_in_progress <- length(season_max_week) == 1 &&
+    is.finite(season_max_week) &&
+    season_max_week < 15
+
+  finish_label <- case_when(
+    lost_semifinal ~ "Semifinals",
+    lost_quarterfinal ~ "Quarterfinals",
+    nrow(season_games) > 0 && !made_postseason && season_in_progress ~ "In Progress",
+    nrow(season_games) > 0 && !made_postseason ~ "Missed Playoffs",
+    TRUE ~ "Unavailable"
+  )
+
+  list(label = finish_label, team = team_name)
+}
+
 h2h_summary <- function(manager_one, manager_two, through_year = Inf, through_week = Inf) {
   games <- matchups |>
     filter(
@@ -674,6 +828,429 @@ h2h_summary <- function(manager_one, manager_two, through_year = Inf, through_we
     manager_two_avg = mean(games$points_for[games$manager == manager_two], na.rm = TRUE)
   )
 }
+
+
+# ---- Fantasy analytics ----
+
+inactive_lineup_slots <- c(
+  "BENCH", "BE", "BN", "IR", "INJURED RESERVE", "IL"
+)
+
+ir_lineup_slots <- c(
+  "IR", "INJURED RESERVE", "IL"
+)
+
+normalize_fantasy_position <- function(x) {
+  x_clean <- str_to_upper(str_squish(as.character(x)))
+
+  case_when(
+    x_clean %in% c("QB", "RB", "WR", "TE", "K") ~ x_clean,
+    x_clean %in% c("D/ST", "DST", "DEF", "D") ~ "D/ST",
+    TRUE ~ x_clean
+  )
+}
+
+top_n_total <- function(values, n) {
+  values <- as.numeric(values)
+  values <- values[!is.na(values)]
+
+  if (length(values) == 0 || n <= 0) {
+    return(0)
+  }
+
+  sum(head(sort(values, decreasing = TRUE), n))
+}
+
+calculate_optimal_lineup_score <- function(roster) {
+  roster <- roster |>
+    mutate(
+      pos_clean = normalize_fantasy_position(pos),
+      slot_clean = str_to_upper(str_squish(as.character(slot))),
+      fpts = as.numeric(fpts)
+    )
+
+  # IR players are not considered available for an optimal starting lineup.
+  eligible <- roster |>
+    filter(
+      !slot_clean %in% ir_lineup_slots,
+      !is.na(fpts),
+      !is.na(pos_clean),
+      nzchar(pos_clean)
+    )
+
+  qb_total <- top_n_total(eligible$fpts[eligible$pos_clean == "QB"], 1)
+  dst_total <- top_n_total(eligible$fpts[eligible$pos_clean == "D/ST"], 1)
+  kicker_total <- top_n_total(eligible$fpts[eligible$pos_clean == "K"], 1)
+
+  skill_players <- eligible |>
+    filter(pos_clean %in% c("RB", "WR", "TE")) |>
+    mutate(skill_id = row_number())
+
+  if (nrow(skill_players) == 0) {
+    skill_total <- 0
+  } else {
+    skill_scores <- vapply(
+      skill_players$skill_id,
+      function(flex_id) {
+        flex_score <- skill_players$fpts[
+          skill_players$skill_id == flex_id
+        ][1]
+
+        remaining <- skill_players |>
+          filter(skill_id != flex_id)
+
+        flex_score +
+          top_n_total(remaining$fpts[remaining$pos_clean == "RB"], 2) +
+          top_n_total(remaining$fpts[remaining$pos_clean == "WR"], 2) +
+          top_n_total(remaining$fpts[remaining$pos_clean == "TE"], 1)
+      },
+      numeric(1)
+    )
+
+    skill_total <- max(skill_scores, na.rm = TRUE)
+  }
+
+  qb_total + skill_total + dst_total + kicker_total
+}
+
+build_weekly_expected_wins <- function(matchup_data) {
+  matchup_data |>
+    group_by(year, week) |>
+    mutate(
+      expected_wins = vapply(
+        points_for,
+        function(score_value) {
+          valid_scores <- points_for[!is.na(points_for)]
+
+          if (is.na(score_value) || length(valid_scores) <= 1) {
+            return(NA_real_)
+          }
+
+          teams_beaten <- sum(valid_scores < score_value)
+          tied_teams <- max(sum(valid_scores == score_value) - 1, 0)
+
+          (teams_beaten + 0.5 * tied_teams) / (length(valid_scores) - 1)
+        },
+        numeric(1)
+      ),
+      actual_win_value = case_when(
+        win == 1 ~ 1,
+        loss == 1 ~ 0,
+        TRUE ~ 0.5
+      ),
+      xw_delta = actual_win_value - expected_wins
+    ) |>
+    ungroup()
+}
+
+build_weekly_lineup_analytics <- function(player_data) {
+  player_data |>
+    group_by(manager, fantasy_team, year, week) |>
+    group_modify(
+      ~ {
+        roster <- .x |>
+          mutate(
+            slot_clean = str_to_upper(str_squish(as.character(slot))),
+            pos_clean = normalize_fantasy_position(pos)
+          )
+
+        starters <- roster |>
+          filter(!slot_clean %in% inactive_lineup_slots)
+
+        actual_starter_points <- sum(starters$fpts, na.rm = TRUE)
+
+        # Historical 2021 data contains starters only, so there is no honest
+        # way to reconstruct an optimal bench decision for those weeks.
+        has_full_roster_data <- any(
+          roster$slot_clean %in% c("BENCH", "BE", "BN")
+        )
+
+        optimal_points <- if (has_full_roster_data) {
+          calculate_optimal_lineup_score(roster)
+        } else {
+          NA_real_
+        }
+
+        lineup_efficiency <- if (
+          is.na(optimal_points) ||
+          optimal_points == 0
+        ) {
+          NA_real_
+        } else {
+          min(actual_starter_points / optimal_points, 1)
+        }
+
+        points_left_on_bench <- if (is.na(optimal_points)) {
+          NA_real_
+        } else {
+          max(optimal_points - actual_starter_points, 0)
+        }
+
+        projection_starters <- starters |>
+          filter(!is.na(proj))
+
+        projection_weeks_available <- nrow(projection_starters) > 0
+
+        projected_starter_points <- if (projection_weeks_available) {
+          sum(projection_starters$proj, na.rm = TRUE)
+        } else {
+          NA_real_
+        }
+
+        projection_actual_points <- if (projection_weeks_available) {
+          sum(projection_starters$fpts, na.rm = TRUE)
+        } else {
+          NA_real_
+        }
+
+        projection_delta <- if (projection_weeks_available) {
+          projection_actual_points - projected_starter_points
+        } else {
+          NA_real_
+        }
+
+        projection_pct <- if (
+          is.na(projected_starter_points) ||
+          projected_starter_points == 0
+        ) {
+          NA_real_
+        } else {
+          projection_delta / projected_starter_points
+        }
+
+        tibble(
+          actual_starter_points = actual_starter_points,
+          optimal_points = optimal_points,
+          lineup_efficiency = lineup_efficiency,
+          points_left_on_bench = points_left_on_bench,
+          projected_starter_points = projected_starter_points,
+          projection_actual_points = projection_actual_points,
+          projection_delta = projection_delta,
+          projection_pct = projection_pct
+        )
+      }
+    ) |>
+    ungroup()
+}
+
+safe_mean_numeric <- function(x) {
+  x <- as.numeric(x)
+  x <- x[!is.na(x)]
+
+  if (length(x) == 0) {
+    return(NA_real_)
+  }
+
+  mean(x)
+}
+
+aggregate_fantasy_analytics <- function(expected_scope, lineup_scope) {
+  expected_summary <- expected_scope |>
+    group_by(manager) |>
+    summarise(
+      xw_games = sum(!is.na(expected_wins)),
+      expected_wins_raw = sum(expected_wins, na.rm = TRUE),
+      actual_wins_raw = sum(actual_win_value, na.rm = TRUE),
+      .groups = "drop"
+    ) |>
+    mutate(
+      expected_wins = if_else(
+        xw_games > 0,
+        expected_wins_raw,
+        NA_real_
+      ),
+      actual_wins = if_else(
+        xw_games > 0,
+        actual_wins_raw,
+        NA_real_
+      ),
+      xw_delta = actual_wins - expected_wins
+    ) |>
+    select(
+      manager,
+      xw_games,
+      expected_wins,
+      actual_wins,
+      xw_delta
+    )
+
+  lineup_summary <- lineup_scope |>
+    group_by(manager) |>
+    summarise(
+      leff_weeks = sum(!is.na(lineup_efficiency)),
+      leff_actual_points = sum(
+        if_else(
+          !is.na(lineup_efficiency),
+          actual_starter_points,
+          0
+        ),
+        na.rm = TRUE
+      ),
+      leff_optimal_points = sum(
+        if_else(
+          !is.na(lineup_efficiency),
+          optimal_points,
+          0
+        ),
+        na.rm = TRUE
+      ),
+      points_left_per_week = safe_mean_numeric(
+        points_left_on_bench[
+          !is.na(lineup_efficiency)
+        ]
+      ),
+      pp_weeks = sum(!is.na(projection_delta)),
+      pp_points_per_week = safe_mean_numeric(projection_delta),
+      pp_projected_points = sum(
+        if_else(
+          !is.na(projection_delta),
+          projected_starter_points,
+          0
+        ),
+        na.rm = TRUE
+      ),
+      pp_actual_points = sum(
+        if_else(
+          !is.na(projection_delta),
+          projection_actual_points,
+          0
+        ),
+        na.rm = TRUE
+      ),
+      .groups = "drop"
+    ) |>
+    mutate(
+      lineup_efficiency = if_else(
+        leff_weeks > 0 & leff_optimal_points != 0,
+        leff_actual_points / leff_optimal_points,
+        NA_real_
+      ),
+      projection_pct = if_else(
+        pp_weeks > 0 & pp_projected_points != 0,
+        (pp_actual_points - pp_projected_points) / pp_projected_points,
+        NA_real_
+      )
+    ) |>
+    select(
+      manager,
+      leff_weeks,
+      lineup_efficiency,
+      points_left_per_week,
+      pp_weeks,
+      pp_points_per_week,
+      projection_pct
+    )
+
+  full_join(expected_summary, lineup_summary, by = "manager")
+}
+
+build_win_streaks <- function(matchup_data) {
+  matchup_data |>
+    filter(win == 1) |>
+    arrange(manager, year, week) |>
+    group_by(manager, year) |>
+    mutate(
+      new_streak = row_number() == 1L | week != lag(week) + 1L,
+      streak_id = cumsum(coalesce(new_streak, TRUE))
+    ) |>
+    group_by(manager, year, streak_id) |>
+    summarise(
+      team_name = if (n_distinct(team) == 1L) {
+        first(team)
+      } else {
+        paste(unique(team), collapse = " / ")
+      },
+      start_week = min(week, na.rm = TRUE),
+      end_week = max(week, na.rm = TRUE),
+      streak_weeks = n(),
+      .groups = "drop"
+    ) |>
+    arrange(desc(streak_weeks), desc(year), start_week, team_name)
+}
+
+weekly_expected_wins <- build_weekly_expected_wins(regular_season_matchups)
+weekly_lineup_analytics <- build_weekly_lineup_analytics(players)
+
+season_team_lookup <- matchups |>
+  arrange(manager, year, desc(week)) |>
+  group_by(manager, year) |>
+  slice_head(n = 1) |>
+  ungroup() |>
+  transmute(
+    manager,
+    year,
+    team_name = team
+  )
+
+season_fantasy_analytics <- sort(unique(matchups$year)) |>
+  lapply(
+    function(season_year) {
+      aggregate_fantasy_analytics(
+        expected_scope = weekly_expected_wins |>
+          filter(year == season_year),
+        lineup_scope = weekly_lineup_analytics |>
+          filter(year == season_year)
+      ) |>
+        mutate(year = season_year)
+    }
+  ) |>
+  bind_rows() |>
+  left_join(
+    season_team_lookup,
+    by = c("manager", "year")
+  )
+
+career_fantasy_analytics <- aggregate_fantasy_analytics(
+  expected_scope = weekly_expected_wins,
+  lineup_scope = weekly_lineup_analytics
+) |>
+  left_join(
+    matchups |>
+      distinct(manager, year) |>
+      count(manager, name = "seasons"),
+    by = "manager"
+  )
+
+# ---- Release notes ----
+
+app_release_version <- "1.1"
+
+app_release_intro <- paste(
+  "Introducing new metrics designed to show how lucky or skilled",
+  "different fantasy managers may be."
+)
+
+app_release_metric_notes <- list(
+  list(
+    label = "Expected Wins (XW)",
+    text = paste(
+      "Shows how many games a manager would be expected to win based on how",
+      "their weekly score compared with every other team in the league.",
+      "XW uses regular-season games only."
+    )
+  ),
+  list(
+    label = "Lineup Efficiency (LEff)",
+    text = paste(
+      "Shows how efficiently a manager set their lineup by comparing actual",
+      "starter points with the highest-scoring legal lineup available from",
+      "that week's roster."
+    )
+  ),
+  list(
+    label = "Projection Performance (PP)",
+    text = paste(
+      "Shows how a manager's starters performed relative to ESPN projections,",
+      "measured as the average points per week above or below projection."
+    )
+  )
+)
+
+app_release_feature_notes <- c(
+  "New Record Book leaderboards show career and single-season historical rankings for XW, LEff, and PP, along with a new Win Streak tracker. Primary career records now use regular-season games only, with playoff-inclusive leaderboards shown separately.",
+  "The new Playoffs tab preserves the history of every playoff matchup in league history, including brackets, matchup scores, byes, and each season's champion.",
+  "Manager headshots are now included throughout the app, including manager pages, matchup recaps, and playoff brackets."
+)
 
 # ---- UI pieces ----
 
@@ -1062,6 +1639,62 @@ ui <- navbarPage(
         line-height: 1.12;
       }
 
+      .metric-playoff-note {
+        display: inline-block;
+        margin-top: 3px;
+        color: rgba(76, 65, 66, 0.62);
+        font-size: 10.5px;
+        font-weight: 500;
+      }
+
+      .manager-profile-header {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 10px;
+      }
+
+      .manager-avatar,
+      .manager-avatar-fallback {
+        width: 82px;
+        height: 82px;
+        flex: 0 0 82px;
+        border: 3px solid rgba(190, 28, 48, 0.18);
+        border-radius: 50%;
+        box-shadow: 0 5px 14px rgba(43, 30, 30, 0.10);
+      }
+
+      .manager-avatar {
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .manager-avatar-fallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(224, 227, 228, 0.62);
+        color: var(--near-black);
+        font-size: 24px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+      }
+
+      .manager-profile-name {
+        color: rgba(255, 255, 255, 0.96);
+        font-size: 22px;
+        font-weight: 900;
+        line-height: 1.05;
+      }
+
+      .manager-profile-team {
+        margin-top: 4px;
+        color: rgba(255, 255, 255, 0.72);
+        font-size: 12px;
+        font-weight: 700;
+      }
+
       .control-row {
         display: flex;
         align-items: end;
@@ -1197,12 +1830,42 @@ ui <- navbarPage(
         display: flex;
         min-height: 100px;
         padding: 13px;
-        flex-direction: column;
-        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        gap: 10px;
       }
 
       .recap-team:first-child {
         border-right: 2px solid var(--near-black);
+      }
+
+      .recap-avatar,
+      .recap-avatar-fallback {
+        width: 46px;
+        height: 46px;
+        flex: 0 0 46px;
+        border: 2px solid rgba(43, 30, 30, 0.16);
+        border-radius: 50%;
+      }
+
+      .recap-avatar {
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .recap-avatar-fallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(224, 227, 228, 0.86);
+        color: var(--near-black);
+        font-size: 14px;
+        font-weight: 900;
+      }
+
+      .recap-team-copy {
+        min-width: 0;
       }
 
       .recap-team-name {
@@ -1222,6 +1885,202 @@ ui <- navbarPage(
 
       .recap-winner {
         background: linear-gradient(135deg, rgba(190, 28, 48, 0.10), rgba(224, 227, 228, 0.45));
+      }
+
+      .playoff-bracket {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 12px;
+        align-items: start;
+      }
+
+      .playoff-round {
+        min-width: 0;
+      }
+
+      .playoff-round-title {
+        margin: 0 0 8px;
+        color: var(--near-black);
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: 0.035em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .playoff-matchup-card,
+      .playoff-bye-card {
+        margin-bottom: 9px;
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 9px;
+        background: #ffffff;
+        box-shadow: 0 3px 10px rgba(43, 30, 30, 0.07);
+      }
+
+      .playoff-team-row {
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr) auto;
+        gap: 7px;
+        align-items: center;
+        padding: 8px 9px;
+      }
+
+      .playoff-team-row + .playoff-team-row {
+        border-top: 1px solid var(--border);
+      }
+
+      .playoff-team-row.playoff-winner {
+        background: linear-gradient(135deg, rgba(190, 28, 48, 0.10), rgba(224, 227, 228, 0.35));
+      }
+
+      .playoff-avatar,
+      .playoff-avatar-fallback {
+        width: 30px;
+        height: 30px;
+        border: 1px solid rgba(43, 30, 30, 0.14);
+        border-radius: 50%;
+      }
+
+      .playoff-avatar {
+        display: block;
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .playoff-avatar-fallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(224, 227, 228, 0.82);
+        color: var(--near-black);
+        font-size: 10px;
+        font-weight: 900;
+      }
+
+      .playoff-team-copy {
+        min-width: 0;
+      }
+
+      .playoff-team-name {
+        overflow: hidden;
+        color: var(--near-black);
+        font-size: 13px;
+        font-weight: 900;
+        line-height: 1.02;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .playoff-manager-name {
+        margin-top: 2px;
+        overflow: hidden;
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 600;
+        line-height: 1.05;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .playoff-score {
+        color: var(--primary-red);
+        font-size: 17px;
+        font-weight: 900;
+      }
+
+      .playoff-bye-card {
+        display: grid;
+        grid-template-columns: 30px minmax(0, 1fr) auto;
+        gap: 7px;
+        align-items: center;
+        padding: 8px 9px;
+        border-style: dashed;
+      }
+
+      .playoff-bye-label {
+        color: var(--muted);
+        font-size: 10px;
+        font-weight: 900;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+
+      .playoff-final-block + .playoff-final-block {
+        margin-top: 15px;
+      }
+
+      .playoff-final-subtitle {
+        margin: 0 0 7px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+
+      .playoff-champion-section {
+        padding: 0;
+        overflow: hidden;
+      }
+
+      .playoff-champion-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 24px 18px;
+        text-align: center;
+        background: linear-gradient(145deg, #f8df7a, #d7aa2d);
+        border: 1px solid #b78916;
+        box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48);
+      }
+
+      .playoff-champion-avatar,
+      .playoff-champion-avatar-fallback {
+        width: 92px;
+        height: 92px;
+        border: 3px solid rgba(43, 30, 30, 0.78);
+        border-radius: 50%;
+      }
+
+      .playoff-champion-avatar {
+        object-fit: cover;
+        object-position: center;
+      }
+
+      .playoff-champion-avatar-fallback {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.42);
+        color: var(--near-black);
+        font-size: 28px;
+        font-weight: 900;
+      }
+
+      .playoff-champion-manager {
+        margin-top: 3px;
+        color: var(--near-black);
+        font-size: 22px;
+        font-weight: 900;
+        line-height: 1.05;
+      }
+
+      .playoff-champion-team {
+        color: rgba(43, 30, 30, 0.72);
+        font-size: 13px;
+        font-weight: 700;
+      }
+
+      .playoff-champion-label {
+        margin-top: 5px;
+        color: var(--near-black);
+        font-size: 13px;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .finish-card {
@@ -1420,6 +2279,20 @@ ui <- navbarPage(
 
       .record-table-card h3 {
         margin-top: 0;
+      }
+
+      .record-book-subsection {
+        margin-top: 16px;
+        padding-top: 14px;
+        border-top: 2px solid rgba(76, 65, 66, 0.16);
+      }
+
+      .record-book-subsection > h3 {
+        margin: 0 0 2px;
+      }
+
+      .record-book-subsection > .muted {
+        margin: 0 0 10px;
       }
 
       table.dataTable tbody tr.record-holder-row > td {
@@ -1776,14 +2649,18 @@ ui <- navbarPage(
       }
 
       .hub-nav-bar {
+        display: flex;
+        align-items: stretch;
         height: 48px;
       }
 
       .hub-nav-toggle {
         display: flex;
+        flex: 1 1 auto;
         align-items: center;
         justify-content: space-between;
-        width: 100%;
+        min-width: 0;
+        width: auto;
         height: 48px;
         margin: 0;
         padding: 0 14px;
@@ -1819,6 +2696,88 @@ ui <- navbarPage(
 
       .hub-nav.is-open .hub-nav-chevron {
         transform: rotate(180deg);
+      }
+
+      .hub-update-button.btn {
+        position: relative;
+        display: flex;
+        flex: 0 0 48px;
+        align-items: center;
+        justify-content: center;
+        width: 48px;
+        height: 48px;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-left: 1px solid rgba(224, 227, 228, 0.10);
+        border-radius: 0;
+        background: transparent;
+        color: var(--off-white);
+        font-size: 17px;
+        box-shadow: none;
+      }
+
+      .hub-update-button.btn:hover,
+      .hub-update-button.btn:focus,
+      .hub-update-button.btn:active {
+        outline: none;
+        background: rgba(255, 255, 255, 0.08);
+        color: #ffffff;
+        box-shadow: none;
+      }
+
+      .hub-update-dot {
+        position: absolute;
+        top: 9px;
+        right: 9px;
+        display: none;
+        width: 8px;
+        height: 8px;
+        border: 2px solid var(--near-black);
+        border-radius: 50%;
+        background: #FFCA28;
+        box-sizing: content-box;
+      }
+
+      .hub-update-button.has-update .hub-update-dot {
+        display: block;
+      }
+
+      .release-version {
+        display: inline-block;
+        margin-bottom: 8px;
+        padding: 4px 8px;
+        border-radius: 999px;
+        background: rgba(190, 28, 48, 0.10);
+        color: var(--dark-red);
+        font-size: 12px;
+        font-weight: 900;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+      }
+
+      .release-notes {
+        margin: 4px 0 0;
+        padding-left: 20px;
+      }
+
+      .release-notes li {
+        margin-bottom: 8px;
+      }
+
+      .analytics-table-wrap {
+        width: 100%;
+        overflow-x: hidden;
+      }
+
+      #league_analytics_table table.dataTable tbody td:nth-child(2),
+      #league_analytics_table table.dataTable tbody td:nth-child(3),
+      #league_analytics_table table.dataTable tbody td:nth-child(4) {
+        font-weight: 800;
+      }
+
+      #league_analytics_table table.dataTable tbody td:nth-child(2) {
+        color: var(--dark-red);
       }
 
       .hub-nav-menu {
@@ -1880,6 +2839,17 @@ ui <- navbarPage(
         .hub-nav-toggle {
           padding: 0 11px;
           font-size: 17px;
+        }
+
+        .hub-update-button.btn {
+          flex-basis: 46px;
+          width: 46px;
+          height: 46px;
+        }
+
+        .hub-update-dot {
+          top: 8px;
+          right: 8px;
         }
 
         .hub-nav-menu {
@@ -2008,6 +2978,18 @@ ui <- navbarPage(
         .recap-team {
           min-height: 78px;
           padding: 8px;
+          gap: 6px;
+        }
+
+        .recap-avatar,
+        .recap-avatar-fallback {
+          width: 34px;
+          height: 34px;
+          flex-basis: 34px;
+        }
+
+        .recap-avatar-fallback {
+          font-size: 10px;
         }
 
         .recap-team:first-child {
@@ -2021,6 +3003,29 @@ ui <- navbarPage(
 
         .recap-team-score {
           font-size: 21px;
+        }
+
+        .playoff-bracket {
+          grid-template-columns: 1fr;
+          gap: 10px;
+        }
+
+        .playoff-round {
+          padding-bottom: 2px;
+        }
+
+        .playoff-round-title {
+          margin-bottom: 6px;
+          font-size: 14px;
+          text-align: left;
+        }
+
+        .playoff-team-name {
+          font-size: 12.5px;
+        }
+
+        .playoff-score {
+          font-size: 16px;
         }
 
         .finish-card {
@@ -2197,6 +3202,37 @@ ui <- navbarPage(
           if (toggle) toggle.setAttribute('aria-expanded', 'false');
         }
 
+        function updateReleaseNotificationState() {
+          var button = document.getElementById('whats_new_button');
+          if (!button) return;
+
+          var version = button.getAttribute('data-version') || '';
+          var seenVersion = null;
+
+          try {
+            seenVersion = window.localStorage.getItem('fantasyHubSeenRelease');
+          } catch (error) {
+            seenVersion = null;
+          }
+
+          button.classList.toggle('has-update', seenVersion !== version);
+        }
+
+        function markReleaseSeen() {
+          var button = document.getElementById('whats_new_button');
+          if (!button) return;
+
+          var version = button.getAttribute('data-version') || '';
+
+          try {
+            window.localStorage.setItem('fantasyHubSeenRelease', version);
+          } catch (error) {
+            // If local storage is unavailable, the modal still works.
+          }
+
+          button.classList.remove('has-update');
+        }
+
         function markAppReady() {
           document.documentElement.classList.add('app-ready');
         }
@@ -2238,11 +3274,18 @@ ui <- navbarPage(
           closeHubMenu();
           bindLoadingScreen();
           registerTableMessageHandler();
+          updateReleaseNotificationState();
 
           if (document.documentElement.dataset.hubMenuBound === 'true') return;
           document.documentElement.dataset.hubMenuBound = 'true';
 
           document.addEventListener('click', function(event) {
+            var updateButton = event.target && event.target.closest
+              ? event.target.closest('#whats_new_button')
+              : null;
+
+            if (updateButton) markReleaseSeen();
+
             var nav = getHubNav();
             if (nav && !nav.contains(event.target)) closeHubMenu();
           });
@@ -2291,6 +3334,23 @@ ui <- navbarPage(
           onclick = "var nav=document.getElementById('hub_nav'); var open=nav.classList.toggle('is-open'); this.setAttribute('aria-expanded', open ? 'true' : 'false');",
           span(class = "hub-nav-title", "Fantasy League Hub"),
           span(class = "hub-nav-chevron", `aria-hidden` = "true", "▾")
+        ),
+        actionButton(
+          "whats_new_button",
+          label = tagList(
+            tags$span(
+              class = "glyphicon glyphicon-bell",
+              `aria-hidden` = "true"
+            ),
+            tags$span(
+              class = "hub-update-dot",
+              `aria-hidden` = "true"
+            )
+          ),
+          class = "hub-update-button",
+          title = "What's New",
+          `aria-label` = "What's New",
+          `data-version` = app_release_version
         )
       ),
       div(
@@ -2318,6 +3378,12 @@ ui <- navbarPage(
         actionButton(
           "hub_nav_record_book",
           "Record Book",
+          class = "hub-nav-item",
+          onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
+        ),
+        actionButton(
+          "hub_nav_playoffs",
+          "Playoffs",
           class = "hub-nav-item",
           onclick = "document.getElementById('hub_nav').classList.remove('is-open'); document.getElementById('hub_menu_toggle').setAttribute('aria-expanded','false');"
         ),
@@ -2377,6 +3443,35 @@ ui <- navbarPage(
             class = "btn-primary power-ranking-toggle"
           )
         )
+      ),
+      div(
+        class = "section-card",
+        div(
+          class = "section-title-row",
+          h3("Fantasy Luck Analytics"),
+          actionButton(
+            "analytics_info",
+            "i",
+            class = "info-button",
+            title = "How Fantasy Luck Analytics work"
+          )
+        ),
+        div(
+          class = "section-subtitle",
+          "XW = Expected Wins • LEff = Lineup Efficiency • PP = Projection Performance"
+        ),
+        div(
+          class = "analytics-table-wrap",
+          DTOutput("league_analytics_table")
+        ),
+        div(
+          class = "power-ranking-actions",
+          actionButton(
+            "league_analytics_toggle",
+            "Show More",
+            class = "btn-primary power-ranking-toggle"
+          )
+        )
       )
     )
   ),
@@ -2398,7 +3493,8 @@ ui <- navbarPage(
             selectize = FALSE
           ),
           uiOutput("manager_period_ui")
-        )
+        ),
+        uiOutput("manager_avatar_ui")
       ),
       uiOutput("manager_content")
     )
@@ -2441,7 +3537,11 @@ ui <- navbarPage(
       class = "page-wrap",
       div(
         class = "section-card hero-card",
-        h2("Record Book")
+        h2("Record Book"),
+        p(
+          class = "muted",
+          "* Career Wins, Win Streak, Career Points, Points by Roster Slot, and Expected Wins use regular-season games only. Playoff-inclusive versions of the affected career records appear at the bottom. Career and single-season LEff and PP use all eligible games."
+        )
       ),
       div(
         class = "section-card",
@@ -2451,6 +3551,36 @@ ui <- navbarPage(
         )
       ),
       uiOutput("record_book_tables")
+    )
+  ),
+
+  tabPanel(
+    "Playoffs",
+    div(
+      class = "page-wrap",
+      div(
+        class = "section-card hero-card",
+        h2("Playoffs"),
+        p(class = "muted", "Select a season to view the full playoff bracket and matchup scores.")
+      ),
+      div(
+        class = "section-card",
+        div(
+          class = "control-row",
+          selectInput(
+            "playoffs_year",
+            "Season",
+            choices = playoff_years,
+            selected = latest_playoff_year,
+            selectize = FALSE
+          )
+        )
+      ),
+      div(
+        class = "section-card",
+        uiOutput("playoff_bracket")
+      ),
+      uiOutput("playoff_champion")
     )
   ),
 
@@ -2488,6 +3618,7 @@ ui <- navbarPage(
 server <- function(input, output, session) {
 
   show_all_power_rankings <- reactiveVal(FALSE)
+  show_all_league_analytics <- reactiveVal(FALSE)
 
   latest_player_year <- max(players$year, na.rm = TRUE)
   latest_player_week <- max(
@@ -2497,7 +3628,9 @@ server <- function(input, output, session) {
 
   reset_tab_state <- function() {
     show_all_power_rankings(FALSE)
+    show_all_league_analytics(FALSE)
     updateActionButton(session, "power_rankings_toggle", label = "Show More")
+    updateActionButton(session, "league_analytics_toggle", label = "Show More")
 
     updateSelectInput(session, "manager_select", selected = "")
     updateSelectInput(session, "manager_period", selected = "")
@@ -2517,6 +3650,7 @@ server <- function(input, output, session) {
     updateTextInput(session, "player_search", value = "")
 
     updateSelectInput(session, "record_scope", selected = "All Time")
+    updateSelectInput(session, "playoffs_year", selected = as.character(latest_playoff_year))
 
     updateSelectInput(session, "history_year", selected = "All Seasons")
     updateSelectInput(session, "history_week", selected = "All Weeks")
@@ -2544,11 +3678,94 @@ server <- function(input, output, session) {
     session$sendCustomMessage("recalculate_tables", list())
   }, ignoreInit = TRUE)
 
+  observeEvent(input$hub_nav_playoffs, {
+    reset_tab_state()
+    updateNavbarPage(session, "main_tabs", selected = "Playoffs")
+  }, ignoreInit = TRUE)
+
   observeEvent(input$hub_nav_history, {
     reset_tab_state()
     updateNavbarPage(session, "main_tabs", selected = "History")
     session$sendCustomMessage("recalculate_tables", list())
   }, ignoreInit = TRUE)
+
+  observeEvent(input$whats_new_button, {
+    showModal(
+      modalDialog(
+        title = "What's New",
+        easyClose = TRUE,
+        footer = modalButton("Close"),
+        div(
+          class = "release-version",
+          paste0("Fantasy Football Hub v", app_release_version)
+        ),
+        tags$p(
+          class = "release-intro",
+          app_release_intro
+        ),
+        tags$ul(
+          class = "release-notes release-metric-notes",
+          lapply(
+            app_release_metric_notes,
+            function(note) {
+              tags$li(
+                strong(paste0(note$label, ": ")),
+                note$text
+              )
+            }
+          )
+        ),
+        tags$p(
+          class = "release-home-note",
+          "All three metrics are displayed in the Fantasy Luck Analytics section on the Home page and on individual manager pages."
+        ),
+        tags$ul(
+          class = "release-notes",
+          lapply(app_release_feature_notes, tags$li)
+        )
+      )
+    )
+  })
+
+  show_fantasy_analytics_info <- function() {
+    showModal(
+      modalDialog(
+        title = "How Fantasy Luck Analytics Work",
+        easyClose = TRUE,
+        footer = modalButton("Close"),
+        tags$div(
+          tags$p(
+            strong("Expected Wins (XW): "),
+            "Regular-season games only. Each week, your score is compared with every other recorded team score from that week. ",
+            "XW is the share of those teams your score would have beaten, with ties counting as half a win. ",
+            "Weekly XW values are added across the selected period."
+          ),
+          tags$p(
+            strong("Lineup Efficiency (LEff): "),
+            "Your actual starter points divided by the highest scoring legal lineup that could have been made from your roster that week. ",
+            "IR players are excluded from the optimal lineup. Historical weeks without full bench data are shown as unavailable rather than estimated."
+          ),
+          tags$p(
+            strong("Projection Performance (PP): "),
+            "The average number of points per week your starters scored above or below their ESPN projections. ",
+            "Positive PP means your starters outperformed projection; negative PP means they underperformed."
+          ),
+          tags$p(
+            class = "muted",
+            "XW uses regular-season games only. LEff and PP remain descriptive lineup and projection measures across the selected period. The three indicators are not combined into one overall luck score."
+          )
+        )
+      )
+    )
+  }
+
+  observeEvent(input$analytics_info, {
+    show_fantasy_analytics_info()
+  })
+
+  observeEvent(input$manager_analytics_info, {
+    show_fantasy_analytics_info()
+  })
 
   observeEvent(input$power_info, {
     showModal(
@@ -2562,7 +3779,7 @@ server <- function(input, output, session) {
           tags$li(strong("30% recent form:"), " teams scoring well over the last 3 games are rewarded."),
           tags$li(strong("20% season scoring:"), " teams with stronger overall scoring averages get a smaller boost.")
         ),
-        p("The score is scaled from current-season league results, then combined into one ranking number.")
+        p("All three ingredients use regular-season results only. The score is scaled from current-season league results, then combined into one ranking number.")
       )
     )
   })
@@ -2724,7 +3941,7 @@ server <- function(input, output, session) {
   })
 
   season_matchups <- reactive({
-    matchups |> filter(year == dashboard_year())
+    regular_season_matchups |> filter(year == dashboard_year())
   })
 
   standings <- reactive({
@@ -2834,17 +4051,42 @@ server <- function(input, output, session) {
       year_value <- games[["year"]][[i]]
       week_value <- games[["week"]][[i]]
 
+      recap_avatar <- function(manager_name) {
+        src <- manager_headshot_src(manager_name)
+
+        if (!is.na(src)) {
+          tags$img(
+            class = "recap-avatar",
+            src = src,
+            alt = paste0(manager_name, " headshot")
+          )
+        } else {
+          div(
+            class = "recap-avatar-fallback",
+            manager_initials(manager_name)
+          )
+        }
+      }
+
       div(
         class = "recap-card",
         div(
           class = paste("recap-team", ifelse(score_a >= score_b, "recap-winner", "")),
-          div(class = "recap-team-name", team_a),
-          div(class = "recap-team-score", score_fmt(score_a))
+          recap_avatar(manager_a),
+          div(
+            class = "recap-team-copy",
+            div(class = "recap-team-name", team_a),
+            div(class = "recap-team-score", score_fmt(score_a))
+          )
         ),
         div(
           class = paste("recap-team", ifelse(score_b >= score_a, "recap-winner", "")),
-          div(class = "recap-team-name", team_b),
-          div(class = "recap-team-score", score_fmt(score_b))
+          recap_avatar(manager_b),
+          div(
+            class = "recap-team-copy",
+            div(class = "recap-team-name", team_b),
+            div(class = "recap-team-score", score_fmt(score_b))
+          )
         )
       )
     })
@@ -2856,7 +4098,7 @@ server <- function(input, output, session) {
     current_year <- dashboard_year()
     current_week <- dashboard_week()
 
-    season_data <- matchups |>
+    season_data <- regular_season_matchups |>
       filter(year == current_year, week <= current_week)
 
     recent_data <- season_data |>
@@ -2942,6 +4184,311 @@ server <- function(input, output, session) {
       )
   })
 
+  league_analytics <- reactive({
+    current_year <- dashboard_year()
+    current_week <- dashboard_week()
+
+    expected_scope <- weekly_expected_wins |>
+      filter(
+        year == current_year,
+        week <= current_week
+      )
+
+    lineup_scope <- weekly_lineup_analytics |>
+      filter(
+        year == current_year,
+        week <= current_week
+      )
+
+    aggregate_fantasy_analytics(
+      expected_scope = expected_scope,
+      lineup_scope = lineup_scope
+    ) |>
+      mutate(
+        team_name = mapply(
+          resolve_team_name_one,
+          manager,
+          current_year,
+          current_week,
+          USE.NAMES = FALSE
+        )
+      ) |>
+      arrange(
+        desc(expected_wins),
+        desc(lineup_efficiency),
+        desc(pp_points_per_week),
+        team_name
+      )
+  })
+
+  observeEvent(input$league_analytics_toggle, {
+    show_all_league_analytics(!show_all_league_analytics())
+    updateActionButton(
+      session,
+      "league_analytics_toggle",
+      label = if (show_all_league_analytics()) "Show Less" else "Show More"
+    )
+  }, ignoreInit = TRUE)
+
+  output$league_analytics_table <- renderDT({
+    analytics_data <- league_analytics() |>
+      transmute(
+        `Team Name` = team_name,
+        XW = if_else(
+          is.na(expected_wins),
+          "—",
+          sprintf("%.2f", expected_wins)
+        ),
+        LEff = if_else(
+          is.na(lineup_efficiency),
+          "—",
+          sprintf("%.1f%%", 100 * lineup_efficiency)
+        ),
+        PP = if_else(
+          is.na(pp_points_per_week),
+          "—",
+          sprintf("%+.1f", pp_points_per_week)
+        )
+      )
+
+    displayed_analytics <- if (show_all_league_analytics()) {
+      analytics_data
+    } else {
+      analytics_data |> slice_head(n = 5)
+    }
+
+    displayed_analytics |>
+      datatable_simple(page_length = max(1, nrow(displayed_analytics)))
+  })
+
+  output$playoff_bracket <- renderUI({
+    req(input$playoffs_year)
+
+    selected_year <- as.integer(input$playoffs_year)
+
+    postseason <- pair_games |>
+      filter(
+        year == selected_year,
+        str_to_lower(str_squish(matchup_type)) != "regular season"
+      ) |>
+      mutate(
+        round_key = case_when(
+          str_to_lower(str_squish(matchup_type)) == "quarterfinals" ~ "quarterfinals",
+          str_to_lower(str_squish(matchup_type)) == "semifinals" ~ "semifinals",
+          str_to_lower(str_squish(matchup_type)) %in% c("finals", "championship") ~ "finals",
+          str_to_lower(str_squish(matchup_type)) %in% c("third place", "third place game", "3rd place") ~ "third_place",
+          TRUE ~ "other"
+        )
+      )
+
+    validate(need(nrow(postseason) > 0, "No playoff data is available for this season."))
+
+    bracket_avatar <- function(manager_name) {
+      src <- manager_headshot_src(manager_name)
+
+      if (!is.na(src)) {
+        tags$img(
+          class = "playoff-avatar",
+          src = src,
+          alt = paste0(manager_name, " headshot")
+        )
+      } else {
+        div(
+          class = "playoff-avatar-fallback",
+          manager_initials(manager_name)
+        )
+      }
+    }
+
+    team_row <- function(manager_name, team_name, score, is_winner = FALSE) {
+      div(
+        class = paste("playoff-team-row", if (is_winner) "playoff-winner" else ""),
+        bracket_avatar(manager_name),
+        div(
+          class = "playoff-team-copy",
+          div(class = "playoff-team-name", team_name),
+          div(class = "playoff-manager-name", manager_name)
+        ),
+        div(class = "playoff-score", score_fmt(score))
+      )
+    }
+
+    matchup_card <- function(game_row) {
+      manager_a <- game_row$manager_a[[1]]
+      manager_b <- game_row$manager_b[[1]]
+      score_a <- game_row$score_a[[1]]
+      score_b <- game_row$score_b[[1]]
+
+      div(
+        class = "playoff-matchup-card",
+        team_row(
+          manager_a,
+          game_row$team_a[[1]],
+          score_a,
+          identical(manager_a, game_row$winner[[1]])
+        ),
+        team_row(
+          manager_b,
+          game_row$team_b[[1]],
+          score_b,
+          identical(manager_b, game_row$winner[[1]])
+        )
+      )
+    }
+
+    round_cards <- function(round_data) {
+      if (nrow(round_data) == 0) {
+        return(NULL)
+      }
+
+      tagList(lapply(seq_len(nrow(round_data)), function(i) {
+        matchup_card(round_data[i, , drop = FALSE])
+      }))
+    }
+
+    quarterfinals <- postseason |>
+      filter(round_key == "quarterfinals") |>
+      arrange(desc(winning_score))
+
+    semifinals <- postseason |>
+      filter(round_key == "semifinals") |>
+      arrange(desc(winning_score))
+
+    finals <- postseason |>
+      filter(round_key == "finals") |>
+      arrange(desc(winning_score))
+
+    third_place <- postseason |>
+      filter(round_key == "third_place") |>
+      arrange(desc(winning_score))
+
+    semifinal_participants <- unique(c(semifinals$manager_a, semifinals$manager_b))
+    quarterfinal_participants <- unique(c(quarterfinals$manager_a, quarterfinals$manager_b))
+    bye_managers <- setdiff(semifinal_participants, quarterfinal_participants)
+
+    bye_cards <- if (length(bye_managers) > 0) {
+      tagList(lapply(bye_managers, function(manager_name) {
+        semifinal_game <- semifinals |>
+          filter(manager_a == manager_name | manager_b == manager_name) |>
+          slice_head(n = 1)
+
+        team_name <- if (nrow(semifinal_game) > 0 && semifinal_game$manager_a[[1]] == manager_name) {
+          semifinal_game$team_a[[1]]
+        } else if (nrow(semifinal_game) > 0) {
+          semifinal_game$team_b[[1]]
+        } else {
+          resolve_team_name_one(manager_name, selected_year)
+        }
+
+        div(
+          class = "playoff-bye-card",
+          bracket_avatar(manager_name),
+          div(
+            class = "playoff-team-copy",
+            div(class = "playoff-team-name", team_name),
+            div(class = "playoff-manager-name", manager_name)
+          ),
+          div(class = "playoff-bye-label", "Bye")
+        )
+      }))
+    } else {
+      NULL
+    }
+
+    finals_content <- tagList(
+      if (nrow(finals) > 0) {
+        div(
+          class = "playoff-final-block",
+          div(class = "playoff-final-subtitle", "Championship"),
+          round_cards(finals)
+        )
+      },
+      if (nrow(third_place) > 0) {
+        div(
+          class = "playoff-final-block",
+          div(class = "playoff-final-subtitle", "Third Place"),
+          round_cards(third_place)
+        )
+      }
+    )
+
+    div(
+      class = "playoff-bracket",
+      div(
+        class = "playoff-round",
+        h3(class = "playoff-round-title", "Quarterfinals"),
+        bye_cards,
+        round_cards(quarterfinals)
+      ),
+      div(
+        class = "playoff-round",
+        h3(class = "playoff-round-title", "Semifinals"),
+        round_cards(semifinals)
+      ),
+      div(
+        class = "playoff-round",
+        h3(class = "playoff-round-title", "Finals"),
+        finals_content
+      )
+    )
+  })
+
+  output$playoff_champion <- renderUI({
+    req(input$playoffs_year)
+
+    selected_year <- as.integer(input$playoffs_year)
+
+    championship_game <- pair_games |>
+      filter(
+        year == selected_year,
+        str_to_lower(str_squish(matchup_type)) %in% c("finals", "championship")
+      ) |>
+      arrange(desc(week)) |>
+      slice_head(n = 1)
+
+    if (nrow(championship_game) == 0) {
+      return(NULL)
+    }
+
+    champion_manager <- championship_game$winner[[1]]
+    champion_team <- if (
+      identical(champion_manager, championship_game$manager_a[[1]])
+    ) {
+      championship_game$team_a[[1]]
+    } else {
+      championship_game$team_b[[1]]
+    }
+
+    champion_src <- manager_headshot_src(champion_manager)
+
+    champion_avatar <- if (!is.na(champion_src)) {
+      tags$img(
+        class = "playoff-champion-avatar",
+        src = champion_src,
+        alt = paste0(champion_manager, " headshot")
+      )
+    } else {
+      div(
+        class = "playoff-champion-avatar-fallback",
+        manager_initials(champion_manager)
+      )
+    }
+
+    div(
+      class = "section-card playoff-champion-section",
+      div(
+        class = "playoff-champion-card",
+        champion_avatar,
+        div(class = "playoff-champion-manager", champion_manager),
+        div(class = "playoff-champion-team", champion_team),
+        div(
+          class = "playoff-champion-label",
+          paste0(selected_year, " Champion")
+        )
+      )
+    )
+  })
+
   selected_manager_data <- reactive({
     req(input$manager_select, input$manager_period)
     validate(need(input$manager_select != "", "Select a manager to view this tab."))
@@ -2958,6 +4505,67 @@ server <- function(input, output, session) {
       arrange(year, week)
   })
 
+  output$manager_avatar_ui <- renderUI({
+    if (is.null(input$manager_select) || input$manager_select == "") {
+      return(NULL)
+    }
+
+    manager_name <- input$manager_select
+
+    manager_years <- matchups$year[
+      matchups$manager == manager_name &
+        !is.na(matchups$year)
+    ]
+
+    selected_year <- if (
+      is.null(input$manager_period) ||
+      input$manager_period == "" ||
+      input$manager_period == "All Years"
+    ) {
+      if (length(manager_years) > 0) {
+        max(manager_years)
+      } else {
+        latest_year
+      }
+    } else {
+      as.integer(input$manager_period)
+    }
+
+    show_team_name <- !is.null(input$manager_period) &&
+      input$manager_period != "" &&
+      input$manager_period != "All Years"
+
+    team_name <- if (show_team_name) {
+      resolve_team_name_one(manager_name, selected_year)
+    } else {
+      NULL
+    }
+
+    headshot_src <- manager_headshot_src(manager_name)
+
+    avatar <- if (!is.na(headshot_src)) {
+      tags$img(
+        class = "manager-avatar",
+        src = headshot_src,
+        alt = paste0(manager_name, " headshot")
+      )
+    } else {
+      div(
+        class = "manager-avatar-fallback",
+        manager_initials(manager_name)
+      )
+    }
+
+    div(
+      class = "manager-profile-header",
+      avatar,
+      div(
+        div(class = "manager-profile-name", manager_name),
+        if (!is.null(team_name)) div(class = "manager-profile-team", team_name)
+      )
+    )
+  })
+
   output$manager_content <- renderUI({
     if (
       is.null(input$manager_select) || input$manager_select == "" ||
@@ -2965,6 +4573,25 @@ server <- function(input, output, session) {
     ) {
       return(NULL)
     }
+
+    analytics_panel <- div(
+      class = "section-card",
+      div(
+        class = "section-title-row",
+        h3("Fantasy Luck Analytics"),
+        actionButton(
+          "manager_analytics_info",
+          "i",
+          class = "info-button",
+          title = "How Fantasy Luck Analytics work"
+        )
+      ),
+      div(
+        class = "section-subtitle",
+        "Expected Wins (XW) • Lineup Efficiency (LEff) • Projection Performance (PP)"
+      ),
+      uiOutput("manager_analytics_cards")
+    )
 
     positional_panel <- div(
       class = "section-card",
@@ -2977,6 +4604,7 @@ server <- function(input, output, session) {
       return(tagList(
         uiOutput("manager_championship_shrine"),
         uiOutput("manager_cards"),
+        analytics_panel,
         positional_panel
       ))
     }
@@ -2984,6 +4612,7 @@ server <- function(input, output, session) {
     tagList(
       uiOutput("manager_finish_summary"),
       uiOutput("manager_cards"),
+      analytics_panel,
       div(
         class = "section-card",
         h3("Weekly Scoring Trend"),
@@ -2993,19 +4622,185 @@ server <- function(input, output, session) {
     )
   })
 
-  output$manager_cards <- renderUI({
-    data <- selected_manager_data()
+  output$manager_analytics_cards <- renderUI({
+    req(input$manager_select, input$manager_period)
+    validate(need(input$manager_select != "", "Select a manager to view analytics."))
 
-    validate(
-      need(nrow(data) > 0, "No manager data found.")
+    expected_scope <- weekly_expected_wins |>
+      filter(manager == input$manager_select)
+
+    lineup_scope <- weekly_lineup_analytics |>
+      filter(manager == input$manager_select)
+
+    if (input$manager_period != "All Years") {
+      selected_year <- as.integer(input$manager_period)
+      expected_scope <- expected_scope |> filter(year == selected_year)
+      lineup_scope <- lineup_scope |> filter(year == selected_year)
+    }
+
+    analytics <- aggregate_fantasy_analytics(
+      expected_scope = expected_scope,
+      lineup_scope = lineup_scope
     )
 
-    wins <- sum(data$win, na.rm = TRUE)
-    losses <- sum(data$loss, na.rm = TRUE)
-    pf <- sum(data$points_for, na.rm = TRUE)
-    pa <- sum(data$points_against, na.rm = TRUE)
-    best_week <- data |> slice_max(points_for, n = 1, with_ties = FALSE)
-    worst_week <- data |> slice_min(points_for, n = 1, with_ties = FALSE)
+    validate(need(nrow(analytics) > 0, "No fantasy analytics are available for this period."))
+
+    row <- analytics |> slice_head(n = 1)
+
+    xw_value <- if (is.na(row$expected_wins[[1]])) {
+      "—"
+    } else {
+      sprintf("%.2f", row$expected_wins[[1]])
+    }
+
+    xw_subtitle <- if (is.na(row$expected_wins[[1]])) {
+      "Expected wins unavailable for this period"
+    } else {
+      paste0(
+        "Regular season • Actual wins: ", sprintf("%.1f", row$actual_wins[[1]]),
+        " • Schedule delta: ", signed_num_fmt(row$xw_delta[[1]], 2)
+      )
+    }
+
+    leff_value <- if (is.na(row$lineup_efficiency[[1]])) {
+      "—"
+    } else {
+      sprintf("%.1f%%", 100 * row$lineup_efficiency[[1]])
+    }
+
+    leff_subtitle <- if (is.na(row$lineup_efficiency[[1]])) {
+      "Full roster data unavailable for this period"
+    } else {
+      paste0(
+        score_fmt(row$points_left_per_week[[1]]),
+        " pts/week left on bench"
+      )
+    }
+
+    pp_value <- if (is.na(row$pp_points_per_week[[1]])) {
+      "—"
+    } else {
+      paste0(signed_num_fmt(row$pp_points_per_week[[1]], 1), " pts/wk")
+    }
+
+    pp_subtitle <- if (is.na(row$projection_pct[[1]])) {
+      "Projection data unavailable for this period"
+    } else {
+      paste0(signed_pct_fmt(row$projection_pct[[1]], 1), " vs projection")
+    }
+
+    div(
+      class = "metric-grid",
+      card(
+        "Expected Wins (XW)",
+        xw_value,
+        xw_subtitle,
+        "accent-blue"
+      ),
+      card(
+        "Lineup Efficiency (LEff)",
+        leff_value,
+        leff_subtitle,
+        "accent-green"
+      ),
+      card(
+        "Projection Performance (PP)",
+        pp_value,
+        pp_subtitle,
+        "accent-purple"
+      )
+    )
+  })
+
+  output$manager_cards <- renderUI({
+    data_all <- selected_manager_data()
+
+    validate(
+      need(nrow(data_all) > 0, "No manager data found.")
+    )
+
+    data_regular <- data_all |>
+      filter(str_to_lower(str_squish(matchup_type)) == "regular season")
+
+    validate(
+      need(nrow(data_regular) > 0, "No regular-season manager data found.")
+    )
+
+    wins <- sum(data_regular$win, na.rm = TRUE)
+    losses <- sum(data_regular$loss, na.rm = TRUE)
+    pf <- sum(data_regular$points_for, na.rm = TRUE)
+    pa <- sum(data_regular$points_against, na.rm = TRUE)
+
+    wins_all <- sum(data_all$win, na.rm = TRUE)
+    losses_all <- sum(data_all$loss, na.rm = TRUE)
+    pf_all <- sum(data_all$points_for, na.rm = TRUE)
+    pa_all <- sum(data_all$points_against, na.rm = TRUE)
+
+    regular_win_pct <- wins / pmax(wins + losses, 1)
+    all_win_pct <- wins_all / pmax(wins_all + losses_all, 1)
+
+    regular_pf_avg <- mean(data_regular$points_for, na.rm = TRUE)
+    regular_pa_avg <- mean(data_regular$points_against, na.rm = TRUE)
+    all_pf_avg <- mean(data_all$points_for, na.rm = TRUE)
+    all_pa_avg <- mean(data_all$points_against, na.rm = TRUE)
+
+    show_playoff_note <- any(
+      str_to_lower(str_squish(data_all$matchup_type)) != "regular season",
+      na.rm = TRUE
+    )
+
+    best_week <- data_all |> slice_max(points_for, n = 1, with_ties = FALSE)
+    worst_week <- data_all |> slice_min(points_for, n = 1, with_ties = FALSE)
+
+    record_subtitle <- if (show_playoff_note) {
+      tags$span(
+        class = "metric-playoff-note",
+        paste0("*Incl playoffs: ", make_record(wins_all, losses_all))
+      )
+    } else {
+      NULL
+    }
+
+    win_pct_subtitle <- if (show_playoff_note) {
+      tags$span(
+        class = "metric-playoff-note",
+        paste0("*Incl playoffs: ", pct_fmt(all_win_pct))
+      )
+    } else {
+      NULL
+    }
+
+    pf_subtitle <- if (show_playoff_note) {
+      tagList(
+        paste0("Average: ", score_fmt(regular_pf_avg)),
+        tags$br(),
+        tags$span(
+          class = "metric-playoff-note",
+          paste0(
+            "*Incl playoffs: ", score_fmt(pf_all),
+            " total • ", score_fmt(all_pf_avg), " avg"
+          )
+        )
+      )
+    } else {
+      paste0("Average: ", score_fmt(regular_pf_avg))
+    }
+
+    pa_subtitle <- if (show_playoff_note) {
+      tagList(
+        paste0("Average: ", score_fmt(regular_pa_avg)),
+        tags$br(),
+        tags$span(
+          class = "metric-playoff-note",
+          paste0(
+            "*Incl playoffs: ", score_fmt(pa_all),
+            " total • ", score_fmt(all_pa_avg), " avg"
+          )
+        )
+      )
+    } else {
+      paste0("Average: ", score_fmt(regular_pa_avg))
+    }
 
     if (input$manager_period == "All Years") {
       best_subtitle <- paste0(
@@ -3031,10 +4826,10 @@ server <- function(input, output, session) {
 
     div(
       class = "metric-grid",
-      card("Record", make_record(wins, losses), NULL, "accent-blue"),
-      card("Win Percentage", pct_fmt(wins / pmax(wins + losses, 1)), NULL, "accent-green"),
-      card("Points For", score_fmt(pf), paste0("Average: ", score_fmt(mean(data$points_for, na.rm = TRUE))), "accent-purple"),
-      card("Points Against", score_fmt(pa), paste0("Average: ", score_fmt(mean(data$points_against, na.rm = TRUE))), "accent-red"),
+      card("Record", make_record(wins, losses), record_subtitle, "accent-blue"),
+      card("Win Percentage", pct_fmt(regular_win_pct), win_pct_subtitle, "accent-green"),
+      card("Points For", score_fmt(pf), pf_subtitle, "accent-purple"),
+      card("Points Against", score_fmt(pa), pa_subtitle, "accent-red"),
       card(
         "Best Week",
         score_fmt(best_week$points_for),
@@ -3119,30 +4914,8 @@ server <- function(input, output, session) {
     }
 
     selected_year <- as.integer(input$manager_period)
-    finish <- manager_finishes |>
-      filter(manager == input$manager_select, year == selected_year) |>
-      slice_head(n = 1)
-
-    team_name <- resolve_team_name_one(input$manager_select, selected_year)
-
-    if (nrow(finish) > 0) {
-      finish_label <- finish$finish_label[[1]]
-      finish_team <- finish$team[[1]]
-    } else {
-      season_games <- matchups |>
-        filter(manager == input$manager_select, year == selected_year) |>
-        arrange(week)
-
-      final_week <- if (nrow(season_games) > 0) max(season_games$week, na.rm = TRUE) else NA_integer_
-      lost_quarterfinal <- any(season_games$week == 15 & season_games$loss == 1, na.rm = TRUE)
-
-      finish_label <- case_when(
-        lost_quarterfinal ~ "Quarterfinals",
-        !is.na(final_week) && final_week == 14 ~ "Missed Playoffs",
-        TRUE ~ "Unavailable"
-      )
-      finish_team <- team_name
-    }
+    finish_info <- manager_season_finish_info(input$manager_select, selected_year)
+    finish_label <- finish_info$label
 
     finish_class <- case_when(
       finish_label == "1st" ~ "finish-gold",
@@ -3171,7 +4944,7 @@ server <- function(input, output, session) {
       "BENCH", "BE", "BN", "IR", "INJURED RESERVE", "IL", "SLOT"
     )
 
-    position_data <- players |>
+    position_data <- regular_season_players |>
       mutate(
         pos_clean = case_when(
           pos %in% c("QB", "RB", "WR", "TE", "K") ~ pos,
@@ -3185,7 +4958,7 @@ server <- function(input, output, session) {
         !roster_slot_clean %in% inactive_roster_slots
       )
 
-    games_played <- matchups |>
+    games_played <- regular_season_matchups |>
       distinct(manager, year, week)
 
     if (input$manager_period != "All Years") {
@@ -3475,16 +5248,6 @@ server <- function(input, output, session) {
     data
   })
 
-  record_players <- reactive({
-    data <- players
-
-    if (!is.na(record_scope_year())) {
-      data <- data |> filter(year == record_scope_year())
-    }
-
-    data
-  })
-
   record_limit <- reactive({
     5
   })
@@ -3494,31 +5257,133 @@ server <- function(input, output, session) {
       tagList(
         div(
           class = "record-grid",
+          div(class = "record-table-card", h3("Championships"), DTOutput("record_championships")),
+          div(class = "record-table-card", h3("Career Wins*"), DTOutput("record_total_wins")),
+          div(class = "record-table-card", h3("Win Streak*"), DTOutput("record_win_streak")),
           div(class = "record-table-card", h3("Single-Week Scores"), DTOutput("record_single_week")),
+          div(class = "record-table-card", h3("Career Points*"), DTOutput("record_total_points")),
+          div(class = "record-table-card", h3("Points by Roster Slot*"), DTOutput("record_slot_points")),
           div(class = "record-table-card", h3("Biggest Blowouts"), DTOutput("record_blowouts")),
           div(class = "record-table-card", h3("Closest Games"), DTOutput("record_closest")),
-          div(class = "record-table-card", h3("Hospital"), p(class = "muted", "Most weeks with a player in an IR slot."), DTOutput("record_hospital")),
-          div(class = "record-table-card", h3("Career Points"), DTOutput("record_total_points")),
-          div(class = "record-table-card", h3("Career Wins"), DTOutput("record_total_wins")),
-          div(class = "record-table-card", h3("Championships"), DTOutput("record_championships")),
-          div(class = "record-table-card", h3("Points by Roster Slot"), DTOutput("record_slot_points"))
+          div(
+            class = "record-table-card",
+            h3("Career Expected Wins (XW)*"),
+            p(class = "muted", "Most expected wins accumulated across a manager's career."),
+            DTOutput("record_xw_career")
+          ),
+          div(
+            class = "record-table-card",
+            h3("Career Lineup Efficiency (LEff)"),
+            p(class = "muted", "Best lineup efficiency across all eligible career weeks."),
+            DTOutput("record_leff_career")
+          ),
+          div(
+            class = "record-table-card",
+            h3("Career Projection Performance (PP)"),
+            p(class = "muted", "Best average points per week versus projection across a manager's career."),
+            DTOutput("record_pp_career")
+          ),
+          div(
+            class = "record-table-card",
+            h3("Hospital"),
+            p(class = "muted", "Most weeks with at least one player in an IR slot, cumulative across all seasons."),
+            DTOutput("record_hospital")
+          )
+        ),
+        div(
+          class = "record-book-subsection",
+          h3("Single-Season Fantasy Luck Analytics"),
+          p(
+            class = "muted",
+            "The best individual-season performances in Expected Wins, Lineup Efficiency, and Projection Performance."
+          ),
+          div(
+            class = "record-grid",
+            div(
+              class = "record-table-card",
+              h3("Expected Wins (XW)*"),
+              p(class = "muted", "Best single-season expected wins."),
+              DTOutput("record_xw")
+            ),
+            div(
+              class = "record-table-card",
+              h3("Lineup Efficiency (LEff)"),
+              p(class = "muted", "Best single-season lineup efficiency."),
+              DTOutput("record_leff")
+            ),
+            div(
+              class = "record-table-card",
+              h3("Projection Performance (PP)"),
+              p(class = "muted", "Best single-season performance versus projection."),
+              DTOutput("record_pp")
+            )
+          )
+        ),
+        div(
+          class = "record-book-subsection",
+          h3("Including Playoffs"),
+          p(
+            class = "muted",
+            "These versions include both regular-season and postseason games."
+          ),
+          div(
+            class = "record-grid",
+            div(class = "record-table-card", h3("Career Points"), DTOutput("record_total_points_all_games")),
+            div(class = "record-table-card", h3("Career Wins"), DTOutput("record_total_wins_all_games")),
+            div(class = "record-table-card", h3("Points by Roster Slot"), DTOutput("record_slot_points_all_games"))
+          )
         )
       )
     } else {
       tagList(
         div(
           class = "record-grid",
+          div(class = "record-table-card", h3("Win Streak*"), DTOutput("record_win_streak")),
           div(class = "record-table-card", h3("Single-Week Scores"), DTOutput("record_single_week")),
           div(class = "record-table-card", h3("Biggest Blowouts"), DTOutput("record_blowouts")),
           div(class = "record-table-card", h3("Closest Games"), DTOutput("record_closest"))
+        ),
+        div(
+          class = "record-book-subsection",
+          h3("Fantasy Luck Analytics"),
+          p(
+            class = "muted",
+            "Expected Wins, Lineup Efficiency, and Projection Performance for the selected season."
+          ),
+          div(
+            class = "record-grid",
+            div(
+              class = "record-table-card",
+              h3("Expected Wins (XW)*"),
+              DTOutput("record_xw")
+            ),
+            div(
+              class = "record-table-card",
+              h3("Lineup Efficiency (LEff)"),
+              DTOutput("record_leff")
+            ),
+            div(
+              class = "record-table-card",
+              h3("Projection Performance (PP)"),
+              DTOutput("record_pp")
+            )
+          )
         )
       )
     }
   })
 
   output$record_single_week <- renderDT({
-    record_matchups() |>
-      arrange(desc(points_for)) |>
+    ranked <- record_matchups() |>
+      arrange(desc(points_for), desc(year), desc(week), team) |>
+      mutate(
+        leader_value = points_for
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
       transmute(
         Season = year,
         Week = week,
@@ -3526,9 +5391,13 @@ server <- function(input, output, session) {
         Manager = manager,
         Score = round(points_for, 2)
       ) |>
-      slice_head(n = record_limit()) |>
-      record_scope_columns(record_scope_year()) |>
-      datatable_record(page_length = record_limit()) |>
+      record_scope_columns(record_scope_year())
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
       DT::formatStyle(
         columns = "Score",
         color = "#BE1C30",
@@ -3537,14 +5406,20 @@ server <- function(input, output, session) {
   }, server = FALSE)
 
   output$record_blowouts <- renderDT({
-    record_pair_games() |>
-      arrange(desc(margin)) |>
+    ranked <- record_pair_games() |>
+      arrange(desc(margin), desc(year), desc(week)) |>
       mutate(
         WinningTeam = if_else(score_a >= score_b, team_a, team_b),
         LosingTeam = if_else(score_a < score_b, team_a, team_b),
         WinningScore = pmax(score_a, score_b),
-        LosingScore = pmin(score_a, score_b)
+        LosingScore = pmin(score_a, score_b),
+        leader_value = margin
       ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
       transmute(
         Matchup = matchup_html(
           year,
@@ -3555,19 +5430,28 @@ server <- function(input, output, session) {
           LosingScore
         )
       ) |>
-      slice_head(n = record_limit()) |>
-      datatable_record(page_length = record_limit(), escape = FALSE)
+      datatable_record(
+        page_length = max(record_limit(), nrow(ranked)),
+        escape = FALSE,
+        leader_rows = leader_rows
+      )
   }, server = FALSE)
 
   output$record_closest <- renderDT({
-    record_pair_games() |>
-      arrange(margin) |>
+    ranked <- record_pair_games() |>
+      arrange(margin, desc(year), desc(week)) |>
       mutate(
         WinningTeam = if_else(score_a >= score_b, team_a, team_b),
         LosingTeam = if_else(score_a < score_b, team_a, team_b),
         WinningScore = pmax(score_a, score_b),
-        LosingScore = pmin(score_a, score_b)
+        LosingScore = pmin(score_a, score_b),
+        leader_value = margin
       ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
       transmute(
         Matchup = matchup_html(
           year,
@@ -3578,39 +5462,68 @@ server <- function(input, output, session) {
           LosingScore
         )
       ) |>
-      slice_head(n = record_limit()) |>
-      datatable_record(page_length = record_limit(), escape = FALSE)
+      datatable_record(
+        page_length = max(record_limit(), nrow(ranked)),
+        escape = FALSE,
+        leader_rows = leader_rows
+      )
   }, server = FALSE)
 
   output$record_hospital <- renderDT({
-    record_players() |>
-      filter(slot %in% c("IR", "Injured Reserve", "IL")) |>
-      distinct(year, week, manager, fantasy_team) |>
-      count(manager, fantasy_team, name = "IR Weeks") |>
-      arrange(desc(`IR Weeks`)) |>
+    ranked <- players |>
+      mutate(
+        slot_clean = str_to_upper(str_squish(as.character(slot)))
+      ) |>
+      filter(
+        slot_clean %in% c("IR", "INJURED RESERVE", "IL"),
+        !is.na(manager),
+        nzchar(manager)
+      ) |>
+      distinct(year, week, manager) |>
+      count(manager, name = "IR Weeks") |>
+      arrange(desc(`IR Weeks`), manager) |>
+      mutate(
+        leader_value = `IR Weeks`
+      ) |>
+      record_rows_with_leader_ties("leader_value", 5L)
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
       transmute(
-        Team = fantasy_team,
         Manager = manager,
         `IR Weeks`
       ) |>
-      slice_head(n = 5) |>
-      datatable_record(page_length = 5)
+      datatable_record(
+        page_length = max(5L, nrow(ranked)),
+        leader_rows = leader_rows
+      )
   }, server = FALSE)
 
   output$record_total_points <- renderDT({
-    matchups |>
+    ranked <- regular_season_matchups |>
       group_by(manager) |>
       summarise(
         `Career Points` = sum(points_for, na.rm = TRUE),
         .groups = "drop"
       ) |>
-      arrange(desc(`Career Points`)) |>
+      arrange(desc(`Career Points`), manager) |>
+      mutate(
+        leader_value = `Career Points`
+      ) |>
+      record_rows_with_leader_ties("leader_value", 5L)
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
       transmute(
         Manager = manager,
         `Career Points` = round(`Career Points`, 2)
       ) |>
-      slice_head(n = 5) |>
-      datatable_record(page_length = 5) |>
+      datatable_record(
+        page_length = max(5L, nrow(ranked)),
+        leader_rows = leader_rows
+      ) |>
       DT::formatStyle(
         columns = "Career Points",
         color = "#BE1C30",
@@ -3619,19 +5532,29 @@ server <- function(input, output, session) {
   }, server = FALSE)
 
   output$record_total_wins <- renderDT({
-    matchups |>
+    ranked <- regular_season_matchups |>
       group_by(manager) |>
       summarise(
         `Career Wins` = sum(win, na.rm = TRUE),
         .groups = "drop"
       ) |>
-      arrange(desc(`Career Wins`)) |>
+      arrange(desc(`Career Wins`), manager) |>
+      mutate(
+        leader_value = `Career Wins`
+      ) |>
+      record_rows_with_leader_ties("leader_value", 5L)
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
       transmute(
         Manager = manager,
         `Career Wins`
       ) |>
-      slice_head(n = 5) |>
-      datatable_record(page_length = 5) |>
+      datatable_record(
+        page_length = max(5L, nrow(ranked)),
+        leader_rows = leader_rows
+      ) |>
       DT::formatStyle(
         columns = "Career Wins",
         color = "#BE1C30",
@@ -3640,16 +5563,26 @@ server <- function(input, output, session) {
   }, server = FALSE)
 
   output$record_championships <- renderDT({
-    manager_finishes |>
+    ranked <- manager_finishes |>
       filter(finish == 1L) |>
       count(manager, name = "Championships") |>
       arrange(desc(Championships), manager) |>
+      mutate(
+        leader_value = Championships
+      ) |>
+      record_rows_with_leader_ties("leader_value", 5L)
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
       transmute(
         Manager = manager,
         Championships
       ) |>
-      slice_head(n = 5) |>
-      datatable_record(page_length = 5) |>
+      datatable_record(
+        page_length = max(5L, nrow(ranked)),
+        leader_rows = leader_rows
+      ) |>
       DT::formatStyle(
         columns = "Championships",
         color = "#BE1C30",
@@ -3658,6 +5591,359 @@ server <- function(input, output, session) {
   }, server = FALSE)
 
   output$record_slot_points <- renderDT({
+    slot_order <- c("QB", "RB", "WR", "TE", "FLEX", "D/ST", "K")
+
+    regular_season_players |>
+      mutate(
+        slot_clean = case_when(
+          str_to_upper(slot) %in% c("DST", "DEF", "D") ~ "D/ST",
+          TRUE ~ as.character(slot)
+        )
+      ) |>
+      filter(slot_clean %in% slot_order) |>
+      group_by(manager, slot_clean) |>
+      summarise(
+        Points = sum(fpts, na.rm = TRUE),
+        .groups = "drop"
+      ) |>
+      group_by(slot_clean) |>
+      slice_max(Points, n = 1, with_ties = TRUE) |>
+      ungroup() |>
+      mutate(slot_clean = factor(slot_clean, levels = slot_order)) |>
+      arrange(slot_clean) |>
+      transmute(
+        Slot = as.character(slot_clean),
+        Manager = manager,
+        Points = round(Points, 2)
+      ) |>
+      datatable_record(page_length = 10, highlight_leader = FALSE) |>
+      DT::formatStyle(
+        columns = "Points",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_win_streak <- renderDT({
+    streaks <- build_win_streaks(regular_season_matchups)
+
+    if (!is.na(record_scope_year())) {
+      streaks <- streaks |>
+        filter(year == record_scope_year())
+    }
+
+    ranked <- streaks |>
+      arrange(desc(streak_weeks), desc(year), start_week, team_name) |>
+      mutate(
+        leader_value = streak_weeks
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Season = year,
+        `Team Name` = team_name,
+        Streak = streak_weeks,
+        Weeks = if_else(
+          start_week == end_week,
+          paste0("Week ", start_week),
+          paste0("Weeks ", start_week, "–", end_week)
+        )
+      ) |>
+      record_scope_columns(record_scope_year())
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "Streak",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_xw_career <- renderDT({
+    ranked <- career_fantasy_analytics |>
+      filter(!is.na(expected_wins)) |>
+      arrange(desc(expected_wins), manager) |>
+      mutate(
+        leader_value = expected_wins
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Manager = manager,
+        Seasons = seasons,
+        XW = round(expected_wins, 2)
+      )
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "XW",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_leff_career <- renderDT({
+    ranked <- career_fantasy_analytics |>
+      filter(!is.na(lineup_efficiency)) |>
+      arrange(desc(lineup_efficiency), manager) |>
+      mutate(
+        leader_value = lineup_efficiency
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Manager = manager,
+        Seasons = seasons,
+        LEff = lineup_efficiency
+      )
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatPercentage(
+        columns = "LEff",
+        digits = 1
+      ) |>
+      DT::formatStyle(
+        columns = "LEff",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_pp_career <- renderDT({
+    ranked <- career_fantasy_analytics |>
+      filter(!is.na(pp_points_per_week)) |>
+      arrange(desc(pp_points_per_week), manager) |>
+      mutate(
+        leader_value = pp_points_per_week
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Manager = manager,
+        Seasons = seasons,
+        PP = sprintf("%+.1f", pp_points_per_week)
+      )
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "PP",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_xw <- renderDT({
+    ranked <- season_fantasy_analytics |>
+      filter(!is.na(expected_wins))
+
+    if (!is.na(record_scope_year())) {
+      ranked <- ranked |>
+        filter(year == record_scope_year())
+    }
+
+    ranked <- ranked |>
+      arrange(desc(expected_wins), desc(year), team_name, manager) |>
+      mutate(
+        leader_value = expected_wins
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Season = year,
+        Team = coalesce(team_name, manager),
+        Manager = manager,
+        XW = round(expected_wins, 2)
+      ) |>
+      record_scope_columns(record_scope_year())
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "XW",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_leff <- renderDT({
+    ranked <- season_fantasy_analytics |>
+      filter(!is.na(lineup_efficiency))
+
+    if (!is.na(record_scope_year())) {
+      ranked <- ranked |>
+        filter(year == record_scope_year())
+    }
+
+    ranked <- ranked |>
+      arrange(desc(lineup_efficiency), desc(year), team_name, manager) |>
+      mutate(
+        leader_value = lineup_efficiency
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Season = year,
+        Team = coalesce(team_name, manager),
+        Manager = manager,
+        LEff = lineup_efficiency
+      ) |>
+      record_scope_columns(record_scope_year())
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatPercentage(
+        columns = "LEff",
+        digits = 1
+      ) |>
+      DT::formatStyle(
+        columns = "LEff",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_pp <- renderDT({
+    ranked <- season_fantasy_analytics |>
+      filter(!is.na(pp_points_per_week))
+
+    if (!is.na(record_scope_year())) {
+      ranked <- ranked |>
+        filter(year == record_scope_year())
+    }
+
+    ranked <- ranked |>
+      arrange(desc(pp_points_per_week), desc(year), team_name, manager) |>
+      mutate(
+        leader_value = pp_points_per_week
+      ) |>
+      record_rows_with_leader_ties("leader_value", record_limit())
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    display <- ranked |>
+      transmute(
+        Season = year,
+        Team = coalesce(team_name, manager),
+        Manager = manager,
+        PP = sprintf("%+.1f", pp_points_per_week)
+      ) |>
+      record_scope_columns(record_scope_year())
+
+    display |>
+      datatable_record(
+        page_length = max(record_limit(), nrow(display)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "PP",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_total_points_all_games <- renderDT({
+    ranked <- matchups |>
+      group_by(manager) |>
+      summarise(
+        `Career Points` = sum(points_for, na.rm = TRUE),
+        .groups = "drop"
+      ) |>
+      arrange(desc(`Career Points`), manager) |>
+      mutate(
+        leader_value = `Career Points`
+      ) |>
+      record_rows_with_leader_ties("leader_value", 5L)
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
+      transmute(
+        Manager = manager,
+        `Career Points` = round(`Career Points`, 2)
+      ) |>
+      datatable_record(
+        page_length = max(5L, nrow(ranked)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "Career Points",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_total_wins_all_games <- renderDT({
+    ranked <- matchups |>
+      group_by(manager) |>
+      summarise(
+        `Career Wins` = sum(win, na.rm = TRUE),
+        .groups = "drop"
+      ) |>
+      arrange(desc(`Career Wins`), manager) |>
+      mutate(
+        leader_value = `Career Wins`
+      ) |>
+      record_rows_with_leader_ties("leader_value", 5L)
+
+    leader_rows <- leader_tie_count(ranked$leader_value)
+
+    ranked |>
+      transmute(
+        Manager = manager,
+        `Career Wins`
+      ) |>
+      datatable_record(
+        page_length = max(5L, nrow(ranked)),
+        leader_rows = leader_rows
+      ) |>
+      DT::formatStyle(
+        columns = "Career Wins",
+        color = "#BE1C30",
+        fontWeight = "bold"
+      )
+  }, server = FALSE)
+
+  output$record_slot_points_all_games <- renderDT({
     slot_order <- c("QB", "RB", "WR", "TE", "FLEX", "D/ST", "K")
 
     players |>
@@ -3674,7 +5960,7 @@ server <- function(input, output, session) {
         .groups = "drop"
       ) |>
       group_by(slot_clean) |>
-      slice_max(Points, n = 1, with_ties = FALSE) |>
+      slice_max(Points, n = 1, with_ties = TRUE) |>
       ungroup() |>
       mutate(slot_clean = factor(slot_clean, levels = slot_order)) |>
       arrange(slot_clean) |>

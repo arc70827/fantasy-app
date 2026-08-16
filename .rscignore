@@ -1,5 +1,13 @@
 ^\.git$
 ^\.github$
+^\.Rproj\.user$
+^\.vscode$
+^\.Renviron$
+^\.Rhistory$
+^\.RData$
+^.*\.Rproj$
 ^DESCRIPTION$
-^SETUP\.md$
-^app\.R\.patch$
+^README\.md$
+^rsconnect$
+^scripts$
+^data_weekly_test$

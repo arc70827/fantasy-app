@@ -1,5 +1,5 @@
 # ============================================================
-# ESPN FANTASY FOOTBALL WEEKLY UPDATER v4 - FIXED 2021 VALIDATION
+# ESPN FANTASY FOOTBALL WEEKLY UPDATER v7 - AUTOMATIC LATE STAT CORRECTIONS
 #
 # Purpose:
 #   Pull one completed fantasy week from ESPN, validate it,
@@ -69,6 +69,7 @@ final_fantasy_week <- 17L
 target_year_env <- Sys.getenv("TARGET_YEAR", unset = "")
 target_week_env <- Sys.getenv("TARGET_WEEK", unset = "")
 dry_run_env <- Sys.getenv("DRY_RUN", unset = "true")
+correction_lookback_env <- Sys.getenv("CORRECTION_LOOKBACK_WEEKS", unset = "4")
 
 dry_run <- tolower(trimws(dry_run_env)) %in%
   c("true", "t", "1", "yes", "y")
@@ -1654,7 +1655,17 @@ build_target_players <- function(
     ) |>
     transmute(
       `Player Name` =
-        player_name,
+        if_else(
+          pos ==
+            "D/ST",
+
+          str_remove(
+            player_name,
+            "\\s+D/ST$"
+          ),
+
+          player_name
+        ),
 
       `Fantasy Team` =
         team_name,
@@ -2901,7 +2912,904 @@ count_row_differences <- function(
 
 
 # ============================================================
-# 17. ATOMIC FILE WRITE
+# 17. AUTOMATIC LATE STAT CORRECTIONS
+# ============================================================
+
+build_historical_team_snapshot <- function(
+    team_snapshot,
+    manager_data,
+    season,
+    target_week
+) {
+
+  historical_snapshot <- team_snapshot
+
+  for (
+    row_index in seq_len(
+      nrow(
+        historical_snapshot
+      )
+    )
+  ) {
+
+    owner_id <- as.character(
+      historical_snapshot$owner_id[[row_index]]
+    )
+
+    owner_rows <- which(
+      !is.na(
+        manager_data$`ESPN ID`
+      ) &
+      manager_data$`ESPN ID` ==
+        owner_id
+    )
+
+    covering_rows <- owner_rows[
+      map_lgl(
+        owner_rows,
+        function(index) {
+
+          range_contains_period(
+            start_year =
+              manager_data$`Start Year`[[index]],
+
+            start_week =
+              manager_data$`Start Week`[[index]],
+
+            end_year =
+              manager_data$`End Year`[[index]],
+
+            end_week =
+              manager_data$`End Week`[[index]],
+
+            target_year =
+              season,
+
+            target_week =
+              target_week
+          )
+        }
+      )
+    ]
+
+    if (
+      length(
+        covering_rows
+      ) != 1
+    ) {
+
+      stop(
+        paste0(
+          "Could not resolve exactly one historical fantasy team name for ESPN owner ID ",
+          owner_id,
+          " in ",
+          season,
+          " Week ",
+          target_week,
+          ". Late stat correction was stopped before any files were changed."
+        )
+      )
+    }
+
+    historical_snapshot$team_name[[row_index]] <-
+      as.character(
+        manager_data$`Team Name`[
+          covering_rows[[1]]
+        ]
+      )
+  }
+
+  duplicate_historical_names <- historical_snapshot |>
+    count(
+      team_name,
+      name = "Rows"
+    ) |>
+    filter(
+      Rows > 1
+    )
+
+  if (
+    nrow(
+      duplicate_historical_names
+    ) > 0
+  ) {
+
+    print(
+      duplicate_historical_names,
+      n = Inf
+    )
+
+    stop(
+      paste0(
+        "Historical manager ranges produced duplicate fantasy team names for ",
+        season,
+        " Week ",
+        target_week,
+        ". No files were changed."
+      )
+    )
+  }
+
+  historical_snapshot
+}
+
+
+apply_recent_stat_corrections <- function(
+    matchup_data,
+    player_data,
+    manager_data,
+    current_team_snapshot,
+    schedule_table,
+    season,
+    correction_weeks
+) {
+
+  working_matchups <- matchup_data
+  working_players <- player_data
+  correction_changes <- list()
+
+  for (
+    correction_week in correction_weeks
+  ) {
+
+    correction_week <- as.integer(
+      correction_week
+    )
+
+    if (
+      !week_is_complete(
+        schedule_table = schedule_table,
+        week = correction_week
+      )
+    ) {
+      stop(
+        paste0(
+          "Previously imported ",
+          season,
+          " Week ",
+          correction_week,
+          " is no longer marked complete by ESPN. No files were changed."
+        )
+      )
+    }
+
+    historical_team_snapshot <- build_historical_team_snapshot(
+      team_snapshot =
+        current_team_snapshot,
+
+      manager_data =
+        manager_data,
+
+      season =
+        season,
+
+      target_week =
+        correction_week
+    )
+
+    target_games <- prepare_target_games(
+      schedule_table =
+        schedule_table,
+
+      target_week =
+        correction_week
+    )
+
+    eligible_team_ids <- sort(
+      unique(
+        c(
+          target_games$home_team_id,
+          target_games$away_team_id
+        )
+      )
+    )
+
+    matchup_result <- build_target_matchups(
+      target_games =
+        target_games,
+
+      team_snapshot =
+        historical_team_snapshot,
+
+      season =
+        season,
+
+      target_week =
+        correction_week
+    )
+
+    roster_data <- espn_get(
+      season =
+        season,
+
+      views =
+        "mRoster",
+
+      scoring_period =
+        correction_week
+    )
+
+    if (
+      is.null(
+        roster_data
+      )
+    ) {
+      stop(
+        paste0(
+          "ESPN returned no roster data while checking a late stat correction for ",
+          season,
+          " Week ",
+          correction_week,
+          "."
+        )
+      )
+    }
+
+    player_result <- build_target_players(
+      roster_data =
+        roster_data,
+
+      team_snapshot =
+        historical_team_snapshot,
+
+      eligible_team_ids =
+        eligible_team_ids,
+
+      season =
+        season,
+
+      target_week =
+        correction_week
+    )
+
+    validate_week_scores(
+      matchup_internal =
+        matchup_result$internal,
+
+      player_internal =
+        player_result$internal,
+
+      target_games =
+        target_games
+    )
+
+    old_matchups <- working_matchups |>
+      filter(
+        Year ==
+          season,
+        Week ==
+          correction_week
+      ) |>
+      arrange(
+        Team
+      )
+
+    new_matchups <- matchup_result$output |>
+      arrange(
+        Team
+      )
+
+    matchup_structure_columns <- c(
+      "Team",
+      "Opposing Team",
+      "Week",
+      "Year",
+      "Matchup Type"
+    )
+
+    old_matchup_structure <- old_matchups |>
+      select(
+        all_of(
+          matchup_structure_columns
+        )
+      ) |>
+      mutate(
+        Team =
+          as.character(
+            Team
+          ),
+
+        `Opposing Team` =
+          as.character(
+            `Opposing Team`
+          ),
+
+        Week =
+          as.integer(
+            Week
+          ),
+
+        Year =
+          as.integer(
+            Year
+          ),
+
+        `Matchup Type` =
+          as.character(
+            `Matchup Type`
+          )
+      ) |>
+      arrange(
+        Team,
+        `Opposing Team`
+      )
+
+    new_matchup_structure <- new_matchups |>
+      select(
+        all_of(
+          matchup_structure_columns
+        )
+      ) |>
+      mutate(
+        Team =
+          as.character(
+            Team
+          ),
+
+        `Opposing Team` =
+          as.character(
+            `Opposing Team`
+          ),
+
+        Week =
+          as.integer(
+            Week
+          ),
+
+        Year =
+          as.integer(
+            Year
+          ),
+
+        `Matchup Type` =
+          as.character(
+            `Matchup Type`
+          )
+      ) |>
+      arrange(
+        Team,
+        `Opposing Team`
+      )
+
+    matchup_structure_same <-
+      nrow(
+        old_matchup_structure
+      ) ==
+        nrow(
+          new_matchup_structure
+        ) &&
+      nrow(
+        anti_join(
+          old_matchup_structure,
+          new_matchup_structure,
+          by =
+            matchup_structure_columns
+        )
+      ) ==
+        0 &&
+      nrow(
+        anti_join(
+          new_matchup_structure,
+          old_matchup_structure,
+          by =
+            matchup_structure_columns
+        )
+      ) ==
+        0
+
+    if (
+      !matchup_structure_same
+    ) {
+
+      cat(
+        "\nStored matchup structure:\n"
+      )
+
+      print(
+        old_matchup_structure,
+        n = Inf
+      )
+
+      cat(
+        "\nFresh ESPN matchup structure:\n"
+      )
+
+      print(
+        new_matchup_structure,
+        n = Inf
+      )
+
+      stop(
+        paste0(
+          "Historical matchup structure changed for ",
+          season,
+          " Week ",
+          correction_week,
+          ". The automatic correction pass will not rewrite team names or matchup structure."
+        )
+      )
+    }
+
+    matchup_rows_changed <- sum(
+      abs(
+        old_matchups$`Points For` -
+          new_matchups$`Points For`
+      ) > 0.001 |
+      abs(
+        old_matchups$`Points Against` -
+          new_matchups$`Points Against`
+      ) > 0.001 |
+      old_matchups$Win !=
+        new_matchups$Win |
+      old_matchups$Loss !=
+        new_matchups$Loss
+    )
+
+    old_players <- working_players |>
+      filter(
+        Year ==
+          season,
+        Week ==
+          correction_week
+      )
+
+    new_players <- player_result$output
+
+    player_structure_columns <- c(
+      "Player Name",
+      "Fantasy Team",
+      "POS",
+      "SLOT",
+      "Week",
+      "Year"
+    )
+
+    old_player_structure <- old_players |>
+      select(
+        all_of(
+          player_structure_columns
+        )
+      ) |>
+      mutate(
+        `Player Name` =
+          as.character(
+            `Player Name`
+          ),
+
+        `Fantasy Team` =
+          as.character(
+            `Fantasy Team`
+          ),
+
+        POS =
+          as.character(
+            POS
+          ),
+
+        SLOT =
+          as.character(
+            SLOT
+          ),
+
+        Week =
+          as.integer(
+            Week
+          ),
+
+        Year =
+          as.integer(
+            Year
+          )
+      ) |>
+      arrange(
+        `Fantasy Team`,
+        `Player Name`,
+        SLOT
+      )
+
+    new_player_structure <- new_players |>
+      select(
+        all_of(
+          player_structure_columns
+        )
+      ) |>
+      mutate(
+        `Player Name` =
+          as.character(
+            `Player Name`
+          ),
+
+        `Fantasy Team` =
+          as.character(
+            `Fantasy Team`
+          ),
+
+        POS =
+          as.character(
+            POS
+          ),
+
+        SLOT =
+          as.character(
+            SLOT
+          ),
+
+        Week =
+          as.integer(
+            Week
+          ),
+
+        Year =
+          as.integer(
+            Year
+          )
+      ) |>
+      arrange(
+        `Fantasy Team`,
+        `Player Name`,
+        SLOT
+      )
+
+    player_structure_same <-
+      nrow(
+        old_player_structure
+      ) ==
+        nrow(
+          new_player_structure
+        ) &&
+      nrow(
+        anti_join(
+          old_player_structure,
+          new_player_structure,
+          by =
+            player_structure_columns
+        )
+      ) ==
+        0 &&
+      nrow(
+        anti_join(
+          new_player_structure,
+          old_player_structure,
+          by =
+            player_structure_columns
+        )
+      ) ==
+        0
+
+    if (
+      !player_structure_same
+    ) {
+
+      cat(
+        "\nStored roster structure:\n"
+      )
+
+      print(
+        old_player_structure,
+        n = Inf
+      )
+
+      cat(
+        "\nFresh ESPN roster structure:\n"
+      )
+
+      print(
+        new_player_structure,
+        n = Inf
+      )
+
+      stop(
+        paste0(
+          "Historical roster structure changed for ",
+          season,
+          " Week ",
+          correction_week,
+          ". The automatic correction pass will not rewrite roster identity, lineup slots, projections, or NFL teams."
+        )
+      )
+    }
+
+    correction_scores <- new_players |>
+      select(
+        `Player Name`,
+        `Fantasy Team`,
+        corrected_fpts =
+          FPTS
+      )
+
+    duplicate_correction_keys <- correction_scores |>
+      count(
+        `Fantasy Team`,
+        `Player Name`,
+        name = "Rows"
+      ) |>
+      filter(
+        Rows > 1
+      )
+
+    if (
+      nrow(
+        duplicate_correction_keys
+      ) > 0
+    ) {
+      stop(
+        paste0(
+          "A duplicate player correction key was found for ",
+          season,
+          " Week ",
+          correction_week,
+          ". No files were changed."
+        )
+      )
+    }
+
+    corrected_players <- old_players |>
+      left_join(
+        correction_scores,
+        by =
+          c(
+            "Player Name",
+            "Fantasy Team"
+          )
+      )
+
+    if (
+      any(
+        is.na(
+          corrected_players$corrected_fpts
+        )
+      )
+    ) {
+      stop(
+        paste0(
+          "A player FPTS correction could not be matched back to the stored roster for ",
+          season,
+          " Week ",
+          correction_week,
+          ". No files were changed."
+        )
+      )
+    }
+
+    player_rows_changed <- sum(
+      abs(
+        corrected_players$FPTS -
+          corrected_players$corrected_fpts
+      ) > 0.001
+    )
+
+    corrected_players <- corrected_players |>
+      mutate(
+        FPTS =
+          corrected_fpts
+      ) |>
+      select(
+        -corrected_fpts
+      )
+
+    if (
+      matchup_rows_changed > 0
+    ) {
+      working_matchups <- working_matchups |>
+        filter(
+          !(
+            Year ==
+              season &
+            Week ==
+              correction_week
+          )
+        ) |>
+        bind_rows(
+          new_matchups
+        ) |>
+        arrange(
+          Year,
+          Week,
+          Team
+        )
+    }
+
+    if (
+      player_rows_changed > 0
+    ) {
+      working_players <- working_players |>
+        filter(
+          !(
+            Year ==
+              season &
+            Week ==
+              correction_week
+          )
+        ) |>
+        bind_rows(
+          corrected_players
+        ) |>
+        arrange(
+          Year,
+          Week,
+          `Fantasy Team`,
+          SLOT,
+          `Player Name`
+        )
+    }
+
+    correction_changes[[length(correction_changes) + 1L]] <- tibble(
+      Year =
+        as.integer(
+          season
+        ),
+
+      Week =
+        as.integer(
+          correction_week
+        ),
+
+      `Matchup Rows Corrected` =
+        as.integer(
+          matchup_rows_changed
+        ),
+
+      `Player FPTS Rows Corrected` =
+        as.integer(
+          player_rows_changed
+        )
+    )
+  }
+
+  correction_table <- bind_rows(
+    correction_changes
+  )
+
+  total_matchup_corrections <- if (
+    nrow(
+      correction_table
+    ) == 0
+  ) {
+    0L
+  } else {
+    sum(
+      correction_table$`Matchup Rows Corrected`
+    )
+  }
+
+  total_player_corrections <- if (
+    nrow(
+      correction_table
+    ) == 0
+  ) {
+    0L
+  } else {
+    sum(
+      correction_table$`Player FPTS Rows Corrected`
+    )
+  }
+
+  list(
+    matchup_data =
+      working_matchups,
+
+    player_data =
+      working_players,
+
+    summary =
+      correction_table,
+
+    changed =
+      (
+        total_matchup_corrections > 0 ||
+        total_player_corrections > 0
+      )
+  )
+}
+
+
+finish_without_new_week <- function(
+    reason,
+    matchup_data,
+    player_data,
+    manager_data,
+    corrections_changed
+) {
+
+  validate_final_data(
+    matchup_data =
+      matchup_data,
+
+    player_data =
+      player_data,
+
+    manager_data =
+      manager_data
+  )
+
+  cat(
+    reason,
+    "\n",
+    sep = ""
+  )
+
+  if (
+    !corrections_changed
+  ) {
+    cat(
+      "No files were changed.\n"
+    )
+
+    return(
+      invisible(
+        list(
+          matchup_data =
+            matchup_data,
+
+          player_data =
+            player_data,
+
+          manager_data =
+            manager_data
+        )
+      )
+    )
+  }
+
+  if (
+    dry_run
+  ) {
+    cat(
+      "Late stat corrections were detected, but DRY_RUN is TRUE.\n"
+    )
+
+    cat(
+      "No files were changed.\n"
+    )
+
+    return(
+      invisible(
+        list(
+          matchup_data =
+            matchup_data,
+
+          player_data =
+            player_data,
+
+          manager_data =
+            manager_data
+        )
+      )
+    )
+  }
+
+  write_all_files_safely(
+    matchup_data =
+      matchup_data,
+
+    player_data =
+      player_data,
+
+    manager_data =
+      manager_data
+  )
+
+  cat(
+    "Late stat corrections were written successfully.\n"
+  )
+
+  invisible(
+    list(
+      matchup_data =
+        matchup_data,
+
+      player_data =
+        player_data,
+
+      manager_data =
+        manager_data
+    )
+  )
+}
+
+
+# ============================================================
+# 18. ATOMIC FILE WRITE
 # ============================================================
 
 write_all_files_safely <- function(
@@ -3036,7 +3944,7 @@ write_all_files_safely <- function(
 
 
 # ============================================================
-# 18. MAIN
+# 19. MAIN
 # ============================================================
 
 main <- function() {
@@ -3073,6 +3981,26 @@ main <- function() {
   week_override <- parse_optional_integer(
     target_week_env,
     "TARGET_WEEK"
+  )
+
+  correction_lookback_weeks <- parse_optional_integer(
+    correction_lookback_env,
+    "CORRECTION_LOOKBACK_WEEKS"
+  )
+
+  if (
+    is.na(
+      correction_lookback_weeks
+    ) ||
+    correction_lookback_weeks < 1
+  ) {
+    stop(
+      "CORRECTION_LOOKBACK_WEEKS must be an integer of at least 1."
+    )
+  }
+
+  automatic_mode <- is.na(
+    week_override
   )
 
   if (
@@ -3146,30 +4074,6 @@ main <- function() {
     target_week <- week_override
   }
 
-  if (
-    target_week >
-      final_fantasy_week
-  ) {
-
-    cat(
-      "Season ",
-      season,
-      " is already complete through Week ",
-      final_fantasy_week,
-      ".\n"
-    )
-
-    cat(
-      "No files were changed.\n"
-    )
-
-    return(
-      invisible(
-        NULL
-      )
-    )
-  }
-
   cat(
     "Season: ",
     season,
@@ -3177,10 +4081,32 @@ main <- function() {
     sep = ""
   )
 
+  if (
+    target_week <=
+      final_fantasy_week
+  ) {
+
+    cat(
+      "Target week: ",
+      target_week,
+      "\n",
+      sep = ""
+    )
+
+  } else {
+
+    cat(
+      "Target week: none; season is complete through Week ",
+      final_fantasy_week,
+      "\n",
+      sep = ""
+    )
+  }
+
   cat(
-    "Target week: ",
-    target_week,
-    "\n",
+    "Late correction lookback: ",
+    correction_lookback_weeks,
+    " imported weeks\n",
     sep = ""
   )
 
@@ -3239,6 +4165,114 @@ main <- function() {
     season_data
   )
 
+  corrections_changed <- FALSE
+
+  if (
+    automatic_mode &&
+    length(
+      existing_season_weeks
+    ) > 0
+  ) {
+
+    correction_weeks <- tail(
+      existing_season_weeks,
+      correction_lookback_weeks
+    )
+
+    cat(
+      "Checking late stat corrections for imported week(s): ",
+      paste(
+        correction_weeks,
+        collapse = ", "
+      ),
+      "\n",
+      sep = ""
+    )
+
+    correction_result <- apply_recent_stat_corrections(
+      matchup_data =
+        existing_matchups,
+
+      player_data =
+        existing_players,
+
+      manager_data =
+        existing_managers,
+
+      current_team_snapshot =
+        team_snapshot,
+
+      schedule_table =
+        schedule_table,
+
+      season =
+        season,
+
+      correction_weeks =
+        correction_weeks
+    )
+
+    existing_matchups <-
+      correction_result$matchup_data
+
+    existing_players <-
+      correction_result$player_data
+
+    corrections_changed <-
+      correction_result$changed
+
+    cat(
+      "\nLate stat correction check:\n"
+    )
+
+    print(
+      correction_result$summary,
+      n = Inf
+    )
+
+    if (
+      corrections_changed
+    ) {
+      cat(
+        "PASS: late stat corrections were detected and validated.\n\n"
+      )
+    } else {
+      cat(
+        "PASS: no late stat corrections were found.\n\n"
+      )
+    }
+  }
+
+  if (
+    target_week >
+      final_fantasy_week
+  ) {
+    return(
+      finish_without_new_week(
+        reason =
+          paste0(
+            "Season ",
+            season,
+            " is already complete through Week ",
+            final_fantasy_week,
+            "."
+          ),
+
+        matchup_data =
+          existing_matchups,
+
+        player_data =
+          existing_players,
+
+        manager_data =
+          existing_managers,
+
+        corrections_changed =
+          corrections_changed
+      )
+    )
+  }
+
   if (
     !week_is_complete(
       schedule_table = schedule_table,
@@ -3246,20 +4280,26 @@ main <- function() {
     )
   ) {
 
-    cat(
-      "Week ",
-      target_week,
-      " is not complete in ESPN yet.\n",
-      sep = ""
-    )
-
-    cat(
-      "No files were changed.\n"
-    )
-
     return(
-      invisible(
-        NULL
+      finish_without_new_week(
+        reason =
+          paste0(
+            "Week ",
+            target_week,
+            " is not complete in ESPN yet."
+          ),
+
+        matchup_data =
+          existing_matchups,
+
+        player_data =
+          existing_players,
+
+        manager_data =
+          existing_managers,
+
+        corrections_changed =
+          corrections_changed
       )
     )
   }

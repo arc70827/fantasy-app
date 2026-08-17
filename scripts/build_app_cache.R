@@ -26,7 +26,7 @@ suppressPackageStartupMessages({
   library(janitor)
 })
 
-cache_schema_version <- 1L
+cache_schema_version <- 2L
 cache_path <- file.path("data", "app_cache.rds")
 
 safe_read <- function(path) {
@@ -912,6 +912,293 @@ win_streaks <- build_win_streaks(
   regular_season_matchups
 )
 
+# ---- Prepared Home dashboard ----
+
+message("Building prepared Home dashboard...")
+
+resolve_team_name_for_cache <- function(
+    manager_value,
+    year_value,
+    week_value = NA_integer_
+) {
+  candidates <- team_names |>
+    filter(
+      manager == manager_value,
+      start_year <= year_value,
+      end_year >= year_value
+    )
+
+  if (!is.na(week_value)) {
+    candidates <- candidates |>
+      filter(
+        manager_range_contains(
+          start_year,
+          start_week,
+          end_year,
+          end_week,
+          year_value,
+          week_value
+        )
+      )
+  } else {
+    candidates <- candidates |>
+      arrange(
+        desc(end_year),
+        desc(end_week),
+        desc(start_year),
+        desc(start_week)
+      )
+  }
+
+  result <- candidates |>
+    pull(team_name)
+
+  if (
+    length(result) == 0 ||
+    is.na(result[1])
+  ) {
+    return(as.character(manager_value))
+  }
+
+  as.character(result[1])
+}
+
+home_week_data <- matchups |>
+  filter(
+    year == latest_year,
+    week == latest_week
+  )
+
+home_matchup_recap <- pair_games |>
+  filter(
+    year == latest_year,
+    week == latest_week
+  ) |>
+  arrange(desc(winning_score))
+
+if (
+  nrow(home_week_data) == 0 ||
+  nrow(home_matchup_recap) == 0
+) {
+  stop(
+    "Could not build the prepared Home dashboard for the latest week.",
+    call. = FALSE
+  )
+}
+
+home_high_score <- home_week_data |>
+  slice_max(
+    points_for,
+    n = 1,
+    with_ties = FALSE
+  )
+
+home_low_score <- home_week_data |>
+  slice_min(
+    points_for,
+    n = 1,
+    with_ties = FALSE
+  )
+
+home_closest <- home_matchup_recap |>
+  slice_min(
+    margin,
+    n = 1,
+    with_ties = FALSE
+  )
+
+home_blowout <- home_matchup_recap |>
+  slice_max(
+    margin,
+    n = 1,
+    with_ties = FALSE
+  )
+
+home_best_start <- players |>
+  filter(
+    year == latest_year,
+    week == latest_week
+  ) |>
+  filter(
+    !str_to_lower(slot) %in%
+      c(
+        "bench",
+        "be",
+        "ir",
+        "injured reserve",
+        "il"
+      )
+  ) |>
+  slice_max(
+    fpts,
+    n = 1,
+    with_ties = FALSE
+  )
+
+home_summary <- list(
+  high_score = home_high_score,
+  low_score = home_low_score,
+  closest = home_closest,
+  blowout = home_blowout,
+  league_avg = mean(
+    home_week_data$points_for,
+    na.rm = TRUE
+  ),
+  best_start = home_best_start
+)
+
+home_season_data <- regular_season_matchups |>
+  filter(
+    year == latest_year,
+    week <= latest_week
+  )
+
+home_recent_data <- home_season_data |>
+  arrange(
+    manager,
+    desc(week)
+  ) |>
+  group_by(manager) |>
+  slice_head(n = 3) |>
+  ungroup()
+
+home_power_base <- home_season_data |>
+  group_by(manager) |>
+  summarise(
+    wins = sum(win, na.rm = TRUE),
+    losses = sum(loss, na.rm = TRUE),
+    points_for = sum(points_for, na.rm = TRUE),
+    points_against = sum(
+      points_against,
+      na.rm = TRUE
+    ),
+    avg_score = mean(
+      points_for,
+      na.rm = TRUE
+    ),
+    .groups = "drop"
+  ) |>
+  mutate(
+    win_pct = wins / pmax(
+      wins + losses,
+      1
+    ),
+    record = paste0(
+      wins,
+      "-",
+      losses
+    )
+  )
+
+home_recent <- home_recent_data |>
+  group_by(manager) |>
+  summarise(
+    recent_avg = mean(
+      points_for,
+      na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
+
+home_power_rankings <- home_power_base |>
+  left_join(
+    home_recent,
+    by = "manager"
+  ) |>
+  mutate(
+    recent_avg = if_else(
+      is.na(recent_avg),
+      avg_score,
+      recent_avg
+    ),
+    win_pct_score =
+      dplyr::percent_rank(win_pct) * 100,
+    recent_score =
+      dplyr::percent_rank(recent_avg) * 100,
+    season_score =
+      dplyr::percent_rank(avg_score) * 100,
+    win_pct_score = if_else(
+      is.na(win_pct_score),
+      50,
+      win_pct_score
+    ),
+    recent_score = if_else(
+      is.na(recent_score),
+      50,
+      recent_score
+    ),
+    season_score = if_else(
+      is.na(season_score),
+      50,
+      season_score
+    ),
+    power_score =
+      0.50 * win_pct_score +
+      0.30 * recent_score +
+      0.20 * season_score
+  ) |>
+  arrange(
+    desc(power_score),
+    desc(points_for)
+  ) |>
+  mutate(
+    rank = row_number(),
+    team_name = mapply(
+      resolve_team_name_for_cache,
+      manager,
+      latest_year,
+      USE.NAMES = FALSE
+    )
+  )
+
+home_expected_scope <- weekly_expected_wins |>
+  filter(
+    year == latest_year,
+    week <= latest_week
+  )
+
+home_lineup_scope <- weekly_lineup_analytics |>
+  filter(
+    year == latest_year,
+    week <= latest_week
+  )
+
+home_league_analytics <-
+  aggregate_fantasy_analytics(
+    expected_scope = home_expected_scope,
+    lineup_scope = home_lineup_scope
+  ) |>
+  mutate(
+    team_name = mapply(
+      resolve_team_name_for_cache,
+      manager,
+      latest_year,
+      latest_week,
+      USE.NAMES = FALSE
+    )
+  ) |>
+  arrange(
+    desc(expected_wins),
+    desc(lineup_efficiency),
+    desc(pp_points_per_week),
+    team_name
+  )
+
+home_dashboard <- list(
+  year = as.integer(latest_year),
+  week = as.integer(latest_week),
+  week_label = paste0(
+    latest_year,
+    " Week ",
+    latest_week,
+    " Recap"
+  ),
+  summary = home_summary,
+  matchup_recap = home_matchup_recap,
+  power_rankings = home_power_rankings,
+  league_analytics = home_league_analytics
+)
+
 app_cache <- list(
   cache_schema_version = cache_schema_version,
   generated_at_utc = format(
@@ -939,7 +1226,8 @@ app_cache <- list(
   weekly_lineup_analytics = weekly_lineup_analytics,
   season_fantasy_analytics = season_fantasy_analytics,
   career_fantasy_analytics = career_fantasy_analytics,
-  win_streaks = win_streaks
+  win_streaks = win_streaks,
+  home_dashboard = home_dashboard
 )
 
 required_cache_objects <- c(
@@ -963,7 +1251,8 @@ required_cache_objects <- c(
   "weekly_lineup_analytics",
   "season_fantasy_analytics",
   "career_fantasy_analytics",
-  "win_streaks"
+  "win_streaks",
+  "home_dashboard"
 )
 
 missing_cache_objects <- setdiff(

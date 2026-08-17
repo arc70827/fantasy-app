@@ -99,6 +99,13 @@ jobs:
 
           cache <- readRDS(cache_path)
 
+          if (
+            is.null(cache$cache_schema_version) ||
+            as.integer(cache$cache_schema_version) != 2L
+          ) {
+            stop("Expected cache schema version 2.")
+          }
+
           required <- c(
             "cache_schema_version",
             "matchups",
@@ -107,7 +114,8 @@ jobs:
             "weekly_expected_wins",
             "weekly_lineup_analytics",
             "season_fantasy_analytics",
-            "career_fantasy_analytics"
+            "career_fantasy_analytics",
+            "home_dashboard"
           )
 
           missing <- setdiff(required, names(cache))

@@ -153,26 +153,6 @@ responsive_column_defs <- function(data) {
   definitions
 }
 
-datatable_clean <- function(data, page_length = 15, selection = "none") {
-  DT::datatable(
-    data,
-    rownames = FALSE,
-    selection = selection,
-    filter = "top",
-    extensions = c("Buttons", "Responsive"),
-    options = list(
-      pageLength = page_length,
-      responsive = TRUE,
-      autoWidth = FALSE,
-      scrollX = FALSE,
-      dom = "Bfrtip",
-      buttons = c("copy", "csv", "excel"),
-      columnDefs = responsive_column_defs(data)
-    ),
-    class = "stripe compact nowrap"
-  )
-}
-
 datatable_simple <- function(data, page_length = 5, selection = "none") {
   DT::datatable(
     data,
@@ -192,26 +172,6 @@ datatable_simple <- function(data, page_length = 5, selection = "none") {
     class = "stripe compact nowrap"
   )
 }
-
-datatable_no_buttons <- function(data, page_length = 25, selection = "none") {
-  DT::datatable(
-    data,
-    rownames = FALSE,
-    selection = selection,
-    filter = "top",
-    extensions = "Responsive",
-    options = list(
-      pageLength = page_length,
-      responsive = TRUE,
-      autoWidth = FALSE,
-      scrollX = FALSE,
-      dom = "frtip",
-      columnDefs = responsive_column_defs(data)
-    ),
-    class = "stripe compact nowrap"
-  )
-}
-
 
 datatable_player_performance <- function(data, page_length = 25) {
   DT::datatable(
@@ -409,7 +369,7 @@ app_cache <- readRDS(cache_path)
 
 if (
   is.null(app_cache$cache_schema_version) ||
-  as.integer(app_cache$cache_schema_version) != 1L
+  as.integer(app_cache$cache_schema_version) != 2L
 ) {
   stop(
     "The prepared app cache has an unsupported schema version. Rebuild it before starting the app.",
@@ -438,7 +398,8 @@ required_cache_objects <- c(
   "weekly_lineup_analytics",
   "season_fantasy_analytics",
   "career_fantasy_analytics",
-  "win_streaks"
+  "win_streaks",
+  "home_dashboard"
 )
 
 missing_cache_objects <- setdiff(
@@ -476,6 +437,7 @@ weekly_lineup_analytics <- app_cache$weekly_lineup_analytics
 season_fantasy_analytics <- app_cache$season_fantasy_analytics
 career_fantasy_analytics <- app_cache$career_fantasy_analytics
 win_streaks <- app_cache$win_streaks
+home_dashboard <- app_cache$home_dashboard
 
 rm(app_cache)
 
@@ -2060,18 +2022,6 @@ ui <- navbarPage(
         font-size: 13px;
       }
 
-      .dataTables_wrapper .dt-buttons .dt-button {
-        margin-right: 4px;
-        padding: 3px 7px !important;
-        border: none !important;
-        border-radius: 6px !important;
-        background: var(--primary-red) !important;
-        color: #ffffff !important;
-        font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
-        font-size: 12px;
-        font-weight: 800;
-      }
-
       .dataTables_wrapper .dataTables_filter input,
       .dataTables_wrapper .dataTables_length select {
         min-height: 29px;
@@ -2731,11 +2681,6 @@ ui <- navbarPage(
         .dataTables_wrapper .dataTables_filter input {
           width: calc(100% - 54px);
           max-width: none;
-        }
-
-        .dataTables_wrapper .dt-buttons {
-          float: none;
-          margin-bottom: 4px;
         }
 
         table.dataTable thead th,
@@ -3558,72 +3503,34 @@ server <- function(input, output, session) {
   })
 
   dashboard_year <- reactive({
-    matchups |>
-      summarise(latest_year = max(year, na.rm = TRUE)) |>
-      pull(latest_year)
+    home_dashboard$year
   })
-
   dashboard_week <- reactive({
-    matchups |>
-      filter(year == dashboard_year()) |>
-      summarise(latest_week = max(week, na.rm = TRUE)) |>
-      pull(latest_week)
+    home_dashboard$week
   })
 
   selected_week_pair_games <- reactive({
-    pair_games |>
-      filter(year == dashboard_year(), week == dashboard_week()) |>
-      arrange(desc(winning_score))
+    home_dashboard$matchup_recap
   })
 
   output$dashboard_week_label <- renderText({
-    paste0(dashboard_year(), " Week ", dashboard_week(), " Recap")
+    home_dashboard$week_label
   })
-
-  season_matchups <- reactive({
-    regular_season_matchups |> filter(year == dashboard_year())
-  })
-
-  standings <- reactive({
-    season_matchups() |>
-      group_by(manager) |>
-      summarise(
-        wins = sum(win, na.rm = TRUE),
-        losses = sum(loss, na.rm = TRUE),
-        points_for = sum(points_for, na.rm = TRUE),
-        points_against = sum(points_against, na.rm = TRUE),
-        point_diff = points_for - points_against,
-        avg_score = mean(points_for, na.rm = TRUE),
-        .groups = "drop"
-      ) |>
-      mutate(
-        record = make_record(wins, losses),
-        win_pct = wins / pmax(wins + losses, 1)
-      ) |>
-      arrange(desc(wins), desc(points_for))
-  })
-
   output$dashboard_cards <- renderUI({
-    current_year <- dashboard_year()
-    current_week <- dashboard_week()
-    week_data <- matchups |> filter(year == current_year, week == current_week)
-    pair_data <- selected_week_pair_games()
+    summary <- home_dashboard$summary
+    high_score <- summary$high_score
+    low_score <- summary$low_score
+    closest <- summary$closest
+    blowout <- summary$blowout
+    league_avg <- summary$league_avg
+    best_start <- summary$best_start
 
     validate(
-      need(nrow(week_data) > 0, "No matchup data found for the most recent week.")
+      need(
+        nrow(high_score) > 0,
+        "No matchup data found for the most recent week."
+      )
     )
-
-    high_score <- week_data |> slice_max(points_for, n = 1, with_ties = FALSE)
-    low_score <- week_data |> slice_min(points_for, n = 1, with_ties = FALSE)
-    closest <- pair_data |> slice_min(margin, n = 1, with_ties = FALSE)
-    blowout <- pair_data |> slice_max(margin, n = 1, with_ties = FALSE)
-    league_avg <- mean(week_data$points_for, na.rm = TRUE)
-
-    best_start <- players |>
-      filter(year == current_year, week == current_week) |>
-      filter(!str_to_lower(slot) %in% c("bench", "be", "ir", "injured reserve", "il")) |>
-      slice_max(fpts, n = 1, with_ties = FALSE)
-
     best_start_card <- if (nrow(best_start) > 0) {
       card(
         "Best Starter",
@@ -3735,56 +3642,7 @@ server <- function(input, output, session) {
   })
 
   power_rankings <- reactive({
-    current_year <- dashboard_year()
-    current_week <- dashboard_week()
-
-    season_data <- regular_season_matchups |>
-      filter(year == current_year, week <= current_week)
-
-    recent_data <- season_data |>
-      arrange(manager, desc(week)) |>
-      group_by(manager) |>
-      slice_head(n = 3) |>
-      ungroup()
-
-    base <- season_data |>
-      group_by(manager) |>
-      summarise(
-        wins = sum(win, na.rm = TRUE),
-        losses = sum(loss, na.rm = TRUE),
-        points_for = sum(points_for, na.rm = TRUE),
-        points_against = sum(points_against, na.rm = TRUE),
-        avg_score = mean(points_for, na.rm = TRUE),
-        .groups = "drop"
-      ) |>
-      mutate(
-        win_pct = wins / pmax(wins + losses, 1),
-        record = make_record(wins, losses)
-      )
-
-    recent <- recent_data |>
-      group_by(manager) |>
-      summarise(
-        recent_avg = mean(points_for, na.rm = TRUE),
-        .groups = "drop"
-      )
-
-    ranked <- base |>
-      left_join(recent, by = "manager") |>
-      mutate(
-        recent_avg = if_else(is.na(recent_avg), avg_score, recent_avg),
-        win_pct_score = dplyr::percent_rank(win_pct) * 100,
-        recent_score = dplyr::percent_rank(recent_avg) * 100,
-        season_score = dplyr::percent_rank(avg_score) * 100,
-        win_pct_score = if_else(is.na(win_pct_score), 50, win_pct_score),
-        recent_score = if_else(is.na(recent_score), 50, recent_score),
-        season_score = if_else(is.na(season_score), 50, season_score),
-        power_score = 0.50 * win_pct_score + 0.30 * recent_score + 0.20 * season_score
-      ) |>
-      arrange(desc(power_score), desc(points_for)) |>
-      mutate(rank = row_number())
-
-    ranked
+    home_dashboard$power_rankings
   })
 
   observeEvent(input$power_rankings_toggle, {
@@ -3798,10 +3656,6 @@ server <- function(input, output, session) {
 
   output$power_rankings_table <- renderDT({
     ranking_data <- power_rankings() |>
-      arrange(desc(power_score), desc(points_for)) |>
-      mutate(
-        team_name = mapply(resolve_team_name_one, manager, dashboard_year(), USE.NAMES = FALSE)
-      ) |>
       transmute(
         `Team Name` = team_name,
         Record = record,
@@ -3809,7 +3663,6 @@ server <- function(input, output, session) {
         `Last 3 Avg` = round(recent_avg, 2),
         `Power Score` = round(power_score, 1)
       )
-
     displayed_rankings <- if (show_all_power_rankings()) {
       ranking_data
     } else {
@@ -3825,42 +3678,8 @@ server <- function(input, output, session) {
   })
 
   league_analytics <- reactive({
-    current_year <- dashboard_year()
-    current_week <- dashboard_week()
-
-    expected_scope <- weekly_expected_wins |>
-      filter(
-        year == current_year,
-        week <= current_week
-      )
-
-    lineup_scope <- weekly_lineup_analytics |>
-      filter(
-        year == current_year,
-        week <= current_week
-      )
-
-    aggregate_fantasy_analytics(
-      expected_scope = expected_scope,
-      lineup_scope = lineup_scope
-    ) |>
-      mutate(
-        team_name = mapply(
-          resolve_team_name_one,
-          manager,
-          current_year,
-          current_week,
-          USE.NAMES = FALSE
-        )
-      ) |>
-      arrange(
-        desc(expected_wins),
-        desc(lineup_efficiency),
-        desc(pp_points_per_week),
-        team_name
-      )
+    home_dashboard$league_analytics
   })
-
   observeEvent(input$league_analytics_toggle, {
     show_all_league_analytics(!show_all_league_analytics())
     updateActionButton(

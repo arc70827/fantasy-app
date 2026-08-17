@@ -43,7 +43,7 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          use-public-rspm: true
+          use-public-rspm: false
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -67,6 +67,7 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
           DATA_DIR: data
         run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
           source("scripts/update_weekly.R")
 
       - name: Check whether production data changed
@@ -89,43 +90,56 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
         run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
           source("scripts/build_app_cache.R")
 
       - name: Validate prepared Shiny cache
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
         run: |
-          cache_path <- "data/app_cache.rds"
+          cache_path <- file.path("data", "app_cache.rds")
 
           if (!file.exists(cache_path)) {
-            stop("Prepared app cache was not created.")
+            stop("Cache was not created: ", cache_path, call. = FALSE)
           }
 
           cache <- readRDS(cache_path)
 
           required <- c(
-            "cache_schema_version",
             "matchups",
             "players",
             "team_names",
+            "regular_season_matchups",
+            "regular_season_players",
+            "years",
+            "managers",
+            "all_teams",
+            "all_positions",
+            "all_slots",
+            "latest_year",
+            "latest_week",
+            "pair_games",
+            "manager_finishes",
+            "playoff_years",
+            "latest_playoff_year",
             "weekly_expected_wins",
             "weekly_lineup_analytics",
             "season_fantasy_analytics",
-            "career_fantasy_analytics"
+            "career_fantasy_analytics",
+            "win_streaks"
           )
 
           missing <- setdiff(required, names(cache))
 
           if (length(missing) > 0) {
             stop(
-              "Prepared app cache is missing: ",
-              paste(missing, collapse = ", ")
+              "Cache is missing required objects: ",
+              paste(missing, collapse = ", "),
+              call. = FALSE
             )
           }
 
-          message(
-            "Prepared app cache validated successfully."
-          )
+          message("Prepared cache validated successfully.")
 
       - name: Commit updated CSV files
         if: steps.changes.outputs.changed == 'true'
@@ -142,9 +156,8 @@ jobs:
           git commit -m "Update fantasy data"
           git push origin HEAD:main
 
-      # A push made with GITHUB_TOKEN does not normally trigger
-      # another workflow. Deploy here instead of relying on the
-      # existing deploy-shiny.yml workflow to start afterward.
+      # A push made with GITHUB_TOKEN does not normally trigger another workflow.
+      # Deploy here using the cache that was built above.
       - name: Deploy updated Shiny app
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
@@ -154,6 +167,8 @@ jobs:
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
           SHINYAPPS_APP_NAME: ${{ secrets.SHINYAPPS_APP_NAME }}
         run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
+
           rsconnect::setAccountInfo(
             name = Sys.getenv("SHINYAPPS_ACCOUNT"),
             token = Sys.getenv("SHINYAPPS_TOKEN"),

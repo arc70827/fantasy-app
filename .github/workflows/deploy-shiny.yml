@@ -3,7 +3,7 @@ name: Deploy Shiny app
 on:
   push:
     branches:
-      main
+      - main
   workflow_dispatch:
 
 jobs:
@@ -17,7 +17,7 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          use-public-rspm: true
+          use-public-rspm: false
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -28,69 +28,61 @@ jobs:
             any::progress
           cache-version: 4
 
-      - name: Verify deployment packages
-        shell: Rscript {0}
-        run: |
-          required <- c(
-            "rsconnect",
-            "cpp11",
-            "progress"
-          )
-
-          missing <- required[
-            !vapply(
-              required,
-              requireNamespace,
-              logical(1),
-              quietly = TRUE
-            )
-          ]
-
-          if (length(missing) > 0) {
-            install.packages(
-              missing,
-              repos = "https://cloud.r-project.org"
-            )
-          }
-
       - name: Build prepared Shiny cache
         shell: Rscript {0}
         run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
           source("scripts/build_app_cache.R")
 
       - name: Validate prepared Shiny cache
         shell: Rscript {0}
         run: |
-          cache_path <- "data/app_cache.rds"
+          cache_path <- file.path("data", "app_cache.rds")
 
           if (!file.exists(cache_path)) {
-            stop("Prepared app cache was not created.")
+            stop("Cache was not created: ", cache_path, call. = FALSE)
           }
 
           cache <- readRDS(cache_path)
 
           required <- c(
-            "cache_schema_version",
             "matchups",
             "players",
             "team_names",
+            "regular_season_matchups",
+            "regular_season_players",
+            "years",
+            "managers",
+            "all_teams",
+            "all_positions",
+            "all_slots",
+            "latest_year",
+            "latest_week",
+            "pair_games",
+            "manager_finishes",
+            "playoff_years",
+            "latest_playoff_year",
             "weekly_expected_wins",
             "weekly_lineup_analytics",
             "season_fantasy_analytics",
-            "career_fantasy_analytics"
+            "career_fantasy_analytics",
+            "win_streaks"
           )
 
           missing <- setdiff(required, names(cache))
 
           if (length(missing) > 0) {
             stop(
-              "Prepared app cache is missing: ",
-              paste(missing, collapse = ", ")
+              "Cache is missing required objects: ",
+              paste(missing, collapse = ", "),
+              call. = FALSE
             )
           }
 
           message(
-            "Prepared app cache validated successfully."
+            "Prepared cache validated successfully. Size: ",
+            round(file.info(cache_path)$size / 1024^2, 2),
+            " MB"
           )
 
       - name: Deploy to shinyapps.io
@@ -101,6 +93,8 @@ jobs:
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
           SHINYAPPS_APP_NAME: ${{ secrets.SHINYAPPS_APP_NAME }}
         run: |
+          options(repos = c(CRAN = "https://cloud.r-project.org"))
+
           rsconnect::setAccountInfo(
             name = Sys.getenv("SHINYAPPS_ACCOUNT"),
             token = Sys.getenv("SHINYAPPS_TOKEN"),

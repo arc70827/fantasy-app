@@ -53,6 +53,7 @@ jobs:
             any::httr2
             any::jsonlite
             any::rsconnect
+            any::cpp11
           cache-version: 8
 
       - name: Run weekly ESPN updater

@@ -24,34 +24,7 @@ jobs:
         with:
           extra-packages: |
             any::rsconnect
-            any::cpp11
-            any::progress
-          cache-version: 6
-
-      - name: Verify deployment packages
-        shell: Rscript {0}
-        run: |
-          required <- c(
-            "rsconnect",
-            "cpp11",
-            "progress"
-          )
-
-          missing <- required[
-            !vapply(
-              required,
-              requireNamespace,
-              logical(1),
-              quietly = TRUE
-            )
-          ]
-
-          if (length(missing) > 0) {
-            install.packages(
-              missing,
-              repos = "https://cloud.r-project.org"
-            )
-          }
+          cache-version: 7
 
       - name: Build prepared Shiny cache
         shell: Rscript {0}
@@ -98,17 +71,27 @@ jobs:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
           SHINYAPPS_APP_NAME: ${{ secrets.SHINYAPPS_APP_NAME }}
-          RSCONNECT_PACKRAT: "true"
         run: |
-          options(
-            repos = c(CRAN = "https://cloud.r-project.org")
+          www_files <- if (dir.exists("www")) {
+            list.files(
+              "www",
+              recursive = TRUE,
+              full.names = TRUE,
+              all.files = TRUE,
+              no.. = TRUE
+            )
+          } else {
+            character()
+          }
+
+          app_files <- c(
+            "app.R",
+            "data/app_cache.rds",
+            www_files
           )
 
-          message(
-            "Deploying with rsconnect ",
-            as.character(packageVersion("rsconnect")),
-            " using legacy Packrat dependency capture."
-          )
+          message("Files being deployed:")
+          message(paste(app_files, collapse = "\n"))
 
           rsconnect::setAccountInfo(
             name = Sys.getenv("SHINYAPPS_ACCOUNT"),
@@ -118,6 +101,9 @@ jobs:
 
           rsconnect::deployApp(
             appDir = ".",
+            appFiles = app_files,
+            appMode = "shiny",
+            dependencyResolution = "library",
             appName = Sys.getenv("SHINYAPPS_APP_NAME"),
             account = Sys.getenv("SHINYAPPS_ACCOUNT"),
             server = "shinyapps.io",

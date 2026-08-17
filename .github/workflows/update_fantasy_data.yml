@@ -53,9 +53,7 @@ jobs:
             any::httr2
             any::jsonlite
             any::rsconnect
-            any::cpp11
-            any::progress
-          cache-version: 6
+          cache-version: 7
 
       - name: Run weekly ESPN updater
         shell: Rscript {0}
@@ -134,9 +132,6 @@ jobs:
           git commit -m "Update fantasy data"
           git push origin HEAD:main
 
-      # A push made with GITHUB_TOKEN does not normally trigger
-      # another workflow. Deploy here instead of relying on the
-      # deploy-shiny.yml workflow to start afterward.
       - name: Deploy updated Shiny app
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
@@ -145,17 +140,27 @@ jobs:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
           SHINYAPPS_APP_NAME: ${{ secrets.SHINYAPPS_APP_NAME }}
-          RSCONNECT_PACKRAT: "true"
         run: |
-          options(
-            repos = c(CRAN = "https://cloud.r-project.org")
+          www_files <- if (dir.exists("www")) {
+            list.files(
+              "www",
+              recursive = TRUE,
+              full.names = TRUE,
+              all.files = TRUE,
+              no.. = TRUE
+            )
+          } else {
+            character()
+          }
+
+          app_files <- c(
+            "app.R",
+            "data/app_cache.rds",
+            www_files
           )
 
-          message(
-            "Deploying with rsconnect ",
-            as.character(packageVersion("rsconnect")),
-            " using legacy Packrat dependency capture."
-          )
+          message("Files being deployed:")
+          message(paste(app_files, collapse = "\n"))
 
           rsconnect::setAccountInfo(
             name = Sys.getenv("SHINYAPPS_ACCOUNT"),
@@ -165,6 +170,9 @@ jobs:
 
           rsconnect::deployApp(
             appDir = ".",
+            appFiles = app_files,
+            appMode = "shiny",
+            dependencyResolution = "library",
             appName = Sys.getenv("SHINYAPPS_APP_NAME"),
             account = Sys.getenv("SHINYAPPS_ACCOUNT"),
             server = "shinyapps.io",

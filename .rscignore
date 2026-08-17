@@ -1,5 +1,6 @@
 ^\.git$
 ^\.github$
+^\.gitignore$
 ^\.Rproj\.user$
 ^\.vscode$
 ^\.Renviron$
@@ -11,3 +12,7 @@
 ^rsconnect$
 ^scripts$
 ^data_weekly_test$
+^data/fantasy_matchup_data\.csv$
+^data/fantasy_player_data\.csv$
+^data/fantasy_manager_data\.csv$
+^app\.R\.before_cache_architecture$

@@ -55,7 +55,7 @@ jobs:
             any::rsconnect
             any::cpp11
             any::progress
-          cache-version: 4
+          cache-version: 5
 
       - name: Run weekly ESPN updater
         shell: Rscript {0}
@@ -84,6 +84,48 @@ jobs:
             echo "changed=true" >> "$GITHUB_OUTPUT"
             echo "Production CSV changes detected."
           fi
+
+      - name: Build prepared Shiny cache
+        if: steps.changes.outputs.changed == 'true'
+        shell: Rscript {0}
+        run: |
+          source("scripts/build_app_cache.R")
+
+      - name: Validate prepared Shiny cache
+        if: steps.changes.outputs.changed == 'true'
+        shell: Rscript {0}
+        run: |
+          cache_path <- "data/app_cache.rds"
+
+          if (!file.exists(cache_path)) {
+            stop("Prepared app cache was not created.")
+          }
+
+          cache <- readRDS(cache_path)
+
+          required <- c(
+            "cache_schema_version",
+            "matchups",
+            "players",
+            "team_names",
+            "weekly_expected_wins",
+            "weekly_lineup_analytics",
+            "season_fantasy_analytics",
+            "career_fantasy_analytics"
+          )
+
+          missing <- setdiff(required, names(cache))
+
+          if (length(missing) > 0) {
+            stop(
+              "Prepared app cache is missing: ",
+              paste(missing, collapse = ", ")
+            )
+          }
+
+          message(
+            "Prepared app cache validated successfully."
+          )
 
       - name: Commit updated CSV files
         if: steps.changes.outputs.changed == 'true'

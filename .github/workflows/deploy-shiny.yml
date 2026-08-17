@@ -26,14 +26,24 @@ jobs:
             any::rsconnect
             any::cpp11
             any::progress
-          cache-version: 3
+          cache-version: 4
 
       - name: Verify deployment packages
         shell: Rscript {0}
         run: |
-          required <- c("rsconnect", "cpp11", "progress")
+          required <- c(
+            "rsconnect",
+            "cpp11",
+            "progress"
+          )
+
           missing <- required[
-            !vapply(required, requireNamespace, logical(1), quietly = TRUE)
+            !vapply(
+              required,
+              requireNamespace,
+              logical(1),
+              quietly = TRUE
+            )
           ]
 
           if (length(missing) > 0) {
@@ -42,6 +52,46 @@ jobs:
               repos = "https://cloud.r-project.org"
             )
           }
+
+      - name: Build prepared Shiny cache
+        shell: Rscript {0}
+        run: |
+          source("scripts/build_app_cache.R")
+
+      - name: Validate prepared Shiny cache
+        shell: Rscript {0}
+        run: |
+          cache_path <- "data/app_cache.rds"
+
+          if (!file.exists(cache_path)) {
+            stop("Prepared app cache was not created.")
+          }
+
+          cache <- readRDS(cache_path)
+
+          required <- c(
+            "cache_schema_version",
+            "matchups",
+            "players",
+            "team_names",
+            "weekly_expected_wins",
+            "weekly_lineup_analytics",
+            "season_fantasy_analytics",
+            "career_fantasy_analytics"
+          )
+
+          missing <- setdiff(required, names(cache))
+
+          if (length(missing) > 0) {
+            stop(
+              "Prepared app cache is missing: ",
+              paste(missing, collapse = ", ")
+            )
+          }
+
+          message(
+            "Prepared app cache validated successfully."
+          )
 
       - name: Deploy to shinyapps.io
         shell: Rscript {0}

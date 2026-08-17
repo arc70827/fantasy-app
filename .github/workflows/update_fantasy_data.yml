@@ -43,7 +43,7 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
         with:
-          use-public-rspm: false
+          use-public-rspm: true
 
       - name: Install R dependencies
         uses: r-lib/actions/setup-r-dependencies@v2
@@ -55,7 +55,7 @@ jobs:
             any::rsconnect
             any::cpp11
             any::progress
-          cache-version: 5
+          cache-version: 6
 
       - name: Run weekly ESPN updater
         shell: Rscript {0}
@@ -67,17 +67,13 @@ jobs:
           DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
           DATA_DIR: data
         run: |
-          options(repos = c(CRAN = "https://cloud.r-project.org"))
           source("scripts/update_weekly.R")
 
       - name: Check whether production data changed
         id: changes
         shell: bash
         run: |
-          if git diff --quiet -- \
-            data/fantasy_matchup_data.csv \
-            data/fantasy_player_data.csv \
-            data/fantasy_manager_data.csv
+          if git diff --quiet --             data/fantasy_matchup_data.csv             data/fantasy_player_data.csv             data/fantasy_manager_data.csv
           then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             echo "No production CSV changes detected."
@@ -90,56 +86,41 @@ jobs:
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
         run: |
-          options(repos = c(CRAN = "https://cloud.r-project.org"))
           source("scripts/build_app_cache.R")
 
       - name: Validate prepared Shiny cache
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
         run: |
-          cache_path <- file.path("data", "app_cache.rds")
+          cache_path <- "data/app_cache.rds"
 
           if (!file.exists(cache_path)) {
-            stop("Cache was not created: ", cache_path, call. = FALSE)
+            stop("Prepared app cache was not created.")
           }
 
           cache <- readRDS(cache_path)
 
           required <- c(
+            "cache_schema_version",
             "matchups",
             "players",
             "team_names",
-            "regular_season_matchups",
-            "regular_season_players",
-            "years",
-            "managers",
-            "all_teams",
-            "all_positions",
-            "all_slots",
-            "latest_year",
-            "latest_week",
-            "pair_games",
-            "manager_finishes",
-            "playoff_years",
-            "latest_playoff_year",
             "weekly_expected_wins",
             "weekly_lineup_analytics",
             "season_fantasy_analytics",
-            "career_fantasy_analytics",
-            "win_streaks"
+            "career_fantasy_analytics"
           )
 
           missing <- setdiff(required, names(cache))
 
           if (length(missing) > 0) {
             stop(
-              "Cache is missing required objects: ",
-              paste(missing, collapse = ", "),
-              call. = FALSE
+              "Prepared app cache is missing: ",
+              paste(missing, collapse = ", ")
             )
           }
 
-          message("Prepared cache validated successfully.")
+          message("Prepared app cache validated successfully.")
 
       - name: Commit updated CSV files
         if: steps.changes.outputs.changed == 'true'
@@ -148,16 +129,14 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add \
-            data/fantasy_matchup_data.csv \
-            data/fantasy_player_data.csv \
-            data/fantasy_manager_data.csv
+          git add             data/fantasy_matchup_data.csv             data/fantasy_player_data.csv             data/fantasy_manager_data.csv
 
           git commit -m "Update fantasy data"
           git push origin HEAD:main
 
-      # A push made with GITHUB_TOKEN does not normally trigger another workflow.
-      # Deploy here using the cache that was built above.
+      # A push made with GITHUB_TOKEN does not normally trigger
+      # another workflow. Deploy here instead of relying on the
+      # deploy-shiny.yml workflow to start afterward.
       - name: Deploy updated Shiny app
         if: steps.changes.outputs.changed == 'true'
         shell: Rscript {0}
@@ -166,8 +145,17 @@ jobs:
           SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
           SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
           SHINYAPPS_APP_NAME: ${{ secrets.SHINYAPPS_APP_NAME }}
+          RSCONNECT_PACKRAT: "true"
         run: |
-          options(repos = c(CRAN = "https://cloud.r-project.org"))
+          options(
+            repos = c(CRAN = "https://cloud.r-project.org")
+          )
+
+          message(
+            "Deploying with rsconnect ",
+            as.character(packageVersion("rsconnect")),
+            " using legacy Packrat dependency capture."
+          )
 
           rsconnect::setAccountInfo(
             name = Sys.getenv("SHINYAPPS_ACCOUNT"),

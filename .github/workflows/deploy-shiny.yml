@@ -24,7 +24,8 @@ jobs:
         with:
           extra-packages: |
             any::rsconnect
-          cache-version: 7
+            any::cpp11
+          cache-version: 8
 
       - name: Build prepared Shiny cache
         shell: Rscript {0}

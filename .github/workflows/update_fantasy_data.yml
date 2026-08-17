@@ -53,7 +53,7 @@ jobs:
             any::httr2
             any::jsonlite
             any::rsconnect
-          cache-version: 7
+          cache-version: 8
 
       - name: Run weekly ESPN updater
         shell: Rscript {0}

@@ -80,6 +80,7 @@ parse_espn_moves <- function(json_path, season) {
         gaining_team = gaining,
         losing_team = losing,
         player_id = as.integer(msg$targetId),
+        author = if (is.null(msg$author)) NA_character_ else msg$author,
         stringsAsFactors = FALSE
       )
     }

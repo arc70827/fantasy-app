@@ -47,8 +47,8 @@ app_mode <- "public"
 is_staging <- identical(app_mode, "staging")
 
 feature_flags <- list(
-  # Example entry for new work:
-  # trades = list(public = FALSE, staging = TRUE)
+  # Trades are in testing: visible in staging only.
+  trades = list(public = FALSE, staging = TRUE)
 )
 
 feature_enabled <- function(feature) {
@@ -465,6 +465,7 @@ season_fantasy_analytics <- app_cache$season_fantasy_analytics
 career_fantasy_analytics <- app_cache$career_fantasy_analytics
 win_streaks <- app_cache$win_streaks
 home_dashboard <- app_cache$home_dashboard
+trade_moves <- app_cache$trade_moves
 
 rm(app_cache)
 
@@ -889,6 +890,23 @@ card <- function(title, value, subtitle = NULL, class = "accent-blue") {
     div(class = "metric-title", title),
     div(class = "metric-value", value),
     if (!is.null(subtitle)) div(class = "metric-subtitle", subtitle)
+  )
+}
+
+# Trades tab: included only when the trades feature is enabled.
+trades_tab <- if (feature_enabled("trades")) {
+  tabPanel(
+    "Trades",
+    value = "Trades",
+    div(
+      class = "page-wrap",
+      h2("Trades"),
+      p(
+        class = "text-muted",
+        "Every player trade and forced drop recorded this season, from ESPN."
+      ),
+      DTOutput("trade_table")
+    )
   )
 }
 
@@ -3025,6 +3043,8 @@ ui <- navbarPage(
     span(class = "app-loading-label", "Loading Fantasy League Hub")
   ),
 
+  trades_tab,
+
   tabPanel(
     "Home",
     value = "Dashboard",
@@ -3228,6 +3248,34 @@ ui <- navbarPage(
 # ---- Server ----
 
 server <- function(input, output, session) {
+
+  output$trade_table <- renderDT({
+    req(feature_enabled("trades"))
+
+    if (nrow(trade_moves) == 0) {
+      return(datatable_simple(
+        data.frame(Message = "No trades have been recorded yet."),
+        page_length = 5
+      ))
+    }
+
+    trade_table_data <- trade_moves |>
+      mutate(
+        Date = format(as.Date(trade_date), "%b %d, %Y"),
+        Move = recode(
+          move,
+          traded = "Traded",
+          dropped_after_trade = "Dropped after trade"
+        ),
+        Player = player_name,
+        From = coalesce(from_manager, "Waivers"),
+        To = coalesce(to_manager, "Waivers")
+      ) |>
+      arrange(desc(trade_date), desc(timestamp)) |>
+      select(Date, Move, Player, From, To)
+
+    datatable_simple(trade_table_data, page_length = 25)
+  })
 
   show_all_power_rankings <- reactiveVal(FALSE)
   show_all_league_analytics <- reactiveVal(FALSE)

@@ -1199,6 +1199,16 @@ home_dashboard <- list(
   league_analytics = home_league_analytics
 )
 
+# Trade moves come from scripts/build_trade_data.R. The app shows them
+# only when the trades feature is enabled, so an empty table is fine here.
+trade_moves_path <- file.path("data", "fantasy_trade_data.csv")
+
+trade_moves <- if (file.exists(trade_moves_path)) {
+  readr::read_csv(trade_moves_path, show_col_types = FALSE)
+} else {
+  tibble::tibble()
+}
+
 app_cache <- list(
   cache_schema_version = cache_schema_version,
   generated_at_utc = format(
@@ -1227,7 +1237,8 @@ app_cache <- list(
   season_fantasy_analytics = season_fantasy_analytics,
   career_fantasy_analytics = career_fantasy_analytics,
   win_streaks = win_streaks,
-  home_dashboard = home_dashboard
+  home_dashboard = home_dashboard,
+  trade_moves = trade_moves
 )
 
 required_cache_objects <- c(

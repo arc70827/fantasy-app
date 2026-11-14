@@ -1,0 +1,135 @@
+season,trade_id,trade_date,timestamp,move,player_id,player_name,from_team,from_manager,to_team,to_manager
+2026,5a63724f-ce09-4a35-a750-e32cc76af49d,2026-08-25,2026-08-25 15:56:03,traded,4882093,Bhayshul Tuten,8,Aidan Shamas,11,Anthony Perrotti
+2026,5a63724f-ce09-4a35-a750-e32cc76af49d,2026-08-25,2026-08-25 15:56:03,traded,4361370,Chris Olave,8,Aidan Shamas,11,Anthony Perrotti
+2026,5a63724f-ce09-4a35-a750-e32cc76af49d,2026-08-25,2026-08-25 15:56:03,traded,4426502,Drake London,11,Anthony Perrotti,8,Aidan Shamas
+2026,5a63724f-ce09-4a35-a750-e32cc76af49d,2026-08-25,2026-08-25 15:56:03,traded,4568490,RJ Harvey,11,Anthony Perrotti,8,Aidan Shamas
+2026,3703891a-30d9-47d8-89fe-5b50eb4febce,2026-08-31,2026-08-31 14:13:01,traded,3128429,Courtland Sutton,11,Anthony Perrotti,14,Dylan Torre
+2026,3703891a-30d9-47d8-89fe-5b50eb4febce,2026-08-31,2026-08-31 14:13:01,traded,4432620,Parker Washington,14,Dylan Torre,11,Anthony Perrotti
+2026,fe3be332-aac6-448c-a0fc-f9e0f7d0c219,2026-08-31,2026-08-31 14:13:03,traded,4047365,Josh Jacobs,14,Dylan Torre,8,Aidan Shamas
+2026,fe3be332-aac6-448c-a0fc-f9e0f7d0c219,2026-08-31,2026-08-31 14:13:03,traded,3916148,Tony Pollard,8,Aidan Shamas,14,Dylan Torre
+2026,3f499a29-a605-4259-9e06-fdb75ccbf64a,2026-08-31,2026-08-31 16:34:04,traded,4890973,Ashton Jeanty,11,Anthony Perrotti,1,Justin Acquarulo
+2026,3f499a29-a605-4259-9e06-fdb75ccbf64a,2026-08-31,2026-08-31 16:34:04,traded,4685247,Braelon Allen,1,Justin Acquarulo,11,Anthony Perrotti
+2026,3f499a29-a605-4259-9e06-fdb75ccbf64a,2026-08-31,2026-08-31 16:34:04,traded,4432620,Parker Washington,11,Anthony Perrotti,1,Justin Acquarulo
+2026,3f499a29-a605-4259-9e06-fdb75ccbf64a,2026-08-31,2026-08-31 16:34:04,traded,3929630,Saquon Barkley,1,Justin Acquarulo,11,Anthony Perrotti
+2026,74195cf5-650b-495f-bda2-9907847a61cc,2026-08-31,2026-08-31 17:31:47,dropped_after_trade,5081432,Antonio Williams,2,Dylan Sachs,NA,NA
+2026,74195cf5-650b-495f-bda2-9907847a61cc,2026-08-31,2026-08-31 17:31:47,traded,4685512,Jadarian Price,2,Dylan Sachs,8,Aidan Shamas
+2026,74195cf5-650b-495f-bda2-9907847a61cc,2026-08-31,2026-08-31 17:31:47,traded,4047365,Josh Jacobs,8,Aidan Shamas,2,Dylan Sachs
+2026,74195cf5-650b-495f-bda2-9907847a61cc,2026-08-31,2026-08-31 17:31:47,traded,4371733,Kenny Gainwell,2,Dylan Sachs,8,Aidan Shamas
+2026,74195cf5-650b-495f-bda2-9907847a61cc,2026-08-31,2026-08-31 17:31:47,traded,4429023,MarShawn Lloyd,8,Aidan Shamas,2,Dylan Sachs
+2026,74195cf5-650b-495f-bda2-9907847a61cc,2026-08-31,2026-08-31 17:31:47,traded,4429013,Tank Bigsby,8,Aidan Shamas,2,Dylan Sachs
+2026,5bc6ee9d-f485-48ff-a3d3-761f8bec4c36,2026-08-31,2026-08-31 17:45:21,traded,4890973,Ashton Jeanty,1,Justin Acquarulo,8,Aidan Shamas
+2026,5bc6ee9d-f485-48ff-a3d3-761f8bec4c36,2026-08-31,2026-08-31 17:45:21,traded,3126486,Deebo Samuel Sr.,1,Justin Acquarulo,8,Aidan Shamas
+2026,5bc6ee9d-f485-48ff-a3d3-761f8bec4c36,2026-08-31,2026-08-31 17:45:21,traded,4430878,Jaxon Smith-Njigba,8,Aidan Shamas,1,Justin Acquarulo
+2026,5bc6ee9d-f485-48ff-a3d3-761f8bec4c36,2026-08-31,2026-08-31 17:45:21,traded,4372016,Jaylen Waddle,1,Justin Acquarulo,8,Aidan Shamas
+2026,5bc6ee9d-f485-48ff-a3d3-761f8bec4c36,2026-08-31,2026-08-31 17:45:21,traded,4360761,Michael Wilson,8,Aidan Shamas,1,Justin Acquarulo
+2026,5bc6ee9d-f485-48ff-a3d3-761f8bec4c36,2026-08-31,2026-08-31 17:45:21,traded,4568490,RJ Harvey,8,Aidan Shamas,1,Justin Acquarulo
+2026,287f0977-6475-4f3d-8960-fbcc10af57c6,2026-08-31,2026-08-31 19:54:53,traded,3116165,Chris Godwin Jr.,11,Anthony Perrotti,8,Aidan Shamas
+2026,287f0977-6475-4f3d-8960-fbcc10af57c6,2026-08-31,2026-08-31 19:54:53,traded,3126486,Deebo Samuel Sr.,8,Aidan Shamas,11,Anthony Perrotti
+2026,287f0977-6475-4f3d-8960-fbcc10af57c6,2026-08-31,2026-08-31 19:54:53,dropped_after_trade,4819231,Kaleb Johnson,11,Anthony Perrotti,NA,NA
+2026,287f0977-6475-4f3d-8960-fbcc10af57c6,2026-08-31,2026-08-31 19:54:53,traded,4371733,Kenny Gainwell,8,Aidan Shamas,11,Anthony Perrotti
+2026,40c12f14-e4df-49ec-ab8d-f1a675f9b0ce,2026-09-03,2026-09-02 21:51:20,traded,4361370,Chris Olave,11,Anthony Perrotti,1,Justin Acquarulo
+2026,40c12f14-e4df-49ec-ab8d-f1a675f9b0ce,2026-09-03,2026-09-02 21:51:20,traded,4430878,Jaxon Smith-Njigba,1,Justin Acquarulo,11,Anthony Perrotti
+2026,40c12f14-e4df-49ec-ab8d-f1a675f9b0ce,2026-09-03,2026-09-02 21:51:20,traded,4696044,Kaelon Black,11,Anthony Perrotti,1,Justin Acquarulo
+2026,40c12f14-e4df-49ec-ab8d-f1a675f9b0ce,2026-09-03,2026-09-02 21:51:20,traded,4685278,Luther Burden III,1,Justin Acquarulo,11,Anthony Perrotti
+2026,40c12f14-e4df-49ec-ab8d-f1a675f9b0ce,2026-09-03,2026-09-02 21:51:20,traded,4568490,RJ Harvey,1,Justin Acquarulo,11,Anthony Perrotti
+2026,40c12f14-e4df-49ec-ab8d-f1a675f9b0ce,2026-09-03,2026-09-02 21:51:20,traded,3929630,Saquon Barkley,11,Anthony Perrotti,1,Justin Acquarulo
+2026,2ad28d50-e28d-46ac-91a9-ef477d4a4e4f,2026-09-23,2026-09-23 19:49:34,traded,4362238,Chase Brown,13,Mike Bonfiglio,11,Anthony Perrotti
+2026,2ad28d50-e28d-46ac-91a9-ef477d4a4e4f,2026-09-23,2026-09-23 19:49:34,traded,4259545,D'Andre Swift,11,Anthony Perrotti,13,Mike Bonfiglio
+2026,2ad28d50-e28d-46ac-91a9-ef477d4a4e4f,2026-09-23,2026-09-23 19:49:34,dropped_after_trade,4697815,Rachaad White,13,Mike Bonfiglio,NA,NA
+2026,2ad28d50-e28d-46ac-91a9-ef477d4a4e4f,2026-09-23,2026-09-23 19:49:34,traded,4429059,Woody Marks,11,Anthony Perrotti,13,Mike Bonfiglio
+2026,e97d2308-eb71-4d54-a31e-2a94a7e0a33b,2026-09-26,2026-09-26 16:06:12,traded,4259545,D'Andre Swift,13,Mike Bonfiglio,1,Justin Acquarulo
+2026,e97d2308-eb71-4d54-a31e-2a94a7e0a33b,2026-09-26,2026-09-26 16:06:12,traded,4047650,DK Metcalf,13,Mike Bonfiglio,1,Justin Acquarulo
+2026,e97d2308-eb71-4d54-a31e-2a94a7e0a33b,2026-09-26,2026-09-26 16:06:12,traded,4426354,George Pickens,1,Justin Acquarulo,13,Mike Bonfiglio
+2026,e97d2308-eb71-4d54-a31e-2a94a7e0a33b,2026-09-26,2026-09-26 16:06:12,traded,4360761,Michael Wilson,1,Justin Acquarulo,13,Mike Bonfiglio
+2026,e97d2308-eb71-4d54-a31e-2a94a7e0a33b,2026-09-26,2026-09-26 16:06:12,traded,4426515,Puka Nacua,13,Mike Bonfiglio,1,Justin Acquarulo
+2026,e97d2308-eb71-4d54-a31e-2a94a7e0a33b,2026-09-26,2026-09-26 16:06:12,traded,3929630,Saquon Barkley,1,Justin Acquarulo,13,Mike Bonfiglio
+2026,ee447148-e49f-4d53-ab11-8d8763b67543,2026-09-30,2026-09-30 13:51:17,traded,4426502,Drake London,8,Aidan Shamas,13,Mike Bonfiglio
+2026,ee447148-e49f-4d53-ab11-8d8763b67543,2026-09-30,2026-09-30 13:51:17,traded,4569618,Garrett Wilson,13,Mike Bonfiglio,8,Aidan Shamas
+2026,ee447148-e49f-4d53-ab11-8d8763b67543,2026-09-30,2026-09-30 13:51:17,traded,4426354,George Pickens,13,Mike Bonfiglio,8,Aidan Shamas
+2026,ee447148-e49f-4d53-ab11-8d8763b67543,2026-09-30,2026-09-30 13:51:17,traded,4685512,Jadarian Price,8,Aidan Shamas,13,Mike Bonfiglio
+2026,2c353714-0f86-49ed-9ed7-8b1e96dae55d,2026-10-01,2026-10-01 12:45:43,traded,4374302,Amon-Ra St. Brown,10,Nate Chieffo,11,Anthony Perrotti
+2026,2c353714-0f86-49ed-9ed7-8b1e96dae55d,2026-10-01,2026-10-01 12:45:43,traded,3915416,DJ Moore,10,Nate Chieffo,11,Anthony Perrotti
+2026,2c353714-0f86-49ed-9ed7-8b1e96dae55d,2026-10-01,2026-10-01 12:45:43,traded,4035538,David Montgomery,10,Nate Chieffo,11,Anthony Perrotti
+2026,2c353714-0f86-49ed-9ed7-8b1e96dae55d,2026-10-01,2026-10-01 12:45:43,traded,4430878,Jaxon Smith-Njigba,11,Anthony Perrotti,10,Nate Chieffo
+2026,2c353714-0f86-49ed-9ed7-8b1e96dae55d,2026-10-01,2026-10-01 12:45:43,traded,4685278,Luther Burden III,11,Anthony Perrotti,10,Nate Chieffo
+2026,2c353714-0f86-49ed-9ed7-8b1e96dae55d,2026-10-01,2026-10-01 12:45:43,dropped_after_trade,4429013,Tank Bigsby,11,Anthony Perrotti,NA,NA
+2026,2dbb52e5-8056-4c18-8fcc-acf5a10b3273,2026-10-01,2026-10-01 18:05:48,traded,4890973,Ashton Jeanty,8,Aidan Shamas,5,Rob Miller
+2026,2dbb52e5-8056-4c18-8fcc-acf5a10b3273,2026-10-01,2026-10-01 18:05:48,traded,3117256,Dalton Schultz,5,Rob Miller,8,Aidan Shamas
+2026,2dbb52e5-8056-4c18-8fcc-acf5a10b3273,2026-10-01,2026-10-01 18:05:48,traded,4379399,James Cook III,5,Rob Miller,8,Aidan Shamas
+2026,2dbb52e5-8056-4c18-8fcc-acf5a10b3273,2026-10-01,2026-10-01 18:05:48,traded,4036133,T.J. Hockenson,8,Aidan Shamas,5,Rob Miller
+2026,02a9c4e0-6cf6-4ccd-acc5-a2a751495820,2026-10-06,2026-10-06 13:38:44,traded,3116365,Mark Andrews,9,Adam Chasse,13,Mike Bonfiglio
+2026,02a9c4e0-6cf6-4ccd-acc5-a2a751495820,2026-10-06,2026-10-06 13:38:44,traded,4429059,Woody Marks,13,Mike Bonfiglio,9,Adam Chasse
+2026,394e0ae7-25f7-4292-904f-99d4ce7e6db1,2026-10-15,2026-10-15 09:05:50,traded,4685261,Germie Bernard,11,Anthony Perrotti,8,Aidan Shamas
+2026,394e0ae7-25f7-4292-904f-99d4ce7e6db1,2026-10-15,2026-10-15 09:05:50,traded,3916433,Jakobi Meyers,8,Aidan Shamas,11,Anthony Perrotti
+2026,394e0ae7-25f7-4292-904f-99d4ce7e6db1,2026-10-15,2026-10-15 09:05:50,traded,4372016,Jaylen Waddle,8,Aidan Shamas,11,Anthony Perrotti
+2026,394e0ae7-25f7-4292-904f-99d4ce7e6db1,2026-10-15,2026-10-15 09:05:50,traded,3916387,Lamar Jackson,11,Anthony Perrotti,8,Aidan Shamas
+2026,394e0ae7-25f7-4292-904f-99d4ce7e6db1,2026-10-15,2026-10-15 09:05:50,traded,4432708,Marvin Harrison Jr.,11,Anthony Perrotti,8,Aidan Shamas
+2026,394e0ae7-25f7-4292-904f-99d4ce7e6db1,2026-10-15,2026-10-15 09:05:50,traded,4360310,Trevor Lawrence,8,Aidan Shamas,11,Anthony Perrotti
+2026,8ac217c3-a9fe-4018-9f89-7fbef40db490,2026-10-15,2026-10-15 10:16:17,traded,4597500,Adonai Mitchell,8,Aidan Shamas,2,Dylan Sachs
+2026,8ac217c3-a9fe-4018-9f89-7fbef40db490,2026-10-15,2026-10-15 10:16:17,traded,3126486,Deebo Samuel Sr.,2,Dylan Sachs,8,Aidan Shamas
+2026,8ac217c3-a9fe-4018-9f89-7fbef40db490,2026-10-15,2026-10-15 10:16:17,traded,4685261,Germie Bernard,8,Aidan Shamas,2,Dylan Sachs
+2026,8ac217c3-a9fe-4018-9f89-7fbef40db490,2026-10-15,2026-10-15 10:16:17,traded,4379399,James Cook III,8,Aidan Shamas,2,Dylan Sachs
+2026,8ac217c3-a9fe-4018-9f89-7fbef40db490,2026-10-15,2026-10-15 10:16:17,traded,4870808,Jeremiyah Love,2,Dylan Sachs,8,Aidan Shamas
+2026,8ac217c3-a9fe-4018-9f89-7fbef40db490,2026-10-15,2026-10-15 10:16:17,traded,4685472,Tetairoa McMillan,2,Dylan Sachs,8,Aidan Shamas
+2026,08ebdcb2-8560-46e9-b97d-ff8c202ae774,2026-10-16,2026-10-15 21:41:44,traded,4362628,Ja'Marr Chase,14,Dylan Torre,9,Adam Chasse
+2026,08ebdcb2-8560-46e9-b97d-ff8c202ae774,2026-10-16,2026-10-15 21:41:44,traded,16737,Mike Evans,9,Adam Chasse,14,Dylan Torre
+2026,08ebdcb2-8560-46e9-b97d-ff8c202ae774,2026-10-16,2026-10-15 21:41:44,traded,4569173,Rhamondre Stevenson,9,Adam Chasse,14,Dylan Torre
+2026,08ebdcb2-8560-46e9-b97d-ff8c202ae774,2026-10-16,2026-10-15 21:41:44,traded,4373626,Tyler Allgeier,14,Dylan Torre,9,Adam Chasse
+2026,08ebdcb2-8560-46e9-b97d-ff8c202ae774,2026-10-16,2026-10-15 21:41:44,traded,4429059,Woody Marks,9,Adam Chasse,14,Dylan Torre
+2026,3885beb8-c672-4aca-8d62-e63a6a5de777,2026-10-16,2026-10-15 21:53:32,traded,4362628,Ja'Marr Chase,9,Adam Chasse,14,Dylan Torre
+2026,3885beb8-c672-4aca-8d62-e63a6a5de777,2026-10-16,2026-10-15 21:53:32,traded,16737,Mike Evans,14,Dylan Torre,9,Adam Chasse
+2026,3885beb8-c672-4aca-8d62-e63a6a5de777,2026-10-16,2026-10-15 21:53:32,traded,4569173,Rhamondre Stevenson,14,Dylan Torre,9,Adam Chasse
+2026,3885beb8-c672-4aca-8d62-e63a6a5de777,2026-10-16,2026-10-15 21:53:32,traded,4373626,Tyler Allgeier,9,Adam Chasse,14,Dylan Torre
+2026,3885beb8-c672-4aca-8d62-e63a6a5de777,2026-10-16,2026-10-15 21:53:32,traded,4429059,Woody Marks,14,Dylan Torre,9,Adam Chasse
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,4890973,Ashton Jeanty,5,Rob Miller,8,Aidan Shamas
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,4685720,Bryce Young,8,Aidan Shamas,5,Rob Miller
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,4596448,Bucky Irving,8,Aidan Shamas,5,Rob Miller
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,4241478,DeVonta Smith,5,Rob Miller,8,Aidan Shamas
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,3917315,Kyler Murray,5,Rob Miller,8,Aidan Shamas
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,4036133,T.J. Hockenson,5,Rob Miller,8,Aidan Shamas
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,traded,4685472,Tetairoa McMillan,8,Aidan Shamas,5,Rob Miller
+2026,c1a1cb24-533d-42a4-b458-1e4cf5a2df6b,2026-10-16,2026-10-15 22:12:52,dropped_after_trade,-16034,Texans D/ST,8,Aidan Shamas,NA,NA
+2026,273eb180-317a-4f08-b9ab-e2030288cc00,2026-10-21,2026-10-21 14:33:36,traded,-16025,49ers D/ST,9,Adam Chasse,1,Justin Acquarulo
+2026,273eb180-317a-4f08-b9ab-e2030288cc00,2026-10-21,2026-10-21 14:33:36,traded,4360078,Alec Pierce,1,Justin Acquarulo,9,Adam Chasse
+2026,273eb180-317a-4f08-b9ab-e2030288cc00,2026-10-21,2026-10-21 14:33:36,traded,4430539,Brenton Strange,1,Justin Acquarulo,9,Adam Chasse
+2026,273eb180-317a-4f08-b9ab-e2030288cc00,2026-10-21,2026-10-21 14:33:36,traded,4612826,Ladd McConkey,9,Adam Chasse,1,Justin Acquarulo
+2026,43d03acb-e896-4111-87c7-1c8ae7b366f2,2026-10-21,2026-10-21 14:34:50,traded,-16025,49ers D/ST,1,Justin Acquarulo,9,Adam Chasse
+2026,bc1ae872-31d9-467d-a93c-b16773907325,2026-10-22,2026-10-21 22:34:31,traded,2577417,Dak Prescott,1,Justin Acquarulo,11,Anthony Perrotti
+2026,bc1ae872-31d9-467d-a93c-b16773907325,2026-10-22,2026-10-21 22:34:31,traded,4568490,RJ Harvey,11,Anthony Perrotti,1,Justin Acquarulo
+2026,bc1ae872-31d9-467d-a93c-b16773907325,2026-10-22,2026-10-21 22:34:31,traded,4239996,Travis Etienne Jr.,1,Justin Acquarulo,11,Anthony Perrotti
+2026,bc1ae872-31d9-467d-a93c-b16773907325,2026-10-22,2026-10-21 22:34:31,traded,4360310,Trevor Lawrence,11,Anthony Perrotti,1,Justin Acquarulo
+2026,9c82f84d-9aea-4270-a9e3-ba17560b7f57,2026-10-30,2026-10-30 12:45:48,dropped_after_trade,8439,Aaron Rodgers,1,Justin Acquarulo,NA,NA
+2026,9c82f84d-9aea-4270-a9e3-ba17560b7f57,2026-10-30,2026-10-30 12:45:48,traded,4259545,D'Andre Swift,1,Justin Acquarulo,11,Anthony Perrotti
+2026,9c82f84d-9aea-4270-a9e3-ba17560b7f57,2026-10-30,2026-10-30 12:45:48,traded,4047650,DK Metcalf,1,Justin Acquarulo,11,Anthony Perrotti
+2026,9c82f84d-9aea-4270-a9e3-ba17560b7f57,2026-10-30,2026-10-30 12:45:48,traded,4372016,Jaylen Waddle,11,Anthony Perrotti,1,Justin Acquarulo
+2026,9c82f84d-9aea-4270-a9e3-ba17560b7f57,2026-10-30,2026-10-30 12:45:48,traded,4360569,Jordan Mason,11,Anthony Perrotti,1,Justin Acquarulo
+2026,9c82f84d-9aea-4270-a9e3-ba17560b7f57,2026-10-30,2026-10-30 12:45:48,traded,4239993,Tee Higgins,11,Anthony Perrotti,1,Justin Acquarulo
+2026,b8459b4f-9d5d-4299-a484-ba20d942fb7e,2026-10-30,2026-10-30 13:04:42,traded,4882093,Bhayshul Tuten,11,Anthony Perrotti,8,Aidan Shamas
+2026,b8459b4f-9d5d-4299-a484-ba20d942fb7e,2026-10-30,2026-10-30 13:04:42,traded,4870808,Jeremiyah Love,8,Aidan Shamas,11,Anthony Perrotti
+2026,b8459b4f-9d5d-4299-a484-ba20d942fb7e,2026-10-30,2026-10-30 13:04:42,traded,4702555,Jonah Coleman,11,Anthony Perrotti,8,Aidan Shamas
+2026,b8459b4f-9d5d-4299-a484-ba20d942fb7e,2026-10-30,2026-10-30 13:04:42,traded,4697815,Rachaad White,8,Aidan Shamas,11,Anthony Perrotti
+2026,ec6449c0-00d7-4a54-b200-163ae07020b1,2026-10-30,2026-10-30 13:22:51,traded,4882093,Bhayshul Tuten,8,Aidan Shamas,1,Justin Acquarulo
+2026,ec6449c0-00d7-4a54-b200-163ae07020b1,2026-10-30,2026-10-30 13:22:51,traded,4887558,Emanuel Wilson,1,Justin Acquarulo,8,Aidan Shamas
+2026,ec6449c0-00d7-4a54-b200-163ae07020b1,2026-10-30,2026-10-30 13:22:51,traded,4426515,Puka Nacua,1,Justin Acquarulo,8,Aidan Shamas
+2026,ec6449c0-00d7-4a54-b200-163ae07020b1,2026-10-30,2026-10-30 13:22:51,traded,4361307,Trey McBride,8,Aidan Shamas,1,Justin Acquarulo
+2026,dc21d6ec-5cda-4063-b898-a0d078f04848,2026-10-30,2026-10-30 13:50:20,traded,4569559,Devaughn Vele,8,Aidan Shamas,13,Mike Bonfiglio
+2026,dc21d6ec-5cda-4063-b898-a0d078f04848,2026-10-30,2026-10-30 13:50:20,traded,4569618,Garrett Wilson,8,Aidan Shamas,13,Mike Bonfiglio
+2026,dc21d6ec-5cda-4063-b898-a0d078f04848,2026-10-30,2026-10-30 13:50:20,traded,4360761,Michael Wilson,13,Mike Bonfiglio,8,Aidan Shamas
+2026,dc21d6ec-5cda-4063-b898-a0d078f04848,2026-10-30,2026-10-30 13:50:20,traded,3929630,Saquon Barkley,13,Mike Bonfiglio,8,Aidan Shamas
+2026,c5ff791d-c1a2-4e4a-a571-19ced30a8381,2026-11-03,2026-11-03 17:56:39,traded,4695883,Jalen Coker,13,Mike Bonfiglio,7,Dylan Dupre
+2026,c5ff791d-c1a2-4e4a-a571-19ced30a8381,2026-11-03,2026-11-03 17:56:39,dropped_after_trade,5083315,Kenyon Sadiq,13,Mike Bonfiglio,NA,NA
+2026,c5ff791d-c1a2-4e4a-a571-19ced30a8381,2026-11-03,2026-11-03 17:56:39,traded,4431459,Tyler Warren,7,Dylan Dupre,13,Mike Bonfiglio
+2026,15c4ea55-f556-4572-9342-25e09f0d88d7,2026-11-04,2026-11-03 19:48:32,traded,4427366,Breece Hall,14,Dylan Torre,1,Justin Acquarulo
+2026,15c4ea55-f556-4572-9342-25e09f0d88d7,2026-11-04,2026-11-03 19:48:32,traded,4372016,Jaylen Waddle,1,Justin Acquarulo,14,Dylan Torre
+2026,d4e8b05c-af59-46b8-842f-43ae0cbad6f4,2026-11-04,2026-11-04 16:31:27,traded,4361741,Brock Purdy,7,Dylan Dupre,5,Rob Miller
+2026,d4e8b05c-af59-46b8-842f-43ae0cbad6f4,2026-11-04,2026-11-04 16:31:27,traded,4685720,Bryce Young,5,Rob Miller,7,Dylan Dupre
+2026,d4e8b05c-af59-46b8-842f-43ae0cbad6f4,2026-11-04,2026-11-04 16:31:27,dropped_after_trade,4429835,George Holani,7,Dylan Dupre,NA,NA
+2026,d4e8b05c-af59-46b8-842f-43ae0cbad6f4,2026-11-04,2026-11-04 16:31:27,traded,4685512,Jadarian Price,5,Rob Miller,7,Dylan Dupre
+2026,6681a5cc-9b77-4966-84c3-98a86c72643d,2026-11-06,2026-11-06 08:12:55,traded,4890973,Ashton Jeanty,8,Aidan Shamas,11,Anthony Perrotti
+2026,6681a5cc-9b77-4966-84c3-98a86c72643d,2026-11-06,2026-11-06 08:12:55,traded,4362238,Chase Brown,11,Anthony Perrotti,8,Aidan Shamas
+2026,6681a5cc-9b77-4966-84c3-98a86c72643d,2026-11-06,2026-11-06 08:12:55,traded,4047650,DK Metcalf,11,Anthony Perrotti,8,Aidan Shamas
+2026,6681a5cc-9b77-4966-84c3-98a86c72643d,2026-11-06,2026-11-06 08:12:55,traded,4241478,DeVonta Smith,8,Aidan Shamas,11,Anthony Perrotti
+2026,9d289c31-a3d7-4920-aa0a-af6b41ca9085,2026-11-11,2026-11-11 12:46:10,traded,4597500,Adonai Mitchell,2,Dylan Sachs,7,Dylan Dupre
+2026,9d289c31-a3d7-4920-aa0a-af6b41ca9085,2026-11-11,2026-11-11 12:46:10,dropped_after_trade,3925357,Calvin Ridley,7,Dylan Dupre,NA,NA
+2026,9d289c31-a3d7-4920-aa0a-af6b41ca9085,2026-11-11,2026-11-11 12:46:10,traded,3126486,Deebo Samuel Sr.,2,Dylan Sachs,7,Dylan Dupre
+2026,9d289c31-a3d7-4920-aa0a-af6b41ca9085,2026-11-11,2026-11-11 12:46:10,traded,4685512,Jadarian Price,7,Dylan Dupre,2,Dylan Sachs

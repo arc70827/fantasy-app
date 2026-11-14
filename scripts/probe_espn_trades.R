@@ -35,19 +35,16 @@ if (!nzchar(swid) || !nzchar(espn_s2)) {
 out_dir <- "probe_output"
 dir.create(out_dir, showWarnings = FALSE)
 
-# Filter taken from the ffscrapr package's ESPN transactions code.
-# Unverified for this league; the probe exists to confirm it.
-# ESPN rejected the filter without this "topics" wrapper (HTTP 400,
-# "known properties: topics, topicsByType").
+# Filter copied from the x-fantasy-filter header that ESPN's own
+# Recent Activity page sends, reduced to transactions only.
+# filterType.value must be a list of type names, not a single string.
 espn_filter <- toJSON(
   list(
     topics = list(
-      filterType = list(value = "ACTIVITY_TRANSACTIONS"),
-      limit = 1000,
-      limitPerMessageSet = list(value = 1000),
-      filterIncludeMessageTypeIds = list(
-        value = c(178, 179, 180, 181, 239, 244)
-      ),
+      filterType = list(value = list("ACTIVITY_TRANSACTIONS")),
+      limit = 100,
+      limitPerMessageSet = list(value = 100),
+      offset = 0,
       sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
     )
   ),

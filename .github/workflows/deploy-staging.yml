@@ -38,6 +38,37 @@ jobs:
         run: |
           source("scripts/build_app_cache.R")
 
+      - name: Set up Python for icon colors
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Recolor app icons to yellow (runner copy only)
+        shell: bash
+        run: |
+          # Changes only this runner's copy of the icons. Nothing is committed.
+          python -m pip install --quiet pillow numpy
+
+          python - <<'PY'
+          from PIL import Image
+          import numpy as np
+
+          for name in ["www/img/icon-192.png", "www/img/icon-512.png"]:
+              img = Image.open(name).convert("RGBA")
+              hsv = np.array(img.convert("HSV")).astype(int)
+              h, s = hsv[..., 0], hsv[..., 1]
+
+              # Red hues become gold; white and black are left alone.
+              red = (s > 90) & ((h < 22) | (h > 232))
+              hsv[..., 0] = np.where(red, 36, h)
+
+              channels = [Image.fromarray(hsv[..., i].astype("uint8")) for i in range(3)]
+              recolored = Image.merge("HSV", channels).convert("RGBA")
+              recolored.putalpha(img.getchannel("A"))
+              recolored.save(name)
+              print(f"{name}: recolored {int(red.sum())} pixels")
+          PY
+
       - name: Switch runner copy to staging mode
         shell: bash
         run: |

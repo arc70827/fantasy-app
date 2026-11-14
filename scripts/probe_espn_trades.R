@@ -38,18 +38,22 @@ dir.create(out_dir, showWarnings = FALSE)
 # Filter copied from the x-fantasy-filter header that ESPN's own
 # Recent Activity page sends, reduced to transactions only.
 # filterType.value must be a list of type names, not a single string.
-espn_filter <- toJSON(
-  list(
-    topics = list(
-      filterType = list(value = list("ACTIVITY_TRANSACTIONS")),
-      limit = 100,
-      limitPerMessageSet = list(value = 100),
-      offset = 0,
-      sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
-    )
-  ),
-  auto_unbox = TRUE
-)
+page_size <- 100
+
+make_filter <- function(offset) {
+  toJSON(
+    list(
+      topics = list(
+        filterType = list(value = list("ACTIVITY_TRANSACTIONS")),
+        limit = page_size,
+        limitPerMessageSet = list(value = page_size),
+        offset = offset,
+        sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
+      )
+    ),
+    auto_unbox = TRUE
+  )
+}
 
 # Same host the weekly updater uses. fantasy.espn.com returns a web page
 # for this path, so it isn't used here.
@@ -59,38 +63,56 @@ url <- sprintf(
   league_id
 )
 
-resp <- request(url) |>
-  req_url_query(view = "kona_league_communication") |>
-  req_headers(
-    Cookie = paste0("SWID=", swid, "; espn_s2=", espn_s2),
-    `x-fantasy-filter` = as.character(espn_filter)
-  ) |>
-  req_error(is_error = function(resp) FALSE) |>
-  req_perform()
+# Fetch every page. ESPN returns at most page_size topics per request,
+# so keep asking with a larger offset until a page comes back short.
+fetch_page <- function(offset) {
+  resp <- request(url) |>
+    req_url_query(view = "kona_league_communication") |>
+    req_headers(
+      Cookie = paste0("SWID=", swid, "; espn_s2=", espn_s2),
+      `x-fantasy-filter` = as.character(make_filter(offset))
+    ) |>
+    req_error(is_error = function(resp) FALSE) |>
+    req_perform()
 
-cat("HTTP status:", resp_status(resp), "\n")
+  cat("Offset", offset, "-> HTTP", resp_status(resp), "\n")
 
-if (resp_status(resp) != 200) {
-  cat("Response body (first 500 chars):\n")
-  cat(substr(resp_body_string(resp), 1, 500), "\n")
-  stop("ESPN did not return data. Check the cookies and season.", call. = FALSE)
+  if (resp_status(resp) != 200) {
+    cat("Response body (first 500 chars):\n")
+    cat(substr(resp_body_string(resp), 1, 500), "\n")
+    stop("ESPN did not return data. Check the cookies and season.", call. = FALSE)
+  }
+
+  text <- resp_body_string(resp)
+
+  # A web page here means the request didn't reach the API.
+  if (grepl("^\\s*<", text)) {
+    stop(
+      "ESPN returned a web page instead of league data. ",
+      "Check that the cookies are current.",
+      call. = FALSE
+    )
+  }
+
+  fromJSON(text, simplifyVector = FALSE)
 }
 
-raw_text <- resp_body_string(resp)
+all_topics <- list()
+offset <- 0
 
-# A web page here means the request didn't reach the API.
-if (grepl("^\\s*<", raw_text)) {
-  stop(
-    "ESPN returned a web page instead of league data. ",
-    "Check that the cookies are current.",
-    call. = FALSE
-  )
+repeat {
+  page <- fetch_page(offset)
+  n <- length(page$topics)
+  all_topics <- c(all_topics, page$topics)
+  if (n < page_size) break
+  offset <- offset + page_size
 }
+
+body <- list(topics = all_topics)
+
 raw_path <- file.path(out_dir, sprintf("espn_communication_%d.json", season))
-writeLines(raw_text, raw_path)
-cat("Raw response saved to:", raw_path, "\n\n")
-
-body <- fromJSON(raw_text, simplifyVector = FALSE)
+writeLines(toJSON(body, auto_unbox = TRUE), raw_path)
+cat("All pages saved to:", raw_path, "\n\n")
 
 cat("Top-level keys:", paste(names(body), collapse = ", "), "\n")
 

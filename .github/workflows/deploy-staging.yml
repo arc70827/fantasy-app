@@ -82,6 +82,43 @@ jobs:
 
           echo "app.R is now in staging mode."
 
+      - name: Add staging badge to runner copy of app.R
+        shell: bash
+        run: |
+          # Adds the STAGING label and title to this runner's copy only.
+          # The committed app.R does not contain this code.
+          python - <<'PY'
+          block = r'''
+          # Staging-only block. Added by .github/workflows/deploy-staging.yml.
+          ui <- tagList(
+            ui,
+            tags$script(HTML("
+              (function () {
+                document.title = 'Fantasy League Hub (STAGING)';
+                var b = document.createElement('div');
+                b.textContent = 'STAGING';
+                b.setAttribute('style', 'position:fixed;bottom:10px;left:10px;z-index:9999;background:#F5C518;color:#2B1E1E;font-weight:900;font-size:12px;padding:4px 8px;border-radius:4px;letter-spacing:0.08em;pointer-events:none;');
+                document.body.appendChild(b);
+              })();
+            "))
+          )
+
+          '''
+          path = "app.R"
+          text = open(path, encoding="utf-8").read()
+          marker = "shinyApp(ui = ui, server = server)"
+          if text.count(marker) != 1:
+              raise SystemExit("Expected exactly one shinyApp(...) call in app.R.")
+          text = text.replace(marker, block + marker)
+          open(path, "w", encoding="utf-8").write(text)
+          print("Staging badge added to runner copy of app.R.")
+          PY
+
+          if ! grep -q 'Staging-only block' app.R; then
+            echo "Staging badge was not added." >&2
+            exit 1
+          fi
+
       - name: Validate prepared Shiny cache
         shell: Rscript {0}
         run: |

@@ -142,6 +142,33 @@ repeat {
   offset <- offset + page_size
 }
 
+# If the communication feed has nothing for this season, try the older
+# mTransactions2 view on the league history endpoint and save what it returns.
+if (length(all_topics) == 0) {
+  tx_path <- file.path(out_dir, sprintf("raw_mtransactions2_%d.json", season))
+
+  tx_url <- sprintf(
+    "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/leagueHistory/%s?seasonId=%d&view=mTransactions2",
+    league_id,
+    season
+  )
+
+  tx_resp <- request(tx_url) |>
+    req_headers(Cookie = paste0("SWID=", swid, "; espn_s2=", espn_s2)) |>
+    req_error(is_error = function(resp) FALSE) |>
+    req_perform()
+
+  cat("mTransactions2 HTTP", resp_status(tx_resp), "\n")
+  writeLines(resp_body_string(tx_resp), tx_path)
+  cat("Saved to", tx_path, "\n")
+
+  stop(
+    "No communication data for this season. The mTransactions2 response ",
+    "was saved for review.",
+    call. = FALSE
+  )
+}
+
 body <- list(topics = all_topics)
 
 raw_path <- file.path(out_dir, sprintf("espn_communication_%d.json", season))

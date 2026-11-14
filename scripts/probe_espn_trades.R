@@ -65,8 +65,16 @@ url <- sprintf(
 
 # Fetch every page. ESPN returns at most page_size topics per request,
 # so keep asking with a larger offset until a page comes back short.
-fetch_page <- function(offset) {
-  resp <- request(url) |>
+# Past seasons may only be served from ESPN's league history endpoint,
+# which the weekly updater uses for 2022 through 2024.
+history_url <- sprintf(
+  "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/leagueHistory/%s?seasonId=%d",
+  league_id,
+  season
+)
+
+send_request <- function(target_url, offset) {
+  request(target_url) |>
     req_url_query(view = "kona_league_communication") |>
     req_headers(
       Cookie = paste0("SWID=", swid, "; espn_s2=", espn_s2),
@@ -74,6 +82,15 @@ fetch_page <- function(offset) {
     ) |>
     req_error(is_error = function(resp) FALSE) |>
     req_perform()
+}
+
+fetch_page <- function(offset) {
+  resp <- send_request(url, offset)
+
+  if (resp_status(resp) == 404) {
+    cat("Season endpoint returned 404. Trying league history endpoint.\n")
+    resp <- send_request(history_url, offset)
+  }
 
   cat("Offset", offset, "-> HTTP", resp_status(resp), "\n")
 

@@ -37,15 +37,19 @@ dir.create(out_dir, showWarnings = FALSE)
 
 # Filter taken from the ffscrapr package's ESPN transactions code.
 # Unverified for this league; the probe exists to confirm it.
+# ESPN rejected the filter without this "topics" wrapper (HTTP 400,
+# "known properties: topics, topicsByType").
 espn_filter <- toJSON(
   list(
-    filterType = list(value = "ACTIVITY_TRANSACTIONS"),
-    limit = 1000,
-    limitPerMessageSet = list(value = 1000),
-    filterIncludeMessageTypeIds = list(
-      value = c(178, 179, 180, 181, 239, 244)
-    ),
-    sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
+    topics = list(
+      filterType = list(value = "ACTIVITY_TRANSACTIONS"),
+      limit = 1000,
+      limitPerMessageSet = list(value = 1000),
+      filterIncludeMessageTypeIds = list(
+        value = c(178, 179, 180, 181, 239, 244)
+      ),
+      sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
+    )
   ),
   auto_unbox = TRUE
 )

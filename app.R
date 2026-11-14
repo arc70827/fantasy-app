@@ -898,14 +898,19 @@ ui <- navbarPage(
     "Fantasy League Hub",
     if (is_staging) {
       span(
-        " STAGING",
-        style = "font-size: 0.6em; opacity: 0.85; margin-left: 0.4em;"
+        "STAGING",
+        style = paste(
+          "position: fixed; bottom: 10px; left: 10px; z-index: 9999;",
+          "background: #F5C518; color: #2B1E1E; font-weight: 900;",
+          "font-size: 12px; padding: 4px 8px; border-radius: 4px;",
+          "letter-spacing: 0.08em; pointer-events: none;"
+        )
       )
     }
   ),
   id = "main_tabs",
   selected = "Dashboard",
-  windowTitle = "Fantasy League Hub",
+  windowTitle = if (is_staging) "Fantasy League Hub (STAGING)" else "Fantasy League Hub",
 
   header = tagList(
     tags$head(

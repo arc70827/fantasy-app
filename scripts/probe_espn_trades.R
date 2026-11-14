@@ -116,7 +116,19 @@ fetch_page <- function(offset) {
     )
   }
 
-  fromJSON(text, simplifyVector = FALSE)
+  # Save the first raw page so the exact response shape can be inspected.
+  if (offset == 0) {
+    writeLines(text, file.path(out_dir, sprintf("raw_first_page_%d.json", season)))
+  }
+
+  parsed <- fromJSON(text, simplifyVector = FALSE)
+
+  # The league history endpoint nests the topics under "communication".
+  if (is.null(parsed$topics) && !is.null(parsed$communication)) {
+    parsed$topics <- parsed$communication$topics
+  }
+
+  parsed
 }
 
 all_topics <- list()

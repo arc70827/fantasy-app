@@ -50,8 +50,10 @@ espn_filter <- toJSON(
   auto_unbox = TRUE
 )
 
+# Same host the weekly updater uses. fantasy.espn.com returns a web page
+# for this path, so it isn't used here.
 url <- sprintf(
-  "https://fantasy.espn.com/apis/v3/games/ffl/seasons/%d/segments/0/leagues/%s/communication/",
+  "https://lm-api-reads.fantasy.espn.com/apis/v3/games/ffl/seasons/%d/segments/0/leagues/%s/communication/",
   season,
   league_id
 )
@@ -74,6 +76,15 @@ if (resp_status(resp) != 200) {
 }
 
 raw_text <- resp_body_string(resp)
+
+# A web page here means the request didn't reach the API.
+if (grepl("^\\s*<", raw_text)) {
+  stop(
+    "ESPN returned a web page instead of league data. ",
+    "Check that the cookies are current.",
+    call. = FALSE
+  )
+}
 raw_path <- file.path(out_dir, sprintf("espn_communication_%d.json", season))
 writeLines(raw_text, raw_path)
 cat("Raw response saved to:", raw_path, "\n\n")

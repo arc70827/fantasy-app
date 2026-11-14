@@ -34,6 +34,33 @@ library(tidyr)
 library(stringr)
 library(scales)
 
+# ---- App mode and feature flags ----
+#
+# app_mode is changed to "staging" only inside the staging deploy
+# workflow (.github/workflows/deploy-staging.yml), in the runner's copy.
+# The committed value stays "public", so the public app is unchanged.
+#
+# Features listed here are visible only where their flag is TRUE.
+# To release a feature publicly, set its public flag to TRUE.
+
+app_mode <- "public"
+is_staging <- identical(app_mode, "staging")
+
+feature_flags <- list(
+  # Example entry for new work:
+  # trades = list(public = FALSE, staging = TRUE)
+)
+
+feature_enabled <- function(feature) {
+  flags <- feature_flags[[feature]]
+
+  if (is.null(flags)) {
+    return(FALSE)
+  }
+
+  isTRUE(flags[[if (is_staging) "staging" else "public"]])
+}
+
 # ---- Helpers ----
 
 score_fmt <- function(x) {
@@ -866,7 +893,16 @@ card <- function(title, value, subtitle = NULL, class = "accent-blue") {
 }
 
 ui <- navbarPage(
-  title = div(class = "brand-title", "Fantasy League Hub"),
+  title = div(
+    class = "brand-title",
+    "Fantasy League Hub",
+    if (is_staging) {
+      span(
+        " STAGING",
+        style = "font-size: 0.6em; opacity: 0.85; margin-left: 0.4em;"
+      )
+    }
+  ),
   id = "main_tabs",
   selected = "Dashboard",
   windowTitle = "Fantasy League Hub",

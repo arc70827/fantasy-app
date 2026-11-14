@@ -1,0 +1,144 @@
+name: Deploy staging app
+
+# Deploys a test copy of the app to its own shinyapps.io address.
+# The public app (deploy-shiny.yml) is not affected.
+#
+# Trigger it from Actions -> Deploy staging app -> Run workflow,
+# or push to a branch named "staging".
+
+on:
+  push:
+    branches:
+      - staging
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::rsconnect
+            any::cpp11
+          cache-version: 8
+
+      - name: Build prepared Shiny cache
+        shell: Rscript {0}
+        run: |
+          source("scripts/build_app_cache.R")
+
+      - name: Switch runner copy to staging mode
+        shell: bash
+        run: |
+          # Changes only this runner's copy of app.R. Nothing is committed.
+          sed -i 's/^app_mode <- "public"$/app_mode <- "staging"/' app.R
+
+          if ! grep -q '^app_mode <- "staging"$' app.R; then
+            echo "Could not switch app.R to staging mode." >&2
+            exit 1
+          fi
+
+          echo "app.R is now in staging mode."
+
+      - name: Validate prepared Shiny cache
+        shell: Rscript {0}
+        run: |
+          cache_path <- "data/app_cache.rds"
+
+          if (!file.exists(cache_path)) {
+            stop("Prepared app cache was not created.")
+          }
+
+          cache <- readRDS(cache_path)
+
+          if (
+            is.null(cache$cache_schema_version) ||
+            as.integer(cache$cache_schema_version) != 2L
+          ) {
+            stop("Expected cache schema version 2.")
+          }
+
+          required <- c(
+            "cache_schema_version",
+            "matchups",
+            "players",
+            "team_names",
+            "weekly_expected_wins",
+            "weekly_lineup_analytics",
+            "season_fantasy_analytics",
+            "career_fantasy_analytics",
+            "home_dashboard"
+          )
+
+          missing <- setdiff(required, names(cache))
+
+          if (length(missing) > 0) {
+            stop(
+              "Prepared app cache is missing: ",
+              paste(missing, collapse = ", ")
+            )
+          }
+
+          message("Prepared app cache validated successfully.")
+
+      - name: Deploy to shinyapps.io (staging)
+        shell: Rscript {0}
+        env:
+          SHINYAPPS_ACCOUNT: ${{ secrets.SHINYAPPS_ACCOUNT }}
+          SHINYAPPS_TOKEN: ${{ secrets.SHINYAPPS_TOKEN }}
+          SHINYAPPS_SECRET: ${{ secrets.SHINYAPPS_SECRET }}
+          SHINYAPPS_STAGING_APP_NAME: ${{ secrets.SHINYAPPS_STAGING_APP_NAME }}
+        run: |
+          if (!nzchar(Sys.getenv("SHINYAPPS_STAGING_APP_NAME"))) {
+            stop("The SHINYAPPS_STAGING_APP_NAME secret is not set.")
+          }
+
+          www_files <- if (dir.exists("www")) {
+            list.files(
+              "www",
+              recursive = TRUE,
+              full.names = TRUE,
+              all.files = TRUE,
+              no.. = TRUE
+            )
+          } else {
+            character()
+          }
+
+          app_files <- c(
+            "app.R",
+            "data/app_cache.rds",
+            www_files
+          )
+
+          message("Files being deployed:")
+          message(paste(app_files, collapse = "\n"))
+
+          rsconnect::setAccountInfo(
+            name = Sys.getenv("SHINYAPPS_ACCOUNT"),
+            token = Sys.getenv("SHINYAPPS_TOKEN"),
+            secret = Sys.getenv("SHINYAPPS_SECRET")
+          )
+
+          rsconnect::deployApp(
+            appDir = ".",
+            appFiles = app_files,
+            appMode = "shiny",
+            dependencyResolution = "library",
+            appName = Sys.getenv("SHINYAPPS_STAGING_APP_NAME"),
+            account = Sys.getenv("SHINYAPPS_ACCOUNT"),
+            server = "shinyapps.io",
+            forceUpdate = TRUE,
+            launch.browser = FALSE
+          )

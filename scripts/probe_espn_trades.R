@@ -40,19 +40,24 @@ dir.create(out_dir, showWarnings = FALSE)
 # filterType.value must be a list of type names, not a single string.
 page_size <- 100
 
-make_filter <- function(offset) {
-  toJSON(
-    list(
-      topics = list(
-        filterType = list(value = list("ACTIVITY_TRANSACTIONS")),
-        limit = page_size,
-        limitPerMessageSet = list(value = page_size),
-        offset = offset,
-        sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
-      )
-    ),
-    auto_unbox = TRUE
+# The league history endpoint nests the filter under "communication";
+# the season endpoint takes "topics" at the top level.
+make_filter <- function(offset, history = FALSE) {
+  topics <- list(
+    topics = list(
+      filterType = list(value = list("ACTIVITY_TRANSACTIONS")),
+      limit = page_size,
+      limitPerMessageSet = list(value = page_size),
+      offset = offset,
+      sortMessageDate = list(sortPriority = 1, sortAsc = FALSE)
+    )
   )
+
+  if (history) {
+    topics <- list(communication = topics)
+  }
+
+  toJSON(topics, auto_unbox = TRUE)
 }
 
 # Same host the weekly updater uses. fantasy.espn.com returns a web page
@@ -73,12 +78,12 @@ history_url <- sprintf(
   season
 )
 
-send_request <- function(target_url, offset) {
+send_request <- function(target_url, offset, history = FALSE) {
   request(target_url) |>
     req_url_query(view = "kona_league_communication") |>
     req_headers(
       Cookie = paste0("SWID=", swid, "; espn_s2=", espn_s2),
-      `x-fantasy-filter` = as.character(make_filter(offset))
+      `x-fantasy-filter` = as.character(make_filter(offset, history))
     ) |>
     req_error(is_error = function(resp) FALSE) |>
     req_perform()
@@ -89,7 +94,7 @@ fetch_page <- function(offset) {
 
   if (resp_status(resp) == 404) {
     cat("Season endpoint returned 404. Trying league history endpoint.\n")
-    resp <- send_request(history_url, offset)
+    resp <- send_request(history_url, offset, history = TRUE)
   }
 
   cat("Offset", offset, "-> HTTP", resp_status(resp), "\n")

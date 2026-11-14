@@ -897,15 +897,17 @@ ui <- navbarPage(
     class = "brand-title",
     "Fantasy League Hub",
     if (is_staging) {
-      span(
-        "STAGING",
-        style = paste(
-          "position: fixed; bottom: 10px; left: 10px; z-index: 9999;",
-          "background: #F5C518; color: #2B1E1E; font-weight: 900;",
-          "font-size: 12px; padding: 4px 8px; border-radius: 4px;",
-          "letter-spacing: 0.08em; pointer-events: none;"
-        )
-      )
+      # Added to <body> by script so the navbar cannot clip it.
+      tags$script(HTML(paste0(
+        "(function(){",
+        "var b = document.createElement('div');",
+        "b.textContent = 'STAGING';",
+        "b.setAttribute('style', 'position:fixed;bottom:10px;left:10px;z-index:9999;",
+        "background:#F5C518;color:#2B1E1E;font-weight:900;font-size:12px;",
+        "padding:4px 8px;border-radius:4px;letter-spacing:0.08em;pointer-events:none;');",
+        "document.body.appendChild(b);",
+        "})();"
+      )))
     }
   ),
   id = "main_tabs",

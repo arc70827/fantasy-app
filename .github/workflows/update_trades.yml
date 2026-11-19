@@ -1,0 +1,83 @@
+name: Update trade data (non-main branches)
+
+# Refreshes data/fantasy_trade_data.csv on the branch it runs from.
+# It only runs manually, and it refuses to run on main, so it never
+# changes main or deploys the public app. The main weekly updater
+# will get this step when the feature is promoted.
+
+on:
+  workflow_dispatch:
+    inputs:
+      target_year:
+        description: "Season to update, for example 2026"
+        required: false
+        default: "2026"
+        type: string
+
+      dry_run:
+        description: "Validate only and do not change files"
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: write
+
+concurrency:
+  group: trade-update-${{ github.ref_name }}
+  cancel-in-progress: false
+
+jobs:
+  update:
+    if: github.ref_name != 'main'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install R dependencies
+        uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: |
+            any::httr2
+            any::jsonlite
+            any::dplyr
+            any::readr
+          cache-version: 1
+
+      - name: Update trade data
+        shell: Rscript {0}
+        env:
+          ESPN_SWID: ${{ secrets.ESPN_SWID }}
+          ESPN_S2: ${{ secrets.ESPN_S2 }}
+          TRADE_SEASON: ${{ inputs.target_year }}
+          DRY_RUN: ${{ inputs.dry_run && 'true' || 'false' }}
+        run: |
+          source("scripts/update_trades.R")
+
+      - name: Commit updated trade data
+        if: inputs.dry_run == false
+        shell: bash
+        run: |
+          if git diff --quiet -- data/fantasy_trade_data.csv; then
+            echo "No trade data changes."
+            exit 0
+          fi
+
+          if [ "${GITHUB_REF_NAME}" = "main" ]; then
+            echo "Refusing to commit to main." >&2
+            exit 1
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add data/fantasy_trade_data.csv
+          git commit -m "Update trade data"
+          git push origin HEAD:"${GITHUB_REF_NAME}"

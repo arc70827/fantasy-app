@@ -24,9 +24,14 @@ suppressPackageStartupMessages({
 source("scripts/parse_trades.R")
 
 season <- as.integer(Sys.getenv("TRADE_SEASON", unset = "2026"))
-probe_path <- file.path("probe_output", sprintf("espn_communication_%d.json", season))
+# Paths can be overridden for the automated update, which writes to a
+# temporary file first.
+probe_path <- Sys.getenv(
+  "TRADE_JSON",
+  unset = file.path("probe_output", sprintf("espn_communication_%d.json", season))
+)
 manager_path <- file.path("data", "fantasy_manager_data.csv")
-out_path <- file.path("data", "fantasy_trade_data.csv")
+out_path <- Sys.getenv("TRADE_OUT", unset = file.path("data", "fantasy_trade_data.csv"))
 
 if (!file.exists(probe_path)) {
   stop("Missing ", probe_path, ". Run scripts/probe_espn_trades.R first.", call. = FALSE)
